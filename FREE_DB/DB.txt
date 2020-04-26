@@ -1,0 +1,117 @@
+USER TABLE (유저 테이블)
+
+USER_ID
+USER_PW
+USER_NAME
+USER_EMAIL
+USER_PHONE1
+USER_PHONE2
+USER_PHONE3
+USER_ADDRESS
+USER_ABOUT_ME - 프리랜서 자기소개
+FREELANCER_MAIN_CATAGORY - 전문분야/대분류
+FREELANCER_MIDDLE_CATAGORY - 전문분야/중분류
+FREELANCER_SKILL - 보유 기술
+FREELANCER_CAREER - 경력
+FREELANCER_CERTIFICATE - 자격증
+FREELANCER_IMAGE - 이미지
+FREELANCER_PUBLIC - 공개 여부
+------------------------------------------------------------------
+FREELANCER PORTFOLIO TABLE (프리랜서 포트폴리오 테이블)
+
+USER_ID - 프리랜서 아이디
+PORTFOLIO_PATH - 파일 경로
+ORIGINNMAE - 파일 원래 명
+FILE_TYPE - 파일 확장자 
+FILE_SIZE - 파일 크기
+FILE_DATETIME - 등록 일자 
+------------------------------------------------------------------
+PROJECT TABLE (프로젝트 테이블)
+
+PROJECT_IDX - 번호
+USER_ID - 작성자 아이디
+PROJECT_MAIN_CATAGORY - 대분류
+PROJECT_MIDDLE_CATAGORY - 중분류
+PROJECT_WORKING_KIND - 근무형태
+PROJECT_SUBNAME - 제목
+PROJECT_CONTENT - 내용
+PROJECT_VIEWS - 조회수
+PROJECT_START_DATE - 프로젝트 시작일
+PROJECT_ADDRESS - 근무 위치
+PROJECT_BUDGET - 프로젝트 예산
+PROJECT_BUDGET_COORDINATION - 예산 조율 여부
+PROJECT_END_DATE - 프로젝트 마감일
+PROJECT_IMAGE_PATH - 이미지
+PROJECT_STATUS - 프로젝트 진척도 ( 0 - 진행중 / 1 - 완료 ) 
+PROJECT_IS_END - 지원자 마감 ( 0 - 모집 / 1 - 마감 )
+------------------------------------------------------------------
+MYFREELANCER TABLE ( 프로젝트 지원 현황 )
+
+PROJECT_IDX - 프로젝트 번호
+PROJECT_SUBJECT - 프로젝트 이름
+CLIENT_ID - 클라이언트 아이디
+FREELANCER_ID - 프리랜서 아이디
+PROJECT_STATUS - 프로젝트 진척도 ( 0 - 진행중 / 1 - 완료 / 2 - 요청된 프로젝트 / 3 - 요청한 프로젝트 ) 
+------------------------------------------------------------------
+BBS TABLE ( 게시판 테이블)
+
+BBS _IDX - 번호
+USER_ID - 작성자 아이디
+BBS _MAIN_CATAGORY - 대분류
+BBS _MIDDLE_CATAGORY - 중분류
+BBS _SUBNAME - 제목
+BBS _CONTENT - 내용
+BBS _VIEWS - 조회수
+BBS _REG_DATE - 작성일
+BBS _UPDATE_DATE - 수정일
+------------------------------------------------------------------
+BBS FILE TABLE ( 게시판 파일 첨부 테이블 )
+
+BBS_IDX - 게시판 번호
+USER_ID - 작성자 아이디
+BBS_FILE_PATH - 파일 경로
+ORIGIN_NAME - 파일 원래 명
+NEW_FILE_NAME - 변환 파일명
+FILE_TYPE - 파일 확장자 
+FILE_SIZE - 파일 크기
+FILE_DATETIME - 등록 일자 
+------------------------------------------------------------------
+BBS COMMENT TABLE ( 게시판 댓글 테이블 )
+
+COMMENT_IDX 댓글 번호
+BBS_IDX - 게시물 번호
+USER_ID - 아이디
+COMMENT_CONTENT - 댓글 내용
+COMMENT_REG_DATE - 작성일
+COMMENT_UPDATE_DATE - 수정일
+
+
+
+
+------------------------------------------------------------------
+REWARD TABLE (리워드 테이블)
+
+REWARD_IDX - 리워드 번호
+USER_ID - 작성자 아이디
+REWARD_MAIN_CATAGORY - 대분류
+REWARD_MIDDLE_CATAGORY - 중분류
+REWARD_SUBJECT - 제목
+REWARD_CONTENT - 내용
+REWARD_START_DATE - 리워드 시작일
+REWARD_END_DATE - 리워드 마감일
+REWARD_BADGET - 리워드 목표 금액
+REWARD_IMAGE_PATH - 이미지
+REWARD_STATUS - 리워드 진척도 ( 0 - 진행중 / 1 - 완료 )
+------------------------------------------------------------------
+MYREWARD SPONSOR TABLE ( 나의 리워드에 참여한 후원자 목록)
+
+REWARD_IDX - 리워드 번호
+REWARD_SUBJECT - 리워드 이름
+CLIENT_ID - 클라이언트 ID
+SPONSOR_ID - 후원자 ID
+
+
+
+
+
+
