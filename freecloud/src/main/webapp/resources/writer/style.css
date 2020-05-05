@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 a {transition: all 0.3s ease 0s;text-decoration:none;color:#444444;}
 a:hover {
-  color: #32B5F3;
+  color: #a3d4f7;
   text-decoration: none;
 }
 a:active, a:hover {
@@ -188,7 +188,7 @@ body {
   font-size: 20px;
 }
 .header-right ul li a span {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   border-radius: 50%;
   bottom: -4px;
   color: #ffffff;
@@ -262,7 +262,7 @@ body {
 }
 .add-to-cart-product {
   background: #ffffff none repeat scroll 0 0;
-  border-top: 2px solid #32b5f3;
+  border-top: 2px solid #a3d4f7;
   box-shadow: 2px 0 7px 0 rgba(0, 0, 0, 0.13);
   color: #ffffff;
   height: auto;
@@ -305,10 +305,10 @@ body {
   color: #9c9b9b;
 }
 .cart-product-info a:hover , .modal-product .product-info .see-all:hover , .product-cart p a:hover , .product-remove > a:hover , .wishlist-table-area .t-product-name h3 a:hover , a.wish-btn:hover , .footer-list li a:hover , .banner-title span{
-  color: #32B5F3;
+  color: #a3d4f7;
 }
 .cart-product-remove i:hover {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
 }
 .total-cart-price {
   padding: 0 15px;
@@ -358,8 +358,8 @@ body {
   padding-left: 5px;
 }
 .cart-checkout a:hover {
-  background: #32B5F3 none repeat scroll 0 0;
-  border: 1px solid #32B5F3;
+  background: #a3d4f7 none repeat scroll 0 0;
+  border: 1px solid #a3d4f7;
   color: #ffffff;
 }
 /*----------------------------------------*/
@@ -380,7 +380,7 @@ body {
 }
 .layer-3 a.title-3 {
   animation: 0.8s ease-in-out 1.5s normal backwards 1 running fadeInRight;
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   border-bottom: medium none;
   border-radius: 30px;
   color: #ffffff;
@@ -451,7 +451,7 @@ body {
   line-height: 20px;
 }
 .banner-bottom-title > a:hover {
-  color: #32b5f3;
+  color: #a3d4f7;
 }
 .single-p-banner .col-md-3 , .blog-list .col-md-3 , .team-list .col-md-3 , .related-product-area .col-md-3 {
   width: 100%;
@@ -520,8 +520,8 @@ body {
   padding: 0 30px;
 }
 .shop-info-content > a:hover {
-  background: #32b5f3 none repeat scroll 0 0;
-  border: 1px solid #32b5f3;
+  background: #a3d4f7 none repeat scroll 0 0;
+  border: 1px solid #a3d4f7;
 }
 .shop-info-content > a {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -532,7 +532,7 @@ body {
   padding: 5px 25px;
 }
 .single-shop-info:hover .shop-info-icon {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
 }
 /*----------------------------------------*/
 /*  6.	Featured Products Area CSS
@@ -633,7 +633,7 @@ body {
   padding: 10px 0;
 }
 .icolor {
-  color: #32b5f3 !important;
+  color: #a3d4f7 !important;
 }
 .rating-icon i {
   color: #666666;
@@ -674,8 +674,8 @@ body {
   width: 42px;
 }
 .functional-buttons > a:hover {
-  background: #32b5f3 none repeat scroll 0 0;
-  border: 1px solid #32b5f3;
+  background: #a3d4f7 none repeat scroll 0 0;
+  border: 1px solid #a3d4f7;
 }
 .functional-buttons > a i {
   line-height: 42px;
@@ -722,7 +722,7 @@ body {
 /*  7.	Testimonial Area CSS
 /*----------------------------------------*/
 .testimonial-area {
-  background: rgba(0, 0, 0, 0) url("img/testimonial/bg.jpg") no-repeat scroll center center;
+  background: #a3d4f7 no-repeat scroll center center;
   color: #ffffff;
   padding-bottom: 100px;
   padding-top: 70px;
@@ -757,7 +757,7 @@ body {
 }
 .single-testimonial > p::after {
   color: #868686;
-  content: "";
+  content: "�꼵";
   font-family: fontawesome;
   font-size: 30px;
   left: -17px;
@@ -795,7 +795,7 @@ body {
 /*  8.	Counter Area CSS
 /*----------------------------------------*/
 .counter-area {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   color: #ffffff;
 }
 .counter-info {
@@ -866,8 +866,8 @@ body {
   width: 55%;
 }
 .btn-search {
-  background: #32b5f3 none repeat scroll 0 0;
-  border: 1px solid #32b5f3;
+  background: #a3d4f7 none repeat scroll 0 0;
+  border: 1px solid #a3d4f7;
   border-radius: 30px;
   color: #ffffff;
   height: 50px;
@@ -930,7 +930,7 @@ body {
   position: relative;
 }
 .footer-list li:hover a::before {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
 }
 .footer-list > li {
   line-height: 1;
@@ -997,7 +997,7 @@ body {
   margin-right: 0;
 }
 .social-icon a:hover {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   color: #ffffff;
 }
 /*----------------------------------------*/
@@ -1021,7 +1021,7 @@ body {
     font-weight: 600;
 }
 .footer-bottom-left a:hover {
-  color: #32b5f3;
+  color: #a3d4f7;
 }
 /*----------------------------------------*/
 /*  13.	About Page CSS
@@ -1142,7 +1142,7 @@ body {
   text-transform: capitalize;
 }
 .check-out-area .panel-heading h4 span {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   border-radius: 50%;
   color: #ffffff;
   display: inline-block;
@@ -1177,8 +1177,8 @@ body {
   line-height: 1;
 }
 .btn-default {
-  background: #32b5f3 none repeat scroll 0 0;
-  border: 1px solid #32b5f3;
+  background: #a3d4f7 none repeat scroll 0 0;
+  border: 1px solid #a3d4f7;
   border-radius: 20px;
   color: #ffffff;
   height: 40px;
@@ -1190,8 +1190,8 @@ body {
 }
 .btn-default:hover {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-  border: 1px solid #32b5f3;
-  color: #32b5f3;
+  border: 1px solid #a3d4f7;
+  color: #a3d4f7;
 }
 .login-info {
     margin-bottom: 40px;
@@ -1278,7 +1278,7 @@ p.form-row-phone {
   text-transform: capitalize;
 }
 .checkout-widget a:hover {
-  color: #32b5f3;
+  color: #a3d4f7;
   margin-left: 10px;
 }
 #checkout-review-table {
@@ -1302,7 +1302,7 @@ p.form-row-phone {
   text-transform: capitalize;
 }
 .data-table thead th {
-  background-color: #32B5F3;
+  background-color: #a3d4f7;
   border-right: 1px solid #eaeeef;
   color: #ffffff;
   font-size: 12px;
@@ -1515,11 +1515,11 @@ p.form-row-phone {
   margin-left: auto;
 }
 .price-filter .ui-slider-range {
-  background: #32B5F3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   height: 2px;
 }
 .price-filter .ui-slider-handle.ui-state-default.ui-corner-all {
-  background: #32B5F3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   border: medium none;
   border-radius: 50%;
   height: 14px;
@@ -1556,7 +1556,7 @@ p.form-row-phone {
   width: 84px;
 }
 .tag-list a:hover {
-  background: #32B5F3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   color: #ffffff;
 }
 .single-seller {
@@ -1668,7 +1668,7 @@ p.form-row-phone {
   overflow: hidden;
 }
 .new-price {
-    color: #32b5f3;
+    color: #a3d4f7;
     font-weight: 600;
 }
 .product-price {
@@ -1678,7 +1678,7 @@ p.form-row-phone {
   margin-bottom: 10px;
 }
 .availability > span {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   border: 1px solid #0a74a7;
   color: #ffffff;
   display: inline-block;
@@ -1834,7 +1834,7 @@ a.wish-btn {
   width: 26px;
 }
 .social-share-icon a:hover {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   color: #ffffff;
 }
 #product-comments-block-extra {
@@ -1854,7 +1854,7 @@ a.wish-btn {
   line-height: 30px;
 }
 .comments-advices a.open-comment-form::before {
-  content: "";
+  content: "��";
 }
 .comments-advices a::before {
   background: #929292 none repeat scroll 0 0;
@@ -1878,7 +1878,7 @@ a.wish-btn {
   margin-right: 30px;
 }
 .p-details-tab ul.p-details-nav-tab li.active a::before {
-  background: #32B5F3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   bottom: 0;
   content: "";
   height: 2px;
@@ -2020,7 +2020,7 @@ a.wish-btn {
   font-weight: 300;
 }
 .shopingcart-bottom-area a {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   border-radius: 20px;
   color: #ffffff;
   display: inline-block;
@@ -2059,7 +2059,7 @@ a.wish-btn {
   width: 100%;
 }
 .discount-middle > a, .subtotal-main-area > a {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   border-radius: 20px;
   color: #ffffff;
   float: right;
@@ -2161,7 +2161,7 @@ a.wish-btn {
   transition: all 0.4s ease 0s;
 }
 .wishlist-bottom-link > a:hover {
-  color: #32B5F3;
+  color: #a3d4f7;
   padding-left: 8px;
 }
 .wishlist-right-area table.wish-list-table {
@@ -2184,7 +2184,7 @@ a.wish-btn {
   width: 100%;
 }
 .product-cart-details > input[type="submit"]:hover {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   color: #ffffff;
 }
 /*----------------------------------------*/
@@ -2232,7 +2232,7 @@ a.wish-btn {
   margin: 0;
 }
 .modal-product .product-info .price-box .special-price {
-  color: #32b5f3;
+  color: #a3d4f7;
   font-size: 24px;
   font-weight: 400;
 }
@@ -2262,7 +2262,7 @@ a.see-all {
   width: 60px;
 }
 .quick-add-to-cart .single_add_to_cart_button {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   border: medium none;
   color: #ffffff;
   float: left;
@@ -2409,7 +2409,7 @@ h3.widget-title-modal {
   position: relative;
 }
 .addresses-lists .panel-heading a i {
-  color: #32B5F3;
+  color: #a3d4f7;
   font-size: 20px;
 }
 .addresses-lists .panel-heading a span {
@@ -2440,7 +2440,7 @@ h3.widget-title-modal {
   border-color: #303030 #303030 #666666 #444444;
 }
 .order-history p {
-  background: #32b5f3 none repeat scroll 0 0;
+  background: #a3d4f7 none repeat scroll 0 0;
   color: #ffffff;
   padding: 15px;
 }
@@ -2470,7 +2470,7 @@ h3.widget-title-modal {
   width: 45px;
 }
 #scrollUp:hover {
-  background-color: #32B5F3;
+  background-color: #a3d4f7;
   color: #ffffff;
 }
 #scrollUp i {
