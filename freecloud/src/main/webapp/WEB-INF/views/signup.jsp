@@ -7,12 +7,11 @@
 	language="java"%>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Home One || Witter Multipage Responsive Template</title>
+<title>Creat An Account || Witter Multipage Responsive Template</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- favicon -->
-<link rel="shortcut icon" type="image/x-icon"
-	href="<c:url value='resources/writer/img/favicon.ico'/>">
+<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 <!-- Place favicon.ico in the root directory -->
 <!-- Google Fonts -->
 <link
@@ -77,24 +76,33 @@
 			<div class="row">
 				<div class="col-md-2 col-sm-6 col-xs-6">
 					<div class="header-logo">
-						<a href="index.html"> <img
+						<a href="home"> <img
 							src="<c:url value='resources/writer/img/freeCloud/logo.png'/>"
 							alt="">
 						</a>
 					</div>
 				</div>
+
 				<div class="col-md-7 col-sm-12 hidden-sm">
 					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
-								<li><h4><a href="index.html">프로젝트</a></h4>
+								<li><h4>
+										<a href="index.html">프로젝트</a>
+									</h4>
 									<ul class="sub-menu">
 										<li><a href="about.html">프로젝트 등록</a></li>
 										<li><a href="cart.html">프로젝트 찾기</a></li>
 									</ul></li>
-								<li><h4><a href="shop.html">프리랜서 찾기</a></h4></li>
-								<li><h4><a href="shop.html">정보구름</a></h4></li>
-								<li><h4><a href="about.html">서비스 안내</a></h4>
+								<li><h4>
+										<a href="shop.html">프리랜서 찾기</a>
+									</h4></li>
+								<li><h4>
+										<a href="shop.html">정보구름</a>
+									</h4></li>
+								<li><h4>
+										<a href="about.html">서비스 안내</a>
+									</h4>
 									<ul class="sub-menu">
 										<li><a href="about.html">프로젝트 이용방법</a></li>
 										<li><a href="cart.html">프리랜서 이용방법</a></li>
@@ -201,7 +209,6 @@
 		</div>
 	</div>
 	<!-- Mobile Menu End -->
-	<!-- Counter Area Start -->
 	<div class="counter-area section-padding text-center"
 		style="background-color: #a3d4f7">
 		<div class="container">
@@ -249,158 +256,88 @@
 			</div>
 		</div>
 	</div>
-	<!-- Counter Area End -->
-	<!-- Featured Product Area Start -->
-	<div class="featured-product-area section-padding">
-		<h2 class="section-title">프로젝트 미리보기</h2>
+	<!-- Breadcrumbs Area Start -->
+	<!-- Loging Area Start -->
+	<div class="login-account section-padding">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					<div class="tab-menu">
-						<!-- Nav tabs -->
-						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="first-item active"><a
-								href="#arrival" aria-controls="arrival" role="tab"
-								data-toggle="tab">디자인</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">IT프로그래밍</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">콘텐츠 제작</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">비즈니스 컨설팅</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">주문제작</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="product-list tab-content">
-					<div role="tabpanel" class="tab-pane fade in active" id="arrival">
-						<div class="featured-product-list indicator-style">
-							<!-- 메뉴 시작-->
-							<div class="single-p-banner">
-								<div class="col-md-3">
-									<div class="single-banner">
-										<a href="#" class="single-banner-image-wrapper"> <img
-											alt=""
-											src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
-										</a>
-										<div class="banner-bottom text-center">
-											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
-										</div>
-										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span>
-											<span class="blog-date">2020년 04년 24일</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- 메뉴 끝 -->
-
+				<div>
+					<form action="#" class="create-account-form" method="post">
+						<h2 class="heading-title">회원가입</h2>
+						<p>
+							<b>아이디</b>
+						</p>
+						<p class="form-row">
+							<input type="text" id="userId" placeholder="ID 입력">
+						</p>
+						<p>
+							<b>비밀번호</b>
+						</p>
+						<p class="form-row">
+							<input type="password" id="userPw" placeholder="PW 입력">
+						</p>
+						<p>
+							<b>비밀번호 확인</b>
+						</p>
+						<p class="form-row">
+							<input type="password" id="userPW2" placeholder="PW 확인">
+						</p>
+						<p>
+							<b>이름</b>
+						</p>
+						<p class="form-row">
+							<input type="password" id="userName" placeholder="이름 입력">
+						</p>
+						<p>
+							<b>이메일 주소</b>
+						</p>
+						<p class="form-row">
+							<input type="email" id="userEmail" placeholder="이메일 입력">
+						</p>
+						<p>
+							<b>전화 번호</b>
+						</p>
+						<div class="col-md-4">
+							<p class="form-row">
+								<input style="width: 90%" type="text" id="userPhone1"
+									placeholder="앞번호 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
+							</p>
 						</div>
-					</div>
+						<div class="col-md-4">
+							<p class="form-row">
+								<input style="width: 90%" type="text" id="userPhone2"
+									placeholder="중간번호 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
+							</p>
+						</div>
+						<div class="col-md-4">
+							<p class="form-row">
+								<input style="width: 90%" type="text" id="userPhone3"
+									placeholder="뒷번호 입력">
+							</p>
+						</div>
+						<p>
+							<b>거주 지역</b>
+						</p>
+						<p class="shop-select">
+							<select>
+								<option value="none">지역을 선택하세요.</option>
+								<option value="서울특별시">서울특별시</option>
+							</select>
+						</p>
+
+						<div class="submit">
+							<button name="loginBtn" id="loginBtn" type="submit"
+								class="btn-default" style="width: 100%">
+								<span> <i class="fa fa-user left"></i> 회원가입
+								</span>
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Featured Product Area End -->
-	<!-- Testimonial Area Start -->
-	<div class="testimonial-area text-center">
-		<div class="container">
-			<div class="testimonial-title">
-				<h2>추천 프리랜서</h2>
-				<p>선별된 최고의 프리랜서를 추천합니다.</p>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="testimonial-list">
-						<div class="single-testimonial">
-							<img
-								src="<c:url value='resources/writer/img/freeCloud/profile.jpg'/>"
-								alt="">
-							<div class="testmonial-info clearfix">
-								<p>안녕하십니까 JAVA SpringFrameWork 전문 프리랜서 김영웅입니다. 실력에는 자신있습니다
-									언제든지 불러만 주십시오!</p>
-								<div class="testimonial-author text-center">
-									<h3>김영웅</h3>
-									<p>IT프로그래밍</p>
-								</div>
-							</div>
-						</div>
-						<div class="single-testimonial">
-							<img
-								src="<c:url value='resources/writer/img/freeCloud/profile2.jpg'/>"
-								alt="">
-							<div class="testmonial-info clearfix">
-								<p>안녕하십니까 일러스트, 디자인 전문 프리랜서 김용웁입니다. 실력에는 자신있습니다 언제든지 불러만
-									주십시오</p>
-								<div class="testimonial-author text-center">
-									<h3>김용웁</h3>
-									<p>디자인</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Testimonial Area End -->
-
-	<div class="featured-product-area section-padding">
-		<h2 class="section-title">프리랜서 미리보기</h2>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="tab-menu">
-						<!-- Nav tabs -->
-						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="first-item active"><a
-								href="#arrival" aria-controls="arrival" role="tab"
-								data-toggle="tab">디자인</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">IT프로그래밍</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">콘텐츠 제작</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">비즈니스 컨설팅</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">주문제작</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="product-list tab-content">
-					<div role="tabpanel" class="tab-pane fade in active" id="arrival">
-						<div class="featured-product-list indicator-style">
-							<!-- 메뉴 시작-->
-							<div class="single-p-banner">
-								<div class="col-md-3">
-									<div class="single-banner">
-										<a href="#" class="single-banner-image-wrapper"> <img
-											alt=""
-											src="<c:url value='resources/writer/img/freeCloud/profile.jpg'/>">
-										</a>
-										<div class="banner-bottom text-center">
-											<a href="#"><b>김영웅</b></a>
-										</div>
-										<div class="banner-bottom text-center">
-											Java, Spring, Jsp<br>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- 메뉴 끝 -->
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+	<!-- Loging Area End -->
 	<!-- Footer Area Start -->
 	<footer>
 		<div class="footer-top-area">
@@ -464,74 +401,6 @@
 		</div>
 	</footer>
 	<!-- Footer Area End -->
-	<!--Quickview Product Start -->
-	<div id="quickview-wrapper">
-		<!-- Modal -->
-		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="modal-product">
-							<div class="product-images">
-								<div class="main-image images">
-									<img alt="" src="img/quick-view.jpg">
-								</div>
-							</div>
-							<div class="product-info">
-								<h1>Frame Princes Cut Diamond</h1>
-								<div class="price-box">
-									<p class="s-price">
-										<span class="special-price"><span class="amount">$280.00</span></span>
-									</p>
-								</div>
-								<a href="product-details.html" class="see-all">See all
-									features</a>
-								<div class="quick-add-to-cart">
-									<form method="post" class="cart">
-										<div class="numbers-row">
-											<input type="number" id="french-hens" value="3">
-										</div>
-										<button class="single_add_to_cart_button" type="submit">Add
-											to cart</button>
-									</form>
-								</div>
-								<div class="quick-desc">Lorem ipsum dolor sit amet,
-									consectetur adipiscing elit. Nam fringilla augue nec est
-									tristique auctor. Donec non est at libero vulputate rutrum.
-									Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
-									vulputate adipiscing cursus eu, suscipit id nulla.</div>
-								<div class="social-sharing">
-									<div class="widget widget_socialsharing_widget">
-										<h3 class="widget-title-modal">Share this product</h3>
-										<ul class="social-icons">
-											<li><a target="_blank" title="Facebook" href="#"
-												class="facebook social-icon"><i class="fa fa-facebook"></i></a></li>
-											<li><a target="_blank" title="Twitter" href="#"
-												class="twitter social-icon"><i class="fa fa-twitter"></i></a></li>
-											<li><a target="_blank" title="Pinterest" href="#"
-												class="pinterest social-icon"><i class="fa fa-pinterest"></i></a></li>
-											<li><a target="_blank" title="Google +" href="#"
-												class="gplus social-icon"><i class="fa fa-google-plus"></i></a></li>
-											<li><a target="_blank" title="LinkedIn" href="#"
-												class="linkedin social-icon"><i class="fa fa-linkedin"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!-- .product-info -->
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--End of Quickview Product-->
 	<!-- all js here -->
 	<!-- jquery latest version -->
 	<script

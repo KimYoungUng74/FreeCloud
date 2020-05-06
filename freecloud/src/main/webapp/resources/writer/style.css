@@ -2190,13 +2190,21 @@ a.wish-btn {
 /*----------------------------------------*/
 /*  21.	Quick Veiw CSS
 /*----------------------------------------*/
-#productModal .modal-dialog {
+#idDialog .modal-dialog {
   margin: 5% auto;
-  max-width: 96%;
+  max-width: 100%;
   min-height: 300px;
   padding: 20px;
   transition: all 0.5s ease 0s;
-  width: 870px;
+  width: 1245px;
+}
+#pwDialog .modal-dialog {
+  margin: 5% auto;
+  max-width: 100%;
+  min-height: 300px;
+  padding: 20px;
+  transition: all 0.5s ease 0s;
+  width: 1245px;
 }
 .modal-product {
   overflow: hidden;
@@ -2323,7 +2331,7 @@ h3.widget-title-modal {
   text-align: center;
   width: 40px;
 }
-#productModal button.close {
+#idDialog button.close {
   opacity: 1;
   position: absolute;
   right: 10px;
@@ -2331,7 +2339,7 @@ h3.widget-title-modal {
   transition: all 0.3s ease 0s;
   z-index: 2;
 }
-#productModal button.close span {
+#idDialog button.close span {
   border: 1px solid #909295;
   border-radius: 60px;
   color: #909295;
@@ -2341,11 +2349,36 @@ h3.widget-title-modal {
   text-align: center;
   width: 30px;
 }
-#productModal .modal-header {
+#idDialog .modal-header {
   border: 0 none;
   min-height: auto;
   padding: 0;
 }
+
+#pwDialog button.close {
+  opacity: 1;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  transition: all 0.3s ease 0s;
+  z-index: 2;
+}
+#pwDialog button.close span {
+  border: 1px solid #909295;
+  border-radius: 60px;
+  color: #909295;
+  display: block;
+  height: 30px;
+  line-height: 28px;
+  text-align: center;
+  width: 30px;
+}
+#pwDialog .modal-header {
+  border: 0 none;
+  min-height: auto;
+  padding: 0;
+}
+
 .modal-product .widget .social-icons li .social-icon.facebook:hover {
   background: #3b579d none repeat scroll 0 0;
   border: 1px solid #3b579d;
