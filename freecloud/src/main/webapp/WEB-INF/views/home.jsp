@@ -560,9 +560,7 @@
 					<div class="modal-body">
 						<div class="modal-product">
 							<div class="product-images">
-								<div class="main-image images">
-									<img alt="" src="img/quick-view.jpg">
-								</div>
+							
 							</div>
 							<div class="product-info">
 								<h1>Frame Princes Cut Diamond</h1>

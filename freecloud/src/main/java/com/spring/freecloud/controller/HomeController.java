@@ -39,7 +39,7 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		UserDTO userDTO = userSer.Test();
-		System.out.println("디비연결 테스트 : " + userDTO.toString());
+		System.out.println("테스트 : " + userDTO.toString());
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
