@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.freecloud.dto.UserDTO;
-import com.spring.freecloud.service.IUserService;
+import com.spring.freecloud.service.UserService;
 
 
 /**
@@ -25,7 +25,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	IUserService userSer;
+	UserService userSer;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -42,7 +42,7 @@ public class HomeController {
 		System.out.println("디비연결 테스트 : " + userDTO.toString());
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "login";
+		return "home";
 	}
 	
 }

@@ -5,7 +5,11 @@
 <mapper namespace="UserMapper">
 	<!-- id는 마음대로 작성 prarameter는 실제DTO클래스 -->
 
-	<select id="Test" resultType="UserDTO">
+	<select id="Test"  resultType="UserDTO">
 		select * from FREE_MYFREELANCER
 	</select>
+	
+	
+	
+	
 </mapper>
