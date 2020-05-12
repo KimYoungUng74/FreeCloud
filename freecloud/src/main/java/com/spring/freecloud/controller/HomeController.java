@@ -38,11 +38,13 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-		UserDTO userDTO = userSer.Test();
-		System.out.println("테스트 : " + userDTO.toString());
+		/*
+		 * UserDTO userDTO = userSer.Test(); System.out.println("테스트 : " +
+		 * userDTO.toString());
+		 */
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "shop";
 	}
 	
 }
