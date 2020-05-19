@@ -4,12 +4,15 @@
 
 <mapper namespace="UserMapper">
 	<!-- id는 마음대로 작성 prarameter는 실제DTO클래스 -->
-
-	<select id="Test"  resultType="UserDTO">
+	<!-- 유저 회원가입 -->
+	<insert id="Signup" parameterType="UserDTO">
+		INSERT INTO FREE_USER(USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_PHONE1, USER_PHONE2, USER_PHONE3, USER_ADDRESS, FREELANCER_PUBLIC, USER_GRANT)
+		VALUES(#{USER_ID}, #{USER_PW}, #{USER_NAME}, #{USER_EMAIL},
+		#{USER_PHONE1}, #{USER_PHONE2}, #{USER_PHONE3}, #{USER_ADDRESS}, 0, 0)
+	</insert>
+	<select id="Test" resultType="UserDTO">
 		select * from FREE_MYFREELANCER
 	</select>
-	
-	
-	
-	
+
+
 </mapper>

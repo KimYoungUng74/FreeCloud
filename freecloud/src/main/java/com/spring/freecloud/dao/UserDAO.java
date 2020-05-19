@@ -23,11 +23,12 @@ public class UserDAO {
 
 	
 	public void signupUser(UserDTO dto) {
-		/*
-		 * // TODO Auto-generated method stub // 비밀 번호 암호화
-		 * dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
-		 * mybatis.insert("UserMapper.Signup", dto);
-		 */
+		
+		  // TODO Auto-generated method stub // 비밀 번호 암호화
+		  dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
+		  mybatis.insert("UserMapper.Signup", dto);
+		 
+		
 	}
 
 

@@ -21,8 +21,13 @@ public class UserService{
 	public UserDAO dao;
 
 	// 회원 가입
-	public void signupUser(UserDTO dto) {
-		dao.signupUser(dto);
+	public int signupUser(UserDTO dto) {
+		try {
+			dao.signupUser(dto);		// 회원가입
+		} catch (Exception e) {
+			return -1;				// 회원가입 실패
+		}
+		return 1;
 	}
 
 	public UserDTO Test() {

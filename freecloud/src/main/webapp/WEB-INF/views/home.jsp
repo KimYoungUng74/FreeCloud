@@ -109,7 +109,7 @@
 						<ul>
 							<li><a href="account.html">로그인<i class="flaticon-people"></i></a>
 							</li>
-							<li><a href="account.html">회원가입</a></li>
+							<li><a href="signup.do">회원가입</a></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
 									class="flaticon-shop"></i> <span>2</span>
 							</a>

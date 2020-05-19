@@ -262,56 +262,56 @@
 		<div class="container">
 			<div class="row">
 				<div>
-					<form action="#" class="create-account-form" method="post">
+					<form action="signupOk.do" class="create-account-form" method="post">
 						<h2 class="heading-title">회원가입</h2>
 						<p>
 							<b>아이디</b>
 						</p>
 						<p class="form-row">
-							<input type="text" id="userId" placeholder="ID 입력">
+							<input type="text" name="USER_ID" placeholder="ID 입력">
 						</p>
 						<p>
 							<b>비밀번호</b>
 						</p>
 						<p class="form-row">
-							<input type="password" id="userPw" placeholder="PW 입력">
+							<input type="password" name="USER_PW" placeholder="PW 입력">
 						</p>
 						<p>
 							<b>비밀번호 확인</b>
 						</p>
 						<p class="form-row">
-							<input type="password" id="userPW2" placeholder="PW 확인">
+							<input type="password" name="USER_PW2" placeholder="PW 확인">
 						</p>
 						<p>
 							<b>이름</b>
 						</p>
 						<p class="form-row">
-							<input type="password" id="userName" placeholder="이름 입력">
+							<input type="text" name="USER_NAME" placeholder="이름 입력">
 						</p>
 						<p>
 							<b>이메일 주소</b>
 						</p>
 						<p class="form-row">
-							<input type="email" id="userEmail" placeholder="이메일 입력">
+							<input type="email" name="USER_EMAIL" placeholder="이메일 입력">
 						</p>
 						<p>
 							<b>전화 번호</b>
 						</p>
 						<div class="col-md-4">
 							<p class="form-row">
-								<input style="width: 90%" type="text" id="userPhone1"
+								<input style="width: 90%" type="text" name="USER_PHONE1"
 									placeholder="앞번호 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
 							</p>
 						</div>
 						<div class="col-md-4">
 							<p class="form-row">
-								<input style="width: 90%" type="text" id="userPhone2"
+								<input style="width: 90%" type="text" name="USER_PHONE2"
 									placeholder="중간번호 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
 							</p>
 						</div>
 						<div class="col-md-4">
 							<p class="form-row">
-								<input style="width: 90%" type="text" id="userPhone3"
+								<input style="width: 90%" type="text" name="USER_PHONE3"
 									placeholder="뒷번호 입력">
 							</p>
 						</div>
@@ -319,7 +319,7 @@
 							<b>거주 지역</b>
 						</p>
 						<p class="shop-select">
-							<select>
+							<select name="USER_ADDRESS">
 								<option value="none">지역을 선택하세요.</option>
 								<option value="서울특별시">서울특별시</option>
 							</select>
