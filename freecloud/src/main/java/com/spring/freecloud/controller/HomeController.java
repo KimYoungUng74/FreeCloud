@@ -39,13 +39,13 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		/*
-		 * UserDTO userDTO = userSer.Test(); System.out.println("테스트 : " +
+		 * UserDTO userDTO = userSer.Test(); System.out.println("�뀒�뒪�듃 : " +
 		 * userDTO.toString());
 		 */
 
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "shop";
+		return "projectState";
 	}
 	
 }

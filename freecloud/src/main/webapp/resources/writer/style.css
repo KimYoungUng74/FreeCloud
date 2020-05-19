@@ -2587,6 +2587,15 @@ a.wish-btn {
 	transition: all 0.4s ease 0s;
 }
 
+.basicBtn {
+	background: #d5d5d5 none repeat scroll 0 0;
+	border: 0 none;
+	font-weight: 500;
+	margin-top: 10px;
+	padding: 5px;
+	transition: all 0.4s ease 0s;
+}
+
 .product-cart p a {
 	bottom: 0;
 	color: #666666;

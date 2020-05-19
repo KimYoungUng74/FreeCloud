@@ -385,7 +385,7 @@
 								<p>
 									<label> 보유기술 : </label> <input type="text" disabled="disabled">
 									<input type="text">
-									<button>등록</button>
+									<button class="basicBtn">등록</button>
 								<p />
 							</div>
 							<div class="col-md-12">
@@ -393,19 +393,19 @@
 							</div>
 							<div class="col-md-6">
 								<p>
-									<input type="file">
+									<input class="basicBtn" style="width: 100%" type="file">
 								</p>
 							</div>
 							<div class="col-md-6">
 								<p>
-									<button>등록</button>
+									<button class="basicBtn">등록</button>
 								</p>
 							</div>
 							<div class="col-md-12">
 								<p>
 									<label> 자격증 : </label> <input type="text" disabled="disabled">
 									<input type="text">
-									<button>등록</button>
+									<button class="basicBtn">등록</button>
 								<p />
 							</div>
 							<div class="col-md-12">
