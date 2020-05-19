@@ -271,35 +271,10 @@
 							</div>
 						</div>
 						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="이미지 변경">
+							<input type="button" style="width: 100%" value="지원 요청">
 						</div>
 						<br>
-						<div class="col-md-5">
-							<h5>
-								<b>정보 공개 여부</b>
-							</h5>
-						</div>
 
-						<div class="col-md-7"
-							style="border: 1px solid #D3D3D3; font-size: 16px;">
-							<input type="radio" name="infor" value="true">공개 &nbsp; <input
-								type="radio" name="infor" value="false">비공개
-						</div>
-						<br>
-						<hr>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%; color: #fff"
-								value="내 정보">
-						</div>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="나의 프로젝트">
-						</div>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="프로젝트 지원 현황">
-						</div>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="나의 게시판">
-						</div>
 					</div>
 				</div>
 				<div class="col-md-9 col-sm-9 col-xs-12" style="font-size: 20px;">
@@ -311,12 +286,7 @@
 									<label> ID : </label> 꾸꾸까까
 								<p>
 								<p>
-									<label> 지역 : </label> <select>
-										<option value="">지역 선택</option>
-										<option value="중졸">서울</option>
-										<option value="고졸">경기도</option>
-										<option value="대졸">강원도</option>
-									</select>
+									<label> 지역 : </label> 서울
 								<p>
 							</div>
 							<div class="col-md-6">
@@ -324,96 +294,54 @@
 									<label> 이름 : </label> 이름
 								<p>
 								<p>
-									<label> 최종학력 : </label> <select>
-										<option value="">학력 선택</option>
-										<option value="중졸">중졸</option>
-										<option value="고졸">고졸</option>
-										<option value="대졸">대졸</option>
-									</select>
+									<label> 최종학력 : </label> 대졸
 								<p>
 							</div>
 							<div class="col-md-12">
 
 								<p>
-									<label> 이메일 : </label> <input type="email"
-										placeholder="freeCloud@free.com">
+									<label> 이메일 : </label> free@freeCloud.com
 								<p>
 								<p>
-									<label> 전화번호 </label>
-							</div>
-							<div class="col-md-4">
-								<input type="text" style="width: 90%;"> &nbsp;&nbsp;-
-							</div>
-							<div class="col-md-4">
-								<input type="text" style="width: 90%;"> &nbsp;&nbsp;-
-							</div>
-							<div class="col-md-4">
-								<input type="text" style="width: 100%;">
+									<label> 전화번호 </label> 010-1234-1234(이부분 비공개?)
 							</div>
 
 							<div class="col-md-12">
 								<br> <label> 자기소개 </label>
 
-								<textarea rows="8" style="width: 100%; resize: none;"></textarea>
+								<textarea rows="8" style="width: 100%; resize: none;" readonly="readonly" >안녕하십니까 jsp, html 전문가입니다.</textarea>
 							</div>
 							<div class="col-md-6">
 								<p>
-									<label> 전문분야 : </label> <select>
-										<option value="">대분류 선택</option>
-										<option value="중졸">서울</option>
-										<option value="고졸">경기도</option>
-										<option value="대졸">강원도</option>
-									</select> &nbsp; <select>
-										<option value="">중분류 선택</option>
-										<option value="중졸">서울</option>
-										<option value="고졸">경기도</option>
-										<option value="대졸">강원도</option>
-									</select>
+									<label> 전문분야 : </label> IT, 웹
 								</p>
 							</div>
 							<div class="col-md-6">
 								<p>
-									<label> 경력 : </label> <select>
-										<option value="">경력 선택</option>
-										<option value="중졸">1년미만</option>
-										<option value="고졸">1년</option>
-										<option value="대졸">3년</option>
+									<label> 경력 : </label> 10년
 									</select>
 								</p>
 							</div>
 							<div class="col-md-12">
 								<p>
-									<label> 보유기술 : </label> <input type="text" disabled="disabled">
-									<input type="text">
-									<button class="basicBtn">등록</button>
+									<label> 보유기술 : </label> HTML, JSP, JAVA, Node.js, PHP
 								<p />
 							</div>
 							<div class="col-md-12">
 								<label> 포트폴리오 </label>
-							</div>
-							<div class="col-md-6">
-								<p>
-									<input class="basicBtn" style="width: 100%" type="file">
-								</p>
-							</div>
-							<div class="col-md-6">
-								<p>
-									<button class="basicBtn">등록</button>
-								</p>
+								<div style="overflow: auto; border:1px solid #D3D3D3; width: 100%; height: 150px;"></div>
 							</div>
 							<div class="col-md-12">
 								<p>
-									<label> 자격증 : </label> <input type="text" disabled="disabled">
-									<input type="text">
-									<button class="basicBtn">등록</button>
+									<label> 자격증 : </label> 정보처리 기사, 리눅스 마스터, 컴퓨터 활용 능력1급
 								<p />
 							</div>
 							<div class="col-md-12">
-							<p>
-							<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="등록 하기">
-						</div>
-							</p>
+								<p>
+								<div class="button" style="width: 100%">
+									<input type="button" style="width: 100%" value="뒤로가기">
+								</div>
+								</p>
 							</div>
 						</div>
 					</div>
