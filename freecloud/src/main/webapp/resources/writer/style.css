@@ -1783,9 +1783,9 @@ p.form-row-phone {
 	bottom: 0;
 	content: "";
 	height: 1px;
-	left: 0;
+	left: 17px;
 	position: absolute;
-	width: 100%;
+	width: 85%;
 }
 
 .sidebar-menu li a i {
@@ -2010,10 +2010,20 @@ p.form-row-phone {
 }
 
 .new-price {
+	color: #444492;
+	font-weight: 600;
+}
+
+.new-price1 {
 	color: #a3d4f7;
 	font-weight: 600;
 }
 
+.new-price2 {
+	color: #a3d4f7;
+	font-weight: 600;
+	font-size: 14px;
+}
 .product-price {
 	margin-bottom: 20px;
 }
@@ -2905,7 +2915,7 @@ h3.widget-title-modal {
 	overflow: hidden;
 	text-decoration: none;
 	text-shadow: 0 1px #ffffff;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 }
 
 .panel-default>.panel-heading h4 {
@@ -3039,3 +3049,5 @@ h3.widget-title-modal {
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 }
+
+

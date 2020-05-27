@@ -45,7 +45,7 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "shop";
+		return "freelancerSearch";
 	}
 	
 }
