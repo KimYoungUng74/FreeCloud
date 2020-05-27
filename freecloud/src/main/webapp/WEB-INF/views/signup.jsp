@@ -115,7 +115,7 @@
 				<div class="col-md-3 hidden-sm">
 					<div class="header-right">
 						<ul>
-							<li><a href="account.html">로그인<i class="flaticon-people"></i></a>
+							<li><a href="login.do">로그인<i class="flaticon-people"></i></a>
 							</li>
 							<li><a href="account.html">회원가입</a></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i

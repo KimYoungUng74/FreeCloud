@@ -21,7 +21,7 @@ public class UserDAO {
 	@Autowired
 	public SqlSessionTemplate mybatis;
 
-	
+	// 회원가입
 	public void signupUser(UserDTO dto) {
 		
 		  // TODO Auto-generated method stub // 비밀 번호 암호화
@@ -29,6 +29,19 @@ public class UserDAO {
 		  mybatis.insert("UserMapper.Signup", dto);
 		 
 		
+	}
+	
+	// 로그인 처리
+	public boolean loginCheck(UserDTO dto) {
+		dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
+		String name = mybatis.selectOne("UserMapper.loginCheck", dto);
+        return (name == null) ? false : true;
+	}
+
+	// 회원 정보 조회
+	public UserDTO viewUser(UserDTO dto) {
+		// TODO Auto-generated method stub
+		return mybatis.selectOne("UserMapper.viewUser", dto);
 	}
 
 

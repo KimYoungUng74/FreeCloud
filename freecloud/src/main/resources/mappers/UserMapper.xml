@@ -10,6 +10,41 @@
 		VALUES(#{USER_ID}, #{USER_PW}, #{USER_NAME}, #{USER_EMAIL},
 		#{USER_PHONE1}, #{USER_PHONE2}, #{USER_PHONE3}, #{USER_ADDRESS}, 0, 0)
 	</insert>
+	
+	<!-- 로그인 처리 -->
+	<select id="loginCheck" parameterType="UserDTO"
+		resultType="String">
+		SELECT USER_NAME 
+		FROM FREE_USER 
+		WHERE USER_ID = #{USER_ID} AND USER_PW = #{USER_PW}
+	</select>
+
+	<!-- 회원 정보 조회 -->
+	<select id="viewUser" parameterType="UserDTO"
+		resultType="UserDTO">
+		SELECT
+		USER_ID,
+		USER_PW,
+		USER_NAME,
+		USER_EMAIL,
+		USER_PHONE1,
+		USER_PHONE2,
+		USER_PHONE3,
+		USER_ADDRESS,
+		FREELANCER_ABOUT_ME,
+		FREELANCER_MAIN_KATEGORY,
+		FREELANCER_MIDDEL_KATEGORY,
+		FREELANCER_SKILL,
+		FREELANCER_CAREER,
+		FREELANCER_CERTIFICATE,
+		FREELANCER_IMAGE_PATH,
+		FREELANCER_PUBLIC,
+		USER_GRANT
+		FROM FREE_USER
+		WHERE USER_ID = #{USER_ID} AND USER_PW = #{USER_PW}
+	</select>
+	
+	
 	<select id="Test" resultType="UserDTO">
 		select * from FREE_MYFREELANCER
 	</select>

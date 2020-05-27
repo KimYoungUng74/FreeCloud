@@ -272,19 +272,19 @@
 		<div class="container">
 			<div class="row">
 				<div>
-					<form action="#" class="create-account-form" method="post">
+					<form action="loginCheck.do" class="create-account-form" method="post">
 						<h2 class="heading-title">로그인</h2>
 						<p>
 							<b>아이디</b>
 						</p>
 						<p class="form-row">
-							<input type="text" placeholder="ID 입력">
+							<input type="text" name="USER_ID" placeholder="ID 입력">
 						</p>
 						<p>
 							<b>비밀번호</b>
 						</p>
 						<p class="form-row">
-							<input type="password" placeholder="PW 입력">
+							<input type="password" name="USER_PW" placeholder="PW 입력">
 						</p>
 						<div class="col-md-2 lost-password form-group">
 							<a href="#" title="Quick view" data-toggle="modal"
