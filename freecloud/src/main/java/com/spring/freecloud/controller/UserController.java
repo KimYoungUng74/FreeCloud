@@ -53,6 +53,12 @@ public class UserController {
 
 		return mav;
 	}
+	
+	// 로그인 화면
+		@RequestMapping(value = "login.do")
+		public String login(Locale locale, Model model) {
+			return "login";
+		}
 
 	// 로그인 처리
 	@RequestMapping(value = "loginCheck.do")
