@@ -39,7 +39,7 @@ public class UserService {
 			session.setAttribute("userId", dto2.getUSER_ID());
 			session.setAttribute("userName", dto2.getUSER_NAME());
 			session.setAttribute("userEmail", dto2.getUSER_EMAIL());
-			session.setAttribute("userinfo", dto2);
+			session.setAttribute("userinfo", dto2.getFREELANCER_ABOUT_ME());
 		}
 		return result;
 	}
