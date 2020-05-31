@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.service.UserService;
@@ -53,12 +54,12 @@ public class UserController {
 
 		return mav;
 	}
-	
+
 	// 로그인 화면
-		@RequestMapping(value = "login.do")
-		public String login(Locale locale, Model model) {
-			return "login";
-		}
+	@RequestMapping(value = "login.do")
+	public String login(Locale locale, Model model) {
+		return "login";
+	}
 
 	// 로그인 처리
 	@RequestMapping(value = "loginCheck.do")
@@ -78,6 +79,18 @@ public class UserController {
 			mav.addObject("msg", "failure");
 			System.out.println("로그인 실패");
 		}
+		return mav;
+	}
+
+	// 로그아웃
+	@RequestMapping(value = "logout.do")
+	public ModelAndView logOut(HttpSession session, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		userSer.logout(session);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("home");
+		mav.addObject("msg", "logout");
 		return mav;
 	}
 

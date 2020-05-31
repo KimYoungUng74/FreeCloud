@@ -43,11 +43,19 @@ public class UserService {
 		}
 		return result;
 	}
-	
+
 	// 회원 정보 조회
 	private UserDTO viewUser(UserDTO dto) {
 		// TODO Auto-generated method stub
 		return dao.viewUser(dto);
+	}
+
+	// 회원 로그아웃
+	public void logout(HttpSession session) {
+		// 세션 변수 개별 삭제
+		// session.removeAttribute("userId");
+		// 세션 정보를 초기화 시킴
+		session.invalidate();
 	}
 
 	public UserDTO Test() {
