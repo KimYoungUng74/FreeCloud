@@ -69,25 +69,44 @@
 <script type="text/javascript">
 	$(function() {
 		//비밀번호 확인
-		$('#USER_PW2')
-				.blur(
-						function() {
-							if ($('#USER_PW2').val() != '') {
-								if ($('#USER_PW1').val() != $('#USER_PW2')
-										.val()) {
-									$('#checkPwd')
-											.html(
-													'<p><b>비밀번호 확인 : </b> <b style="color:red"> 비밀번호가 일치하지 않습니다. </b></p>');
-									$('#USER_PW2').val('');
-									$('#USER_PW2').focus();
-								} else {
-									$('#checkPwd')
-											.html(
-													'<p><b>비밀번호 확인 : </b> <b style="color:blue"> 비밀번호가 일치합니다. </b></p>');
-								}
-							}
-						})
+		$('#USER_PW2').blur(
+			function() {
+				if ($('#USER_PW2').val() != '') {
+					if ($('#USER_PW1').val() != $('#USER_PW2').val()) {
+						$('#checkPwd').html('<p><b>비밀번호 확인 : </b> <b style="color:red"> 비밀번호가 일치하지 않습니다. </b></p>');
+						$('#USER_PW2').val('');
+						$('#USER_PW2').focus();
+					} else {
+						$('#checkPwd').html('<p><b>비밀번호 확인 : </b> <b style="color:blue"> 비밀번호가 일치합니다. </b></p>');
+					}
+				}
+			})
 	});
+	$(function(){
+		//아이디 중복체크
+		    $('#USER_ID').blur(function(){
+		        $.ajax({
+			     type:"POST",
+			     url:"checkId",
+			     data:{
+			            "id":$('#USER_ID').val()
+			     },
+			     success:function(data){	//data : checkId에서 넘겨준 결과값
+			            if($.trim(data)=="YES"){
+			               if($('#USER_ID').val()!=''){ 
+			            	   $('#checkId').html('<p><b>아이디 : </b> <b style="color:blue"> 사용가능한 아이디입니다. </b></p>');
+			               }
+			           	}else{
+			               if($('#USER_ID').val()!=''){
+			            	   $('#checkId').html('<p><b>아이디 : </b> <b style="color:red"> 중복된 아이디입니다. </b></p>');
+			                  $('#USER_ID').focus();
+			               }
+			            }
+			         }
+			    }) 
+		     })
+
+		});
 </script>
 
 </head>
@@ -305,8 +324,11 @@
 					<form action="signupOk.do" class="create-account-form"
 						method="post">
 						<h2 class="heading-title">회원가입</h2>
-						<p>
-							<b>아이디</b>
+						<div id="checkId">
+							<p>
+								<b>아이디</b>
+							</p>
+						</div>
 						<p class="form-row">
 							<input type="text" id="USER_ID" name="USER_ID"
 								placeholder="ID 입력" onkeydown="checkId()">

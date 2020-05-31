@@ -28,11 +28,10 @@ public class UserDAO {
 		mybatis.insert("UserMapper.Signup", dto);
 
 	}
-
-	public boolean checkId(String usrid) throws Exception {
-
-		String id = mybatis.selectOne("UserMapper.loginCheck", usrid);
-		return (id == null) ? true : false;
+	// 중복아이디 체크
+	public boolean checkId(String usrid){
+		String id = mybatis.selectOne("UserMapper.IdCheck", usrid);
+		return (id == null) ? false : true;
 	}// end list()
 
 	// 로그인 처리

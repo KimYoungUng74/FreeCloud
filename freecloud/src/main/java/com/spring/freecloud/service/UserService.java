@@ -61,5 +61,9 @@ public class UserService {
 
 		return dao.connectTest();
 	}
+	public boolean checkId(String id){
+		// TODO Auto-generated method stub
+		return dao.checkId(id);
+	}
 
 }

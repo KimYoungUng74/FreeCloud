@@ -17,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
@@ -53,6 +55,19 @@ public class UserController {
 		mav.setViewName("home");
 
 		return mav;
+	}
+
+	// 아이디 중복 체크
+	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
+	public @ResponseBody String AjaxView(@RequestParam("id") String id) {
+		String str = "";
+		boolean idcheck = userSer.checkId(id);
+		if (idcheck) { // 이미 존재하는 계정
+			str = "NO";
+		} else { // 사용 가능한 계정
+			str = "YES";
+		}
+		return str;
 	}
 
 	// 로그인 화면

@@ -12,6 +12,14 @@
 	</insert>
 	
 	<!-- 로그인 처리 -->
+	<select id="IdCheck" parameterType="UserDTO"
+		resultType="String">
+		SELECT USER_ID
+		FROM FREE_USER 
+		WHERE USER_ID = #{USER_ID}
+	</select>
+	
+	<!-- 로그인 처리 -->
 	<select id="loginCheck" parameterType="UserDTO"
 		resultType="String">
 		SELECT USER_NAME 
