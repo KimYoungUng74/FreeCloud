@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.util.SHA256;
 
-
 //[DB연결 사용법] 3. 인터페이스 받아서 클래스 생성
 @Repository
 public class UserDAO {
@@ -23,19 +22,24 @@ public class UserDAO {
 
 	// 회원가입
 	public void signupUser(UserDTO dto) {
-		
-		  // TODO Auto-generated method stub // 비밀 번호 암호화
-		  dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
-		  mybatis.insert("UserMapper.Signup", dto);
-		 
-		
+
+		// TODO Auto-generated method stub // 비밀 번호 암호화
+		dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
+		mybatis.insert("UserMapper.Signup", dto);
+
 	}
-	
+
+	public boolean checkId(String usrid) throws Exception {
+
+		String id = mybatis.selectOne("UserMapper.loginCheck", usrid);
+		return (id == null) ? true : false;
+	}// end list()
+
 	// 로그인 처리
 	public boolean loginCheck(UserDTO dto) {
 		dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
 		String name = mybatis.selectOne("UserMapper.loginCheck", dto);
-        return (name == null) ? false : true;
+		return (name == null) ? false : true;
 	}
 
 	// 회원 정보 조회
@@ -43,7 +47,6 @@ public class UserDAO {
 		// TODO Auto-generated method stub
 		return mybatis.selectOne("UserMapper.viewUser", dto);
 	}
-
 
 	public UserDTO connectTest() {
 		// TODO Auto-generated method stub

@@ -1,6 +1,7 @@
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true"%>
+<%@page import="com.spring.freecloud.dao.UserDAO"%>
 <html>
 <head>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
@@ -64,6 +65,31 @@
 <!-- modernizr css -->
 <script
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//비밀번호 확인
+		$('#USER_PW2')
+				.blur(
+						function() {
+							if ($('#USER_PW2').val() != '') {
+								if ($('#USER_PW1').val() != $('#USER_PW2')
+										.val()) {
+									$('#checkPwd')
+											.html(
+													'<p><b>비밀번호 확인 : </b> <b style="color:red"> 비밀번호가 일치하지 않습니다. </b></p>');
+									$('#USER_PW2').val('');
+									$('#USER_PW2').focus();
+								} else {
+									$('#checkPwd')
+											.html(
+													'<p><b>비밀번호 확인 : </b> <b style="color:blue"> 비밀번호가 일치합니다. </b></p>');
+								}
+							}
+						})
+	});
+</script>
+
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -84,7 +110,7 @@
 					</div>
 				</div>
 				<div class="col-md-7">
-					<div class="mainmenu text-center"> 
+					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
 								<li><h4>
@@ -121,7 +147,7 @@
 									</c:when>
 									<c:otherwise>
 
-											<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
+										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
 									</c:otherwise>
 								</c:choose></li>
 							<li><c:choose>
@@ -129,7 +155,7 @@
 										<a href="signup.do">회원가입</a>
 									</c:when>
 									<c:otherwise>
-											<a href="logout.do">로그아웃</a>
+										<a href="logout.do">로그아웃</a>
 									</c:otherwise>
 								</c:choose></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
@@ -276,25 +302,33 @@
 		<div class="container">
 			<div class="row">
 				<div>
-					<form action="signupOk.do" class="create-account-form" method="post">
+					<form action="signupOk.do" class="create-account-form"
+						method="post">
 						<h2 class="heading-title">회원가입</h2>
 						<p>
 							<b>아이디</b>
-						</p>
 						<p class="form-row">
-							<input type="text" name="USER_ID" placeholder="ID 입력">
+							<input type="text" id="USER_ID" name="USER_ID"
+								placeholder="ID 입력" onkeydown="checkId()">
 						</p>
 						<p>
 							<b>비밀번호</b>
 						</p>
 						<p class="form-row">
-							<input type="password" name="USER_PW" placeholder="PW 입력">
+							<input type="password" id="USER_PW1" name="USER_PW"
+								placeholder="PW 입력">
 						</p>
-						<p>
-							<b>비밀번호 확인</b>
-						</p>
+
+						<div id="checkPwd">
+							<p>
+								<b>비밀번호 확인 : 동일한 암호를 입력하세요.</b>
+							</p>
+						</div>
+
+
 						<p class="form-row">
-							<input type="password" name="USER_PW2" placeholder="PW 확인">
+							<input type="password" id="USER_PW2" name="USER_PW2"
+								placeholder="PW 확인" onchange="checkPwd();">
 						</p>
 						<p>
 							<b>이름</b>
@@ -366,13 +400,20 @@
 								</a>
 							</div>
 							<div class="col-md-9">
-							<br>
-								<h2 class="footer-title"><p><a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a></h2> 
+								<br>
+								<h2 class="footer-title">
+									<p>
+										<a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a
+											href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a>
+								</h2>
 							</div>
-							<br><br><br><br>
-							<p>㈜ Free구름&nbsp;&nbsp;|&nbsp;&nbsp;대표자 : 김영웅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사업자등록번호 : 123-12-12345</p>
+							<br> <br> <br> <br>
+							<p>㈜ Free구름&nbsp;&nbsp;|&nbsp;&nbsp;대표자 :
+								김영웅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사업자등록번호 :
+								123-12-12345</p>
 							<ul class="footer-contact">
-								<li><i class="flaticon-location"></i> 14558 경기도 의정부시 서부로 545 융합소프트웨어과 404호
+								<li><i class="flaticon-location"></i> 14558 경기도 의정부시 서부로
+									545 융합소프트웨어과 404호
 								<li>
 								<li><i class="flaticon-web"></i> negahero@freeClude.com</li>
 							</ul>
@@ -382,16 +423,16 @@
 						<div class="single-footer">
 							<h1 class="footer-title">고객센터</h1>
 							<ul class="footer-contact">
-								<li><h4> 운영시간 : 평일 09:00 ~ 18:00 </h4></li>
+								<li><h4>운영시간 : 평일 09:00 ~ 18:00</h4></li>
 								<li><i class="flaticon-technology"></i> (+800) 123 4567 890
 								</li>
 								<li><i class="flaticon-web"></i> negahero@freeClude.com</li>
 							</ul>
 						</div>
 					</div>
-					
+
 				</div>
-			</div>  
+			</div>
 		</div>
 		<div class="footer-bottom">
 			<div class="container">
@@ -399,8 +440,8 @@
 					<div class="col-md-6">
 						<div class="footer-bottom-left pull-left">
 							<p>
-								Copyright &copy; 2020 <span><a href="#">FreeCloud</a></span>. All
-								Right Reserved.
+								Copyright &copy; 2020 <span><a href="#">FreeCloud</a></span>.
+								All Right Reserved.
 							</p>
 						</div>
 					</div>
@@ -418,7 +459,9 @@
 	<!-- all js here -->
 	<!-- jquery latest version -->
 	<script
-		src="<c:url value='resources/writer/js/vendor/jquery-1.12.0.min.js'/>"></script>
+		src="<c:url value='resources/writer/js/vendor/jquery-1.12.0.min.js'/>">
+		
+	</script>
 	<!-- bootstrap js -->
 	<script src="<c:url value='resources/writer/js/bootstrap.min.js'/>"></script>
 	<!-- owl.carousel js -->
@@ -455,5 +498,6 @@
 		type="text/javascript"></script>
 	<!-- main js -->
 	<script src="<c:url value='resources/writer/js/main.js'/>"></script>
+
 </body>
 </html>

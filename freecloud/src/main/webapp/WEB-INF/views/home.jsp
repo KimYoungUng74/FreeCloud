@@ -69,7 +69,14 @@
 	<!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
+	<c:if test="${msg == 'logout'}">
+		<script>
+			alert("로그아웃 되었습니다.");
+		</script>
+	</c:if>
+	<c:if test="${msg == 'success'}">
+		<script> alert("${sessionScope.userName}님 환영합니다.");</script>
+	</c:if>
 	<!-- Add your site or application content here -->
 	<!--Header Area Start-->
 	<div class="header-area">
@@ -84,7 +91,7 @@
 					</div>
 				</div>
 				<div class="col-md-7">
-					<div class="mainmenu text-center"> 
+					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
 								<li><h4>
@@ -121,7 +128,7 @@
 									</c:when>
 									<c:otherwise>
 
-											<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
+										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
 									</c:otherwise>
 								</c:choose></li>
 							<li><c:choose>
@@ -129,7 +136,7 @@
 										<a href="signup.do">회원가입</a>
 									</c:when>
 									<c:otherwise>
-											<a href="logout.do">로그아웃</a>
+										<a href="logout.do">로그아웃</a>
 									</c:otherwise>
 								</c:choose></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i

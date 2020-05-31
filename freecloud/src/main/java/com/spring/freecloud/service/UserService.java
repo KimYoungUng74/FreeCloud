@@ -29,7 +29,6 @@ public class UserService {
 		}
 		return 1;
 	}
-
 	// 회원 로그인 체크
 	public boolean loginCheck(UserDTO dto, HttpSession session) {
 		boolean result = dao.loginCheck(dto);

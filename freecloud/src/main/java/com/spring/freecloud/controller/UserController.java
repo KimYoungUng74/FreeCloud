@@ -69,7 +69,6 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 
 		if (result) { // 로그인 성공
-			mav.addObject("dto", dto);
 			mav.setViewName("home");
 			mav.addObject("msg", "success");
 			System.out.println("로그인 성공");
