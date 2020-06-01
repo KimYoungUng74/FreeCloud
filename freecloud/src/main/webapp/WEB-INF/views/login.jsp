@@ -83,10 +83,8 @@
 					"name" : $('#USER_NAME').val(),
 					"email" : $('#USER_EMAIL').val()
 				},
-				success : function(data) { //data : checkId에서 넘겨준 결과값
+				success : function(data) { //data : seekId에서 넘겨준 결과값(id)
 					alert(data);
-					$('#checkId').html(data);
-
 				}
 			})
 		})
@@ -429,11 +427,6 @@
 								<div class="row">
 									<div>
 											<h2 class="heading-title">아이디 찾기</h2>
-											<div id="checkId">
-												<p>
-													<b>아이디</b>
-												</p>
-											</div>
 											<p>
 												<b>이름</b>
 											</p>

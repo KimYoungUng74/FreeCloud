@@ -49,6 +49,7 @@ public class UserDAO {
 
 	// 아이디 찾기
 	public String seekId(UserDTO dto) {
+		System.out.println();
 		String id = mybatis.selectOne("UserMapper.seekId", dto);
 		return  (id == null) ? "" : id;
 	}
