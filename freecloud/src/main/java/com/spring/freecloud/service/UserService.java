@@ -57,13 +57,18 @@ public class UserService {
 		session.invalidate();
 	}
 
-	public UserDTO Test() {
-
-		return dao.connectTest();
-	}
+	// 중복 아이디 체크
 	public boolean checkId(String id){
 		// TODO Auto-generated method stub
 		return dao.checkId(id);
+	}
+	
+	// 아이디 찾기
+	public String seekId(String name, String email) {
+		UserDTO dto = new UserDTO();
+		dto.setUSER_NAME(name);
+		dto.setUSER_EMAIL(email);
+		return dao.seekId(dto);
 	}
 
 }

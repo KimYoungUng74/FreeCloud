@@ -25,12 +25,12 @@ public class UserDAO {
 
 		// TODO Auto-generated method stub // 비밀 번호 암호화
 		dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
-		mybatis.insert("UserMapper.Signup", dto);
+		mybatis.insert("UserMapper.signup", dto);
 
 	}
 	// 중복아이디 체크
 	public boolean checkId(String usrid){
-		String id = mybatis.selectOne("UserMapper.IdCheck", usrid);
+		String id = mybatis.selectOne("UserMapper.idCheck", usrid);
 		return (id == null) ? false : true;
 	}// end list()
 
@@ -47,8 +47,9 @@ public class UserDAO {
 		return mybatis.selectOne("UserMapper.viewUser", dto);
 	}
 
-	public UserDTO connectTest() {
-		// TODO Auto-generated method stub
-		return mybatis.selectOne("UserMapper.Test");
+	// 아이디 찾기
+	public String seekId(UserDTO dto) {
+		String id = mybatis.selectOne("UserMapper.seekId", dto);
+		return  (id == null) ? "" : id;
 	}
 }

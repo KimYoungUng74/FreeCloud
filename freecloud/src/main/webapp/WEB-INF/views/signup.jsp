@@ -370,19 +370,19 @@
 						<div class="col-md-4">
 							<p class="form-row">
 								<input style="width: 90%" type="text" name="USER_PHONE1"
-									placeholder="앞번호 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
+									placeholder="앞번호 입력" maxlength="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
 							</p>
 						</div>
 						<div class="col-md-4">
 							<p class="form-row">
 								<input style="width: 90%" type="text" name="USER_PHONE2"
-									placeholder="중간번호 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
+									placeholder="중간번호 입력" maxlength="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
 							</p>
 						</div>
 						<div class="col-md-4">
 							<p class="form-row">
 								<input style="width: 90%" type="text" name="USER_PHONE3"
-									placeholder="뒷번호 입력">
+									placeholder="뒷번호 입력" maxlength="4">
 							</p>
 						</div>
 						<p>

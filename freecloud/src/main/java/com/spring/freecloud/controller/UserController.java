@@ -108,4 +108,20 @@ public class UserController {
 		return mav;
 	}
 
+	// 아이디 중복 체크
+	@RequestMapping(value = "/seekId", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String AjaxView2(@RequestParam("name") String name, @RequestParam("email") String email) {
+		System.out.println("seekid에 접근함");
+
+		String str = "";
+		String idcheck = userSer.seekId(name, email);
+		if (idcheck != "") { // 정보가 일치할 경우
+			str = idcheck;
+		} else { // 가입된 회원아 아닐경우
+			str = "|noSerchId|";
+		}
+
+		return str;
+	}
+
 }
