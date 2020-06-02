@@ -3,6 +3,14 @@
 <%@ page session="false"%>
 <html>
 <head>
+<style type="text/css">
+   .chklist { height: 100px; overflow: auto; width: 100px; border: 1px solid #D3D3D3; }
+   .chklist { list-style-type: none; padding: 0; overflow-x: hidden; }
+   .listc {  padding: 0; }
+   .wKind {border: 1px solid #D3D3D3; }
+   
+ </style>
+ 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	language="java"%>
 <meta charset="utf-8">
@@ -91,7 +99,7 @@
 										<a href="index.html">프로젝트</a>
 									</h4>
 									<ul class="sub-menu">
-										<li><a href="projectReg.do">프로젝트 등록</a></li>
+										<li><a href="about.html">프로젝트 등록</a></li>
 										<li><a href="cart.html">프로젝트 찾기</a></li>
 									</ul></li>
 								<li><h4>
@@ -115,7 +123,7 @@
 				<div class="col-md-3 hidden-sm">
 					<div class="header-right">
 						<ul>
-							<li><a href="login.do">로그인<i class="flaticon-people"></i></a>
+							<li><a href="account.html">로그인<i class="flaticon-people"></i></a>
 							</li>
 							<li><a href="account.html">회원가입</a></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
@@ -258,80 +266,250 @@
 	</div>
 	<!-- Breadcrumbs Area Start -->
 	<!-- Loging Area Start -->
+
+	<!-- <div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="shop-select">
+					<label>Country <span class="required">*</span></label> <select>
+						<option value="volvo">Bangladesh</option>
+						<option value="saab">Algeria</option>
+						<option value="mercedes">Afghanistan</option>
+						<option value="audi">Ghana</option>
+						<option value="audi2">Albania</option>
+						<option value="audi3">Bahrain</option>
+						<option value="audi4">Colombia</option>
+						<option value="audi5">Dominican Republic</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="First Name *">
+				</p>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="Last Name *">
+				</p>
+			</div>
+			<div class="col-md-12">
+				<p class="form-row">
+					<input type="text" placeholder="Company Name">
+				</p>
+			</div>
+			<div class="col-md-12">
+				<p class="form-row">
+					<input type="text" placeholder="Street address">
+				</p>
+			</div>
+			<div class="col-md-12">
+				<p class="form-row">
+					<input type="text" placeholder="Town / City">
+				</p>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="State / County *">
+				</p>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="Postcode / Zip">
+				</p>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="Email Address *">
+				</p>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="Phone *">
+				</p>
+			</div>
+			<div class="col-md-12">
+				<label class="checbox-info"> <input type="checkbox"
+					id="cbox"> Create an account?
+				</label>
+				<div id="cbox_info">
+					<p>Create an account by entering the information below. If you
+						are a returning customer please login at the top of the page.</p>
+					<p class="form-row form-row-phone">
+						<label>Phone<span class="required">*</span></label> <input
+							type="text" placeholder="Phone">
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>-->
 	<div class="login-account section-padding">
 		<div class="container">
 			<div class="row">
 				<div>
-					<form action="signupOk.do" class="create-account-form" method="post">
-						<h2 class="heading-title">회원가입</h2>
-						<p>
-							<b>아이디</b>
-						</p>
-						<p class="form-row">
-							<input type="text" name="USER_ID" placeholder="ID 입력">
-						</p>
-						<p>
-							<b>비밀번호</b>
-						</p>
-						<p class="form-row">
-							<input type="password" name="USER_PW" placeholder="PW 입력">
-						</p>
-						<p>
-							<b>비밀번호 확인</b>
-						</p>
-						<p class="form-row">
-							<input type="password" name="USER_PW2" placeholder="PW 확인">
-						</p>
-						<p>
-							<b>이름</b>
-						</p>
-						<p class="form-row">
-							<input type="text" name="USER_NAME" placeholder="이름 입력">
-						</p>
-						<p>
-							<b>이메일 주소</b>
-						</p>
-						<p class="form-row">
-							<input type="email" name="USER_EMAIL" placeholder="이메일 입력">
-						</p>
-						<p>
-							<b>전화 번호</b>
-						</p>
-						<div class="col-md-4">
-							<p class="form-row">
-								<input style="width: 90%" type="text" name="USER_PHONE1"
-									placeholder="앞번호 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
-							</p>
-						</div>
-						<div class="col-md-4">
-							<p class="form-row">
-								<input style="width: 90%" type="text" name="USER_PHONE2"
-									placeholder="중간번호 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
-							</p>
-						</div>
-						<div class="col-md-4">
-							<p class="form-row">
-								<input style="width: 90%" type="text" name="USER_PHONE3"
-									placeholder="뒷번호 입력">
-							</p>
-						</div>
-						<p>
-							<b>거주 지역</b>
-						</p>
-						<p class="shop-select">
-							<select name="USER_ADDRESS">
-								<option value="none">지역을 선택하세요.</option>
-								<option value="서울특별시">서울특별시</option>
+					<form action="#" class="create-account-form" method="post">
+						<h2 class="heading-title">리워드 등록</h2>
+
+						<div class="shop-select" style="display: inline; width: 25%;">
+							<label><b>카테고리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
+							<br>
+							<select style="width: 25%">
+								<option hidden="">대분류</option>
+								<option value="volvo">IT</option>
+								<option value="saab">Algeria</option>
+								<option value="mercedes">Afghanistan</option>
+								<option value="audi">Ghana</option>
+								<option value="audi2">Albania</option>
+								<option value="audi3">Bahrain</option>
+								<option value="audi4">Colombia</option>
+								<option value="audi5">Dominican Republic</option>
 							</select>
+							
+							<select style="width: 25%">
+								<option hidden="">대분류</option>
+								<option value="volvo">IT</option>
+								<option value="saab">Algeria</option>
+								<option value="mercedes">Afghanistan</option>
+								<option value="audi">Ghana</option>
+								<option value="audi2">Albania</option>
+								<option value="audi3">Bahrain</option>
+								<option value="audi4">Colombia</option>
+								<option value="audi5">Dominican Republic</option>
+							</select>
+						</div>
+
+						
+						<div class="col-md-6" style="display: inline; float: right; width: 48%;">
+							<b>리워드 패키지</b><br><br>
+							<ul class="chklist"style="width: 100%; height: 100%;">
+								<li class="listc"><label for="chk1"><input type="checkbox"
+										name="chk1" id="chk1">&nbsp;패키지 1</label></li>
+							<p class="form-row order-notes">
+								<textarea placeholder="패키지 내용 설명" style="display: inline; width: 100%;
+								text-align: center;"></textarea>
+							</p>
+							</ul>
+							
+							
+							<br>
+							
+							<br><br>
+							<ul class="chklist"style="width: 100%; height: 100%;">
+								<li class="listc"><label for="chk1"><input type="checkbox"
+										name="chk1" id="chk1">&nbsp;패키지 2</label></li>
+							<p class="form-row order-notes">
+								<textarea placeholder="패키지 내용 설명" style="display: inline; width: 100%;
+								text-align: center;"></textarea>
+							</p>
+							</ul>
+							
+							<br><br>
+							<ul class="chklist"style="width: 100%; height: 100%;">
+								<li class="listc"><label for="chk1"><input type="checkbox"
+										name="chk1" id="chk1">&nbsp;패키지 3</label></li>
+							<p class="form-row order-notes">
+								<textarea placeholder="패키지 내용 설명" style="display: inline; width: 100%;
+								text-align: center;"></textarea>
+							</p>
+							</ul>
+							
+							<br><br>
+							<ul class="chklist"style="width: 100%; height: 100%;">
+								<li class="listc"><label for="chk1"><input type="checkbox"
+										name="chk1" id="chk1">&nbsp;패키지 4</label></li>
+							<p class="form-row order-notes">
+								<textarea placeholder="패키지 내용 설명" style="display: inline; width: 100%;
+								text-align: center;"></textarea>
+							</p>
+							</ul>
+							
+							
+						</div>
+						
+					<br>
+
+						<p class="form-row">
+							<b>제목</b><br>
+							<br> <input type="text" id="userPW2" placeholder="제목" style="display: inline; width: 50%;">
 						</p>
 
-						<div class="submit">
+						<p>
+							<b>리워드 상세내용</b>
+						</p>
+
+						<p class="form-row order-notes">
+							<textarea placeholder="상세 내용 기입" style="display: inline; width: 50%;"></textarea>
+						</p>
+
+
+						<div class="col-md-6" style="display: inline; width: 51%;">
+							<b>리워드 시작일</b><br>
+							<br>
+							<p class="form-row"">
+
+								<input style="display: inline;" type="text" id="userPhone1"
+									placeholder="Ex)2020-05-05">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</p>
+						</div>
+
+						
+
+						<div class="col-md-6" style="display: inline; width: 51%;">
+							<b>리워드 마감일</b><br>
+							<br>
+							<p class="form-row"">
+
+								<input style="display: inline;" type="text" id="userPhone1"
+									placeholder="Ex)2020-05-05">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</p>
+						</div>
+
+						
+
+						<div class="col-md-6" style="display: inline; width: 51%;">
+							<b>프로젝트 예산</b><br>
+							<br>
+							<p class="form-row"">
+
+								<input style="display: inline;" type="text" id="userPhone1"
+									placeholder="예산 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</p>
+						</div>
+
+
+						<!-- <div class="col-md-6" style="display: inline;">
+							<b>리워드 패키지</b><br><br>
+							<ul class="chklist"style="width: 100%">
+								<li class="listc"><label for="chk1"><input type="checkbox"
+										name="chk1" id="chk1">First</label></li>
+								<li class="listc"><label for="chk2"><input type="checkbox"
+										name="chk2" id="chk2">Second</label></li>
+								<li class="listc"><label for="chk3"><input type="checkbox"
+										name="chk3" id="chk3">Third</label></li>
+								<li class="listc"><label for="chk4"><input type="checkbox"
+										name="chk4" id="chk4">Fourth</label></li>
+								<li class="listc"><label for="chk5"><input type="checkbox"
+										name="chk5" id="chk5">Fifth</label></li>
+								<li class="listc"><label for="chk6"><input type="checkbox"
+										name="chk6" id="chk6">Sixth</label></li>
+								<li class="listc"><label for="chk7"><input type="checkbox"
+										name="chk7" id="chk7">Seventh</label></li>
+							</ul>
+							<br>
+						</div> -->
+						
+						
+						<div class="submit" style="display: inline;">
+							
 							<button name="loginBtn" id="loginBtn" type="submit"
-								class="btn-default" style="width: 100%">
-								<span> <i class="fa fa-user left"></i> 회원가입
+								class="btn-default" style="width:50%">
+								<span> <i class="fa fa-user left"></i> 후원하기
 								</span>
 							</button>
+							
 						</div>
+						
+						
 					</form>
 				</div>
 			</div>
@@ -352,13 +530,20 @@
 								</a>
 							</div>
 							<div class="col-md-9">
-							<br>
-								<h2 class="footer-title"><p><a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a></h2> 
+								<br>
+								<h2 class="footer-title">
+									<p>
+										<a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a
+											href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a>
+								</h2>
 							</div>
-							<br><br><br><br>
-							<p>㈜ Free구름&nbsp;&nbsp;|&nbsp;&nbsp;대표자 : 김영웅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사업자등록번호 : 123-12-12345</p>
+							<br> <br> <br> <br>
+							<p>㈜ Free구름&nbsp;&nbsp;|&nbsp;&nbsp;대표자 :
+								김영웅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사업자등록번호 :
+								123-12-12345</p>
 							<ul class="footer-contact">
-								<li><i class="flaticon-location"></i> 14558 경기도 의정부시 서부로 545 융합소프트웨어과 404호
+								<li><i class="flaticon-location"></i> 14558 경기도 의정부시 서부로
+									545 융합소프트웨어과 404호
 								<li>
 								<li><i class="flaticon-web"></i> negahero@freeClude.com</li>
 							</ul>
@@ -368,16 +553,16 @@
 						<div class="single-footer">
 							<h1 class="footer-title">고객센터</h1>
 							<ul class="footer-contact">
-								<li><h4> 운영시간 : 평일 09:00 ~ 18:00 </h4></li>
+								<li><h4>운영시간 : 평일 09:00 ~ 18:00</h4></li>
 								<li><i class="flaticon-technology"></i> (+800) 123 4567 890
 								</li>
 								<li><i class="flaticon-web"></i> negahero@freeClude.com</li>
 							</ul>
 						</div>
 					</div>
-					
+
 				</div>
-			</div>  
+			</div>
 		</div>
 		<div class="footer-bottom">
 			<div class="container">
@@ -385,8 +570,8 @@
 					<div class="col-md-6">
 						<div class="footer-bottom-left pull-left">
 							<p>
-								Copyright &copy; 2020 <span><a href="#">FreeCloud</a></span>. All
-								Right Reserved.
+								Copyright &copy; 2020 <span><a href="#">FreeCloud</a></span>.
+								All Right Reserved.
 							</p>
 						</div>
 					</div>
