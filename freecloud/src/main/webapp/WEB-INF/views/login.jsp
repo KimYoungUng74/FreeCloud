@@ -1,6 +1,6 @@
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <html>
 <head>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
@@ -63,16 +63,34 @@
 <!-- modernizr css -->
 <script
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
-
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <!-- My Script -->
-<script>    
+<script>
 	function idDialog() {
 		$("#idDialog").dialog("open");
 	}
-            
- </script>
+</script>
+<script type="text/javascript">
+	$(function() {
+		//아이디 중복체크
+		$('#SEEK_ID').click(function() {
+			
+			$.ajax({
+				type : "POST",
+				url : "seekId",
+				data : {
+					"name" : $('#USER_NAME').val(),
+					"email" : $('#USER_EMAIL').val()
+				},
+				success : function(data) { //data : seekId에서 넘겨준 결과값(id)
+					alert(data);
+				}
+			})
+		})
 
+	});
+</script>
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -84,16 +102,15 @@
 	<div class="header-area">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2 col-sm-6 col-xs-6">
+				<div class="col-md-2">
 					<div class="header-logo">
-						<a href="home"> <img
+						<a href="home.do"> <img
 							src="<c:url value='resources/writer/img/freeCloud/logo.png'/>"
 							alt="">
 						</a>
 					</div>
 				</div>
-
-				<div class="col-md-7 col-sm-12 hidden-sm">
+				<div class="col-md-7">
 					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
@@ -122,12 +139,26 @@
 						</nav>
 					</div>
 				</div>
-				<div class="col-md-3 hidden-sm">
-					<div class="header-right">
+				<div class="col-md-3">
+					<div class="header-right text-center">
 						<ul>
-							<li><a href="account.html">로그인<i class="flaticon-people"></i></a>
-							</li>
-							<li><a href="account.html">회원가입</a></li>
+							<li><c:choose>
+									<c:when test="${sessionScope.userId == null}">
+										<a href="login.do">로그인<i class="flaticon-people"></i></a>
+									</c:when>
+									<c:otherwise>
+
+										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
+									</c:otherwise>
+								</c:choose></li>
+							<li><c:choose>
+									<c:when test="${sessionScope.userId == null}">
+										<a href="signup.do">회원가입</a>
+									</c:when>
+									<c:otherwise>
+										<a href="logout.do">로그아웃</a>
+									</c:otherwise>
+								</c:choose></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
 									class="flaticon-shop"></i> <span>2</span>
 							</a>
@@ -272,7 +303,8 @@
 		<div class="container">
 			<div class="row">
 				<div>
-					<form action="loginCheck.do" class="create-account-form" method="post">
+					<form action="loginCheck.do" class="create-account-form"
+						method="post">
 						<h2 class="heading-title">로그인</h2>
 						<p>
 							<b>아이디</b>
@@ -394,29 +426,27 @@
 							<div class="container">
 								<div class="row">
 									<div>
-										<form action="#" class="create-account-form" method="post">
 											<h2 class="heading-title">아이디 찾기</h2>
 											<p>
 												<b>이름</b>
 											</p>
 											<p class="form-row">
-												<input type="text" placeholder="이름 입력">
+												<input type="text" id="USER_NAME" placeholder="이름 입력">
 											</p>
 											<p>
 												<b>이메일 주소</b>
 											</p>
 											<p class="form-row">
-												<input type="email" id="userEmail" placeholder="이메일 입력">
+												<input type="email" id="USER_EMAIL" placeholder="이메일 입력">
 											</p>
 
 											<div class="submit" style="float: center">
-												<button name="loginBtn" id="loginBtn" type="submit"
+												<button name="SEEK_ID" id="SEEK_ID"
 													class="btn-default" style="width: 100%">
-													<span> <i class="fa fa-user left"></i> 로그인
+													<span> <i class="fa fa-user left"></i> 아이디 찾기
 													</span>
 												</button>
 											</div>
-										</form>
 									</div>
 								</div>
 							</div>
@@ -426,7 +456,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="modal fade" id="pwDialog" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -465,7 +495,7 @@
 											<div class="submit" style="float: center">
 												<button name="loginBtn" id="loginBtn" type="submit"
 													class="btn-default" style="width: 100%">
-													<span> <i class="fa fa-user left"></i> 로그인
+													<span> <i class="fa fa-user left"></i> 비밀번호 찾기
 													</span>
 												</button>
 											</div>

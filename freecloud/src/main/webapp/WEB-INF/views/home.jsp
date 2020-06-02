@@ -1,6 +1,6 @@
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <html>
 <head>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
@@ -69,32 +69,47 @@
 	<!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
+	<c:if test="${msg == 'logout'}">
+		<script>
+			alert("로그아웃 되었습니다.");
+		</script>
+	</c:if>
+	<c:if test="${msg == 'success'}">
+		<script> alert("${sessionScope.userName}님 환영합니다.");</script>
+	</c:if>
 	<!-- Add your site or application content here -->
 	<!--Header Area Start-->
 	<div class="header-area">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2 col-sm-6 col-xs-6">
+				<div class="col-md-2">
 					<div class="header-logo">
-						<a href="index.html"> <img
+						<a href="home.do"> <img
 							src="<c:url value='resources/writer/img/freeCloud/logo.png'/>"
 							alt="">
 						</a>
 					</div>
 				</div>
-				<div class="col-md-7 col-sm-12 hidden-sm">
+				<div class="col-md-7">
 					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
-								<li><h4><a href="index.html">프로젝트</a></h4>
+								<li><h4>
+										<a href="index.html">프로젝트</a>
+									</h4>
 									<ul class="sub-menu">
 										<li><a href="projectReg.do">프로젝트 등록</a></li>
 										<li><a href="cart.html">프로젝트 찾기</a></li>
 									</ul></li>
-								<li><h4><a href="shop.html">프리랜서 찾기</a></h4></li>
-								<li><h4><a href="shop.html">정보구름</a></h4></li>
-								<li><h4><a href="about.html">서비스 안내</a></h4>
+								<li><h4>
+										<a href="shop.html">프리랜서 찾기</a>
+									</h4></li>
+								<li><h4>
+										<a href="shop.html">정보구름</a>
+									</h4></li>
+								<li><h4>
+										<a href="about.html">서비스 안내</a>
+									</h4>
 									<ul class="sub-menu">
 										<li><a href="about.html">프로젝트 이용방법</a></li>
 										<li><a href="cart.html">프리랜서 이용방법</a></li>
@@ -104,12 +119,26 @@
 						</nav>
 					</div>
 				</div>
-				<div class="col-md-3 hidden-sm">
-					<div class="header-right">
+				<div class="col-md-3">
+					<div class="header-right text-center">
 						<ul>
-							<li><a href="account.html">로그인<i class="flaticon-people"></i></a>
-							</li>
-							<li><a href="signup.do">회원가입</a></li>
+							<li><c:choose>
+									<c:when test="${sessionScope.userId == null}">
+										<a href="login.do">로그인<i class="flaticon-people"></i></a>
+									</c:when>
+									<c:otherwise>
+
+										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
+									</c:otherwise>
+								</c:choose></li>
+							<li><c:choose>
+									<c:when test="${sessionScope.userId == null}">
+										<a href="signup.do">회원가입</a>
+									</c:when>
+									<c:otherwise>
+										<a href="logout.do">로그아웃</a>
+									</c:otherwise>
+								</c:choose></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
 									class="flaticon-shop"></i> <span>2</span>
 							</a>
@@ -290,8 +319,8 @@
 											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
 										</div>
 										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span>
-											<span class="blog-date">2020년 04년 24일</span>
+											<span class="blog-author">BY:곽지용</span> <span
+												class="blog-date">2020년 04년 24일</span>
 										</div>
 									</div>
 								</div>
@@ -309,12 +338,13 @@
 											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
 										</div>
 										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span>
-											<span class="blog-date">2020년 04년 24일</span>
+											<span class="blog-author">BY:곽지용</span> <span
+												class="blog-date">2020년 04년 24일</span>
 										</div>
 									</div>
 								</div>
-							</div><div class="single-p-banner">
+							</div>
+							<div class="single-p-banner">
 								<div class="col-md-3">
 									<div class="single-banner">
 										<a href="#" class="single-banner-image-wrapper"> <img
@@ -325,12 +355,13 @@
 											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
 										</div>
 										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span>
-											<span class="blog-date">2020년 04년 24일</span>
+											<span class="blog-author">BY:곽지용</span> <span
+												class="blog-date">2020년 04년 24일</span>
 										</div>
 									</div>
 								</div>
-							</div><div class="single-p-banner">
+							</div>
+							<div class="single-p-banner">
 								<div class="col-md-3">
 									<div class="single-banner">
 										<a href="#" class="single-banner-image-wrapper"> <img
@@ -341,12 +372,13 @@
 											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
 										</div>
 										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span>
-											<span class="blog-date">2020년 04년 24일</span>
+											<span class="blog-author">BY:곽지용</span> <span
+												class="blog-date">2020년 04년 24일</span>
 										</div>
 									</div>
 								</div>
-							</div><div class="single-p-banner">
+							</div>
+							<div class="single-p-banner">
 								<div class="col-md-3">
 									<div class="single-banner">
 										<a href="#" class="single-banner-image-wrapper"> <img
@@ -357,12 +389,13 @@
 											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
 										</div>
 										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span>
-											<span class="blog-date">2020년 04년 24일</span>
+											<span class="blog-author">BY:곽지용</span> <span
+												class="blog-date">2020년 04년 24일</span>
 										</div>
 									</div>
 								</div>
-							</div><div class="single-p-banner">
+							</div>
+							<div class="single-p-banner">
 								<div class="col-md-3">
 									<div class="single-banner">
 										<a href="#" class="single-banner-image-wrapper"> <img
@@ -373,8 +406,8 @@
 											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
 										</div>
 										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span>
-											<span class="blog-date">2020년 04년 24일</span>
+											<span class="blog-author">BY:곽지용</span> <span
+												class="blog-date">2020년 04년 24일</span>
 										</div>
 									</div>
 								</div>
@@ -481,7 +514,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Footer Area Start -->
 	<footer>
 		<div class="footer-top-area">
@@ -496,13 +529,20 @@
 								</a>
 							</div>
 							<div class="col-md-9">
-							<br>
-								<h2 class="footer-title"><p><a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a></h2> 
+								<br>
+								<h2 class="footer-title">
+									<p>
+										<a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a
+											href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a>
+								</h2>
 							</div>
-							<br><br><br><br>
-							<p>㈜ Free구름&nbsp;&nbsp;|&nbsp;&nbsp;대표자 : 김영웅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사업자등록번호 : 123-12-12345</p>
+							<br> <br> <br> <br>
+							<p>㈜ Free구름&nbsp;&nbsp;|&nbsp;&nbsp;대표자 :
+								김영웅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사업자등록번호 :
+								123-12-12345</p>
 							<ul class="footer-contact">
-								<li><i class="flaticon-location"></i> 14558 경기도 의정부시 서부로 545 융합소프트웨어과 404호
+								<li><i class="flaticon-location"></i> 14558 경기도 의정부시 서부로
+									545 융합소프트웨어과 404호
 								<li>
 								<li><i class="flaticon-web"></i> negahero@freeClude.com</li>
 							</ul>
@@ -512,16 +552,16 @@
 						<div class="single-footer">
 							<h1 class="footer-title">고객센터</h1>
 							<ul class="footer-contact">
-								<li><h4> 운영시간 : 평일 09:00 ~ 18:00 </h4></li>
+								<li><h4>운영시간 : 평일 09:00 ~ 18:00</h4></li>
 								<li><i class="flaticon-technology"></i> (+800) 123 4567 890
 								</li>
 								<li><i class="flaticon-web"></i> negahero@freeClude.com</li>
 							</ul>
 						</div>
 					</div>
-					
+
 				</div>
-			</div>  
+			</div>
 		</div>
 		<div class="footer-bottom">
 			<div class="container">
@@ -529,8 +569,8 @@
 					<div class="col-md-6">
 						<div class="footer-bottom-left pull-left">
 							<p>
-								Copyright &copy; 2020 <span><a href="#">FreeCloud</a></span>. All
-								Right Reserved.
+								Copyright &copy; 2020 <span><a href="#">FreeCloud</a></span>.
+								All Right Reserved.
 							</p>
 						</div>
 					</div>
@@ -559,9 +599,7 @@
 					</div>
 					<div class="modal-body">
 						<div class="modal-product">
-							<div class="product-images">
-							
-							</div>
+							<div class="product-images"></div>
 							<div class="product-info">
 								<h1>Frame Princes Cut Diamond</h1>
 								<div class="price-box">

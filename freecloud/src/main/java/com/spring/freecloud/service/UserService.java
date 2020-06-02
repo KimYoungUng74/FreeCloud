@@ -29,7 +29,6 @@ public class UserService {
 		}
 		return 1;
 	}
-
 	// 회원 로그인 체크
 	public boolean loginCheck(UserDTO dto, HttpSession session) {
 		boolean result = dao.loginCheck(dto);
@@ -39,20 +38,37 @@ public class UserService {
 			session.setAttribute("userId", dto2.getUSER_ID());
 			session.setAttribute("userName", dto2.getUSER_NAME());
 			session.setAttribute("userEmail", dto2.getUSER_EMAIL());
-			session.setAttribute("userinfo", dto2);
+			session.setAttribute("userinfo", dto2.getFREELANCER_ABOUT_ME());
 		}
 		return result;
 	}
-	
+
 	// 회원 정보 조회
 	private UserDTO viewUser(UserDTO dto) {
 		// TODO Auto-generated method stub
 		return dao.viewUser(dto);
 	}
 
-	public UserDTO Test() {
+	// 회원 로그아웃
+	public void logout(HttpSession session) {
+		// 세션 변수 개별 삭제
+		// session.removeAttribute("userId");
+		// 세션 정보를 초기화 시킴
+		session.invalidate();
+	}
 
-		return dao.connectTest();
+	// 중복 아이디 체크
+	public boolean checkId(String id){
+		// TODO Auto-generated method stub
+		return dao.checkId(id);
+	}
+	
+	// 아이디 찾기
+	public String seekId(String name, String email) {
+		UserDTO dto = new UserDTO();
+		dto.setUSER_NAME(name);
+		dto.setUSER_EMAIL(email);
+		return dao.seekId(dto);
 	}
 
 }

@@ -17,7 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.service.UserService;
@@ -54,6 +57,25 @@ public class UserController {
 		return mav;
 	}
 
+	// 아이디 중복 체크
+	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
+	public @ResponseBody String AjaxView(@RequestParam("id") String id) {
+		String str = "";
+		boolean idcheck = userSer.checkId(id);
+		if (idcheck) { // 이미 존재하는 계정
+			str = "NO";
+		} else { // 사용 가능한 계정
+			str = "YES";
+		}
+		return str;
+	}
+
+	// 로그인 화면
+	@RequestMapping(value = "login.do")
+	public String login(Locale locale, Model model) {
+		return "login";
+	}
+
 	// 로그인 처리
 	@RequestMapping(value = "loginCheck.do")
 	public ModelAndView loginCheck(@ModelAttribute UserDTO dto, HttpSession sessison, HttpServletRequest request,
@@ -62,7 +84,6 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 
 		if (result) { // 로그인 성공
-			mav.addObject("dto", dto);
 			mav.setViewName("home");
 			mav.addObject("msg", "success");
 			System.out.println("로그인 성공");
@@ -73,6 +94,34 @@ public class UserController {
 			System.out.println("로그인 실패");
 		}
 		return mav;
+	}
+
+	// 로그아웃
+	@RequestMapping(value = "logout.do")
+	public ModelAndView logOut(HttpSession session, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		userSer.logout(session);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("home");
+		mav.addObject("msg", "logout");
+		return mav;
+	}
+
+	// 아이디 중복 체크
+	@RequestMapping(value = "/seekId", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String AjaxView2(@RequestParam("name") String name, @RequestParam("email") String email) {
+		System.out.println("seekid에 접근함");
+
+		String str = "";
+		String idcheck = userSer.seekId(name, email);
+		if (idcheck != "") { // 정보가 일치할 경우
+			str = idcheck;
+		} else { // 가입된 회원아 아닐경우
+			str = "|noSerchId|";
+		}
+
+		return str;
 	}
 
 }

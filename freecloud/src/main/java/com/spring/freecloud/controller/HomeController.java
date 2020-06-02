@@ -48,4 +48,22 @@ public class HomeController {
 		return "rewardReg";
 	}
 	
+	@RequestMapping(value = "home.do", method = RequestMethod.GET)
+	public String homepage(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		/*
+		 * UserDTO userDTO = userSer.Test(); System.out.println("�뀒�뒪�듃 : " +
+		 * userDTO.toString());
+		 */
+
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "home";
+	}
+	
 }

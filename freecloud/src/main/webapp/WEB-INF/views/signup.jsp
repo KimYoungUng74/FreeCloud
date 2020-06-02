@@ -1,17 +1,19 @@
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
+<%@page import="com.spring.freecloud.dao.UserDAO"%>
 <html>
 <head>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	language="java"%>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Creat An Account || Witter Multipage Responsive Template</title>
+<title>Home One || Witter Multipage Responsive Template</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon"
+	href="<c:url value='resources/writer/img/favicon.ico'/>">
 <!-- Place favicon.ico in the root directory -->
 <!-- Google Fonts -->
 <link
@@ -63,6 +65,50 @@
 <!-- modernizr css -->
 <script
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//비밀번호 확인
+		$('#USER_PW2').blur(
+			function() {
+				if ($('#USER_PW2').val() != '') {
+					if ($('#USER_PW1').val() != $('#USER_PW2').val()) {
+						$('#checkPwd').html('<p><b>비밀번호 확인 : </b> <b style="color:red"> 비밀번호가 일치하지 않습니다. </b></p>');
+						$('#USER_PW2').val('');
+						$('#USER_PW2').focus();
+					} else {
+						$('#checkPwd').html('<p><b>비밀번호 확인 : </b> <b style="color:blue"> 비밀번호가 일치합니다. </b></p>');
+					}
+				}
+			})
+	});
+	$(function(){
+		//아이디 중복체크
+		    $('#USER_ID').blur(function(){
+		        $.ajax({
+			     type:"POST",
+			     url:"checkId",
+			     data:{
+			            "id":$('#USER_ID').val()
+			     },
+			     success:function(data){	//data : checkId에서 넘겨준 결과값
+			            if($.trim(data)=="YES"){
+			               if($('#USER_ID').val()!=''){ 
+			            	   $('#checkId').html('<p><b>아이디 : </b> <b style="color:blue"> 사용가능한 아이디입니다. </b></p>');
+			               }
+			           	}else{
+			               if($('#USER_ID').val()!=''){
+			            	   $('#checkId').html('<p><b>아이디 : </b> <b style="color:red"> 중복된 아이디입니다. </b></p>');
+			                  $('#USER_ID').focus();
+			               }
+			            }
+			         }
+			    }) 
+		     })
+
+		});
+</script>
+
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -74,16 +120,15 @@
 	<div class="header-area">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2 col-sm-6 col-xs-6">
+				<div class="col-md-2">
 					<div class="header-logo">
-						<a href="home"> <img
+						<a href="home.do"> <img
 							src="<c:url value='resources/writer/img/freeCloud/logo.png'/>"
 							alt="">
 						</a>
 					</div>
 				</div>
-
-				<div class="col-md-7 col-sm-12 hidden-sm">
+				<div class="col-md-7">
 					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
@@ -112,12 +157,26 @@
 						</nav>
 					</div>
 				</div>
-				<div class="col-md-3 hidden-sm">
-					<div class="header-right">
+				<div class="col-md-3">
+					<div class="header-right text-center">
 						<ul>
-							<li><a href="login.do">로그인<i class="flaticon-people"></i></a>
-							</li>
-							<li><a href="account.html">회원가입</a></li>
+							<li><c:choose>
+									<c:when test="${sessionScope.userId == null}">
+										<a href="login.do">로그인<i class="flaticon-people"></i></a>
+									</c:when>
+									<c:otherwise>
+
+										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
+									</c:otherwise>
+								</c:choose></li>
+							<li><c:choose>
+									<c:when test="${sessionScope.userId == null}">
+										<a href="signup.do">회원가입</a>
+									</c:when>
+									<c:otherwise>
+										<a href="logout.do">로그아웃</a>
+									</c:otherwise>
+								</c:choose></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
 									class="flaticon-shop"></i> <span>2</span>
 							</a>
@@ -262,25 +321,36 @@
 		<div class="container">
 			<div class="row">
 				<div>
-					<form action="signupOk.do" class="create-account-form" method="post">
+					<form action="signupOk.do" class="create-account-form"
+						method="post">
 						<h2 class="heading-title">회원가입</h2>
-						<p>
-							<b>아이디</b>
-						</p>
+						<div id="checkId">
+							<p>
+								<b>아이디</b>
+							</p>
+						</div>
 						<p class="form-row">
-							<input type="text" name="USER_ID" placeholder="ID 입력">
+							<input type="text" id="USER_ID" name="USER_ID"
+								placeholder="ID 입력" onkeydown="checkId()">
 						</p>
 						<p>
 							<b>비밀번호</b>
 						</p>
 						<p class="form-row">
-							<input type="password" name="USER_PW" placeholder="PW 입력">
+							<input type="password" id="USER_PW1" name="USER_PW"
+								placeholder="PW 입력">
 						</p>
-						<p>
-							<b>비밀번호 확인</b>
-						</p>
+
+						<div id="checkPwd">
+							<p>
+								<b>비밀번호 확인 : 동일한 암호를 입력하세요.</b>
+							</p>
+						</div>
+
+
 						<p class="form-row">
-							<input type="password" name="USER_PW2" placeholder="PW 확인">
+							<input type="password" id="USER_PW2" name="USER_PW2"
+								placeholder="PW 확인" onchange="checkPwd();">
 						</p>
 						<p>
 							<b>이름</b>
@@ -300,19 +370,19 @@
 						<div class="col-md-4">
 							<p class="form-row">
 								<input style="width: 90%" type="text" name="USER_PHONE1"
-									placeholder="앞번호 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
+									placeholder="앞번호 입력" maxlength="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
 							</p>
 						</div>
 						<div class="col-md-4">
 							<p class="form-row">
 								<input style="width: 90%" type="text" name="USER_PHONE2"
-									placeholder="중간번호 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
+									placeholder="중간번호 입력" maxlength="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
 							</p>
 						</div>
 						<div class="col-md-4">
 							<p class="form-row">
 								<input style="width: 90%" type="text" name="USER_PHONE3"
-									placeholder="뒷번호 입력">
+									placeholder="뒷번호 입력" maxlength="4">
 							</p>
 						</div>
 						<p>
@@ -352,13 +422,20 @@
 								</a>
 							</div>
 							<div class="col-md-9">
-							<br>
-								<h2 class="footer-title"><p><a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a></h2> 
+								<br>
+								<h2 class="footer-title">
+									<p>
+										<a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a
+											href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a>
+								</h2>
 							</div>
-							<br><br><br><br>
-							<p>㈜ Free구름&nbsp;&nbsp;|&nbsp;&nbsp;대표자 : 김영웅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사업자등록번호 : 123-12-12345</p>
+							<br> <br> <br> <br>
+							<p>㈜ Free구름&nbsp;&nbsp;|&nbsp;&nbsp;대표자 :
+								김영웅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사업자등록번호 :
+								123-12-12345</p>
 							<ul class="footer-contact">
-								<li><i class="flaticon-location"></i> 14558 경기도 의정부시 서부로 545 융합소프트웨어과 404호
+								<li><i class="flaticon-location"></i> 14558 경기도 의정부시 서부로
+									545 융합소프트웨어과 404호
 								<li>
 								<li><i class="flaticon-web"></i> negahero@freeClude.com</li>
 							</ul>
@@ -368,16 +445,16 @@
 						<div class="single-footer">
 							<h1 class="footer-title">고객센터</h1>
 							<ul class="footer-contact">
-								<li><h4> 운영시간 : 평일 09:00 ~ 18:00 </h4></li>
+								<li><h4>운영시간 : 평일 09:00 ~ 18:00</h4></li>
 								<li><i class="flaticon-technology"></i> (+800) 123 4567 890
 								</li>
 								<li><i class="flaticon-web"></i> negahero@freeClude.com</li>
 							</ul>
 						</div>
 					</div>
-					
+
 				</div>
-			</div>  
+			</div>
 		</div>
 		<div class="footer-bottom">
 			<div class="container">
@@ -385,8 +462,8 @@
 					<div class="col-md-6">
 						<div class="footer-bottom-left pull-left">
 							<p>
-								Copyright &copy; 2020 <span><a href="#">FreeCloud</a></span>. All
-								Right Reserved.
+								Copyright &copy; 2020 <span><a href="#">FreeCloud</a></span>.
+								All Right Reserved.
 							</p>
 						</div>
 					</div>
@@ -404,7 +481,9 @@
 	<!-- all js here -->
 	<!-- jquery latest version -->
 	<script
-		src="<c:url value='resources/writer/js/vendor/jquery-1.12.0.min.js'/>"></script>
+		src="<c:url value='resources/writer/js/vendor/jquery-1.12.0.min.js'/>">
+		
+	</script>
 	<!-- bootstrap js -->
 	<script src="<c:url value='resources/writer/js/bootstrap.min.js'/>"></script>
 	<!-- owl.carousel js -->
@@ -441,5 +520,6 @@
 		type="text/javascript"></script>
 	<!-- main js -->
 	<script src="<c:url value='resources/writer/js/main.js'/>"></script>
+
 </body>
 </html>
