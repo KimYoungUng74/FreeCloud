@@ -28,11 +28,18 @@ public class UserDAO {
 		mybatis.insert("UserMapper.signup", dto);
 
 	}
+
 	// 중복아이디 체크
-	public boolean checkId(String usrid){
-		String id = mybatis.selectOne("UserMapper.idCheck", usrid);
+	public boolean checkId(UserDTO dto) {
+		String id = mybatis.selectOne("UserMapper.idCheck", dto);
 		return (id == null) ? false : true;
-	}// end list()
+	}
+
+	// 중복이메일 체크
+	public boolean checkEmail(UserDTO dto) {
+		String email = mybatis.selectOne("UserMapper.emailCheck", dto);
+		return (email == null) ? false : true;
+	}
 
 	// 로그인 처리
 	public boolean loginCheck(UserDTO dto) {
@@ -51,6 +58,6 @@ public class UserDAO {
 	public String seekId(UserDTO dto) {
 		System.out.println();
 		String id = mybatis.selectOne("UserMapper.seekId", dto);
-		return  (id == null) ? "" : id;
+		return (id == null) ? "" : id;
 	}
 }

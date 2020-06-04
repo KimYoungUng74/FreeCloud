@@ -70,6 +70,19 @@ public class UserController {
 		return str;
 	}
 
+	// 이메일 중복 체크
+	@RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+	public @ResponseBody String AjaxView2(@RequestParam("email") String email) {
+		String str = "";
+		boolean emailcheck = userSer.checkEmail(email);
+		if (emailcheck) { // 이미 존재하는 계정
+			str = "NO";
+		} else { // 사용 가능한 계정
+			str = "YES";
+		}
+		return str;
+	}
+
 	// 로그인 화면
 	@RequestMapping(value = "login.do")
 	public String login(Locale locale, Model model) {

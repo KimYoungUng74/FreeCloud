@@ -29,6 +29,7 @@ public class UserService {
 		}
 		return 1;
 	}
+
 	// 회원 로그인 체크
 	public boolean loginCheck(UserDTO dto, HttpSession session) {
 		boolean result = dao.loginCheck(dto);
@@ -58,11 +59,19 @@ public class UserService {
 	}
 
 	// 중복 아이디 체크
-	public boolean checkId(String id){
-		// TODO Auto-generated method stub
-		return dao.checkId(id);
+	public boolean checkId(String id) {
+		UserDTO dto = new UserDTO();
+		dto.setUSER_ID(id);
+		return dao.checkId(dto);
 	}
-	
+
+	// 중복 이메일 체크
+	public boolean checkEmail(String email) {
+		UserDTO dto = new UserDTO();
+		dto.setUSER_EMAIL(email);
+		return dao.checkEmail(dto);
+	}
+
 	// 아이디 찾기
 	public String seekId(String name, String email) {
 		UserDTO dto = new UserDTO();
