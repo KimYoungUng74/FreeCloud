@@ -80,4 +80,13 @@ public class UserService {
 		return dao.seekId(dto);
 	}
 
+	public String seekPw(String id, String name, String email) {
+		UserDTO dto = new UserDTO();
+		dto.setUSER_ID(id);
+		dto.setUSER_NAME(name);
+		dto.setUSER_EMAIL(email);
+		
+		return dao.seekPw(dto);
+	}
+
 }
