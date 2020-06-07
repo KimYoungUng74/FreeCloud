@@ -1,10 +1,9 @@
 package com.spring.freecloud.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.io.File;
 import java.util.Locale;
 
-import javax.servlet.http.Cookie;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,13 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
 
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.service.UserService;
@@ -35,6 +35,12 @@ public class UserController {
 
 	@Autowired
 	UserService userSer;
+	
+	// xml에 설정된 리소스 참조 
+    // bean의 id가 uploadPath인 태그를 참조 파일업로드
+	@Autowired
+    @Resource(name="uploadPath")
+    String uploadPath;
 
 	// 회원가입 화면
 	@RequestMapping(value = "signup.do")
@@ -160,5 +166,35 @@ public class UserController {
 	public String mypage(Locale locale, Model model) {
 		return "mypage";
 	}
+	
+	// 업로드 흐름 : 업로드 버튼클릭 => 임시디렉토리에 업로드=> 지정된 디렉토리에 저장 => 파일정보가 file에 저장
+    @RequestMapping(value="/upload/uploadForm", method=RequestMethod.GET)
+    public void uplodaForm(){
+        // upload/uploadForm.jsp(업로드 페이지)로 포워딩
+    }
+    
+ // 파일 업로드
+ 	@RequestMapping(value="/fileUpload.do", method=RequestMethod.POST)
+     public ModelAndView uplodaForm(MultipartFile file, ModelAndView mav) throws Exception{
+ 		System.out.println("fileUpload에 접근함");
+         logger.info("파일이름 :"+file.getOriginalFilename());
+         logger.info("파일크기 : "+file.getSize());
+         logger.info("컨텐트 타입 : "+file.getContentType());
+
+         String savedName = file.getOriginalFilename();
+
+         File target = new File(uploadPath, savedName);
+
+         // 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
+         // FileCopyUtils.copy(바이트배열, 파일객체)
+         FileCopyUtils.copy(file.getBytes(), target);
+
+         mav.setViewName("mypage");
+         mav.addObject("savedName", savedName);
+
+         return mav; // mypage.jsp(결과화면)로 포워딩
+     }
+	
+	
 
 }
