@@ -73,17 +73,37 @@
 </script>
 <script type="text/javascript">
 	$(function() {
-		//아이디 중복체크
+		//아이디 찾기
 		$('#SEEK_ID').click(function() {
 			
 			$.ajax({
 				type : "POST",
 				url : "seekId",
 				data : {
-					"name" : $('#USER_NAME').val(),
-					"email" : $('#USER_EMAIL').val()
+					"name" : $('.seekid #USER_NAME').val(),
+					"email" : $('.seekid #USER_EMAIL').val()
 				},
 				success : function(data) { //data : seekId에서 넘겨준 결과값(id)
+					alert(data);
+				}
+			})
+		})
+
+	});
+	
+	$(function() {
+		//비밀번호 찾기
+		$('#SEEK_PW').click(function() {
+			
+			$.ajax({
+				type : "POST",
+				url : "seekPw",
+				data : {
+					"id" : $('.seekpw #USER_ID').val(),
+ 					"name" : $('.seekpw #USER_NAME').val(),
+					"email" : $('.seekpw #USER_EMAIL').val()
+				},
+				success : function(data) { //data : seekPw에서 넘겨준 결과값(pw)
 					alert(data);
 				}
 			})
@@ -427,19 +447,23 @@
 								<div class="row">
 									<div>
 											<h2 class="heading-title">아이디 찾기</h2>
+											
 											<p>
 												<b>이름</b>
 											</p>
-											<p class="form-row">
+											
+											<p class="form-row seekid">
 												<input type="text" id="USER_NAME" placeholder="이름 입력">
 											</p>
+											
 											<p>
 												<b>이메일 주소</b>
 											</p>
-											<p class="form-row">
+											
+											<p class="form-row seekid">
 												<input type="email" id="USER_EMAIL" placeholder="이메일 입력">
 											</p>
-
+											
 											<div class="submit" style="float: center">
 												<button name="SEEK_ID" id="SEEK_ID"
 													class="btn-default" style="width: 100%">
@@ -471,35 +495,36 @@
 							<div class="container">
 								<div class="row">
 									<div>
-										<form action="#" class="create-account-form" method="post">
 											<h2 class="heading-title">비밀번호 찾기</h2>
 											<p>
 												<b>아이디</b>
 											</p>
-											<p class="form-row">
-												<input type="text" placeholder="아이디 입력">
+											<p class="form-row seekpw">
+												<input type="text" id="USER_ID" placeholder="아이디 입력">
 											</p>
 											<p>
 												<b>이름</b>
 											</p>
-											<p class="form-row">
-												<input type="text" placeholder="이름 입력">
+											
+											<p class="form-row seekpw">
+												<input type="text" id="USER_NAME" placeholder="이름 입력">
 											</p>
+											
 											<p>
 												<b>이메일 주소</b>
 											</p>
-											<p class="form-row">
-												<input type="email" id="userEmail" placeholder="이메일 입력">
+											
+											<p class="form-row seekpw">
+												<input type="email" id="USER_EMAIL" placeholder="이메일 입력">
 											</p>
 
 											<div class="submit" style="float: center">
-												<button name="loginBtn" id="loginBtn" type="submit"
+												<button name="SEEK_PW" id="SEEK_PW"
 													class="btn-default" style="width: 100%">
 													<span> <i class="fa fa-user left"></i> 비밀번호 찾기
 													</span>
 												</button>
 											</div>
-										</form>
 									</div>
 								</div>
 							</div>

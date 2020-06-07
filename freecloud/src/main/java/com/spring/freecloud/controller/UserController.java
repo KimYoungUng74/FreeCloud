@@ -70,6 +70,19 @@ public class UserController {
 		return str;
 	}
 
+	// 이메일 중복 체크
+	@RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+	public @ResponseBody String AjaxView2(@RequestParam("email") String email) {
+		String str = "";
+		boolean emailcheck = userSer.checkEmail(email);
+		if (emailcheck) { // 이미 존재하는 계정
+			str = "NO";
+		} else { // 사용 가능한 계정
+			str = "YES";
+		}
+		return str;
+	}
+
 	// 로그인 화면
 	@RequestMapping(value = "login.do")
 	public String login(Locale locale, Model model) {
@@ -108,17 +121,35 @@ public class UserController {
 		return mav;
 	}
 
-	// 아이디 중복 체크
+	// 아이디 찾기
 	@RequestMapping(value = "/seekId", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-	public @ResponseBody String AjaxView2(@RequestParam("name") String name, @RequestParam("email") String email) {
+	public @ResponseBody String seekid(@RequestParam("name") String name, @RequestParam("email") String email) {
 		System.out.println("seekid에 접근함");
 
 		String str = "";
 		String idcheck = userSer.seekId(name, email);
 		if (idcheck != "") { // 정보가 일치할 경우
-			str = idcheck;
-		} else { // 가입된 회원아 아닐경우
-			str = "|noSerchId|";
+			str = "찾으신 아이디는 \'"+idcheck+"\'입니다.";
+		} else { // 가입된 회원이 아닐경우
+			str = "가입된 정보가 없습니다 입력한 정보를 확인하세요";
+		}
+
+		return str;
+	}
+
+	// 아이디 찾기
+	@RequestMapping(value = "/seekPw", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String seekpw(@RequestParam("id") String id, @RequestParam("name") String name,
+			@RequestParam("email") String email) {
+		System.out.println("seekpw에 접근함");
+		String str = "";
+		String pwcheck = userSer.seekPw(id, name, email);
+		if (pwcheck == "dbError") { // 정보가 일치할 경우
+			str = "DB오류가 발생했습니다 다시 시도해주세요";
+		} else if(pwcheck == "notFound") { // 가입된 회원아 아닐경우
+			str = "가입된 정보가 없습니다 입력한 정보를 확인하세요";
+		} else {
+			str = "임시비밀번호 : \'"+pwcheck+" \'로그인시 변경해주세요";
 		}
 
 		return str;

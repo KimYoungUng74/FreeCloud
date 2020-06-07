@@ -20,12 +20,35 @@
 	</select>
 	
 	<!-- 아이디 중복체크 -->
+	<select id="emailCheck" parameterType="UserDTO"
+		resultType="String">
+		SELECT USER_EMAIL
+		FROM FREE_USER 
+		WHERE USER_EMAIL = #{USER_EMAIL}
+	</select>
+	
+	<!-- 아이디 찾기-->
 	<select id="seekId" parameterType="UserDTO"
 		resultType="String">
 		SELECT USER_ID
 		FROM FREE_USER 
 		WHERE USER_NAME = #{USER_NAME} AND USER_EMAIL = #{USER_EMAIL}
 	</select>
+	
+	<!-- 비밀번호 찾기-->
+	<select id="seekPw" parameterType="UserDTO"
+		resultType="String">
+		SELECT USER_ID
+		FROM FREE_USER 
+		WHERE USER_ID = #{USER_ID} AND USER_NAME = #{USER_NAME} AND USER_EMAIL = #{USER_EMAIL}
+	</select>
+	
+	<!-- 비밀번호 번경-->
+	<update id="seekPw2" parameterType="UserDTO">
+		UPDATE FREE_USER
+    	SET USER_PW = #{USER_PW}
+    	WHERE USER_ID = #{USER_ID}
+	</update>
 	
 	<!-- 로그인 처리 -->
 	<select id="loginCheck" parameterType="UserDTO"

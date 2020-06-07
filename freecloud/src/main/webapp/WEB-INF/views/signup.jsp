@@ -107,6 +107,31 @@
 		     })
 
 		});
+	$(function(){
+		//아이디 중복체크
+		    $('#USER_EMAIL').blur(function(){
+		        $.ajax({
+			     type:"POST",
+			     url:"checkEmail",
+			     data:{
+			           "email":$('#USER_EMAIL').val()
+			     },
+			     success:function(data){	//data : checkId에서 넘겨준 결과값
+			            if($.trim(data)=="YES"){
+			               if($('#USER_EMAIL').val()!=''){ 
+			            	   $('#checkEmail').html('<p><b>이메일 : </b> <b style="color:blue"> 사용가능한 이메일입니다. </b></p>');
+			               }
+			           	}else{
+			               if($('#USER_EMAIL').val()!=''){
+			            	   $('#checkEmail').html('<p><b>이메일 : </b> <b style="color:red"> 중복된 이메일입니다. </b></p>');
+			                  $('#USER_EMAIL').focus();
+			               }
+			            }
+			         }
+			    }) 
+		     })
+
+		});
 </script>
 
 </head>
@@ -356,13 +381,15 @@
 							<b>이름</b>
 						</p>
 						<p class="form-row">
-							<input type="text" name="USER_NAME" placeholder="이름 입력">
+							<input type="text"   name="USER_NAME" placeholder="이름 입력">
 						</p>
-						<p>
-							<b>이메일 주소</b>
-						</p>
+						<div id="checkEmail">
+							<p>
+								<b>이메일</b>
+							</p>
+						</div>
 						<p class="form-row">
-							<input type="email" name="USER_EMAIL" placeholder="이메일 입력">
+							<input type="email" id="USER_EMAIL" name="USER_EMAIL" placeholder="이메일 입력">
 						</p>
 						<p>
 							<b>전화 번호</b>
