@@ -1,19 +1,25 @@
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="true"%>
-<%@page import="com.spring.freecloud.dao.UserDAO"%>
+<%@ page session="false"%>
 <html>
 <head>
+<style type="text/css">
+   .chklist { height: 100px; overflow: auto; width: 100px; border: 1px solid #D3D3D3; }
+   .chklist { list-style-type: none; padding: 0; overflow-x: hidden; }
+   .listc {  padding: 0; }
+   .wKind {border: 1px solid #D3D3D3; }
+   
+ </style>
+ 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	language="java"%>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Home One || Witter Multipage Responsive Template</title>
+<title>Creat An Account || Witter Multipage Responsive Template</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- favicon -->
-<link rel="shortcut icon" type="image/x-icon"
-	href="<c:url value='resources/writer/img/favicon.ico'/>">
+<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 <!-- Place favicon.ico in the root directory -->
 <!-- Google Fonts -->
 <link
@@ -65,75 +71,6 @@
 <!-- modernizr css -->
 <script
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		//비밀번호 확인
-		$('#USER_PW2').blur(
-			function() {
-				if ($('#USER_PW2').val() != '') {
-					if ($('#USER_PW1').val() != $('#USER_PW2').val()) {
-						$('#checkPwd').html('<p><b>비밀번호 확인 : </b> <b style="color:red"> 비밀번호가 일치하지 않습니다. </b></p>');
-						$('#USER_PW2').val('');
-						$('#USER_PW2').focus();
-					} else {
-						$('#checkPwd').html('<p><b>비밀번호 확인 : </b> <b style="color:blue"> 비밀번호가 일치합니다. </b></p>');
-					}
-				}
-			})
-	});
-	$(function(){
-		//아이디 중복체크
-		    $('#USER_ID').blur(function(){
-		        $.ajax({
-			     type:"POST",
-			     url:"checkId",
-			     data:{
-			            "id":$('#USER_ID').val()
-			     },
-			     success:function(data){	//data : checkId에서 넘겨준 결과값
-			            if($.trim(data)=="YES"){
-			               if($('#USER_ID').val()!=''){ 
-			            	   $('#checkId').html('<p><b>아이디 : </b> <b style="color:blue"> 사용가능한 아이디입니다. </b></p>');
-			               }
-			           	}else{
-			               if($('#USER_ID').val()!=''){
-			            	   $('#checkId').html('<p><b>아이디 : </b> <b style="color:red"> 중복된 아이디입니다. </b></p>');
-			                  $('#USER_ID').focus();
-			               }
-			            }
-			         }
-			    }) 
-		     })
-
-		});
-	$(function(){
-		//아이디 중복체크
-		    $('#USER_EMAIL').blur(function(){
-		        $.ajax({
-			     type:"POST",
-			     url:"checkEmail",
-			     data:{
-			           "email":$('#USER_EMAIL').val()
-			     },
-			     success:function(data){	//data : checkId에서 넘겨준 결과값
-			            if($.trim(data)=="YES"){
-			               if($('#USER_EMAIL').val()!=''){ 
-			            	   $('#checkEmail').html('<p><b>이메일 : </b> <b style="color:blue"> 사용가능한 이메일입니다. </b></p>');
-			               }
-			           	}else{
-			               if($('#USER_EMAIL').val()!=''){
-			            	   $('#checkEmail').html('<p><b>이메일 : </b> <b style="color:red"> 중복된 이메일입니다. </b></p>');
-			                  $('#USER_EMAIL').focus();
-			               }
-			            }
-			         }
-			    }) 
-		     })
-
-		});
-</script>
-
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -145,15 +82,16 @@
 	<div class="header-area">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-2 col-sm-6 col-xs-6">
 					<div class="header-logo">
-						<a href="home.do"> <img
+						<a href="home"> <img
 							src="<c:url value='resources/writer/img/freeCloud/logo.png'/>"
 							alt="">
 						</a>
 					</div>
 				</div>
-				<div class="col-md-7">
+
+				<div class="col-md-7 col-sm-12 hidden-sm">
 					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
@@ -161,7 +99,7 @@
 										<a href="index.html">프로젝트</a>
 									</h4>
 									<ul class="sub-menu">
-										<li><a href="projectReg.do">프로젝트 등록</a></li>
+										<li><a href="about.html">프로젝트 등록</a></li>
 										<li><a href="cart.html">프로젝트 찾기</a></li>
 									</ul></li>
 								<li><h4>
@@ -182,26 +120,12 @@
 						</nav>
 					</div>
 				</div>
-				<div class="col-md-3">
-					<div class="header-right text-center">
+				<div class="col-md-3 hidden-sm">
+					<div class="header-right">
 						<ul>
-							<li><c:choose>
-									<c:when test="${sessionScope.userId == null}">
-										<a href="login.do">로그인<i class="flaticon-people"></i></a>
-									</c:when>
-									<c:otherwise>
-
-										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
-									</c:otherwise>
-								</c:choose></li>
-							<li><c:choose>
-									<c:when test="${sessionScope.userId == null}">
-										<a href="signup.do">회원가입</a>
-									</c:when>
-									<c:otherwise>
-										<a href="logout.do">로그아웃</a>
-									</c:otherwise>
-								</c:choose></li>
+							<li><a href="account.html">로그인<i class="flaticon-people"></i></a>
+							</li>
+							<li><a href="account.html">회원가입</a></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
 									class="flaticon-shop"></i> <span>2</span>
 							</a>
@@ -342,92 +266,273 @@
 	</div>
 	<!-- Breadcrumbs Area Start -->
 	<!-- Loging Area Start -->
+
+	<!-- <div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="shop-select">
+					<label>Country <span class="required">*</span></label> <select>
+						<option value="volvo">Bangladesh</option>
+						<option value="saab">Algeria</option>
+						<option value="mercedes">Afghanistan</option>
+						<option value="audi">Ghana</option>
+						<option value="audi2">Albania</option>
+						<option value="audi3">Bahrain</option>
+						<option value="audi4">Colombia</option>
+						<option value="audi5">Dominican Republic</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="First Name *">
+				</p>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="Last Name *">
+				</p>
+			</div>
+			<div class="col-md-12">
+				<p class="form-row">
+					<input type="text" placeholder="Company Name">
+				</p>
+			</div>
+			<div class="col-md-12">
+				<p class="form-row">
+					<input type="text" placeholder="Street address">
+				</p>
+			</div>
+			<div class="col-md-12">
+				<p class="form-row">
+					<input type="text" placeholder="Town / City">
+				</p>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="State / County *">
+				</p>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="Postcode / Zip">
+				</p>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="Email Address *">
+				</p>
+			</div>
+			<div class="col-md-6">
+				<p class="form-row">
+					<input type="text" placeholder="Phone *">
+				</p>
+			</div>
+			<div class="col-md-12">
+				<label class="checbox-info"> <input type="checkbox"
+					id="cbox"> Create an account?
+				</label>
+				<div id="cbox_info">
+					<p>Create an account by entering the information below. If you
+						are a returning customer please login at the top of the page.</p>
+					<p class="form-row form-row-phone">
+						<label>Phone<span class="required">*</span></label> <input
+							type="text" placeholder="Phone">
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>-->
 	<div class="login-account section-padding">
 		<div class="container">
 			<div class="row">
 				<div>
-					<form action="signupOk.do" class="create-account-form"
-						method="post">
-						<h2 class="heading-title">회원가입</h2>
-						<div id="checkId">
-							<p>
-								<b>아이디</b>
-							</p>
-						</div>
-						<p class="form-row">
-							<input type="text" id="USER_ID" name="USER_ID"
-								placeholder="ID 입력" onkeydown="checkId()">
-						</p>
-						<p>
-							<b>비밀번호</b>
-						</p>
-						<p class="form-row">
-							<input type="password" id="USER_PW1" name="USER_PW"
-								placeholder="PW 입력">
-						</p>
+					<form action="#" class="create-account-form" method="post">
+						<h2 class="heading-title">리워드 등록</h2>
 
-						<div id="checkPwd">
-							<p>
-								<b>비밀번호 확인 : 동일한 암호를 입력하세요.</b>
-							</p>
-						</div>
-
-
-						<p class="form-row">
-							<input type="password" id="USER_PW2" name="USER_PW2"
-								placeholder="PW 확인" onchange="checkPwd();">
-						</p>
-						<p>
-							<b>이름</b>
-						</p>
-						<p class="form-row">
-							<input type="text"   name="USER_NAME" placeholder="이름 입력">
-						</p>
-						<div id="checkEmail">
-							<p>
-								<b>이메일</b>
-							</p>
-						</div>
-						<p class="form-row">
-							<input type="email" id="USER_EMAIL" name="USER_EMAIL" placeholder="이메일 입력">
-						</p>
-						<p>
-							<b>전화 번호</b>
-						</p>
-						<div class="col-md-4">
-							<p class="form-row">
-								<input style="width: 90%" type="text" name="USER_PHONE1"
-									placeholder="앞번호 입력" maxlength="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
-							</p>
-						</div>
-						<div class="col-md-4">
-							<p class="form-row">
-								<input style="width: 90%" type="text" name="USER_PHONE2"
-									placeholder="중간번호 입력" maxlength="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b>
-							</p>
-						</div>
-						<div class="col-md-4">
-							<p class="form-row">
-								<input style="width: 90%" type="text" name="USER_PHONE3"
-									placeholder="뒷번호 입력" maxlength="4">
-							</p>
-						</div>
-						<p>
-							<b>거주 지역</b>
-						</p>
-						<p class="shop-select">
-							<select name="USER_ADDRESS">
-								<option value="none">지역을 선택하세요.</option>
-								<option value="서울특별시">서울특별시</option>
+						<div class="shop-select" style="display: inline; width: 25%;">
+							<label><b>카테고리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
+							<select style="width: 25%">
+								<option hidden="">대분류</option>
+								<option value="volvo">IT</option>
+								<option value="saab">Algeria</option>
+								<option value="mercedes">Afghanistan</option>
+								<option value="audi">Ghana</option>
+								<option value="audi2">Albania</option>
+								<option value="audi3">Bahrain</option>
+								<option value="audi4">Colombia</option>
+								<option value="audi5">Dominican Republic</option>
 							</select>
+						</div>
+
+						<div class="shop-select" style="display: inline; width: 25%;">
+							<!-- <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;중분류 </label> -->
+							<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> <select
+								style="width: 25%">
+								<option hidden="">중분류</option>
+								<option value="volvo">Java</option>
+								<option value="saab">Algeria</option>
+								<option value="mercedes">Afghanistan</option>
+								<option value="audi">Ghana</option>
+								<option value="audi2">Albania</option>
+								<option value="audi3">Bahrain</option>
+								<option value="audi4">Colombia</option>
+								<option value="audi5">Dominican Republic</option>
+							</select>
+
+
+						</div>
+						<br>
+
+						<p class="form-row">
+							<b>제목</b><br>
+							<br> <input type="text" id="userPW2" placeholder="제목">
 						</p>
 
-						<div class="submit">
-							<button name="loginBtn" id="loginBtn" type="submit"
-								class="btn-default" style="width: 100%">
-								<span> <i class="fa fa-user left"></i> 회원가입
+						<p>
+							<b>리워드 상세내용</b>
+						</p>
+
+						<p class="form-row order-notes">
+							<textarea placeholder="상세 내용 기입"></textarea>
+						</p>
+
+
+						<div class="col-md-3" style="display: inline;">
+							<b>리워드 시작일</b><br>
+							<br>
+							<p class="form-row"">
+
+								<input style="display: inline;" type="text" id="userPhone1"
+									placeholder="Ex)2020-05-05">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</p>
+						</div>
+
+						
+
+						<div class="col-md-3" style="display: inline;">
+							<b>리워드 마감일</b><br>
+							<br>
+							<p class="form-row"">
+
+								<input style="display: inline;" type="text" id="userPhone1"
+									placeholder="Ex)2020-05-05">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</p>
+						</div>
+
+						
+
+						<div class="col-md-3" style="display: inline;">
+							<b>프로젝트 예산</b><br>
+							<br>
+							<p class="form-row"">
+
+								<input style="display: inline;" type="text" id="userPhone1"
+									placeholder="예산 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</p>
+						</div>
+
+
+						<div class="col-md-6" style="display: inline;">
+							<b>리워드 패키지</b><br><br>
+							<ul class="chklist"style="width: 100%">
+								<li class="listc"><label for="chk1"><input type="checkbox"
+										name="chk1" id="chk1">First</label></li>
+								<li class="listc"><label for="chk2"><input type="checkbox"
+										name="chk2" id="chk2">Second</label></li>
+								<li class="listc"><label for="chk3"><input type="checkbox"
+										name="chk3" id="chk3">Third</label></li>
+								<li class="listc"><label for="chk4"><input type="checkbox"
+										name="chk4" id="chk4">Fourth</label></li>
+								<li class="listc"><label for="chk5"><input type="checkbox"
+										name="chk5" id="chk5">Fifth</label></li>
+								<li class="listc"><label for="chk6"><input type="checkbox"
+										name="chk6" id="chk6">Sixth</label></li>
+								<li class="listc"><label for="chk7"><input type="checkbox"
+										name="chk7" id="chk7">Seventh</label></li>
+							</ul>
+							<br>
+						</div>
+						
+						<div class="col-md-4" style="display: inline;">
+							<br><br>
+							<div class="submit" style="display: inline;">
+							<button name="packReg" id="packReg" type="button"
+								class="btn-default" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+								<span> <i class="fa fa-user left"></i> 패키지 추가
 								</span>
 							</button>
+							</div>
+						<br>
+						</div>
+						
+						<div class="col-md-4"">
+							<br>
+							<div class="submit">
+							<button name="loginBtn" id="loginBtn" type="submit"
+								class="btn-default">
+								<span> <i class="fa fa-user left"></i> 패키지 삭제
+								</span>
+							</button>
+							</div>
+						
+						</div>
+	
+						
+						<div class="submit" style="display: inline;">
+							
+							<button name="loginBtn" id="loginBtn" type="submit"
+								class="btn-default" style="width:51%">
+								<span> <i class="fa fa-user left"></i> 취소
+								</span>
+							</button>
+							
+						</div>
+						
+						<div class="submit" style="display: inline;">
+							
+							<button name="loginBtn" id="loginBtn" type="submit"
+								class="btn-default" style="width:48%">
+								<span> <i class="fa fa-user left"></i> 등록
+								</span>
+							</button>
+							
+						</div>
+						
+						<!-- dialog  -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">리워드 패키지 추가</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        <form>
+						          <div class="form-group">
+						            <label for="recipient-name" class="col-form-label">패키지 명</label>
+						            <input type="text" class="form-control" id="recipient-name">
+						          </div>
+						          <div class="form-group">
+						            <label for="message-text" class="col-form-label">패키지 내용</label>
+						            <textarea class="form-control" id="message-text"></textarea>
+						          </div>
+						          
+						          <div class="form-group">
+						            <label for="message-text" class="col-form-label">금액</label>
+						            <input type="text" class="form-control" id="recipient-name" placeholder="EX) 10000000" width="50%">
+						          </div>
+						          
+						        </form>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+						        <button type="button" class="btn btn-primary">등록</button>
+						      </div>
+						    </div>
+						  </div>
 						</div>
 					</form>
 				</div>
@@ -508,9 +613,7 @@
 	<!-- all js here -->
 	<!-- jquery latest version -->
 	<script
-		src="<c:url value='resources/writer/js/vendor/jquery-1.12.0.min.js'/>">
-		
-	</script>
+		src="<c:url value='resources/writer/js/vendor/jquery-1.12.0.min.js'/>"></script>
 	<!-- bootstrap js -->
 	<script src="<c:url value='resources/writer/js/bootstrap.min.js'/>"></script>
 	<!-- owl.carousel js -->
@@ -547,6 +650,5 @@
 		type="text/javascript"></script>
 	<!-- main js -->
 	<script src="<c:url value='resources/writer/js/main.js'/>"></script>
-
 </body>
 </html>

@@ -98,7 +98,7 @@
 										<a href="index.html">프로젝트</a>
 									</h4>
 									<ul class="sub-menu">
-										<li><a href="about.html">프로젝트 등록</a></li>
+										<li><a href="projectReg.do">프로젝트 등록</a></li>
 										<li><a href="cart.html">프로젝트 찾기</a></li>
 									</ul></li>
 								<li><h4>
