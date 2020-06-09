@@ -64,6 +64,35 @@
 <!-- modernizr css -->
 <script
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//아이디 중복체크
+	    $('#CHANGE').click(function(){
+	    	// ajax로 전달할 폼 객체
+            var formData = new FormData();
+            // 폼 객체에 파일추가, append("변수명", 값)
+            formData.append('file', $('#file')[0].files[0]);
+            
+	        $.ajax({
+		     type:"POST",
+		     url:"fileUploadAjax.do",
+		     data: formData,
+		     dataType: "text",
+		     processData: false,
+             contentType: false,
+		     success:function(data){	//data : checkId에서 넘겨준 결과값
+		            if($.trim(data)=="YES"){
+		               alert("성공");
+		           	}else{
+		           		alert("실패");
+		            }
+		         }
+		    }) 
+	     })
+	});
+</script>
+
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -585,8 +614,6 @@
 							<div class="container">
 								<div class="row">
 									<div>
-										<form action="fileUpload.do" method="post"
-											enctype="multipart/form-data">
 											<h2 class="heading-title">이미지 변경</h2>
 											<p>
 												<b>아이디</b>
@@ -602,7 +629,6 @@
 													</span>
 												</button>
 											</div>
-										</form>
 									</div>
 								</div>
 							</div>

@@ -195,6 +195,24 @@ public class UserController {
          return mav; // mypage.jsp(결과화면)로 포워딩
      }
 	
-	
+ // 파일 업로드
+  	@RequestMapping(value="/fileUploadAjax.do", method=RequestMethod.POST)
+      public String uplodaFormAjax(MultipartFile file, ModelAndView mav) throws Exception{
+  		System.out.println(file);
+  		System.out.println("fileUploadAjax에 접근함");
+          logger.info("파일이름 :"+file.getOriginalFilename());
+          logger.info("파일크기 : "+file.getSize());
+          logger.info("컨텐트 타입 : "+file.getContentType());
+
+          String savedName = file.getOriginalFilename();
+
+          File target = new File(uploadPath, savedName);
+
+          // 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
+          // FileCopyUtils.copy(바이트배열, 파일객체)
+          FileCopyUtils.copy(file.getBytes(), target);
+
+          return "YES"; // mypage.jsp(결과화면)로 포워딩
+      }
 
 }
