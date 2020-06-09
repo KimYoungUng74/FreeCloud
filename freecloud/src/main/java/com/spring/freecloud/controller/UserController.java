@@ -195,9 +195,9 @@ public class UserController {
          return mav; // mypage.jsp(결과화면)로 포워딩
      }
 	
- // 파일 업로드
+ // 파일 업로드 Ajax
   	@RequestMapping(value="/fileUploadAjax.do", method=RequestMethod.POST)
-      public String uplodaFormAjax(MultipartFile file, ModelAndView mav) throws Exception{
+      public @ResponseBody String uplodaFormAjax(MultipartFile file, ModelAndView mav) throws Exception{
   		System.out.println(file);
   		System.out.println("fileUploadAjax에 접근함");
           logger.info("파일이름 :"+file.getOriginalFilename());
