@@ -1,4 +1,4 @@
-	package com.spring.freecloud.dao;
+package com.spring.freecloud.dao;
 
 import java.sql.Date;
 import java.util.HashMap;

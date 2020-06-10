@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.freecloud.dto.UserDTO;
-import com.spring.freecloud.service.BoardService;
 import com.spring.freecloud.service.UserService;
 
 /**
@@ -32,16 +31,14 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
 	@Autowired
-	BoardService boardSer;
+	UserService userSer;
 
 	// 프로젝트 등록 화면
 	@RequestMapping(value = "projectReg.do")
 	public String projectReg(Locale locale, Model model) {
 		return "projectReg";
 	}
-	
-	// 프로젝트 등록 처리
-	
+
 	/*
 	 * // 회원 가입 처리
 	 * 
