@@ -64,6 +64,35 @@
 <!-- modernizr css -->
 <script
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//아이디 중복체크
+	    $('#CHANGE').click(function(){
+	    	// ajax로 전달할 폼 객체
+            var formData = new FormData();
+            // 폼 객체에 파일추가, append("변수명", 값)
+            formData.append('file', $('#file')[0].files[0]);
+            
+	        $.ajax({
+		     type:"POST",
+		     url:"fileUploadAjax.do",
+		     data: formData,
+		     dataType: "text",
+		     processData: false,
+             contentType: false,
+		     success:function(data){	//data : checkId에서 넘겨준 결과값
+		            if($.trim(data)=="YES"){
+		               alert("성공");
+		           	}else{
+		           		alert("실패");
+		            }
+		         }
+		    }) 
+	     })
+	});
+</script>
+
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -84,7 +113,7 @@
 					</div>
 				</div>
 				<div class="col-md-7">
-					<div class="mainmenu text-center"> 
+					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
 								<li><h4>
@@ -121,7 +150,7 @@
 									</c:when>
 									<c:otherwise>
 
-											<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
+										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
 									</c:otherwise>
 								</c:choose></li>
 							<li><c:choose>
@@ -129,7 +158,7 @@
 										<a href="signup.do">회원가입</a>
 									</c:when>
 									<c:otherwise>
-											<a href="logout.do">로그아웃</a>
+										<a href="logout.do">로그아웃</a>
 									</c:otherwise>
 								</c:choose></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
@@ -284,8 +313,9 @@
 									src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
 							</div>
 						</div>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="이미지 변경">
+						<div class="basic_btn" style="width: 100%">
+							<a href="#" title="Quick view" data-toggle="modal"
+								data-target="#pwDialog">이미지 변경</a>
 						</div>
 						<br>
 						<div class="col-md-5">
@@ -423,11 +453,11 @@
 								<p />
 							</div>
 							<div class="col-md-12">
-							<p>
-							<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="등록 하기">
-						</div>
-							</p>
+								<p>
+								<div class="button" style="width: 100%">
+									<input type="button" style="width: 100%" value="등록 하기">
+								</div>
+								</p>
 							</div>
 						</div>
 					</div>
@@ -559,6 +589,46 @@
 											<li><a target="_blank" title="LinkedIn" href="#"
 												class="linkedin social-icon"><i class="fa fa-linkedin"></i></a></li>
 										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- .product-info -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 이미지 변경 -->
+		<div class="modal fade" id="pwDialog" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-product">
+							<div class="container">
+								<div class="row">
+									<div>
+											<h2 class="heading-title">이미지 변경</h2>
+											<p>
+												<b>아이디</b>
+											</p>
+											<p class="form-row seekpw">
+												<input type="file" name="file" id="file"
+													placeholder="아이디 입력">
+											</p>
+											<div class="submit" style="float: center">
+												<button name="CHANGE" id="CHANGE" class="btn-default"
+													style="width: 100%">
+													<span> <i class="fa fa-user left"></i> 이미지 변경
+													</span>
+												</button>
+											</div>
 									</div>
 								</div>
 							</div>
