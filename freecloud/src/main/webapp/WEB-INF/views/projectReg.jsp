@@ -360,7 +360,7 @@
 		<div class="container">
 			<div class="row">
 				<div>
-					<form action="#" class="create-account-form" method="post">
+					<form action="projectRegOk.do" class="create-account-form" method="post">
 						<h2 class="heading-title">프로젝트 등록</h2>
 
 						<div class="shop-select" style="display: inline; width: 25%;">
@@ -510,7 +510,7 @@
 						
 						<div class="submit" style="display: inline;">
 							
-							<button name="loginBtn" id="loginBtn" type="submit"
+							<button name="loginBtn" id="loginBtn" type="button"
 								class="btn-default" style="width:51%">
 								<span> <i class="fa fa-user left"></i> 취소
 								</span>

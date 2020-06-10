@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.freecloud.dto.BoardDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.service.BoardService;
 import com.spring.freecloud.service.UserService;
@@ -40,8 +41,22 @@ public class BoardController {
 		return "projectReg";
 	}
 	
-	// 프로젝트 등록 처리
+	// 프로젝트 조회 화면
+	@RequestMapping(value = "projectSearch.do")
+	public String projectSearch(Locale locale, Model model) {
+		return "projectSearch";
+	}
 	
+	// 프로젝트 등록 처리
+	@RequestMapping(value = "projectRegOk.do", method = RequestMethod.POST)
+	public String projectWrite(BoardDTO boardDTO) throws Exception {
+		
+		System.out.println("등록 테스트");
+		boardSer.projectWrite(boardDTO);
+		
+		System.out.println("등록완료");
+		return "projectSearch";
+	}
 	/*
 	 * // 회원 가입 처리
 	 * 
