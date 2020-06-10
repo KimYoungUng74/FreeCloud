@@ -23,13 +23,9 @@ public class BoardService {
 	public BoardDAO dao;
 
 	// 게시글 등록
-	public int projectWrite(BoardDTO dto) {
-		try {
-			dao.projectWrite(dto); // 게시글 등록
-		} catch (Exception e) {
-			return -1; // 게시글 등록 실패
-		}
-		return 1;
+	public void projectWrite(BoardDTO dto) {
+		dao.projectWrite(dto); // 게시글 등록
+
 	}
 	
 	// 게시글 조회

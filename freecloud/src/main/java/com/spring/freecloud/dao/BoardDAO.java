@@ -26,6 +26,7 @@ public class BoardDAO {
 	public void projectWrite(BoardDTO dto) {
 		
 		  //mybatis.insert("UserMapper.Signup", dto);
+		mybatis.insert("BoardMapper.projectWrite", dto);
 
 	}
 
