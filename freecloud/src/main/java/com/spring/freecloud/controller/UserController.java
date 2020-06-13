@@ -173,6 +173,9 @@ public class UserController {
         // upload/uploadForm.jsp(업로드 페이지)로 포워딩
     }
     
+ // 외부저장소에서 이미지 불러오기위해 
+ // 톰켓 sever.xml에 <Context path="/banzzackimg" reloadable="true" docBase="D:\freecloud"/> 추가
+    
  // 파일 업로드
  	@RequestMapping(value="/fileUpload.do", method=RequestMethod.POST)
      public ModelAndView uplodaForm(MultipartFile file, ModelAndView mav) throws Exception{
