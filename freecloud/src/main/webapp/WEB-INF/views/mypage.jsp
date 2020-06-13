@@ -82,8 +82,10 @@ $(function(){
 		     processData: false,
              contentType: false,
 		     success:function(data){	//data : checkId에서 넘겨준 결과값
-		            if($.trim(data)=="YES"){
-		               alert("성공");
+		            if($.trim(data)!="Fail"){
+		            	var test = "<img alt=\"\"src=\"<c:url value='"+$.trim(data)+"'/>\">";
+		            	 $('#profile').html(test);
+		               alert($.trim(data));
 		           	}else{
 		           		alert("실패");
 		            }
@@ -308,7 +310,7 @@ $(function(){
 				<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
 					<div class="row shop-widget">
 						<div class="thumbnail">
-							<div class="centered">
+							<div class="centered" id="profile">
 								<img alt=""
 									src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
 							</div>
