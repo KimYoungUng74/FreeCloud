@@ -84,14 +84,14 @@
 					</div>
 				</div>
 				<div class="col-md-7">
-					<div class="mainmenu text-center"> 
+					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
 								<li><h4>
 										<a href="index.html">프로젝트</a>
 									</h4>
 									<ul class="sub-menu">
-										<li><a href="about.html">프로젝트 등록</a></li>
+										<li><a href="projectReg.do">프로젝트 등록</a></li>
 										<li><a href="cart.html">프로젝트 찾기</a></li>
 									</ul></li>
 								<li><h4>
@@ -121,7 +121,7 @@
 									</c:when>
 									<c:otherwise>
 
-											<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
+										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
 									</c:otherwise>
 								</c:choose></li>
 							<li><c:choose>
@@ -129,7 +129,7 @@
 										<a href="signup.do">회원가입</a>
 									</c:when>
 									<c:otherwise>
-											<a href="logout.do">로그아웃</a>
+										<a href="logout.do">로그아웃</a>
 									</c:otherwise>
 								</c:choose></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
