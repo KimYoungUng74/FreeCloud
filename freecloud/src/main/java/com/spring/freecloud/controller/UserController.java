@@ -199,7 +199,7 @@ public class UserController {
      }
 	
  // 파일 업로드 Ajax
-  	@RequestMapping(value="/fileUploadAjax.do", method=RequestMethod.POST)
+  	@RequestMapping(value="/fileUploadAjax.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
       public @ResponseBody String uplodaFormAjax(MultipartFile file, ModelAndView mav){
   		System.out.println(file);
   		System.out.println("fileUploadAjax에 접근함");
