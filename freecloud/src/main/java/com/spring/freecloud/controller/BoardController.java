@@ -57,6 +57,14 @@ public class BoardController {
 		System.out.println("등록완료");
 		return "projectSearch";
 	}
+	
+	//프리랜서 조회 화면
+	@RequestMapping(value = "freelancerSearch.do")
+	public String freelancerSearch(Locale locale, Model model) {
+		return "freelancerSearch";
+	}
+	
+	// 
 	/*
 	 * // 회원 가입 처리
 	 * 

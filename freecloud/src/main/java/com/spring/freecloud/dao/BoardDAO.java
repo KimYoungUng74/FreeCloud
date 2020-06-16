@@ -33,7 +33,9 @@ public class BoardDAO {
 	// 게시글 조회
 	public BoardDTO viewProject(BoardDTO dto) {
 		// TODO Auto-generated method stub
-		return mybatis.selectOne("UserMapper.viewUser", dto);
+		//return mybatis.selectOne("UserMapper.viewUser", dto);
+		
+		return null;
 	}
 	
 	// 게시글 수정
