@@ -387,7 +387,7 @@ function showCheckboxes() {
 												</label></li>
 
 												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;에플리케이션
+														type="checkbox" name="chk1" id="chk1">&nbsp;애플리케이션
 												</label></li>
 
 												<li class="listc"><label for="chk1"> <input

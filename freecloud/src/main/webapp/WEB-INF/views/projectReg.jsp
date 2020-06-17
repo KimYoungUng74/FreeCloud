@@ -11,6 +11,35 @@
    
  </style>
  
+<script type="text/javascript">
+	function categoryChange(e) {
+		
+		var target = document.getElementById("PROJECT_MIDDLE_KATEGORY");
+		var opt = $("#PROJECT_MIDDLE_KATEGORY option").length;
+		
+		if (e.value == ""){
+			num = new Array("중분류");
+			vnum = new Array("");
+		}
+		else if (e.value == "devel") {
+			num = new Array("웹", "애플리케이션", "워드프로세스", "퍼블리싱", "일반 소프트웨어", "커머스, 쇼핑몰", "게임", "임베디드", "기타");
+			vnum = new Array("WEB", "APP", "WORD", "PUB", "SOFT", "SHOP", "GAME", "IMB", "OTHER");
+		}
+		else if(e.value == "design") {
+			num = new Array("웹", "제품", "프리젠테이션", "인쇄물", "커머스, 쇼핑몰", "로고", "그래픽", "영상", "게임", "기타");
+			vnum = new Array("WEB", "PRODUCT", "PRE", "PRINT", "SHOP", "LOGO", "GRAPHIC", "VIDEO", "GAME", "OTHER");
+		}
+		
+		for(var i=0; i<opt; i++){
+			target.options[0] = null;
+		}
+		
+		for(var k=0; k<num.length; k++){
+			target.options[k] = new Option(num[k], vnum[k]);
+		}
+	}
+</script>
+ 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	language="java"%>
 <meta charset="utf-8">
@@ -365,32 +394,18 @@
 
 						<div class="shop-select" style="display: inline; width: 25%;">
 							<label><b>카테고리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
-							<select style="width: 25%">
+							<select name="PROJECT_MAIN_KETEGORY" id="PROJECT_MAIN_KETEGORY" style="width: 25%" onchange="categoryChange(this)">
 								<option hidden="">대분류</option>
-								<option value="volvo">IT</option>
-								<option value="saab">Algeria</option>
-								<option value="mercedes">Afghanistan</option>
-								<option value="audi">Ghana</option>
-								<option value="audi2">Albania</option>
-								<option value="audi3">Bahrain</option>
-								<option value="audi4">Colombia</option>
-								<option value="audi5">Dominican Republic</option>
+								<option value="devel">개발</option>
+								<option value="design">디자인</option>
 							</select>
 						</div>
 
 						<div class="shop-select" style="display: inline; width: 25%;">
 							<!-- <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;중분류 </label> -->
-							<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> <select
-								style="width: 25%">
+							<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> 
+							<select name= "PROJECT_MIDDLE_KATEGORY" id="PROJECT_MIDDLE_KATEGORY" style="width: 25%">
 								<option hidden="">중분류</option>
-								<option value="volvo">Java</option>
-								<option value="saab">Algeria</option>
-								<option value="mercedes">Afghanistan</option>
-								<option value="audi">Ghana</option>
-								<option value="audi2">Albania</option>
-								<option value="audi3">Bahrain</option>
-								<option value="audi4">Colombia</option>
-								<option value="audi5">Dominican Republic</option>
 							</select>
 
 
@@ -399,7 +414,7 @@
 
 						<p class="form-row">
 							<b>제목</b><br>
-							<br> <input type="text" id="userPW2" placeholder="제목">
+							<br> <input type="text" name="PROJECT_SUBJECT" id="PROJECT_SUBJECT" placeholder="제목">
 						</p>
 
 						<p>
@@ -407,7 +422,7 @@
 						</p>
 
 						<p class="form-row order-notes">
-							<textarea placeholder="상세 내용 기입"></textarea>
+							<textarea name="PROJECT_CONTENT" id="PROJECT_CONTENT" placeholder="상세 내용 기입"></textarea>
 						</p>
 
 
@@ -416,7 +431,7 @@
 							<br>
 							<p class="form-row"">
 
-								<input style="display: inline;" type="text" id="userPhone1"
+								<input style="display: inline;" type="text" name="PROJECT_START_DATE" id="PROJECT_START_DATE"
 									placeholder="Ex)2020-05-05">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</p>
 						</div>
@@ -424,7 +439,7 @@
 						<div class="col-md-4" style="display: inline; width: 50%;">
 							<p class="shop-select">
 								<b>근무 위치</b><br>
-								<br> <select>
+								<br> <select name="PROJECT_ADDRESS" id="PROJECT_ADDRESS">
 									<option value="none">지역을 선택하세요.</option>
 									<option value="서울특별시">서울특별시</option>
 								</select>
@@ -436,7 +451,7 @@
 							<br>
 							<p class="form-row"">
 
-								<input style="display: inline;" type="text" id="userPhone1"
+								<input style="display: inline;" type="text" name="PROJECT_END_DATE" id="PROJECT_END_DATE"
 									placeholder="Ex)2020-05-05">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</p>
 						</div>
@@ -444,11 +459,11 @@
 						<div class="col-md-4" style="display: inline; width: 30%;">
 							<b>근무 형태</b><br>
 							<br>
-							<p style="font-size: 23px;" class="wKind">
-								&nbsp;&nbsp; <input type="radio" name="chk_kind" value="HTML"
+							<p style="font-size: 23px;" class="wkind">
+								&nbsp;&nbsp; <input type="radio" id="WORKING_KIND" name="WORKING_KIND" value="외주"
 									style="width: 18px; height: 18px">&nbsp;&nbsp;외주&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="chk_kind"
-									value="CSS " style="width: 18px; height: 18px">&nbsp;&nbsp;상주
+								&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="WORKING_KIND"
+									value="상주 " style="width: 18px; height: 18px">&nbsp;&nbsp;상주
 
 							</p>
 						</div>
@@ -458,7 +473,7 @@
 							<br>
 							<p class="form-row"">
 
-								<input style="display: inline;" type="text" id="userPhone1"
+								<input style="display: inline;" type="text" name="PROJECT_BUDGET" id="PROJECT_BUDGET"
 									placeholder="예산 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</p>
 						</div>
@@ -466,11 +481,11 @@
 						<div class="col-md-4" style="display: inline; width: 30%;">
 							<b>예산 조율 여부</b><br>
 							<br>
-							<p style="font-size: 23px;" class="wKind">
-								&nbsp;&nbsp; <input type="radio" name="chk_budget" value="HTML"
+							<p style="font-size: 23px;" class="cooldi">
+								&nbsp;&nbsp; <input type="radio" id="PROOJECT_BUDGET_COORDINATION" name="PROOJECT_BUDGET_COORDINATION" value="0"
 									style="width: 18px; height: 18px">&nbsp;&nbsp;가능&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="chk_budget"
-									value="CSS " style="width: 18px; height: 18px">&nbsp;&nbsp;불가능
+								&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="PROOJECT_BUDGET_COORDINATION" name="PROOJECT_BUDGET_COORDINATION"
+									value="1 " style="width: 18px; height: 18px">&nbsp;&nbsp;불가능
 
 							</p>
 						</div>
@@ -510,7 +525,7 @@
 						
 						<div class="submit" style="display: inline;">
 							
-							<button name="loginBtn" id="loginBtn" type="button"
+							<button name="pCancle" id="pCancle" type="button"
 								class="btn-default" style="width:51%">
 								<span> <i class="fa fa-user left"></i> 취소
 								</span>
@@ -520,7 +535,7 @@
 						
 						<div class="submit" style="display: inline;">
 							
-							<button name="loginBtn" id="loginBtn" type="submit"
+							<button name="pReg" id="pReg" type="submit"
 								class="btn-default" style="width:48%">
 								<span> <i class="fa fa-user left"></i> 등록
 								</span>
