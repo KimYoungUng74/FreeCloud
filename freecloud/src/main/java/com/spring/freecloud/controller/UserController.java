@@ -1,7 +1,9 @@
 package com.spring.freecloud.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -35,12 +37,12 @@ public class UserController {
 
 	@Autowired
 	UserService userSer;
-	
-	// xml에 설정된 리소스 참조 
-    // bean의 id가 uploadPath인 태그를 참조 파일업로드
+
+	// xml에 설정된 리소스 참조
+	// bean의 id가 uploadPath인 태그를 참조 파일업로드
 	@Autowired
-    @Resource(name="uploadPath")
-    String uploadPath;
+	@Resource(name = "uploadPath")
+	String uploadPath;
 
 	// 회원가입 화면
 	@RequestMapping(value = "signup.do")
@@ -166,64 +168,74 @@ public class UserController {
 	public String mypage(Locale locale, Model model) {
 		return "mypage";
 	}
-	
+
 	// 업로드 흐름 : 업로드 버튼클릭 => 임시디렉토리에 업로드=> 지정된 디렉토리에 저장 => 파일정보가 file에 저장
-    @RequestMapping(value="/upload/uploadForm", method=RequestMethod.GET)
-    public void uplodaForm(){
-        // upload/uploadForm.jsp(업로드 페이지)로 포워딩
-    }
-    
- // 외부저장소에서 이미지 불러오기위해 
- // 톰켓 sever.xml에 <Context path="/banzzackimg" reloadable="true" docBase="D:\freecloud"/> 추가
-    
- // 파일 업로드
- 	@RequestMapping(value="/fileUpload.do", method=RequestMethod.POST)
-     public ModelAndView uplodaForm(MultipartFile file, ModelAndView mav) throws Exception{
- 		System.out.println("fileUpload에 접근함");
-         logger.info("파일이름 :"+file.getOriginalFilename());
-         logger.info("파일크기 : "+file.getSize());
-         logger.info("컨텐트 타입 : "+file.getContentType());
+	@RequestMapping(value = "/upload/uploadForm", method = RequestMethod.GET)
+	public void uplodaForm() {
+		// upload/uploadForm.jsp(업로드 페이지)로 포워딩
+	}
 
-         String savedName = file.getOriginalFilename();
+	// 외부저장소에서 이미지 불러오기위해
+	// 톰켓 sever.xml에 <Context path="/banzzackimg" reloadable="true"
+	// docBase="D:\freecloud"/> 추가
 
-         File target = new File(uploadPath, savedName);
+	// 파일 업로드
+	@RequestMapping(value = "/fileUpload.do", method = RequestMethod.POST)
+	public ModelAndView uplodaForm(MultipartFile file, ModelAndView mav) throws Exception {
+		System.out.println("fileUpload에 접근함");
+		logger.info("파일이름 :" + file.getOriginalFilename());
+		logger.info("파일크기 : " + file.getSize());
+		logger.info("컨텐트 타입 : " + file.getContentType());
 
-         // 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
-         // FileCopyUtils.copy(바이트배열, 파일객체)
-         FileCopyUtils.copy(file.getBytes(), target);
+		String savedName = file.getOriginalFilename();
 
-         mav.setViewName("mypage");
-         mav.addObject("savedName", savedName);
+		File target = new File(uploadPath, savedName);
 
-         return mav; // mypage.jsp(결과화면)로 포워딩
-     }
-	
- // 파일 업로드 Ajax
-  	@RequestMapping(value="/fileUploadAjax.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
-      public @ResponseBody String uplodaFormAjax(MultipartFile file, ModelAndView mav){
-  		System.out.println(file);
-  		System.out.println("fileUploadAjax에 접근함");
-          logger.info("파일이름 :"+file.getOriginalFilename());
-          logger.info("파일크기 : "+file.getSize());
-          logger.info("컨텐트 타입 : "+file.getContentType());
-          
-          System.out.println("파일이름 :"+file.getOriginalFilename());
-         
+		// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
+		// FileCopyUtils.copy(바이트배열, 파일객체)
+		FileCopyUtils.copy(file.getBytes(), target);
 
-          String savedName = file.getOriginalFilename();
-          System.out.println(uploadPath+"\\"+savedName);
+		mav.setViewName("mypage");
+		mav.addObject("savedName", savedName);
 
-          File target = new File(uploadPath, savedName);
+		return mav; // mypage.jsp(결과화면)로 포워딩
+	}
 
-          // 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
-          // FileCopyUtils.copy(바이트배열, 파일객체)
-          try {
-        	  FileCopyUtils.copy(file.getBytes(), target);
-          } catch (Exception e) {
-        	  return "Fail";		// 등록 실패시
-		}
-          return "http://localhost:8181/img/"+savedName; // mypage.jsp(결과화면)로 포워딩
-        	  
-      }
+	// 파일 업로드 Ajax
+	@RequestMapping(value = "/fileUploadAjax.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String uplodaFormAjax(MultipartFile file, ModelAndView mav) throws IOException, Exception {
+		System.out.println(file);
+		System.out.println("fileUploadAjax에 접근함");
+		
+		String savedName = file.getOriginalFilename();
+		
+		logger.info("파일이름 :" + file.getOriginalFilename());
+		logger.info("파일크기 : " + file.getSize());
+		logger.info("컨텐트 타입 : " + file.getContentType());
+
+		System.out.println("파일이름 :" + file.getOriginalFilename());
+		
+		// 랜덤생성+파일이름 저장
+        // 파일명 랜덤생성 메서드호출
+        savedName = uploadFile(savedName, file.getBytes());
+
+		
+		return "http://localhost:8181/img/" + savedName;
+
+	}
+
+	// 파일명 랜덤생성 메서드
+	private String uploadFile(String originalName, byte[] fileData) throws Exception {
+		// uuid 생성(Universal Unique IDentifier, 범용 고유 식별자)
+		UUID uuid = UUID.randomUUID();
+		// 랜덤생성+파일이름 저장
+		String savedName = uuid.toString() + "_" + originalName;
+		System.out.println(uploadPath + "\\" + savedName);
+		File target = new File(uploadPath, savedName);
+		// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
+		// FileCopyUtils.copy(바이트배열, 파일객체)
+		FileCopyUtils.copy(fileData, target);
+		return savedName;
+	}
 
 }
