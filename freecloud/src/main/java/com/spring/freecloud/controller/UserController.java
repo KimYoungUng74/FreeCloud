@@ -204,6 +204,8 @@ public class UserController {
 	// 파일 업로드 Ajax
 	@RequestMapping(value = "/fileUploadAjax.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public @ResponseBody String uplodaFormAjax(MultipartFile file, ModelAndView mav) throws IOException, Exception {
+		
+		String dirname = File.separator + "profile";
 		System.out.println(file);
 		System.out.println("fileUploadAjax에 접근함");
 		
@@ -217,25 +219,45 @@ public class UserController {
 		
 		// 랜덤생성+파일이름 저장
         // 파일명 랜덤생성 메서드호출
-        savedName = uploadFile(savedName, file.getBytes());
+        savedName = uploadFile(savedName, file.getBytes(), dirname);
 
 		
-		return "http://localhost:8181/img/" + savedName;
+		return "http://localhost:8181/img/profile/" + savedName;
 
 	}
 
 	// 파일명 랜덤생성 메서드
-	private String uploadFile(String originalName, byte[] fileData) throws Exception {
+	private String uploadFile(String originalName, byte[] fileData, String dirName) throws Exception {
+		
+		// 폴더 생성
+		makeDir(uploadPath, dirName);
 		// uuid 생성(Universal Unique IDentifier, 범용 고유 식별자)
 		UUID uuid = UUID.randomUUID();
 		// 랜덤생성+파일이름 저장
 		String savedName = uuid.toString() + "_" + originalName;
 		System.out.println(uploadPath + "\\" + savedName);
-		File target = new File(uploadPath, savedName);
+		File target = new File(uploadPath+dirName, savedName);
 		// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
 		// FileCopyUtils.copy(바이트배열, 파일객체)
 		FileCopyUtils.copy(fileData, target);
 		return savedName;
 	}
+	
+	 // 디렉토리 생성
+    private static void makeDir(String uploadPath, String... paths) {
+        // 디렉토리가 존재하면
+        if (new File(paths[paths.length - 1]).exists()){
+            return;
+        }
+        // 디렉토리가 존재하지 않으면
+        for (String path : paths) {
+            // 
+            File dirPath = new File(uploadPath + path);
+            // 디렉토리가 존재하지 않으면
+            if (!dirPath.exists()) {
+                dirPath.mkdir(); //디렉토리 생성
+            }
+        }
+    }    
 
 }
