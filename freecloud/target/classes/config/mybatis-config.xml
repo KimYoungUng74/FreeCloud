@@ -8,6 +8,7 @@
 		<!-- <typeAlias type="com.spring.travel.dto.UserDTO" alias="UserDTO"></typeAlias> -->
 		<typeAlias type="com.spring.freecloud.dto.UserDTO" alias="UserDTO"></typeAlias>
 		<typeAlias type="com.spring.freecloud.dto.BoardDTO" alias="BoardDTO"></typeAlias>
+		<typeAlias type="com.spring.freecloud.dto.ProjectDTO" alias="ProjectDTO"></typeAlias>
 	</typeAliases>
 	
 	

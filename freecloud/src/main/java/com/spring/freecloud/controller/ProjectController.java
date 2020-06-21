@@ -20,20 +20,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.freecloud.dto.BoardDTO;
+import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.service.BoardService;
+import com.spring.freecloud.service.ProjectService;
 import com.spring.freecloud.service.UserService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class BoardController {
+public class ProjectController {
 
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
 
 	@Autowired
-	BoardService boardSer;
+	ProjectService projectSer;
 
 	// 프로젝트 등록 화면
 	@RequestMapping(value = "projectReg.do")
@@ -49,14 +51,49 @@ public class BoardController {
 	
 	// 프로젝트 등록 처리
 	@RequestMapping(value = "projectRegOk.do", method = RequestMethod.POST)
-	public String projectWrite(BoardDTO boardDTO) throws Exception {
+	public ModelAndView projectWrite(Locale local, ProjectDTO dto, HttpServletRequest request) throws Exception {
 		
 		System.out.println("등록 테스트");
-		boardSer.projectWrite(boardDTO);
+		
+		int budget = Integer.parseInt(request.getParameter("PROJECT_BUDGET"));
+		int cBudget = Integer.parseInt(request.getParameter("PROOJECT_BUDGET_COORDINATION"));
+		String start_date = request.getParameter("PROJECT_START_DATE");
+		String end_date = request.getParameter("PROJECT_END_DATE");
+		
+		java.sql.Date SD = java.sql.Date.valueOf(start_date);
+		java.sql.Date ED = java.sql.Date.valueOf(end_date);
+		
+		dto.setPROJECT_BUDGET(budget);
+		dto.setPROJECT_BUDGET_COORDINATION(cBudget);
+		dto.setPROJECT_START_DATE(SD);
+		dto.setPROJECT_END_DATE(ED);
+		
+		System.out.println("대분류 " + dto.getPROJECT_MAIN_KETEGORY());
+		System.out.println("중분류 " + dto.getPROJECT_MIDDLE_KATEGORY());
+		System.out.println("제목 : " + dto.getPROJECT_SUBJECT() );
+		System.out.println("내용 : " + dto.getPROJECT_CONTENT());
+		System.out.println("근무 형태 : " + dto.getWORKING_KIND());
+		System.out.println("근무 위치 : " + dto.getPROJECT_ADDRESS());
+		System.out.println("예산 : " + dto.getPROJECT_BUDGET() );
+		System.out.println("예산 조율 여부 " + dto.getPROJECT_BUDGET_COORDINATION());
+		System.out.println("시작일 : " + dto.getPROJECT_START_DATE() );
+		System.out.println("마감일 : " + dto.getPROJECT_END_DATE() );
+		
+		projectSer.projectWrite(dto);
 		
 		System.out.println("등록완료");
-		return "projectSearch";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("projectSearch");
+		return mav;
 	}
+	
+	//프리랜서 조회 화면
+	@RequestMapping(value = "freelancerSearch.do")
+	public String freelancerSearch(Locale locale, Model model) {
+		return "freelancerSearch";
+	}
+	
+	// 
 	/*
 	 * // 회원 가입 처리
 	 * 

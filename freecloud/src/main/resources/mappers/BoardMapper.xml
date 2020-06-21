@@ -4,11 +4,29 @@
 
 <mapper namespace="BoardMapper">
 	<!-- id는 마음대로 작성 prarameter는 실제DTO클래스 -->
-	<!-- 유저 회원가입 -->
-	<insert id="projectWrite">
+	<!-- 프리랜서 글 등록 -->
+	<insert id="freelancerWrite">
 		INSERT INTO FREE_BBS(BBS_IDX, USER_ID, BBS_MAIN_KATEGORY, BBS_MIDDLE_KATEGORY, BBS_SUBJECT, BBS_CONTENT, BBS_VIEWS, BBS_REG_DATE, BBS_UPDATE_DATE)
 		VALUES(AUTOINC.nextval, 'test', 'test', 'test', 'test', 'test', 1, sysdate, sysdate)
 	</insert>
 
-
+	<!-- 프로젝트 등록 -->
+	<insert id="projectWrite">
+		INSERT INTO FREE_PROJECT(PROJECT_IDX, USER_ID, PROJECT_MAIN_KATEGORY, PROJECT_MIDDLE_KATEGORY,PROJECT_WORKING_KIND, PROJECT_SUBJECT, PROJECT_CONTENT
+		, PROJECT_START_DATE, PROJECT_END_DATE, PROJECT_ADDRESS, PROJECT_BUDGET, PROJECT_BUDGET_COORDINATION, PROJECT_IMAGE_PATH, PROJECT_STATUS,PROJECT_VIEWS)
+		VALUES(
+		AUTOINC1.nextval, 
+		'test', 
+		#{PROJECT_MAIN_KETEGORY}, 
+		#{PROJECT_MIDDLE_KATEGORY}, 
+		#{WORKING_KIND}, #{PROJECT_SUBJECT}, 
+		#{PROJECT_CONTENT}, #{PROJECT_START_DATE}, 
+		#{PROJECT_END_DATE}, #{PROJECT_ADDRESS}, 
+		#{PROJECT_BUDGET}, 
+		#{PROJECT_BUDGET_COORDINATION}, 
+		'1', 
+		1, 
+		1
+		)
+	</insert>
 </mapper>
