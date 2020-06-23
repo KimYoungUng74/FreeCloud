@@ -225,6 +225,42 @@ public class UserController {
 		return "http://localhost:8181/img/profile/" + savedName;
 
 	}
+	
+	// 포트폴리오 업로드 Ajax
+		@RequestMapping(value = "/	myPortfolioUploadAjax.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+		public @ResponseBody String myPortfolioUploadAjax(MultipartFile portfolio, ModelAndView mav) throws IOException, Exception {
+			
+			String dirname = File.separator + "portfolio";
+			System.out.println(portfolio);
+			System.out.println("fileUploadAjax에 접근함");
+			
+			String savedName = portfolio.getOriginalFilename();
+			
+			logger.info("파일이름 :" + portfolio.getOriginalFilename());
+			logger.info("파일크기 : " + portfolio.getSize());
+			logger.info("컨텐트 타입 : " + portfolio.getContentType());
+
+			System.out.println("파일이름 :" + portfolio.getOriginalFilename());
+			
+			// 랜덤생성+파일이름 저장
+	        // 파일명 랜덤생성 메서드호출
+	        savedName = uploadFile(savedName, portfolio.getBytes(), dirname);
+
+			
+			return savedName;
+
+		}
+		
+		// 포트폴리오 파일 삭제 
+	    @RequestMapping(value = "myPortfolioDeleteAjax.do", method = RequestMethod.POST)
+	    public @ResponseBody String deleteFile(String fileName) {
+	   
+	        // 원본 파일 삭제
+	    	System.out.println(uploadPath+ File.separator + "portfolio" + fileName.replace('/', File.separatorChar));
+	        new File(uploadPath+ File.separator + "portfolio" + File.separator + fileName.replace('/', File.separatorChar)).delete();
+
+	        return "deleted";
+	    }
 
 	// 파일명 랜덤생성 메서드
 	private String uploadFile(String originalName, byte[] fileData, String dirName) throws Exception {
@@ -241,7 +277,7 @@ public class UserController {
 		FileCopyUtils.copy(fileData, target);
 		return savedName;
 	}
-	
+
 	 // 디렉토리 생성
     private static void makeDir(String uploadPath, String... paths) {
         // 디렉토리가 존재하면

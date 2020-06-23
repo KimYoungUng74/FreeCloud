@@ -66,74 +66,138 @@
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	//프로필 바꾸기
-	    $('#CHANGE').click(function(){
-	    	// ajax로 전달할 폼 객체
-            var formData = new FormData();
-            // 폼 객체에 파일추가, append("변수명", 값)
-            formData.append('file', $('#file')[0].files[0]);
-            
-	        $.ajax({
-		     type:"POST",
-		     url:"fileUploadAjax.do",
-		     data: formData,
-		     dataType: "text",
-		     processData: false,
-             contentType: false,
-		     success:function(data){	//data : checkId에서 넘겨준 결과값
-		            if($.trim(data)!="Fail"){
-		            	var test = "<img alt=\"\"src=\"<c:url value='"+$.trim(data)+"'/>\">";
-		            	 $('#profile').html(test);
-		               alert($.trim(data));
-		           	}else{
-		           		alert("실패");
-		            }
-		         }
-		    }) 
-	     })
+	$(function() {
+		//프로필 바꾸기
+		$('#CHANGE').click(
+				function() {
+					// ajax로 전달할 폼 객체
+					var formData = new FormData();
+					// 폼 객체에 파일추가, append("변수명", 값)
+					formData.append('file', $('#file')[0].files[0]);
+
+					$.ajax({
+						type : "POST",
+						url : "fileUploadAjax.do",
+						data : formData,
+						dataType : "text",
+						processData : false,
+						contentType : false,
+						success : function(data) { //data : checkId에서 넘겨준 결과값
+							if ($.trim(data) != "Fail") {
+								var test = "<img alt=\"\"src=\"<c:url value='"
+										+ $.trim(data) + "'/>\">";
+								$('#profile').html(test);
+								alert($.trim(data));
+							} else {
+								alert("실패");
+							}
+						}
+					})
+				})
+				
+				//프로필 바꾸기
+		$('#profolioBtn').click(
+				function() {
+					// ajax로 전달할 폼 객체
+					var formData = new FormData();
+					// 폼 객체에 파일추가, append("변수명", 값)
+					formData.append('portfolio', $('#myPortfolio')[0].files[0]);
+
+					$.ajax({
+						type : "POST",
+						url : "myPortfolioUploadAjax.do",
+						data : formData,
+						dataType : "text",
+						processData : false,
+						contentType : false,
+						success : function(data) { //data : checkId에서 넘겨준 결과값
+							if ($.trim(data) != "Fail") {
+								var idx = data.indexOf("_")+1;
+								var test = "<div><a href='${path}/upload/displayFile?fileName="+data+"'>"+data.substr(idx)+"</a><span data-src="+data+">[삭제]</span></div>";
+								$('#portfolio').html(test);
+							} else {
+								alert("실패");
+							}
+						}
+					})
+				})
+				
+ 				$("#portfolio").on("click", "span", function(event) {
+ 				    var that = $(this); // 여기서 this는 클릭한 span태그
+ 				    $.ajax({
+ 				        url: "myPortfolioDeleteAjax.do",
+ 				        type: "post",
+ 				        // data: "fileName="+$(this).attr("date-src") = {fileName:$(this).attr("data-src")}
+ 				        // 태그.attr("속성")
+ 				        data: {fileName:$(this).attr("data-src")}, // json방식
+ 				        dataType: "text",
+ 				        success: function(result){
+ 				            if( result == "deleted" ){
+ 				                // 클릭한 span태그가 속한 div를 제거
+ 				                that.parent("div").remove();
+ 				            }
+ 				        }
+ 				    });
+ 				}) 
 	});
 </script>
 <script type="text/javascript">
+	$(function() {
 
-$(function() {
-	
-	$('#CATAGORY1').change(function() {
-		$('#CATAGORY2').children('option').remove();
-		if($("#CATAGORY1 option:selected").val() == "") {
-			num = new Array("중분류 선택");
-			vnum = new Array("");
-		} else if($("#CATAGORY1 option:selected").val() == "design"){
-			num = new Array("웹", "제품", "프리젠테이션", "인쇄물", "커머스, 쇼핑몰", "로고", "그래픽", "영상", "게임", "기타");
-			vnum = new Array("WEB", "PRODUCT", "PRE", "PRINT", "SHOP", "LOGO", "GRAPHIC", "VIDEO", "GAME", "OTHER");
-		} else if($("#CATAGORY1 option:selected").val() == "devel"){
-			num = new Array("웹", "애플리케이션", "워드프로세스", "퍼블리싱", "일반 소프트웨어", "커머스, 쇼핑몰", "게임", "임베디드", "기타");
-			vnum = new Array("WEB", "APP", "WORD", "PUB", "SOFT", "SHOP", "GAME", "IMB", "OTHER");
-		}
+		$('#CATAGORY1')
+				.change(
+						function() {
+							$('#CATAGORY2').children('option').remove();
+							if ($("#CATAGORY1 option:selected").val() == "") {
+								num = new Array("중분류 선택");
+								vnum = new Array("");
+							} else if ($("#CATAGORY1 option:selected").val() == "design") {
+								num = new Array("웹", "제품", "프리젠테이션", "인쇄물",
+										"커머스, 쇼핑몰", "로고", "그래픽", "영상", "게임",
+										"기타");
+								vnum = new Array("WEB", "PRODUCT", "PRE",
+										"PRINT", "SHOP", "LOGO", "GRAPHIC",
+										"VIDEO", "GAME", "OTHER");
+							} else if ($("#CATAGORY1 option:selected").val() == "devel") {
+								num = new Array("웹", "애플리케이션", "워드프로세스",
+										"퍼블리싱", "일반 소프트웨어", "커머스, 쇼핑몰", "게임",
+										"임베디드", "기타");
+								vnum = new Array("WEB", "APP", "WORD", "PUB",
+										"SOFT", "SHOP", "GAME", "IMB", "OTHER");
+							}
+
+							for (var i = 0; i < num.length; i++) {
+								$("#CATAGORY2").append(
+										"<option value='"+vnum[i]+"'>" + num[i]
+												+ "</option>");
+							}
+						})
+
+		$('#skillBtn').click(
+				function() {
+					if ($('#mySkill').val() == "") {
+						$('#mySkill').val($('#skillInput').val());
+					} else {
+						$('#mySkill').val(
+								$('#mySkill').val() + ","
+										+ $('#skillInput').val());
+					}
+				})
+
+		$('#licenseBtn').click(
+				function() {
+					if ($('#myLicense').val() == "") {
+						$('#myLicense').val($('#licenseInput').val());
+					} else {
+						$('#myLicense').val(
+								$('#myLicense').val() + ","
+										+ $('#licenseInput').val());
+					}
+		})
 		
-		for(var i=0; i <num.length; i++) {
-			$("#CATAGORY2").append("<option value='"+vnum[i]+"'>"+num[i]+"</option>");
-		}
-	})
-	
-	 $('#skillBtn').click(function() {
-		 alert("꾸꾸?");
-		 if($('#mySkill').val()=="") {
-			 $('#mySkill').val($('#skillInput').val());
-		 } else {
-			 $('#mySkill').val($('#mySkill').val()+","+$('#skillInput').val());
-		 }
-	 })
-	 
-	 $('#licenseBtn').click(function() {
-		 alert("꾸꾸?");
-		 if($('#myLicense').val()=="") {
-			 $('#myLicense').val($('#licenseInput').val());
-		 } else {
-			 $('#myLicense').val($('#myLicense').val()+","+$('#licenseInput').val());
-		 }
-	 })
-});
+		
+		
+	});
 </script>
 
 </head>
@@ -469,28 +533,34 @@ $(function() {
 							</div>
 							<div class="col-md-12">
 								<p>
-									<label> 보유기술 : </label> <input type="text" id="mySkill" disabled="disabled" value="">
-									<input type="text" id="skillInput" value="">
+									<label> 보유기술 : </label> <input type="text" id="mySkill"
+										disabled="disabled" value=""> <input type="text"
+										id="skillInput" value="">
 									<button class="basicBtn" id="skillBtn">등록</button>
 								<p />
 							</div>
 							<div class="col-md-12">
 								<label> 포트폴리오 </label>
 							</div>
-							<div class="col-md-6">
-								<p>
-									<input class="basicBtn" style="width: 100%" type="file">
-								</p>
+							<div id="portfolioReg" style="display: block;">
+								<div class="col-md-6">
+									<p>
+										<input class="basicBtn" id="myPortfolio" style="width: 100%" type="file">
+									</p>
+								</div>
+								<div class="col-md-6">
+									<p>
+										<button class="basicBtn" id="profolioBtn">등록</button>
+									</p>			
+								</div>
 							</div>
-							<!-- <div class="col-md-6">
-								<p>
-									<button class="basicBtn">등록</button>
-								</p>
-							</div> -->
+							<div class="col-md-12" id="portfolio"></div> 
+
 							<div class="col-md-12">
 								<p>
-									<label> 자격증 : </label> <input type="text" id="myLicense" disabled="disabled"
-										value=""> <input type="text" id="licenseInput">
+									<label> 자격증 : </label> <input type="text" id="myLicense"
+										disabled="disabled" value=""> <input type="text"
+										id="licenseInput">
 									<button class="basicBtn" id="licenseBtn">등록</button>
 								<p />
 							</div>
@@ -499,7 +569,7 @@ $(function() {
 								<div class="button" style="width: 100%">
 									<input type="button" style="width: 100%" value="등록 하기">
 								</div>
-								</p>
+
 							</div>
 						</div>
 					</div>
@@ -527,6 +597,7 @@ $(function() {
 									<p>
 										<a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a
 											href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a>
+								
 								</h2>
 							</div>
 							<br> <br> <br> <br>
@@ -536,7 +607,9 @@ $(function() {
 							<ul class="footer-contact">
 								<li><i class="flaticon-location"></i> 14558 경기도 의정부시 서부로
 									545 융합소프트웨어과 404호
+								
 								<li>
+								
 								<li><i class="flaticon-web"></i> negahero@freeClude.com</li>
 							</ul>
 						</div>
