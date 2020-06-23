@@ -114,9 +114,25 @@ $(function() {
 		for(var i=0; i <num.length; i++) {
 			$("#CATAGORY2").append("<option value='"+vnum[i]+"'>"+num[i]+"</option>");
 		}
-
-		
 	})
+	
+	 $('#skillBtn').click(function() {
+		 alert("꾸꾸?");
+		 if($('#mySkill').val()=="") {
+			 $('#mySkill').val($('#skillInput').val());
+		 } else {
+			 $('#mySkill').val($('#mySkill').val()+","+$('#skillInput').val());
+		 }
+	 })
+	 
+	 $('#licenseBtn').click(function() {
+		 alert("꾸꾸?");
+		 if($('#myLicense').val()=="") {
+			 $('#myLicense').val($('#licenseInput').val());
+		 } else {
+			 $('#myLicense').val($('#myLicense').val()+","+$('#licenseInput').val());
+		 }
+	 })
 });
 </script>
 
@@ -429,15 +445,14 @@ $(function() {
 							</div>
 							<div class="col-md-8">
 								<p>
-									<label> 전문분야 : </label> 
-									<select id="CATAGORY1">
+									<label> 전문분야 : </label> <select id="CATAGORY1">
 										<option value="">대분류 선택</option>
 										<option value="design">디자인</option>
 										<option value="devel">IT프로그래밍</option>
 										<option value="콘텐츠 제작">콘텐츠 제작</option>
 										<option value="비즈니스 컨설팅">비즈니스 컨설팅</option>
 										<option value="주문제작">주문제작</option>
-									</select> &nbsp; <select  id="CATAGORY2">
+									</select> &nbsp; <select id="CATAGORY2">
 										<option value="">중분류 선택</option>
 									</select>
 								</p>
@@ -454,9 +469,9 @@ $(function() {
 							</div>
 							<div class="col-md-12">
 								<p>
-									<label> 보유기술 : </label> <input type="text" disabled="disabled">
-									<input type="text">
-									<button class="basicBtn">등록</button>
+									<label> 보유기술 : </label> <input type="text" id="mySkill" disabled="disabled" value="">
+									<input type="text" id="skillInput" value="">
+									<button class="basicBtn" id="skillBtn">등록</button>
 								<p />
 							</div>
 							<div class="col-md-12">
@@ -467,16 +482,16 @@ $(function() {
 									<input class="basicBtn" style="width: 100%" type="file">
 								</p>
 							</div>
-							<div class="col-md-6">
+							<!-- <div class="col-md-6">
 								<p>
 									<button class="basicBtn">등록</button>
 								</p>
-							</div>
+							</div> -->
 							<div class="col-md-12">
 								<p>
-									<label> 자격증 : </label> <input type="text" disabled="disabled">
-									<input type="text">
-									<button class="basicBtn">등록</button>
+									<label> 자격증 : </label> <input type="text" id="myLicense" disabled="disabled"
+										value=""> <input type="text" id="licenseInput">
+									<button class="basicBtn" id="licenseBtn">등록</button>
 								<p />
 							</div>
 							<div class="col-md-12">
@@ -641,21 +656,20 @@ $(function() {
 							<div class="container">
 								<div class="row">
 									<div>
-											<h2 class="heading-title">이미지 변경</h2>
-											<p>
-												<b>아이디</b>
-											</p>
-											<p class="form-row seekpw">
-												<input type="file" name="file" id="file"
-													placeholder="아이디 입력">
-											</p>
-											<div class="submit" style="float: center">
-												<button name="CHANGE" id="CHANGE" class="btn-default"
-													style="width: 100%">
-													<span> <i class="fa fa-user left"></i> 이미지 변경
-													</span>
-												</button>
-											</div>
+										<h2 class="heading-title">이미지 변경</h2>
+										<p>
+											<b>아이디</b>
+										</p>
+										<p class="form-row seekpw">
+											<input type="file" name="file" id="file" placeholder="아이디 입력">
+										</p>
+										<div class="submit" style="float: center">
+											<button name="CHANGE" id="CHANGE" class="btn-default"
+												style="width: 100%">
+												<span> <i class="fa fa-user left"></i> 이미지 변경
+												</span>
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
