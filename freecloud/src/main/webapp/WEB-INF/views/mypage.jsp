@@ -67,7 +67,7 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	//아이디 중복체크
+	//프로필 바꾸기
 	    $('#CHANGE').click(function(){
 	    	// ajax로 전달할 폼 객체
             var formData = new FormData();
@@ -93,6 +93,31 @@ $(function(){
 		    }) 
 	     })
 	});
+</script>
+<script type="text/javascript">
+
+$(function() {
+	
+	$('#CATAGORY1').change(function() {
+		$('#CATAGORY2').children('option').remove();
+		if($("#CATAGORY1 option:selected").val() == "") {
+			num = new Array("중분류 선택");
+			vnum = new Array("");
+		} else if($("#CATAGORY1 option:selected").val() == "design"){
+			num = new Array("웹", "제품", "프리젠테이션", "인쇄물", "커머스, 쇼핑몰", "로고", "그래픽", "영상", "게임", "기타");
+			vnum = new Array("WEB", "PRODUCT", "PRE", "PRINT", "SHOP", "LOGO", "GRAPHIC", "VIDEO", "GAME", "OTHER");
+		} else if($("#CATAGORY1 option:selected").val() == "devel"){
+			num = new Array("웹", "애플리케이션", "워드프로세스", "퍼블리싱", "일반 소프트웨어", "커머스, 쇼핑몰", "게임", "임베디드", "기타");
+			vnum = new Array("WEB", "APP", "WORD", "PUB", "SOFT", "SHOP", "GAME", "IMB", "OTHER");
+		}
+		
+		for(var i=0; i <num.length; i++) {
+			$("#CATAGORY2").append("<option value='"+vnum[i]+"'>"+num[i]+"</option>");
+		}
+
+		
+	})
+});
 </script>
 
 </head>
@@ -402,22 +427,22 @@ $(function(){
 
 								<textarea rows="8" style="width: 100%; resize: none;"></textarea>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-8">
 								<p>
-									<label> 전문분야 : </label> <select>
+									<label> 전문분야 : </label> 
+									<select id="CATAGORY1">
 										<option value="">대분류 선택</option>
-										<option value="중졸">서울</option>
-										<option value="고졸">경기도</option>
-										<option value="대졸">강원도</option>
-									</select> &nbsp; <select>
+										<option value="design">디자인</option>
+										<option value="devel">IT프로그래밍</option>
+										<option value="콘텐츠 제작">콘텐츠 제작</option>
+										<option value="비즈니스 컨설팅">비즈니스 컨설팅</option>
+										<option value="주문제작">주문제작</option>
+									</select> &nbsp; <select  id="CATAGORY2">
 										<option value="">중분류 선택</option>
-										<option value="중졸">서울</option>
-										<option value="고졸">경기도</option>
-										<option value="대졸">강원도</option>
 									</select>
 								</p>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<p>
 									<label> 경력 : </label> <select>
 										<option value="">경력 선택</option>

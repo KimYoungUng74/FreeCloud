@@ -235,7 +235,6 @@ public class UserController {
 		UUID uuid = UUID.randomUUID();
 		// 랜덤생성+파일이름 저장
 		String savedName = uuid.toString() + "_" + originalName;
-		System.out.println(uploadPath + "\\" + savedName);
 		File target = new File(uploadPath+dirName, savedName);
 		// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
 		// FileCopyUtils.copy(바이트배열, 파일객체)
