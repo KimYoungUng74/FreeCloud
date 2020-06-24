@@ -43,6 +43,14 @@
 		WHERE USER_ID = #{USER_ID} AND USER_NAME = #{USER_NAME} AND USER_EMAIL = #{USER_EMAIL}
 	</select>
 	
+	<!-- 비밀번호 확인-->
+	<select id="checkPw" parameterType="UserDTO"
+		resultType="String">
+		SELECT USER_ID
+		FROM FREE_USER 
+		WHERE USER_ID = #{USER_ID} AND USER_PW = #{USER_PW}
+	</select>
+	
 	<!-- 비밀번호 번경-->
 	<update id="seekPw2" parameterType="UserDTO">
 		UPDATE FREE_USER
@@ -83,10 +91,42 @@
 		WHERE USER_ID = #{USER_ID} AND USER_PW = #{USER_PW}
 	</select>
 	
+	<!-- 회원 정보 번경-->
+	<update id="userInfoChange" parameterType="UserDTO">
+		UPDATE FREE_USER
+    	SET USER_NAME = #{USER_NAME}, 
+    	USER_EMAIL = #{USER_EMAIL},
+    	USER_PHONE1 = #{USER_PHONE1},
+    	USER_PHONE2 = #{USER_PHONE2},
+    	USER_PHONE3 = #{USER_PHONE3},
+    	USER_ADDRESS = #{USER_ADDRESS},
+    	FREELANCER_ABOUT_ME = #{FREELANCER_ABOUT_ME},
+    	FREELANCER_MAIN_KATEGORY = #{FREELANCER_MAIN_KATEGORY},
+    	FREELANCER_MIDDEL_KATEGORY = #{FREELANCER_MIDDEL_KATEGORY},
+    	FREELANCER_SKILL = #{FREELANCER_SKILL},
+    	FREELANCER_CAREER = #{FREELANCER_CAREER},
+    	FREELANCER_CERTIFICATE = #{FREELANCER_CERTIFICATE},
+    	FREELANCER_PUBLIC = #{FREELANCER_PUBLIC}
+    	WHERE USER_ID = #{USER_ID}
+	</update>
 	
-	<select id="Test" resultType="UserDTO">
-		select * from FREE_MYFREELANCER
-	</select>
-
+	<!-- 프로필 번경-->
+	<update id="profileChange" parameterType="UserDTO">
+		UPDATE FREE_USER
+    	SET FREELANCER_IMAGE_PATH = #{FREELANCER_IMAGE_PATH}
+    	WHERE USER_ID = #{USER_ID}
+	</update>
+	
+	<!-- 포트폴리오 등록-->
+	<insert id="portfolioInsert" parameterType="PortfolioDTO">
+		INSERT INTO FREE_PORTFOLIO(USER_ID, PORTFOLIO_PATH, ORIGINNAME)
+		VALUES(#{USER_ID}, #{PORTFOLIO_PATH}, #{ORIGINNAME})
+	</insert>
+	
+	<!-- 포트폴리오 삭제-->
+	<delete id="deleteArticle">
+		DELETE FROM FREE_PORTFOLIO
+		WHERE USER_ID = #{USER_ID}
+	</delete>
 
 </mapper>

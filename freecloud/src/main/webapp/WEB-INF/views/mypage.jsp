@@ -96,7 +96,7 @@
 				})
 				
 				//프로필 바꾸기
-		$('#profolioBtn').click(
+		$('#portfolioBtn').click(
 				function() {
 					// ajax로 전달할 폼 객체
 					var formData = new FormData();
@@ -550,7 +550,7 @@
 								</div>
 								<div class="col-md-6">
 									<p>
-										<button class="basicBtn" id="profolioBtn">등록</button>
+										<button class="basicBtn" id="portfolioBtn">등록</button>
 									</p>			
 								</div>
 							</div>
