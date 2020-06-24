@@ -30,6 +30,9 @@ public class UserService {
 		}
 		return 1;
 	}
+	
+
+
 
 	// 회원 로그인 체크
 	public boolean loginCheck(UserDTO dto, HttpSession session) {
@@ -89,6 +92,14 @@ public class UserService {
 		dto.setUSER_EMAIL(email);
 		
 		return dao.seekPw(dto);
+	}
+	
+	// 회원정보 수정
+	public int userModify(UserDTO dto) {
+			System.out.println(dto.toString());
+			dao.userModify(dto); // 회원정보 수정
+
+		return 1;
 	}
 
 	// 프로필 변경

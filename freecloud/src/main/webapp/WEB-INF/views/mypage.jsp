@@ -255,7 +255,6 @@
 										<a href="login.do">로그인<i class="flaticon-people"></i></a>
 									</c:when>
 									<c:otherwise>
-
 										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
 									</c:otherwise>
 								</c:choose></li>
@@ -411,6 +410,7 @@
 	<div class="shopping-area section-padding">
 		<div class="container">
 			<div class="row">
+			<form action="myInfoModify.do" method="post">
 				<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
 					<div class="row shop-widget">
 						<div class="thumbnail">
@@ -433,8 +433,8 @@
 
 						<div class="col-md-7"
 							style="border: 1px solid #D3D3D3; font-size: 16px;">
-							<input type="radio" name="infor" value="true">공개 &nbsp; <input
-								type="radio" name="infor" value="false">비공개
+							<input type="radio" name="FREELANCER_PUBLIC" value=1>공개 &nbsp; <input
+								type="radio" name="FREELANCER_PUBLIC" value=0>비공개
 						</div>
 						<br>
 						<hr>
@@ -459,23 +459,23 @@
 						<div class="row">
 							<div class="col-md-6">
 								<p>
-									<label> ID : </label> 꾸꾸까까
+									<label> ID : </label> <input name="USER_ID" value="${sessionScope.userId}" readonly="readonly"> 
 								<p>
 								<p>
-									<label> 지역 : </label> <select>
+									<label> 지역 : </label> <select name="USER_ADDRESS">
 										<option value="">지역 선택</option>
-										<option value="중졸">서울</option>
-										<option value="고졸">경기도</option>
-										<option value="대졸">강원도</option>
+										<option value="서울">서울</option>
+										<option value="경기도">경기도</option>
+										<option value="강원도">강원도</option>
 									</select>
 								<p>
 							</div>
 							<div class="col-md-6">
 								<p>
-									<label> 이름 : </label> 이름
+									<label> 이름 : </label> <input type="text" name="USER_NAME">
 								<p>
 								<p>
-									<label> 최종학력 : </label> <select>
+									<label> 최종학력 : </label> <select name="USER_EDU">
 										<option value="">학력 선택</option>
 										<option value="중졸">중졸</option>
 										<option value="고졸">고졸</option>
@@ -486,57 +486,57 @@
 							<div class="col-md-12">
 
 								<p>
-									<label> 이메일 : </label> <input type="email"
+									<label> 이메일 : </label> <input type="email" name="USER_EMAIL"
 										placeholder="freeCloud@free.com">
 								<p>
 								<p>
 									<label> 전화번호 </label>
 							</div>
 							<div class="col-md-4">
-								<input type="text" style="width: 90%;"> &nbsp;&nbsp;-
+								<input type="text" name="USER_PHONE1" style="width: 90%;"> &nbsp;&nbsp;-
 							</div>
 							<div class="col-md-4">
-								<input type="text" style="width: 90%;"> &nbsp;&nbsp;-
+								<input type="text" name="USER_PHONE2" style="width: 90%;"> &nbsp;&nbsp;-
 							</div>
 							<div class="col-md-4">
-								<input type="text" style="width: 100%;">
+								<input type="text" name="USER_PHONE3" style="width: 100%;">
 							</div>
 
 							<div class="col-md-12">
 								<br> <label> 자기소개 </label>
 
-								<textarea rows="8" style="width: 100%; resize: none;"></textarea>
+								<textarea rows="8" name="FREELANCER_ABOUT_ME" style="width: 100%; resize: none;"></textarea>
 							</div>
 							<div class="col-md-8">
 								<p>
-									<label> 전문분야 : </label> <select id="CATAGORY1">
+									<label> 전문분야 : </label> <select id="CATAGORY1" name="FREELANCER_MAIN_KATEGORY">
 										<option value="">대분류 선택</option>
 										<option value="design">디자인</option>
 										<option value="devel">IT프로그래밍</option>
 										<option value="콘텐츠 제작">콘텐츠 제작</option>
 										<option value="비즈니스 컨설팅">비즈니스 컨설팅</option>
 										<option value="주문제작">주문제작</option>
-									</select> &nbsp; <select id="CATAGORY2">
+									</select> &nbsp; <select id="CATAGORY2" name="FREELANCER_MIDDEL_KATEGORY">
 										<option value="">중분류 선택</option>
 									</select>
 								</p>
 							</div>
 							<div class="col-md-4">
 								<p>
-									<label> 경력 : </label> <select>
+									<label> 경력 : </label> <select name="FREELANCER_CAREER">
 										<option value="">경력 선택</option>
-										<option value="중졸">1년미만</option>
-										<option value="고졸">1년</option>
-										<option value="대졸">3년</option>
+										<option value=0>1년미만</option>
+										<option value=1>1년</option>
+										<option value=3>3년</option>
 									</select>
 								</p>
 							</div>
 							<div class="col-md-12">
 								<p>
-									<label> 보유기술 : </label> <input type="text" id="mySkill"
-										disabled="disabled" value=""> <input type="text"
+									<label> 보유기술 : </label> <input type="text" id="mySkill" name="FREELANCER_SKILL"
+										readonly="readonly" value=""> <input type="text"
 										id="skillInput" value="">
-									<button class="basicBtn" id="skillBtn">등록</button>
+									<a class="basicBtn2" id="skillBtn">등록</a>
 								<p />
 							</div>
 							<div class="col-md-12">
@@ -548,9 +548,9 @@
 										<input class="basicBtn" id="myPortfolio" style="width: 100%" type="file">
 									</p>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-6" style="margin-top: 15px;">
 									<p>
-										<button class="basicBtn" id="portfolioBtn">등록</button>
+										<a class="basicBtn2" id="portfolioBtn" >등록</a>
 									</p>			
 								</div>
 							</div>
@@ -558,22 +558,21 @@
 
 							<div class="col-md-12">
 								<p>
-									<label> 자격증 : </label> <input type="text" id="myLicense"
-										disabled="disabled" value=""> <input type="text"
+									<label> 자격증 : </label> <input type="text" id="myLicense" name="FREELANCER_CERTIFICATE"
+										readonly="readonly" value=""> <input type="text"
 										id="licenseInput">
-									<button class="basicBtn" id="licenseBtn">등록</button>
+									<a class="basicBtn2" id="licenseBtn">등록</a>
 								<p />
 							</div>
 							<div class="col-md-12">
 								<p>
-								<div class="button" style="width: 100%">
-									<input type="button" style="width: 100%" value="등록 하기">
-								</div>
-
+									<input type="submit" style="width: 100%" value="등록 하기">
+								</p>
 							</div>
 						</div>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>

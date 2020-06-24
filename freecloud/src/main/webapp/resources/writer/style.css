@@ -2598,6 +2598,18 @@ a.wish-btn {
 	padding: 10px;
 	transition: all 0.4s ease 0s;
 }
+.basicBtn2 {
+	background: #d5d5d5 none repeat scroll 0 0;
+	border: 0 none;
+	font-weight: 500;
+	margin-top: 10px;
+	padding: 5px;
+	transition: all 0.4s ease 0s;
+}
+
+.basicBtn2 hover{
+	color: #000;
+}
 
 .basicBtn {
 	background: #d5d5d5 none repeat scroll 0 0;

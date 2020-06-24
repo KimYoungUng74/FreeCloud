@@ -108,4 +108,9 @@ public class UserDAO {
 	public void deletePortfolio(PortfolioDTO dto) {
 		mybatis.delete("UserMapper.deletePortfolio", dto);
 	}
+
+	public void userModify(UserDTO dto) {
+
+		mybatis.insert("UserMapper.userInfoChange", dto);
+	}
 }

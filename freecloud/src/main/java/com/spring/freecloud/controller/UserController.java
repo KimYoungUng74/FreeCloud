@@ -169,6 +169,20 @@ public class UserController {
 		return "mypage";
 	}
 
+	// 회원정보 수정
+	@RequestMapping(value = "myInfoModify.do", method = RequestMethod.POST)
+	public ModelAndView myInfoModify(Locale locale, UserDTO dto) {
+		if (1 == userSer.userModify(dto)) {
+			System.out.println("회원정보 수정 되었음");
+		} else {
+			System.out.println("회원정보 수정 실패");
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("home");
+
+		return mav;
+	}
+
 	// 업로드 흐름 : 업로드 버튼클릭 => 임시디렉토리에 업로드=> 지정된 디렉토리에 저장 => 파일정보가 file에 저장
 	@RequestMapping(value = "/upload/uploadForm", method = RequestMethod.GET)
 	public void uplodaForm() {
@@ -203,101 +217,105 @@ public class UserController {
 
 	// 파일 업로드 Ajax
 	@RequestMapping(value = "/fileUploadAjax.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-	public @ResponseBody String uplodaFormAjax(MultipartFile file, String originalProfile, HttpSession sessison, ModelAndView mav) throws IOException, Exception {
-		
+	public @ResponseBody String uplodaFormAjax(MultipartFile file, String originalProfile, HttpSession sessison,
+			ModelAndView mav) throws IOException, Exception {
+
 		System.out.println("원래 파일이름 : " + originalProfile);
 		String dirname = File.separator + "profile";
 		System.out.println(file);
 		System.out.println("fileUploadAjax에 접근함");
-		
+
 		String savedName = file.getOriginalFilename();
 		logger.info("파일이름 :" + file.getOriginalFilename());
 		logger.info("파일크기 : " + file.getSize());
 		logger.info("컨텐트 타입 : " + file.getContentType());
 
 		System.out.println("파일이름 :" + file.getOriginalFilename());
-		
+
 		// 랜덤생성+파일이름 저장
-        // 파일명 랜덤생성 메서드호출
-        savedName = uploadFile(savedName, file.getBytes(), dirname);
-        
-        // 프로필 DB변경
-        userSer.changeProfile(savedName, sessison.getAttribute("userId").toString());
-        
-        if(originalProfile!="basic.png") new File(uploadPath+ File.separator + "profile" + File.separator + originalProfile).delete();
-		
+		// 파일명 랜덤생성 메서드호출
+		savedName = uploadFile(savedName, file.getBytes(), dirname);
+
+		// 프로필 DB변경
+		userSer.changeProfile(savedName, sessison.getAttribute("userId").toString());
+
+		if (originalProfile != "basic.png")
+			new File(uploadPath + File.separator + "profile" + File.separator + originalProfile).delete();
+
 		return savedName;
 
 	}
-	
+
 	// 포트폴리오 업로드 Ajax
-		@RequestMapping(value = "/	myPortfolioUploadAjax.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-		public @ResponseBody String myPortfolioUploadAjax(MultipartFile portfolio, HttpSession sessison, ModelAndView mav) throws IOException, Exception {
-			
-			String dirname = File.separator + "portfolio";
-			System.out.println(portfolio);
-			System.out.println("fileUploadAjax에 접근함");
-			
-			String originalName = portfolio.getOriginalFilename();
-			
-			logger.info("파일이름 :" + portfolio.getOriginalFilename());
-			logger.info("파일크기 : " + portfolio.getSize());
-			logger.info("컨텐트 타입 : " + portfolio.getContentType());
+	@RequestMapping(value = "/	myPortfolioUploadAjax.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String myPortfolioUploadAjax(MultipartFile portfolio, HttpSession sessison, ModelAndView mav)
+			throws IOException, Exception {
 
-			System.out.println("파일이름 :" + portfolio.getOriginalFilename());
-			
-			// 랜덤생성+파일이름 저장
-	        // 파일명 랜덤생성 메서드호출
-	        String savedName = uploadFile(originalName, portfolio.getBytes(), dirname);
-	        userSer.addPortfolio(originalName, savedName, sessison.getAttribute("userId").toString());
-			
-			return savedName;
+		String dirname = File.separator + "portfolio";
+		System.out.println(portfolio);
+		System.out.println("fileUploadAjax에 접근함");
 
-		}
-		
-		// 포트폴리오 파일 삭제 
-	    @RequestMapping(value = "myPortfolioDeleteAjax.do", method = RequestMethod.POST)
-	    public @ResponseBody String deleteFile(String fileName, HttpSession sessison) {
-	   
-	    	userSer.deletePortfolio(sessison.getAttribute("userId").toString());
-	        // 원본 파일 삭제
-	    	System.out.println(uploadPath+ File.separator + "portfolio" + fileName.replace('/', File.separatorChar));
-	        new File(uploadPath+ File.separator + "portfolio" + File.separator + fileName.replace('/', File.separatorChar)).delete();
-	        
-	        return "deleted";
-	    }
+		String originalName = portfolio.getOriginalFilename();
+
+		logger.info("파일이름 :" + portfolio.getOriginalFilename());
+		logger.info("파일크기 : " + portfolio.getSize());
+		logger.info("컨텐트 타입 : " + portfolio.getContentType());
+
+		System.out.println("파일이름 :" + portfolio.getOriginalFilename());
+
+		// 랜덤생성+파일이름 저장
+		// 파일명 랜덤생성 메서드호출
+		String savedName = uploadFile(originalName, portfolio.getBytes(), dirname);
+		userSer.addPortfolio(originalName, savedName, sessison.getAttribute("userId").toString());
+
+		return savedName;
+
+	}
+
+	// 포트폴리오 파일 삭제
+	@RequestMapping(value = "myPortfolioDeleteAjax.do", method = RequestMethod.POST)
+	public @ResponseBody String deleteFile(String fileName, HttpSession sessison) {
+
+		userSer.deletePortfolio(sessison.getAttribute("userId").toString());
+		// 원본 파일 삭제
+		System.out.println(uploadPath + File.separator + "portfolio" + fileName.replace('/', File.separatorChar));
+		new File(uploadPath + File.separator + "portfolio" + File.separator + fileName.replace('/', File.separatorChar))
+				.delete();
+
+		return "deleted";
+	}
 
 	// 파일명 랜덤생성 메서드
 	private String uploadFile(String originalName, byte[] fileData, String dirName) throws Exception {
-		
+
 		// 폴더 생성
 		makeDir(uploadPath, dirName);
 		// uuid 생성(Universal Unique IDentifier, 범용 고유 식별자)
 		UUID uuid = UUID.randomUUID();
 		// 랜덤생성+파일이름 저장
 		String savedName = uuid.toString() + "_" + originalName;
-		File target = new File(uploadPath+dirName, savedName);
+		File target = new File(uploadPath + dirName, savedName);
 		// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
 		// FileCopyUtils.copy(바이트배열, 파일객체)
 		FileCopyUtils.copy(fileData, target);
 		return savedName;
 	}
 
-	 // 디렉토리 생성
-    private static void makeDir(String uploadPath, String... paths) {
-        // 디렉토리가 존재하면
-        if (new File(paths[paths.length - 1]).exists()){
-            return;
-        }
-        // 디렉토리가 존재하지 않으면
-        for (String path : paths) {
-            // 
-            File dirPath = new File(uploadPath + path);
-            // 디렉토리가 존재하지 않으면
-            if (!dirPath.exists()) {
-                dirPath.mkdir(); //디렉토리 생성
-            }
-        }
-    }    
+	// 디렉토리 생성
+	private static void makeDir(String uploadPath, String... paths) {
+		// 디렉토리가 존재하면
+		if (new File(paths[paths.length - 1]).exists()) {
+			return;
+		}
+		// 디렉토리가 존재하지 않으면
+		for (String path : paths) {
+			//
+			File dirPath = new File(uploadPath + path);
+			// 디렉토리가 존재하지 않으면
+			if (!dirPath.exists()) {
+				dirPath.mkdir(); // 디렉토리 생성
+			}
+		}
+	}
 
 }
