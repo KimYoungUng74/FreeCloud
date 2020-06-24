@@ -51,23 +51,23 @@ public class ProjectController {
 	
 	// 프로젝트 등록 처리
 	@RequestMapping(value = "projectRegOk.do", method = RequestMethod.POST)
-	public ModelAndView projectWrite(Locale local, ProjectDTO dto, HttpServletRequest request) throws Exception {
-		
+	public String projectWrite(Locale local, ProjectDTO dto, HttpServletRequest request) throws Exception {
+			
 		System.out.println("등록 테스트");
 		
 		int budget = Integer.parseInt(request.getParameter("PROJECT_BUDGET"));
 		int cBudget = Integer.parseInt(request.getParameter("PROOJECT_BUDGET_COORDINATION"));
 		String start_date = request.getParameter("PROJECT_START_DATE");
 		String end_date = request.getParameter("PROJECT_END_DATE");
-		
+			
 		java.sql.Date SD = java.sql.Date.valueOf(start_date);
 		java.sql.Date ED = java.sql.Date.valueOf(end_date);
-		
+			
 		dto.setPROJECT_BUDGET(budget);
 		dto.setPROJECT_BUDGET_COORDINATION(cBudget);
 		dto.setPROJECT_START_DATE(SD);
 		dto.setPROJECT_END_DATE(ED);
-		
+			
 		System.out.println("대분류 " + dto.getPROJECT_MAIN_KETEGORY());
 		System.out.println("중분류 " + dto.getPROJECT_MIDDLE_KATEGORY());
 		System.out.println("제목 : " + dto.getPROJECT_SUBJECT() );
@@ -78,13 +78,14 @@ public class ProjectController {
 		System.out.println("예산 조율 여부 " + dto.getPROJECT_BUDGET_COORDINATION());
 		System.out.println("시작일 : " + dto.getPROJECT_START_DATE() );
 		System.out.println("마감일 : " + dto.getPROJECT_END_DATE() );
-		
+			
 		projectSer.projectWrite(dto);
-		
+			
 		System.out.println("등록완료");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("projectSearch");
-		return mav;
+		/*
+		 * ModelAndView mav = new ModelAndView(); mav.setViewName("projectSearch");
+		 */
+		return "redirect:projectSearch.do";
 	}
 	
 	//프리랜서 조회 화면
@@ -92,6 +93,8 @@ public class ProjectController {
 	public String freelancerSearch(Locale locale, Model model) {
 		return "freelancerSearch";
 	}
+	
+	
 	
 	// 
 	/*

@@ -45,7 +45,7 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "projectReg";
+		return "";
 	}
 	
 	@RequestMapping(value = "home.do", method = RequestMethod.GET)
