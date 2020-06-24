@@ -74,7 +74,7 @@
 					var formData = new FormData();
 					// 폼 객체에 파일추가, append("변수명", 값)
 					formData.append('file', $('#file')[0].files[0]);
-
+					formData.append('originalProfile', $('#originalProfile').val());
 					$.ajax({
 						type : "POST",
 						url : "fileUploadAjax.do",
@@ -84,10 +84,9 @@
 						contentType : false,
 						success : function(data) { //data : checkId에서 넘겨준 결과값
 							if ($.trim(data) != "Fail") {
-								var test = "<img alt=\"\"src=\"<c:url value='"
-										+ $.trim(data) + "'/>\">";
+								var test = "<img alt=\"\"src=\"<c:url value='http://localhost:8181/img/profile/"+ $.trim(data) + "'/>\">";
 								$('#profile').html(test);
-								alert($.trim(data));
+
 							} else {
 								alert("실패");
 							}
@@ -95,7 +94,7 @@
 					})
 				})
 				
-				//프로필 바꾸기
+		// 포트폴리오 전송
 		$('#portfolioBtn').click(
 				function() {
 					// ajax로 전달할 폼 객체
@@ -418,6 +417,7 @@
 							<div class="centered" id="profile">
 								<img alt=""
 									src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
+								<input id="originalProfile" type="hidden" value="${dto.FREELANCER_IMAGE_PATH}">
 							</div>
 						</div>
 						<div class="basic_btn" style="width: 100%">
@@ -716,7 +716,7 @@
 
 		<!-- 이미지 변경 -->
 		<div class="modal fade" id="pwDialog" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
+			<div class="modal-dialog" id="profileChange" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"

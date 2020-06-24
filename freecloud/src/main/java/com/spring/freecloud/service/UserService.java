@@ -89,4 +89,12 @@ public class UserService {
 		return dao.seekPw(dto);
 	}
 
+	public void changeProfile(String savedName, String userid) {
+		UserDTO dto = new UserDTO();
+		dto.setUSER_ID(userid);
+		dto.setFREELANCER_IMAGE_PATH(savedName);
+		
+		dao.changeProfile(dto);
+	}
+
 }

@@ -95,4 +95,8 @@ public class UserDAO {
 	    
 	    return iValue;
 	}
+
+	public void changeProfile(UserDTO dto) {
+		mybatis.update("UserMapper.profileChange", dto);
+	}
 }

@@ -203,14 +203,14 @@ public class UserController {
 
 	// 파일 업로드 Ajax
 	@RequestMapping(value = "/fileUploadAjax.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-	public @ResponseBody String uplodaFormAjax(MultipartFile file, ModelAndView mav) throws IOException, Exception {
+	public @ResponseBody String uplodaFormAjax(MultipartFile file, String originalProfile, HttpSession sessison, ModelAndView mav) throws IOException, Exception {
 		
+		System.out.println("원래 파일이름 : " + originalProfile);
 		String dirname = File.separator + "profile";
 		System.out.println(file);
 		System.out.println("fileUploadAjax에 접근함");
 		
 		String savedName = file.getOriginalFilename();
-		
 		logger.info("파일이름 :" + file.getOriginalFilename());
 		logger.info("파일크기 : " + file.getSize());
 		logger.info("컨텐트 타입 : " + file.getContentType());
@@ -220,9 +220,11 @@ public class UserController {
 		// 랜덤생성+파일이름 저장
         // 파일명 랜덤생성 메서드호출
         savedName = uploadFile(savedName, file.getBytes(), dirname);
-
+        userSer.changeProfile(savedName, sessison.getAttribute("userId").toString());
+        
+        new File(uploadPath+ File.separator + "profile" + File.separator + originalProfile).delete();
 		
-		return "http://localhost:8181/img/profile/" + savedName;
+		return savedName;
 
 	}
 	
