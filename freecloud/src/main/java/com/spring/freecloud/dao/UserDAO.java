@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.freecloud.dto.PortfolioDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.util.SHA256;
 
@@ -98,5 +99,13 @@ public class UserDAO {
 
 	public void changeProfile(UserDTO dto) {
 		mybatis.update("UserMapper.profileChange", dto);
+	}
+
+	public void addPortfolio(PortfolioDTO dto) {
+		mybatis.insert("UserMapper.portfolioAdd", dto);
+	}
+
+	public void deletePortfolio(PortfolioDTO dto) {
+		mybatis.delete("UserMapper.deletePortfolio", dto);
 	}
 }

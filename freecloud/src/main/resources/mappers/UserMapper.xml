@@ -118,13 +118,13 @@
 	</update>
 	
 	<!-- 포트폴리오 등록-->
-	<insert id="portfolioInsert" parameterType="PortfolioDTO">
+	<insert id="portfolioAdd" parameterType="PortfolioDTO">
 		INSERT INTO FREE_PORTFOLIO(USER_ID, PORTFOLIO_PATH, ORIGINNAME)
 		VALUES(#{USER_ID}, #{PORTFOLIO_PATH}, #{ORIGINNAME})
 	</insert>
 	
 	<!-- 포트폴리오 삭제-->
-	<delete id="deleteArticle">
+	<delete id="deletePortfolio" parameterType="PortfolioDTO">
 		DELETE FROM FREE_PORTFOLIO
 		WHERE USER_ID = #{USER_ID}
 	</delete>

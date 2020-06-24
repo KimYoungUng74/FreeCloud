@@ -220,9 +220,11 @@ public class UserController {
 		// 랜덤생성+파일이름 저장
         // 파일명 랜덤생성 메서드호출
         savedName = uploadFile(savedName, file.getBytes(), dirname);
+        
+        // 프로필 DB변경
         userSer.changeProfile(savedName, sessison.getAttribute("userId").toString());
         
-        new File(uploadPath+ File.separator + "profile" + File.separator + originalProfile).delete();
+        if(originalProfile!="basic.png") new File(uploadPath+ File.separator + "profile" + File.separator + originalProfile).delete();
 		
 		return savedName;
 
@@ -230,13 +232,13 @@ public class UserController {
 	
 	// 포트폴리오 업로드 Ajax
 		@RequestMapping(value = "/	myPortfolioUploadAjax.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-		public @ResponseBody String myPortfolioUploadAjax(MultipartFile portfolio, ModelAndView mav) throws IOException, Exception {
+		public @ResponseBody String myPortfolioUploadAjax(MultipartFile portfolio, HttpSession sessison, ModelAndView mav) throws IOException, Exception {
 			
 			String dirname = File.separator + "portfolio";
 			System.out.println(portfolio);
 			System.out.println("fileUploadAjax에 접근함");
 			
-			String savedName = portfolio.getOriginalFilename();
+			String originalName = portfolio.getOriginalFilename();
 			
 			logger.info("파일이름 :" + portfolio.getOriginalFilename());
 			logger.info("파일크기 : " + portfolio.getSize());
@@ -246,8 +248,8 @@ public class UserController {
 			
 			// 랜덤생성+파일이름 저장
 	        // 파일명 랜덤생성 메서드호출
-	        savedName = uploadFile(savedName, portfolio.getBytes(), dirname);
-
+	        String savedName = uploadFile(originalName, portfolio.getBytes(), dirname);
+	        userSer.addPortfolio(originalName, savedName, sessison.getAttribute("userId").toString());
 			
 			return savedName;
 
@@ -255,12 +257,13 @@ public class UserController {
 		
 		// 포트폴리오 파일 삭제 
 	    @RequestMapping(value = "myPortfolioDeleteAjax.do", method = RequestMethod.POST)
-	    public @ResponseBody String deleteFile(String fileName) {
+	    public @ResponseBody String deleteFile(String fileName, HttpSession sessison) {
 	   
+	    	userSer.deletePortfolio(sessison.getAttribute("userId").toString());
 	        // 원본 파일 삭제
 	    	System.out.println(uploadPath+ File.separator + "portfolio" + fileName.replace('/', File.separatorChar));
 	        new File(uploadPath+ File.separator + "portfolio" + File.separator + fileName.replace('/', File.separatorChar)).delete();
-
+	        
 	        return "deleted";
 	    }
 

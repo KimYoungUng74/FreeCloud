@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
 
 import com.spring.freecloud.dao.UserDAO;
+import com.spring.freecloud.dto.PortfolioDTO;
 import com.spring.freecloud.dto.UserDTO;
 
 @Service("IUserService")
@@ -79,7 +80,8 @@ public class UserService {
 		dto.setUSER_EMAIL(email);
 		return dao.seekId(dto);
 	}
-
+	
+	// 비밀번호 찾기
 	public String seekPw(String id, String name, String email) {
 		UserDTO dto = new UserDTO();
 		dto.setUSER_ID(id);
@@ -89,12 +91,30 @@ public class UserService {
 		return dao.seekPw(dto);
 	}
 
+	// 프로필 변경
 	public void changeProfile(String savedName, String userid) {
 		UserDTO dto = new UserDTO();
 		dto.setUSER_ID(userid);
 		dto.setFREELANCER_IMAGE_PATH(savedName);
 		
 		dao.changeProfile(dto);
+	}
+
+	// 포트폴리오 추가
+	public void addPortfolio(String originalName, String savedName, String userid) {
+		PortfolioDTO dto = new PortfolioDTO();
+		dto.setUSER_ID(userid);
+		dto.setORIGINNAME(originalName);
+		dto.setPORTFOLIO_PATH(savedName);
+		
+		dao.addPortfolio(dto);
+	}
+
+	// 포트폴리오 삭제
+	public void deletePortfolio(String userid) {
+		PortfolioDTO dto = new PortfolioDTO();
+		dto.setUSER_ID(userid);
+		dao.deletePortfolio(dto);
 	}
 
 }
