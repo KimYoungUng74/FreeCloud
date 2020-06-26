@@ -96,21 +96,27 @@ public class UserDAO {
 	    
 	    return iValue;
 	}
-
+	// 프로필 변경
 	public void changeProfile(UserDTO dto) {
 		mybatis.update("UserMapper.profileChange", dto);
 	}
-
+	// 포트폴리오 추가
 	public void addPortfolio(PortfolioDTO dto) {
 		mybatis.insert("UserMapper.portfolioAdd", dto);
 	}
-
+	// 포트폴리오 삭제
 	public void deletePortfolio(PortfolioDTO dto) {
 		mybatis.delete("UserMapper.deletePortfolio", dto);
 	}
-
+	// 회원정보 수정
 	public void userModify(UserDTO dto) {
 
 		mybatis.insert("UserMapper.userInfoChange", dto);
+	}
+	// 비밀번호 체크
+	public String checkPw(UserDTO dto) {
+		dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
+		String name = mybatis.selectOne("UserMapper.checkPw", dto);
+		return name;
 	}
 }

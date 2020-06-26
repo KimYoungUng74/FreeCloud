@@ -30,9 +30,6 @@ public class UserService {
 		}
 		return 1;
 	}
-	
-
-
 
 	// 회원 로그인 체크
 	public boolean loginCheck(UserDTO dto, HttpSession session) {
@@ -83,21 +80,21 @@ public class UserService {
 		dto.setUSER_EMAIL(email);
 		return dao.seekId(dto);
 	}
-	
+
 	// 비밀번호 찾기
 	public String seekPw(String id, String name, String email) {
 		UserDTO dto = new UserDTO();
 		dto.setUSER_ID(id);
 		dto.setUSER_NAME(name);
 		dto.setUSER_EMAIL(email);
-		
+
 		return dao.seekPw(dto);
 	}
-	
+
 	// 회원정보 수정
 	public int userModify(UserDTO dto) {
-			System.out.println(dto.toString());
-			dao.userModify(dto); // 회원정보 수정
+		System.out.println(dto.toString());
+		dao.userModify(dto); // 회원정보 수정
 
 		return 1;
 	}
@@ -107,7 +104,7 @@ public class UserService {
 		UserDTO dto = new UserDTO();
 		dto.setUSER_ID(userid);
 		dto.setFREELANCER_IMAGE_PATH(savedName);
-		
+
 		dao.changeProfile(dto);
 	}
 
@@ -117,7 +114,7 @@ public class UserService {
 		dto.setUSER_ID(userid);
 		dto.setORIGINNAME(originalName);
 		dto.setPORTFOLIO_PATH(savedName);
-		
+
 		dao.addPortfolio(dto);
 	}
 
@@ -126,6 +123,14 @@ public class UserService {
 		PortfolioDTO dto = new PortfolioDTO();
 		dto.setUSER_ID(userid);
 		dao.deletePortfolio(dto);
+	}
+
+	// 비밀번호 확인
+	public String checkPw(String id, String pw) {
+		UserDTO dto = new UserDTO();
+		dto.setUSER_ID(id);
+		dto.setUSER_PW(pw);
+		return dao.checkPw(dto);
 	}
 
 }

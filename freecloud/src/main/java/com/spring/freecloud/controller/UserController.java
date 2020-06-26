@@ -152,9 +152,9 @@ public class UserController {
 		System.out.println("seekpw에 접근함");
 		String str = "";
 		String pwcheck = userSer.seekPw(id, name, email);
-		if (pwcheck == "dbError") { // 정보가 일치할 경우
+		if (pwcheck == "dbError") { // 정보가 일치하지 않을 경우
 			str = "DB오류가 발생했습니다 다시 시도해주세요";
-		} else if (pwcheck == "notFound") { // 가입된 회원아 아닐경우
+		} else if (pwcheck == "notFound") { // 가입된 회원이 아닐경우
 			str = "가입된 정보가 없습니다 입력한 정보를 확인하세요";
 		} else {
 			str = "임시비밀번호 : \'" + pwcheck + " \'로그인시 변경해주세요";
@@ -162,12 +162,28 @@ public class UserController {
 
 		return str;
 	}
-
+	
 	// 마이페이지
 	@RequestMapping(value = "mypage.do")
 	public String mypage(Locale locale, Model model) {
 		return "mypage";
 	}
+	
+	// 아이디 찾기
+		@RequestMapping(value = "/checkMyPass.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+		public @ResponseBody String checkMyPass(@RequestParam("pw") String pw, HttpSession sessison) {
+			System.out.println("checkMyPass에 접근함");
+			String str = "";
+			str = userSer.checkPw(sessison.getAttribute("userId").toString(), pw);
+			System.out.println(str);
+			if (str == null) { // 비밀번호 일치함
+				str = "Not_Match";
+			} else { // 비밀번호 일치 하지 않음
+				str = "Same";
+			}
+
+			return str;
+		} 
 
 	// 회원정보 수정
 	@RequestMapping(value = "myInfoModify.do", method = RequestMethod.POST)

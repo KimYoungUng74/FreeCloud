@@ -68,76 +68,112 @@
 <script type="text/javascript">
 	$(function() {
 		//프로필 바꾸기
-		$('#CHANGE').click(
-				function() {
-					// ajax로 전달할 폼 객체
-					var formData = new FormData();
-					// 폼 객체에 파일추가, append("변수명", 값)
-					formData.append('file', $('#file')[0].files[0]);
-					formData.append('originalProfile', $('#originalProfile').val());
-					$.ajax({
-						type : "POST",
-						url : "fileUploadAjax.do",
-						data : formData,
-						dataType : "text",
-						processData : false,
-						contentType : false,
-						success : function(data) { //data : checkId에서 넘겨준 결과값
-							if ($.trim(data) != "Fail") {
-								var test = "<img alt=\"\"src=\"<c:url value='http://localhost:8181/img/profile/"+ $.trim(data) + "'/>\">";
-								$('#profile').html(test);
+		$('#CHANGE')
+				.click(
+						function() {
+							// ajax로 전달할 폼 객체
+							var formData = new FormData();
+							// 폼 객체에 파일추가, append("변수명", 값)
+							formData.append('file', $('#file')[0].files[0]);
+							formData.append('originalProfile', $(
+									'#originalProfile').val());
+							$.ajax({
+										type : "POST",
+										url : "fileUploadAjax.do",
+										data : formData,
+										dataType : "text",
+										processData : false,
+										contentType : false,
+										success : function(data) { //data : checkId에서 넘겨준 결과값
+											if ($.trim(data) != "Fail") {
+												var test = "<img alt=\"\"src=\"<c:url value='http://localhost:8181/img/profile/"
+														+ $.trim(data)
+														+ "'/>\">";
+												$('#profile').html(test);
+												$('#profileClose').click();
 
-							} else {
-								alert("실패");
-							}
-						}
-					})
-				})
-				
+											} else {
+												alert("실패");
+											}
+										}
+									})
+						})
+						
+	    			// 비밀번호 확인				
+	    	$(function() {
+	    	//비밀번호 확인
+	    	$('#myPass').click(function() {
+	    		
+	    		$.ajax({
+	    			type : "POST",
+	    			url : "checkMyPass.do",
+	    			data : {
+	    				"pw" : $('#myPassCheck').val()
+	    			},
+	    			success : function(data) { //data : seekPw에서 넘겨준 결과값(pw)
+	    				if(data == "Not_Match") {
+	    					alert("비밀번호가 일치하지 않습니다.");
+	    				} else {
+	    					alert("일치함!");
+	    				}
+	    			}
+	    		})
+	    	})
+        
+	    });
+
 		// 포트폴리오 전송
-		$('#portfolioBtn').click(
-				function() {
-					// ajax로 전달할 폼 객체
-					var formData = new FormData();
-					// 폼 객체에 파일추가, append("변수명", 값)
-					formData.append('portfolio', $('#myPortfolio')[0].files[0]);
+		$('#portfolioBtn')
+				.click(
+						function() {
+							// ajax로 전달할 폼 객체
+							var formData = new FormData();
+							// 폼 객체에 파일추가, append("변수명", 값)
+							formData.append('portfolio',
+									$('#myPortfolio')[0].files[0]);
 
-					$.ajax({
-						type : "POST",
-						url : "myPortfolioUploadAjax.do",
-						data : formData,
-						dataType : "text",
-						processData : false,
-						contentType : false,
-						success : function(data) { //data : checkId에서 넘겨준 결과값
-							if ($.trim(data) != "Fail") {
-								var idx = data.indexOf("_")+1;
-								var test = "<div><a href='${path}/upload/displayFile?fileName="+data+"'>"+data.substr(idx)+"</a><span data-src="+data+">[삭제]</span></div>";
-								$('#portfolio').html(test);
-							} else {
-								alert("실패");
-							}
-						}
-					})
-				})
-				
- 				$("#portfolio").on("click", "span", function(event) {
- 				    var that = $(this); // 여기서 this는 클릭한 span태그
- 				    $.ajax({
- 				        url: "myPortfolioDeleteAjax.do",
- 				        type: "post",
- 				        // data: "fileName="+$(this).attr("date-src") = {fileName:$(this).attr("data-src")}
- 				        // 태그.attr("속성")
- 				        data: {fileName:$(this).attr("data-src")}, // json방식
- 				        dataType: "text",
- 				        success: function(result){
- 				            if( result == "deleted" ){
- 				                // 클릭한 span태그가 속한 div를 제거
- 				                that.parent("div").remove();
- 				            }
- 				        }
- 				    });
- 				}) 
+							$.ajax({
+										type : "POST",
+										url : "myPortfolioUploadAjax.do",
+										data : formData,
+										dataType : "text",
+										processData : false,
+										contentType : false,
+										success : function(data) { //data : checkId에서 넘겨준 결과값
+											if ($.trim(data) != "Fail") {
+												var idx = data.indexOf("_") + 1;
+												var test = "<div><a href='${path}/upload/displayFile?fileName="
+														+ data
+														+ "'>"
+														+ data.substr(idx)
+														+ "</a><span data-src="+data+">[삭제]</span></div>";
+												$('#portfolio').html(test);
+											} else {
+												alert("실패");
+											}
+										}
+									})
+						})
+
+		$("#portfolio").on("click", "span", function(event) {
+			var that = $(this); // 여기서 this는 클릭한 span태그
+			$.ajax({
+				url : "myPortfolioDeleteAjax.do",
+				type : "post",
+				// data: "fileName="+$(this).attr("date-src") = {fileName:$(this).attr("data-src")}
+				// 태그.attr("속성")
+				data : {
+					fileName : $(this).attr("data-src")
+				}, // json방식
+				dataType : "text",
+				success : function(result) {
+					if (result == "deleted") {
+						// 클릭한 span태그가 속한 div를 제거
+						that.parent("div").remove();
+					}
+				}
+			});
+		})
 	});
 </script>
 <script type="text/javascript">
@@ -192,10 +228,8 @@
 								$('#myLicense').val() + ","
 										+ $('#licenseInput').val());
 					}
-		})
-		
-		
-		
+				})
+
 	});
 </script>
 
@@ -410,168 +444,182 @@
 	<div class="shopping-area section-padding">
 		<div class="container">
 			<div class="row">
-			<form action="myInfoModify.do" method="post">
-				<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
-					<div class="row shop-widget">
-						<div class="thumbnail">
-							<div class="centered" id="profile">
-								<img alt=""
-									src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
-								<input id="originalProfile" type="hidden" value="${dto.FREELANCER_IMAGE_PATH}">
+				<form action="myInfoModify.do" method="post" id="infoForm">
+					<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
+						<div class="row shop-widget">
+							<div class="thumbnail">
+								<div class="centered" id="profile">
+									<img alt=""
+										src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
+									<input id="originalProfile" type="hidden"
+										value="basic.png">
+								</div>
 							</div>
-						</div>
-						<div class="basic_btn" style="width: 100%">
-							<a href="#" title="Quick view" data-toggle="modal"
-								data-target="#pwDialog">이미지 변경</a>
-						</div>
-						<br>
-						<div class="col-md-5">
-							<h5>
-								<b>정보 공개 여부</b>
-							</h5>
-						</div>
+							<div class="basic_btn" style="width: 100%">
+								<a href="#" title="Quick view" data-toggle="modal"
+									data-target="#pwDialog">이미지 변경</a>
+							</div>
+							<br>
+							<div class="col-md-5">
+								<h5>
+									<b>정보 공개 여부</b>
+								</h5>
+							</div>
 
-						<div class="col-md-7"
-							style="border: 1px solid #D3D3D3; font-size: 16px;">
-							<input type="radio" name="FREELANCER_PUBLIC" value=1>공개 &nbsp; <input
-								type="radio" name="FREELANCER_PUBLIC" value=0>비공개
-						</div>
-						<br>
-						<hr>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%; color: #fff"
-								value="내 정보">
-						</div>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="나의 프로젝트">
-						</div>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="프로젝트 지원 현황">
-						</div>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="나의 게시판">
+							<div class="col-md-7"
+								style="border: 1px solid #D3D3D3; font-size: 16px;">
+								<input type="radio" name="FREELANCER_PUBLIC" value=1>공개
+								&nbsp; <input type="radio" name="FREELANCER_PUBLIC" value=0>비공개
+							</div>
+							<br>
+							<hr>
+							<div class="button" style="width: 100%">
+								<input type="button" style="width: 100%; color: #fff"
+									value="내 정보">
+							</div>
+							<div class="button" style="width: 100%">
+								<input type="button" style="width: 100%" value="나의 프로젝트">
+							</div>
+							<div class="button" style="width: 100%">
+								<input type="button" style="width: 100%" value="프로젝트 지원 현황">
+							</div>
+							<div class="button" style="width: 100%">
+								<input type="button" style="width: 100%" value="나의 게시판">
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-9 col-sm-9 col-xs-12" style="font-size: 20px;">
-					<div
-						style="width: 100%; height: 100%; border: 1px solid #D3D3D3; padding: 10px;">
-						<div class="row">
-							<div class="col-md-6">
-								<p>
-									<label> ID : </label> <input name="USER_ID" value="${sessionScope.userId}" readonly="readonly"> 
-								<p>
-								<p>
-									<label> 지역 : </label> <select name="USER_ADDRESS">
-										<option value="">지역 선택</option>
-										<option value="서울">서울</option>
-										<option value="경기도">경기도</option>
-										<option value="강원도">강원도</option>
-									</select>
-								<p>
-							</div>
-							<div class="col-md-6">
-								<p>
-									<label> 이름 : </label> <input type="text" name="USER_NAME">
-								<p>
-								<p>
+					<div class="col-md-9 col-sm-9 col-xs-12" style="font-size: 20px;">
+						<div
+							style="width: 100%; height: 100%; border: 1px solid #D3D3D3; padding: 10px;">
+							<div class="row">
+								<div class="col-md-6">
+									<p>
+										<label> ID : </label> <input name="USER_ID"
+											value="${sessionScope.userId}" readonly="readonly">
+									<p>
+									<p>
+										<label> 지역 : </label> <select name="USER_ADDRESS">
+											<option value="">지역 선택</option>
+											<option value="서울">서울</option>
+											<option value="경기도">경기도</option>
+											<option value="강원도">강원도</option>
+										</select>
+									<p>
+								</div>
+								<div class="col-md-6">
+									<p>
+										<label> 비밀번호 : </label> <input type="password"
+											name="USER_PASS" value="">
+									<p>
+									<p>
+										<label> 이름 : </label> <input type="text" name="USER_NAME">
+									<p>
+								</div>
+								<div class="col-md-6">
+									<p>
+										<label> 이메일 : </label> <input type="email" name="USER_EMAIL"
+											placeholder="freeCloud@free.com">
+									</p>
+								</div>
+								<div class="col-md-6">
 									<label> 최종학력 : </label> <select name="USER_EDU">
 										<option value="">학력 선택</option>
 										<option value="중졸">중졸</option>
 										<option value="고졸">고졸</option>
 										<option value="대졸">대졸</option>
 									</select>
-								<p>
-							</div>
-							<div class="col-md-12">
+								</div>
 
-								<p>
-									<label> 이메일 : </label> <input type="email" name="USER_EMAIL"
-										placeholder="freeCloud@free.com">
-								<p>
-								<p>
+								<div class="col-md-12">
 									<label> 전화번호 </label>
-							</div>
-							<div class="col-md-4">
-								<input type="text" name="USER_PHONE1" style="width: 90%;"> &nbsp;&nbsp;-
-							</div>
-							<div class="col-md-4">
-								<input type="text" name="USER_PHONE2" style="width: 90%;"> &nbsp;&nbsp;-
-							</div>
-							<div class="col-md-4">
-								<input type="text" name="USER_PHONE3" style="width: 100%;">
-							</div>
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE1" style="width: 90%;">
+									&nbsp;&nbsp;-
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE2" style="width: 90%;">
+									&nbsp;&nbsp;-
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE3" style="width: 100%;">
+								</div>
 
-							<div class="col-md-12">
-								<br> <label> 자기소개 </label>
+								<div class="col-md-12">
+									<br> <label> 자기소개 </label>
 
-								<textarea rows="8" name="FREELANCER_ABOUT_ME" style="width: 100%; resize: none;"></textarea>
-							</div>
-							<div class="col-md-8">
-								<p>
-									<label> 전문분야 : </label> <select id="CATAGORY1" name="FREELANCER_MAIN_KATEGORY">
-										<option value="">대분류 선택</option>
-										<option value="design">디자인</option>
-										<option value="devel">IT프로그래밍</option>
-										<option value="콘텐츠 제작">콘텐츠 제작</option>
-										<option value="비즈니스 컨설팅">비즈니스 컨설팅</option>
-										<option value="주문제작">주문제작</option>
-									</select> &nbsp; <select id="CATAGORY2" name="FREELANCER_MIDDEL_KATEGORY">
-										<option value="">중분류 선택</option>
-									</select>
-								</p>
-							</div>
-							<div class="col-md-4">
-								<p>
-									<label> 경력 : </label> <select name="FREELANCER_CAREER">
-										<option value="">경력 선택</option>
-										<option value=0>1년미만</option>
-										<option value=1>1년</option>
-										<option value=3>3년</option>
-									</select>
-								</p>
-							</div>
-							<div class="col-md-12">
-								<p>
-									<label> 보유기술 : </label> <input type="text" id="mySkill" name="FREELANCER_SKILL"
-										readonly="readonly" value=""> <input type="text"
-										id="skillInput" value="">
-									<a class="basicBtn2" id="skillBtn">등록</a>
-								<p />
-							</div>
-							<div class="col-md-12">
-								<label> 포트폴리오 </label>
-							</div>
-							<div id="portfolioReg" style="display: block;">
-								<div class="col-md-6">
+									<textarea rows="8" name="FREELANCER_ABOUT_ME"
+										style="width: 100%; resize: none;"></textarea>
+								</div>
+								<div class="col-md-8">
 									<p>
-										<input class="basicBtn" id="myPortfolio" style="width: 100%" type="file">
+										<label> 전문분야 : </label> <select id="CATAGORY1"
+											name="FREELANCER_MAIN_KATEGORY">
+											<option value="">대분류 선택</option>
+											<option value="design">디자인</option>
+											<option value="devel">IT프로그래밍</option>
+											<option value="콘텐츠 제작">콘텐츠 제작</option>
+											<option value="비즈니스 컨설팅">비즈니스 컨설팅</option>
+											<option value="주문제작">주문제작</option>
+										</select> &nbsp; <select id="CATAGORY2"
+											name="FREELANCER_MIDDEL_KATEGORY">
+											<option value="">중분류 선택</option>
+										</select>
 									</p>
 								</div>
-								<div class="col-md-6" style="margin-top: 15px;">
+								<div class="col-md-4">
 									<p>
-										<a class="basicBtn2" id="portfolioBtn" >등록</a>
-									</p>			
+										<label> 경력 : </label> <select name="FREELANCER_CAREER">
+											<option value="">경력 선택</option>
+											<option value=0>1년미만</option>
+											<option value=1>1년</option>
+											<option value=3>3년</option>
+										</select>
+									</p>
 								</div>
-							</div>
-							<div class="col-md-12" id="portfolio"></div> 
+								<div class="col-md-12">
+									<p>
+										<label> 보유기술 : </label> <input type="text" id="mySkill"
+											name="FREELANCER_SKILL" readonly="readonly" value="">
+										<input type="text" id="skillInput" value=""> <a
+											class="basicBtn2" id="skillBtn">등록</a>
+									<p />
+								</div>
+								<div class="col-md-12">
+									<label> 포트폴리오 </label>
+								</div>
+								<div id="portfolioReg" style="display: block;">
+									<div class="col-md-6">
+										<p>
+											<input class="basicBtn" id="myPortfolio" style="width: 100%"
+												type="file">
+										</p>
+									</div>
+									<div class="col-md-6" style="margin-top: 15px;">
+										<p>
+											<a class="basicBtn2" id="portfolioBtn">등록</a>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-12" id="portfolio"></div>
 
-							<div class="col-md-12">
-								<p>
-									<label> 자격증 : </label> <input type="text" id="myLicense" name="FREELANCER_CERTIFICATE"
-										readonly="readonly" value=""> <input type="text"
-										id="licenseInput">
-									<a class="basicBtn2" id="licenseBtn">등록</a>
-								<p />
-							</div>
-							<div class="col-md-12">
-								<p>
-									<input type="submit" style="width: 100%" value="등록 하기">
-								</p>
+								<div class="col-md-12">
+									<p>
+										<label> 자격증 : </label> <input type="text" id="myLicense"
+											name="FREELANCER_CERTIFICATE" readonly="readonly" value="">
+										<input type="text" id="licenseInput"> <a
+											class="basicBtn2" style="width: 100%" id="licenseBtn">등록</a>
+									<p />
+								</div>
+								<div class="col-md-12">
+									<div class="basic_btn" style="width: 100%">
+										<a title="Quick view" data-toggle="modal"
+											data-target="#idDialog">등록 하기</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				</form>
 			</div>
 		</div>
@@ -596,7 +644,6 @@
 									<p>
 										<a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a
 											href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a>
-								
 								</h2>
 							</div>
 							<br> <br> <br> <br>
@@ -606,9 +653,7 @@
 							<ul class="footer-contact">
 								<li><i class="flaticon-location"></i> 14558 경기도 의정부시 서부로
 									545 융합소프트웨어과 404호
-								
 								<li>
-								
 								<li><i class="flaticon-web"></i> negahero@freeClude.com</li>
 							</ul>
 						</div>
@@ -712,10 +757,11 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- 이미지 변경 -->
-		<div class="modal fade" id="pwDialog" tabindex="-1" role="dialog">
-			<div class="modal-dialog" id="profileChange" role="document">
+		
+		<!-- 비밀번호 확인 -->
+		
+	<div class="modal fade" id="idDialog" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -728,9 +774,52 @@
 							<div class="container">
 								<div class="row">
 									<div>
+											<h2 class="heading-title">비밀번호 확인</h2>
+											
+											<p>
+												<b>비밀번호 확인</b>
+											</p>
+											
+											<p class="form-row seekid">
+												<input type="password" id="myPassCheck" >
+											</p>
+
+											<div class="submit" style="float: center">
+												<button name="myPass" id="myPass"
+													class="btn-default" style="width: 100%">
+													<span> <i class="fa fa-user left"></i> 확인
+													</span>
+												</button>
+											</div>
+									</div>
+								</div>
+							</div>
+							<!-- .product-info -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 비밀번호 확인 -->
+
+		<!-- 이미지 변경 -->
+		<div class="modal fade" id="pwDialog" tabindex="-1" role="dialog">
+			<div class="modal-dialog" id="profileChange" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" id="profileClose" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-product">
+							<div class="container">
+								<div class="row">
+									<div>
 										<h2 class="heading-title">이미지 변경</h2>
 										<p>
-											<b>아이디</b>
+											<b>이미지파일</b>
 										</p>
 										<p class="form-row seekpw">
 											<input type="file" name="file" id="file" placeholder="아이디 입력">
@@ -751,6 +840,9 @@
 				</div>
 			</div>
 		</div>
+		<!-- 이미지 변경 -->
+		
+		
 	</div>
 	<!--End of Quickview Product-->
 	<!-- all js here -->
