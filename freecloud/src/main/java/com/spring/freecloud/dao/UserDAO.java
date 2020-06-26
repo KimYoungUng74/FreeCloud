@@ -119,4 +119,9 @@ public class UserDAO {
 		String name = mybatis.selectOne("UserMapper.checkPw", dto);
 		return name;
 	}
+
+	// 내 정보 확인
+	public UserDTO myInfo(UserDTO dto) {
+		return mybatis.selectOne("UserMapper.viewUser", dto);
+	}
 }

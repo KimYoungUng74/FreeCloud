@@ -114,7 +114,7 @@
 	    				if(data == "Not_Match") {
 	    					alert("비밀번호가 일치하지 않습니다.");
 	    				} else {
-	    					alert("일치함!");
+	    					$('#infoForm').submit();
 	    				}
 	    			}
 	    		})
@@ -468,8 +468,17 @@
 
 							<div class="col-md-7"
 								style="border: 1px solid #D3D3D3; font-size: 16px;">
-								<input type="radio" name="FREELANCER_PUBLIC" value=1>공개
-								&nbsp; <input type="radio" name="FREELANCER_PUBLIC" value=0>비공개
+								<c:choose>
+										<c:when test = "${FREELANCER_PUBLIC == 0}" >
+											<input type="radio" name="FREELANCER_PUBLIC" value=1 >공개
+											&nbsp; <input type="radio" name="FREELANCER_PUBLIC" value=0 checked="checked">비공개
+										</c:when>
+										<c:otherwise>
+											<input type="radio" name="FREELANCER_PUBLIC" value=1 checked="checked">공개
+											&nbsp; <input type="radio" name="FREELANCER_PUBLIC" value=0 >비공개
+										</c:otherwise>
+								</c:choose>
+								
 							</div>
 							<br>
 							<hr>
@@ -499,7 +508,7 @@
 									<p>
 									<p>
 										<label> 지역 : </label> <select name="USER_ADDRESS">
-											<option value="">지역 선택</option>
+											<option value="${dto.USER_ADDRESS}" hidden selected>${dto.USER_ADDRESS}</option>
 											<option value="서울">서울</option>
 											<option value="경기도">경기도</option>
 											<option value="강원도">강원도</option>
@@ -512,18 +521,18 @@
 											name="USER_PASS" value="">
 									<p>
 									<p>
-										<label> 이름 : </label> <input type="text" name="USER_NAME">
+										<label> 이름 : </label> <input type="text" name="USER_NAME" value="${dto.USER_NAME}">
 									<p>
 								</div>
 								<div class="col-md-6">
 									<p>
-										<label> 이메일 : </label> <input type="email" name="USER_EMAIL"
+										<label> 이메일 : </label> <input type="email" name="USER_EMAIL" value="${dto.USER_EMAIL}"
 											placeholder="freeCloud@free.com">
 									</p>
 								</div>
 								<div class="col-md-6">
 									<label> 최종학력 : </label> <select name="USER_EDU">
-										<option value="">학력 선택</option>
+										<option value="${dto.USER_EDU}" hidden selected>${dto.USER_EDU}</option>
 										<option value="중졸">중졸</option>
 										<option value="고졸">고졸</option>
 										<option value="대졸">대졸</option>
@@ -534,28 +543,28 @@
 									<label> 전화번호 </label>
 								</div>
 								<div class="col-md-4">
-									<input type="text" name="USER_PHONE1" style="width: 90%;">
+									<input type="text" name="USER_PHONE1" style="width: 90%;" value="${dto.USER_PHONE1}">
 									&nbsp;&nbsp;-
 								</div>
 								<div class="col-md-4">
-									<input type="text" name="USER_PHONE2" style="width: 90%;">
+									<input type="text" name="USER_PHONE2" style="width: 90%;" value="${dto.USER_PHONE2}">
 									&nbsp;&nbsp;-
 								</div>
 								<div class="col-md-4">
-									<input type="text" name="USER_PHONE3" style="width: 100%;">
+									<input type="text" name="USER_PHONE3" style="width: 100%;" value="${dto.USER_PHONE3}">
 								</div>
 
 								<div class="col-md-12">
 									<br> <label> 자기소개 </label>
 
 									<textarea rows="8" name="FREELANCER_ABOUT_ME"
-										style="width: 100%; resize: none;"></textarea>
+										style="width: 100%; resize: none;">${dto.FREELANCER_ABOUT_ME}</textarea>
 								</div>
 								<div class="col-md-8">
 									<p>
 										<label> 전문분야 : </label> <select id="CATAGORY1"
 											name="FREELANCER_MAIN_KATEGORY">
-											<option value="">대분류 선택</option>
+											<option value="${dto.FREELANCER_MAIN_KATEGORY}" hidden selected>${dto.FREELANCER_MAIN_KATEGORY}</option>
 											<option value="design">디자인</option>
 											<option value="devel">IT프로그래밍</option>
 											<option value="콘텐츠 제작">콘텐츠 제작</option>
@@ -563,14 +572,22 @@
 											<option value="주문제작">주문제작</option>
 										</select> &nbsp; <select id="CATAGORY2"
 											name="FREELANCER_MIDDEL_KATEGORY">
-											<option value="">중분류 선택</option>
+											<option value="${dto.FREELANCER_MIDDEL_KATEGORY}" hidden selected>${dto.FREELANCER_MIDDEL_KATEGORY}</option>
 										</select>
 									</p>
 								</div>
 								<div class="col-md-4">
 									<p>
 										<label> 경력 : </label> <select name="FREELANCER_CAREER">
-											<option value="">경력 선택</option>
+										<c:choose>
+										<c:when test = "${dto.FREELANCER_CAREER == 0}" >
+											<option value="${dto.FREELANCER_CAREER}" hidden selected>1년미만</option>
+										</c:when>
+											<c:otherwise>
+												<option value="${dto.FREELANCER_CAREER}" hidden selected>${dto.FREELANCER_MIDDEL_KATEGORY}년</option>
+											</c:otherwise>
+										</c:choose>
+
 											<option value=0>1년미만</option>
 											<option value=1>1년</option>
 											<option value=3>3년</option>
@@ -580,7 +597,7 @@
 								<div class="col-md-12">
 									<p>
 										<label> 보유기술 : </label> <input type="text" id="mySkill"
-											name="FREELANCER_SKILL" readonly="readonly" value="">
+											name="FREELANCER_SKILL" readonly="readonly" value="${dto.FREELANCER_SKILL}">
 										<input type="text" id="skillInput" value=""> <a
 											class="basicBtn2" id="skillBtn">등록</a>
 									<p />
@@ -606,7 +623,7 @@
 								<div class="col-md-12">
 									<p>
 										<label> 자격증 : </label> <input type="text" id="myLicense"
-											name="FREELANCER_CERTIFICATE" readonly="readonly" value="">
+											name="FREELANCER_CERTIFICATE" readonly="readonly" value="${dto.FREELANCER_CERTIFICATE}">
 										<input type="text" id="licenseInput"> <a
 											class="basicBtn2" style="width: 100%" id="licenseBtn">등록</a>
 									<p />

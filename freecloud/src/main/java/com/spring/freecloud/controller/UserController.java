@@ -2,6 +2,8 @@ package com.spring.freecloud.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -163,11 +165,18 @@ public class UserController {
 		return str;
 	}
 	
-	// 마이페이지
-	@RequestMapping(value = "mypage.do")
-	public String mypage(Locale locale, Model model) {
-		return "mypage";
-	}
+	// 회원정보 수정
+		@RequestMapping(value = "mypage.do", produces = "application/text; charset=utf8")
+		public ModelAndView mypage(Locale locale, HttpSession sessison) {
+			System.out.println("mypage에 접근함");
+			UserDTO dto = new UserDTO();
+			dto = userSer.myInfo(sessison.getAttribute("userId").toString());
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("dto", dto);
+			mav.setViewName("mypage");
+			System.out.println(dto);
+			return mav;
+		}
 	
 	// 아이디 찾기
 		@RequestMapping(value = "/checkMyPass.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")

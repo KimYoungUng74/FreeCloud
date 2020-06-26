@@ -133,4 +133,12 @@ public class UserService {
 		return dao.checkPw(dto);
 	}
 
+	//회원 정보 확인
+	public UserDTO myInfo(String id) {
+		// TODO Auto-generated method stub
+		UserDTO dto = new UserDTO();
+		dto.setUSER_ID(id);
+		return dao.myInfo(dto);
+	}
+
 }
