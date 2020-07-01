@@ -60,7 +60,7 @@
 	<!-- String uploadPath = new String("업로드 경로") -->
 	<bean id="uploadPath" class="java.lang.String">
 		<!-- 파일업로드 디렉토리 -->
-		<constructor-arg value="D:\\freecloud" />
+		<constructor-arg value="C:\\freecloud" />
 	</bean>
 
 </beans>
