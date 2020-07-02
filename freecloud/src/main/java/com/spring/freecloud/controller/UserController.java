@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.service.UserService;
 
@@ -164,35 +166,89 @@ public class UserController {
 
 		return str;
 	}
-	
-	// 회원정보 수정
-		@RequestMapping(value = "mypage.do", produces = "application/text; charset=utf8")
-		public ModelAndView mypage(Locale locale, HttpSession sessison) {
-			System.out.println("mypage에 접근함");
-			UserDTO dto = new UserDTO();
-			dto = userSer.myInfo(sessison.getAttribute("userId").toString());
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("dto", dto);
-			mav.setViewName("mypage");
-			System.out.println(dto);
-			return mav;
-		}
-	
-	// 아이디 찾기
-		@RequestMapping(value = "/checkMyPass.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-		public @ResponseBody String checkMyPass(@RequestParam("pw") String pw, HttpSession sessison) {
-			System.out.println("checkMyPass에 접근함");
-			String str = "";
-			str = userSer.checkPw(sessison.getAttribute("userId").toString(), pw);
-			System.out.println(str);
-			if (str == null) { // 비밀번호 일치함
-				str = "Not_Match";
-			} else { // 비밀번호 일치 하지 않음
-				str = "Same";
-			}
 
-			return str;
-		} 
+	// 회원정보 수정 페이지
+	@RequestMapping(value = "mypage.do", produces = "application/text; charset=utf8")
+	public ModelAndView mypage(Locale locale, HttpSession sessison) {
+		System.out.println("mypage에 접근함");
+		UserDTO dto = new UserDTO();
+		dto = userSer.myInfo(sessison.getAttribute("userId").toString());
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("dto", dto);
+		mav.setViewName("mypage");
+		System.out.println(dto);
+		return mav;
+	}
+
+	// 나의 프로젝트
+	@RequestMapping(value = "myProject.do", produces = "application/text; charset=utf8")
+	public ModelAndView myProject(Locale locale, HttpSession sessison) {
+		System.out.println("myProject에 접근함");
+		
+		List<ProjectDTO> ingList = null; // 진행중인 프로젝트
+		List<ProjectDTO> edList = null; // 완료한 프로젝트
+		String userId =sessison.getAttribute("userId").toString();	// 유저 아이디
+		String myprofile = userSer.myProfile(userId); // 프로필 사진 가져오기
+		ingList = userSer.ingMyProject(userId); // 진행중인 프로젝트 - 의뢰
+		edList = userSer.edMyProject(userId);  // 완료한 프로젝트 - 의뢰
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("ingList", ingList);
+		mav.addObject("edList", edList);
+		mav.addObject("myprofile", myprofile);
+		mav.setViewName("myProject");
+		return mav;
+	}
+
+	// 프로젝트 지원 현황
+	@RequestMapping(value = "projectRequest.do", produces = "application/text; charset=utf8")
+	public ModelAndView projectApply(Locale locale, HttpSession sessison) {
+		System.out.println("projectApply에 접근함");
+
+		List<ProjectDTO> ingList = null; // 진행중인 프로젝트
+		List<ProjectDTO> requestedList = null; // 지원 요청 된 프로젝트
+		List<ProjectDTO> requestList = null; // 지원한 프로젝트
+		List<ProjectDTO> edList = null; // 완료한 프로젝트
+		
+		String userId =sessison.getAttribute("userId").toString();	// 유저 아이디
+		String myprofile = userSer.myProfile(userId); // 프로필 사진 가져오기
+		ingList = userSer.rIngMyProject(userId); // 진행중인 프로젝트 - 지원
+		requestedList = userSer.requestedProject(userId);  // 완료한 프로젝트 - 의뢰
+		requestList = userSer.requestProject(userId); // 진행중인 프로젝트 - 의뢰
+		edList = userSer.rEdMyProject(userId);  // 완료한 프로젝트 - 지원
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("myprofile", myprofile);
+		mav.setViewName("projectApply");
+		return mav;
+	}
+
+	// 나의 게시판
+	@RequestMapping(value = "projectState.do", produces = "application/text; charset=utf8")
+	public ModelAndView projectState(Locale locale, HttpSession sessison) {
+		System.out.println("projectState에 접근함");
+		String myprofile = userSer.myProfile(sessison.getAttribute("userId").toString()); // 프로필 사진 가져오기
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("myprofile", myprofile);
+		mav.setViewName("projectState");
+		return mav;
+	}
+
+	// 아이디 찾기
+	@RequestMapping(value = "/checkMyPass.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String checkMyPass(@RequestParam("pw") String pw, HttpSession sessison) {
+		System.out.println("checkMyPass에 접근함");
+		String str = "";
+		str = userSer.checkPw(sessison.getAttribute("userId").toString(), pw);
+		System.out.println(str);
+		if (str == null) { // 비밀번호 일치함
+			str = "Not_Match";
+		} else { // 비밀번호 일치 하지 않음
+			str = "Same";
+		}
+
+		return str;
+	}
 
 	// 회원정보 수정
 	@RequestMapping(value = "myInfoModify.do", method = RequestMethod.POST)

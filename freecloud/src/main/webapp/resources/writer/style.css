@@ -2598,18 +2598,7 @@ a.wish-btn {
 	padding: 10px;
 	transition: all 0.4s ease 0s;
 }
-.basicBtn2 {
-	background: #d5d5d5 none repeat scroll 0 0;
-	border: 0 none;
-	font-weight: 500;
-	margin-top: 10px;
-	padding: 5px;
-	transition: all 0.4s ease 0s;
-}
 
-.basicBtn2 hover{
-	color: #000;
-}
 
 .basicBtn {
 	background: #d5d5d5 none repeat scroll 0 0;
@@ -3076,15 +3065,6 @@ h3.widget-title-modal {
 /*  24.	Button CSS
 /*----------------------------------------*/
 .basic_btn a {
-	/* color: #d5d5d;
-    border: 0 none;
-    display: inline-block;
-    font-family: "Poppins",sans-serif;
-    font-weight: 500;
-    margin-top: 10px;
-    padding: 5px;
-    font-size: 15px;
-    transition: all 0.4s ease 0s; */
     
     width: 100%;
 	background: #d5d5d5 none repeat scroll 0 0;
@@ -3103,4 +3083,21 @@ h3.widget-title-modal {
 
 .basic_btn a:hover {
 	color: #fff;
+	background: #a3d4f7 none repeat scroll 0 0;
+}
+
+.basicBtn2 a {
+	background: #d5d5d5 none repeat scroll 0 0;
+	display: inline-block;
+	border: 0 none;
+	font-weight: 500;
+	text-align: center;
+	margin-top: 10px;
+	padding: 5px;
+	transition: all 0.4s ease 0s;
+}
+
+.basicBtn2 a:hover{
+	color: #fff;
+	background: #a3d4f7 none repeat scroll 0 0;
 }

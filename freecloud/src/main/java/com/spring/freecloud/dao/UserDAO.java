@@ -2,6 +2,7 @@ package com.spring.freecloud.dao;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.freecloud.dto.PortfolioDTO;
+import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.util.SHA256;
 
@@ -123,5 +125,46 @@ public class UserDAO {
 	// 내 정보 확인
 	public UserDTO myInfo(UserDTO dto) {
 		return mybatis.selectOne("UserMapper.viewUser", dto);
+	}
+
+	// 내 프로필 사진 
+	public String myProfile(String USER_ID) {
+		// TODO Auto-generated method stub
+		return  mybatis.selectOne("UserMapper.myProfile", USER_ID);
+	}
+
+	/* 나의 프로젝트 */
+	// 진행중인 프로젝트 - 의뢰
+	public List<ProjectDTO> ingMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.ingMyProject", USER_ID);
+	}
+
+	// 완료한 프로젝트 - 의뢰
+	public List<ProjectDTO> edMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.edMyProject", USER_ID);
+	}
+	
+	/* 프로젝트 지원 형황 */
+	// 진행중인 나의 프로젝트 - 지원
+	public List<ProjectDTO> rIngMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.rIngMyProject", USER_ID);
+	}
+	// 지원 요청된 프로젝트 
+	public List<ProjectDTO> requestedProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.requestedProject", USER_ID);
+	}
+	// 지원한 프로젝트
+	public List<ProjectDTO> requestProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.requestProject", USER_ID);
+	}
+	// 완료한 프로젝트 - 지원
+	public List<ProjectDTO> rEdMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.rEdMyProject", USER_ID);
 	}
 }

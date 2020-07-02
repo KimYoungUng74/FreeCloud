@@ -1,6 +1,7 @@
 package com.spring.freecloud.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.spring.freecloud.dao.UserDAO;
 import com.spring.freecloud.dto.PortfolioDTO;
+import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 
 @Service("IUserService")
@@ -139,6 +141,46 @@ public class UserService {
 		UserDTO dto = new UserDTO();
 		dto.setUSER_ID(id);
 		return dao.myInfo(dto);
+	}
+
+	// 프로필 사진
+	public String myProfile(String id) {
+		// TODO Auto-generated method stub
+		return dao.myProfile(id);
+	}
+
+	/* 나의 프로젝트 */
+	// 진행중인 나의 프로젝트 - 의뢰
+	public List<ProjectDTO> ingMyProject(String USER_ID) {
+		return dao.ingMyProject(USER_ID);
+	}
+
+	// 완료한 프로젝트 - 의뢰
+	public List<ProjectDTO> edMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return dao.edMyProject(USER_ID);
+	}
+
+	/* 프로젝트 지원 형황 */
+	// 진행중인 나의 프로젝트 - 지원
+	public List<ProjectDTO> rIngMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return dao.rIngMyProject(USER_ID);
+	}
+	// 지원 요청된 프로젝트 
+	public List<ProjectDTO> requestedProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return dao.requestedProject(USER_ID);
+	}
+	// 지원한 프로젝트
+	public List<ProjectDTO> requestProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return dao.requestProject(USER_ID);
+	}
+	// 완료한 프로젝트 - 지원
+	public List<ProjectDTO> rEdMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return dao.rEdMyProject(USER_ID);
 	}
 
 }

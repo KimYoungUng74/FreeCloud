@@ -111,6 +111,14 @@
     	WHERE USER_ID = #{USER_ID}
 	</update>
 	
+	<!-- 프로필 사진 조회 -->
+	<select id="myProfile" parameterType="String"
+		resultType="String">
+		SELECT
+		FREELANCER_IMAGE_PATH
+		FROM FREE_USER
+		WHERE USER_ID = #{USER_ID}
+	</select>
 	<!-- 프로필 번경-->
 	<update id="profileChange" parameterType="UserDTO">
 		UPDATE FREE_USER
@@ -129,5 +137,65 @@
 		DELETE FROM FREE_PORTFOLIO
 		WHERE USER_ID = #{USER_ID}
 	</delete>
+	
+	<!-- 진행중인 프로젝트 조회 - 의뢰 -->
+	<select id="ingMyProject" parameterType="String"
+		resultType="ProjectDTO">
+		SELECT
+		PROJECT_IDX,
+		PROJECT_SUBJECT 
+		FROM FREE_PROJECT
+		WHERE USER_ID = #{USER_ID} AND PROJECT_STATUS=0
+	</select>
+	
+	<!-- 완료된 프로젝트 조회 - 의뢰 -->
+	<select id="edMyProject" parameterType="String"
+		resultType="ProjectDTO">
+		SELECT
+		PROJECT_IDX,
+		PROJECT_SUBJECT 
+		FROM FREE_PROJECT
+		WHERE USER_ID = #{USER_ID} AND PROJECT_STATUS=1
+	</select>
+	
+	<!-- 진행중인 프로젝트 조회 - 지원 -->
+	<select id="edMyProject" parameterType="String"
+		resultType="ProjectDTO">
+		SELECT
+		PROJECT_IDX,
+		PROJECT_SUBJECT 
+		FROM FREE_MYFREELANCER
+		WHERE USER_ID = #{USER_ID} AND PROJECT_STATUS=1
+	</select>
+	
+	<!-- 진행중인 프로젝트 조회 - 의뢰 -->
+	<select id="edMyProject" parameterType="String"
+		resultType="ProjectDTO">
+		SELECT
+		PROJECT_IDX,
+		PROJECT_SUBJECT 
+		FROM FREE_MYFREELANCER
+		WHERE USER_ID = #{USER_ID} AND PROJECT_STATUS=1
+	</select>
+	
+	<!-- 진행중인 프로젝트 조회 - 의뢰 -->
+	<select id="edMyProject" parameterType="String"
+		resultType="ProjectDTO">
+		SELECT
+		PROJECT_IDX,
+		PROJECT_SUBJECT 
+		FROM FREE_MYFREELANCER
+		WHERE USER_ID = #{USER_ID} AND PROJECT_STATUS=1
+	</select>
+	
+	<!-- 진행중인 프로젝트 조회 - 의뢰 -->
+	<select id="edMyProject" parameterType="String"
+		resultType="ProjectDTO">
+		SELECT
+		PROJECT_IDX,
+		PROJECT_SUBJECT 
+		FROM FREE_MYFREELANCER
+		WHERE USER_ID = #{USER_ID} AND PROJECT_STATUS=1
+	</select>
 
 </mapper>

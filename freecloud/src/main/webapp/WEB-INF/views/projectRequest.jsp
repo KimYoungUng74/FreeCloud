@@ -279,23 +279,25 @@
 				<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
 					<div class="row shop-widget">
 						<div class="thumbnail">
-							<div class="centered">
+							<div class="centered" id="profile">
 								<img alt=""
-									src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
+									src="<c:url value='http://localhost:8181/img/profile/${myprofile}'/>">
+								<input id="originalProfile" type="hidden" value="basic.png">
 							</div>
 						</div>
 						<hr>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%;" value="내 정보">
+						<div class="basic_btn" style="width: 100%;">
+							<a href="mypage.do">내 정보</a>
 						</div>
-						<div class="button" style="width: 100%;">
-							<input type="button" style="width: 100%" value="나의 프로젝트">
+						<div class="basic_btn" style="width: 100%;">
+							<a href="myProject.do">나의 프로젝트</a>
 						</div>
-						<div class="button" style="width: 100%;  color: #fff;">
-							<input type="button" style="width: 100%" value="프로젝트 지원 현황">
+						<div class="basic_btn" style="width: 100%;">
+							<a href="projectRequest.do" style="color: #fff; background-color: #a3d4f7;">프로젝트 지원 현황</a>
 						</div>
-						<div class="button" style="width: 100%;">
-							<input type="button" style="width: 100%" value="나의 게시판">
+						<div class="basic_btn" style="width: 100%;">
+							<a href="projectState.do"
+								>나의 게시판</a>
 						</div>
 					</div>
 				</div>

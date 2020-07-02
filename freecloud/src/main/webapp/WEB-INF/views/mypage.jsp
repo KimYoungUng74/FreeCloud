@@ -554,19 +554,19 @@
 							</div>
 							<br>
 							<hr>
-							<div class="button" style="width: 100%">
-								<input type="button" style="width: 100%; color: #fff"
-									value="내 정보">
+							<div class="basic_btn" style="width: 100%;">
+								<a href="mypage.do" style="color: #fff; background-color: #a3d4f7;">내 정보</a>
 							</div>
-							<div class="button" style="width: 100%">
-								<input type="button" style="width: 100%" value="나의 프로젝트">
+							<div class="basic_btn" style="width: 100%;">
+								<a href="myProject.do">나의 프로젝트</a>
 							</div>
-							<div class="button" style="width: 100%">
-								<input type="button" style="width: 100%" value="프로젝트 지원 현황">
+							<div class="basic_btn" style="width: 100%;">
+								<a href="projectRequest.do">프로젝트 지원 현황</a>
 							</div>
-							<div class="button" style="width: 100%">
-								<input type="button" style="width: 100%" value="나의 게시판">
+							<div class="basic_btn" style="width: 100%;">
+								<a href="projectState.do">나의 게시판</a>
 							</div>
+							
 						</div>
 					</div>
 					<div class="col-md-9 col-sm-9 col-xs-12" style="font-size: 20px;">
@@ -670,13 +670,13 @@
 										</select>
 									</p>
 								</div>
-								<div class="col-md-12">
+								<div class="col-md-12 basicBtn2">
 									<p>
 										<label> 보유기술 : </label> <input type="text" id="mySkill"
 											name="FREELANCER_SKILL" readonly="readonly"
 											value="${dto.FREELANCER_SKILL}"> <input type="text"
-											id="skillInput" value=""> <a class="basicBtn2"
-											id="skillBtn">등록</a> <a class="basicBtn2" id="skillDeleteBtn">삭제</a>
+											id="skillInput" value=""> <a
+											id="skillBtn">등록</a> <a id="skillDeleteBtn">삭제</a>
 									<p />
 								</div>
 								<div class="col-md-12">
@@ -689,22 +689,20 @@
 												type="file">
 										</p>
 									</div>
-									<div class="col-md-6" style="margin-top: 15px;">
+									<div class="col-md-6 basicBtn2">
 										<p>
-											<a class="basicBtn2" id="portfolioBtn">등록</a>
+											<a id="portfolioBtn">등록</a>
 										</p>
 									</div>
 								</div>
 								<div class="col-md-12" id="portfolio"></div>
 
-								<div class="col-md-12">
+								<div class="col-md-12 basicBtn2">
 									<p>
 										<label> 자격증 : </label> <input type="text" id="myLicense"
 											name="FREELANCER_CERTIFICATE" readonly="readonly"
 											value="${dto.FREELANCER_CERTIFICATE}"> <input
-											type="text" id="licenseInput" value=""> <a class="basicBtn2"
-											style="width: 100%" id="licenseBtn">등록</a> <a
-											class="basicBtn2" style="width: 100%" id="licenseDeleteBtn">삭제</a>
+											type="text" id="licenseInput" value=""> <a id="licenseBtn">등록</a> <a id="licenseDeleteBtn">삭제</a>
 									<p />
 								</div>
 								<div class="col-md-12">
