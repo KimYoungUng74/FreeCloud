@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.freecloud.dto.MyfreelancerDTO;
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.service.UserService;
@@ -203,12 +204,12 @@ public class UserController {
 	// 프로젝트 지원 현황
 	@RequestMapping(value = "projectRequest.do", produces = "application/text; charset=utf8")
 	public ModelAndView projectApply(Locale locale, HttpSession sessison) {
-		System.out.println("projectApply에 접근함");
+		System.out.println("projectRequest에 접근함");
 
-		List<ProjectDTO> ingList = null; // 진행중인 프로젝트
-		List<ProjectDTO> requestedList = null; // 지원 요청 된 프로젝트
-		List<ProjectDTO> requestList = null; // 지원한 프로젝트
-		List<ProjectDTO> edList = null; // 완료한 프로젝트
+		List<MyfreelancerDTO> ingList = null; // 진행중인 프로젝트
+		List<MyfreelancerDTO> requestedList = null; // 지원 요청 된 프로젝트
+		List<MyfreelancerDTO> requestList = null; // 지원한 프로젝트
+		List<MyfreelancerDTO> edList = null; // 완료한 프로젝트
 		
 		String userId =sessison.getAttribute("userId").toString();	// 유저 아이디
 		String myprofile = userSer.myProfile(userId); // 프로필 사진 가져오기
@@ -218,8 +219,12 @@ public class UserController {
 		edList = userSer.rEdMyProject(userId);  // 완료한 프로젝트 - 지원
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("ingList", ingList);
+		mav.addObject("requestedList", requestedList);
+		mav.addObject("requestList", requestList);
+		mav.addObject("edList", edList);
 		mav.addObject("myprofile", myprofile);
-		mav.setViewName("projectApply");
+		mav.setViewName("projectRequest");
 		return mav;
 	}
 

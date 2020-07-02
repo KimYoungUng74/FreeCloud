@@ -10,6 +10,7 @@
 		<typeAlias type="com.spring.freecloud.dto.BoardDTO" alias="BoardDTO"></typeAlias>
 		<typeAlias type="com.spring.freecloud.dto.ProjectDTO" alias="ProjectDTO"></typeAlias>
 		<typeAlias type="com.spring.freecloud.dto.PortfolioDTO" alias="PortfolioDTO"></typeAlias>
+			<typeAlias type="com.spring.freecloud.dto.MyfreelancerDTO" alias="MyfreelancerDTO"></typeAlias>
 	</typeAliases>
 	
 	

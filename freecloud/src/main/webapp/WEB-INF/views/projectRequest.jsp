@@ -84,7 +84,7 @@
 					</div>
 				</div>
 				<div class="col-md-7">
-					<div class="mainmenu text-center"> 
+					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
 								<li><h4>
@@ -121,7 +121,7 @@
 									</c:when>
 									<c:otherwise>
 
-											<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
+										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
 									</c:otherwise>
 								</c:choose></li>
 							<li><c:choose>
@@ -129,7 +129,7 @@
 										<a href="signup.do">회원가입</a>
 									</c:when>
 									<c:otherwise>
-											<a href="logout.do">로그아웃</a>
+										<a href="logout.do">로그아웃</a>
 									</c:otherwise>
 								</c:choose></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
@@ -293,11 +293,11 @@
 							<a href="myProject.do">나의 프로젝트</a>
 						</div>
 						<div class="basic_btn" style="width: 100%;">
-							<a href="projectRequest.do" style="color: #fff; background-color: #a3d4f7;">프로젝트 지원 현황</a>
+							<a href="projectRequest.do"
+								style="color: #fff; background-color: #a3d4f7;">프로젝트 지원 현황</a>
 						</div>
 						<div class="basic_btn" style="width: 100%;">
-							<a href="projectState.do"
-								>나의 게시판</a>
+							<a href="projectState.do">나의 게시판</a>
 						</div>
 					</div>
 				</div>
@@ -308,32 +308,42 @@
 							<div class="col-md-12">
 								<br> <label>진행 중인 프로젝트 </label>
 
-								<div style="overflow: auto; border:1px solid #D3D3D3; width: 100%; height: 250px;">
-								<a href="naver.com">울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
+								<div
+									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
+									<c:forEach var="row" items="${ingList}">
+										<a href="${row.PROJECT_IDX}">${row.PROJECT_SUBJECT}</a>
+									</c:forEach>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<br> <label>지원 요청된 프로젝트</label>
 
-								<div style="overflow: auto; border:1px solid #D3D3D3; width: 100%; height: 250px;"></div>
+								<div
+									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
+									<c:forEach var="row" items="${requestedList}">
+										<a href="${row.PROJECT_IDX}">${row.PROJECT_SUBJECT}</a>
+									</c:forEach>
+								</div>
 							</div>
 							<div class="col-md-12">
 								<br> <label>지원한 프로젝트</label>
 
-								<div style="overflow: auto; border:1px solid #D3D3D3; width: 100%; height: 250px;"></div>
+								<div
+									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
+									<c:forEach var="row" items="${requestList}">
+										<a href="${row.PROJECT_IDX}">${row.PROJECT_SUBJECT}</a>
+									</c:forEach>
+								</div>
 							</div>
 							<div class="col-md-12">
 								<br> <label>완료한 프로젝트</label>
 
-								<div style="overflow: auto; border:1px solid #D3D3D3; width: 100%; height: 250px;"></div>
+								<div
+									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
+									<c:forEach var="row" items="${edList}">
+										<a href="${row.PROJECT_IDX}">${row.PROJECT_SUBJECT}</a>
+									</c:forEach>
+								</div>
 							</div>
 							<div class="col-md-12">
 								<p></p>

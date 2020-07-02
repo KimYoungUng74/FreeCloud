@@ -159,43 +159,43 @@
 	</select>
 	
 	<!-- 진행중인 프로젝트 조회 - 지원 -->
-	<select id="edMyProject" parameterType="String"
-		resultType="ProjectDTO">
+	<select id="rIngMyProject" parameterType="String"
+		resultType="MyfreelancerDTO">
 		SELECT
 		PROJECT_IDX,
 		PROJECT_SUBJECT 
 		FROM FREE_MYFREELANCER
-		WHERE USER_ID = #{USER_ID} AND PROJECT_STATUS=1
+		WHERE FREELANCER_ID = #{FREELANCER_ID} AND PROJECT_STATUS=0
 	</select>
 	
-	<!-- 진행중인 프로젝트 조회 - 의뢰 -->
-	<select id="edMyProject" parameterType="String"
-		resultType="ProjectDTO">
+	<!-- 지원 요청 된 프로젝트 -->
+	<select id="requestedProject" parameterType="String"
+		resultType="MyfreelancerDTO">
 		SELECT
 		PROJECT_IDX,
 		PROJECT_SUBJECT 
 		FROM FREE_MYFREELANCER
-		WHERE USER_ID = #{USER_ID} AND PROJECT_STATUS=1
+		WHERE FREELANCER_ID = #{FREELANCER_ID} AND PROJECT_STATUS=2
 	</select>
 	
-	<!-- 진행중인 프로젝트 조회 - 의뢰 -->
-	<select id="edMyProject" parameterType="String"
-		resultType="ProjectDTO">
+	<!-- 지원한 프로젝트 -->
+	<select id="requestProject" parameterType="String"
+		resultType="MyfreelancerDTO">
 		SELECT
 		PROJECT_IDX,
 		PROJECT_SUBJECT 
 		FROM FREE_MYFREELANCER
-		WHERE USER_ID = #{USER_ID} AND PROJECT_STATUS=1
+		WHERE FREELANCER_ID = #{FREELANCER_ID} AND PROJECT_STATUS=3
 	</select>
 	
-	<!-- 진행중인 프로젝트 조회 - 의뢰 -->
-	<select id="edMyProject" parameterType="String"
-		resultType="ProjectDTO">
+	<!-- 완료한 프로젝트 - 지원 -->
+	<select id="rEdMyProject" parameterType="String"
+		resultType="MyfreelancerDTO">
 		SELECT
 		PROJECT_IDX,
 		PROJECT_SUBJECT 
 		FROM FREE_MYFREELANCER
-		WHERE USER_ID = #{USER_ID} AND PROJECT_STATUS=1
+		WHERE FREELANCER_ID = #{FREELANCER_ID} AND PROJECT_STATUS=1
 	</select>
 
 </mapper>

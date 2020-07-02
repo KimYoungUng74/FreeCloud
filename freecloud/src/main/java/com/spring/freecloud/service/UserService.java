@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
 
 import com.spring.freecloud.dao.UserDAO;
+import com.spring.freecloud.dto.MyfreelancerDTO;
 import com.spring.freecloud.dto.PortfolioDTO;
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
@@ -163,22 +164,22 @@ public class UserService {
 
 	/* 프로젝트 지원 형황 */
 	// 진행중인 나의 프로젝트 - 지원
-	public List<ProjectDTO> rIngMyProject(String USER_ID) {
+	public List<MyfreelancerDTO> rIngMyProject(String USER_ID) {
 		// TODO Auto-generated method stub
 		return dao.rIngMyProject(USER_ID);
 	}
 	// 지원 요청된 프로젝트 
-	public List<ProjectDTO> requestedProject(String USER_ID) {
+	public List<MyfreelancerDTO> requestedProject(String USER_ID) {
 		// TODO Auto-generated method stub
 		return dao.requestedProject(USER_ID);
 	}
 	// 지원한 프로젝트
-	public List<ProjectDTO> requestProject(String USER_ID) {
+	public List<MyfreelancerDTO> requestProject(String USER_ID) {
 		// TODO Auto-generated method stub
 		return dao.requestProject(USER_ID);
 	}
 	// 완료한 프로젝트 - 지원
-	public List<ProjectDTO> rEdMyProject(String USER_ID) {
+	public List<MyfreelancerDTO> rEdMyProject(String USER_ID) {
 		// TODO Auto-generated method stub
 		return dao.rEdMyProject(USER_ID);
 	}

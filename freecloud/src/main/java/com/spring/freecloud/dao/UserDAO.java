@@ -11,6 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.freecloud.dto.MyfreelancerDTO;
 import com.spring.freecloud.dto.PortfolioDTO;
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
@@ -148,23 +149,23 @@ public class UserDAO {
 	
 	/* 프로젝트 지원 형황 */
 	// 진행중인 나의 프로젝트 - 지원
-	public List<ProjectDTO> rIngMyProject(String USER_ID) {
+	public List<MyfreelancerDTO> rIngMyProject(String FREELANCER_ID) {
 		// TODO Auto-generated method stub
-		return mybatis.selectList("UserMapper.rIngMyProject", USER_ID);
+		return mybatis.selectList("UserMapper.rIngMyProject", FREELANCER_ID);
 	}
-	// 지원 요청된 프로젝트 
-	public List<ProjectDTO> requestedProject(String USER_ID) {
+	// 지원 요청 된 프로젝트 
+	public List<MyfreelancerDTO> requestedProject(String FREELANCER_ID) {
 		// TODO Auto-generated method stub
-		return mybatis.selectList("UserMapper.requestedProject", USER_ID);
+		return mybatis.selectList("UserMapper.requestedProject", FREELANCER_ID);
 	}
 	// 지원한 프로젝트
-	public List<ProjectDTO> requestProject(String USER_ID) {
+	public List<MyfreelancerDTO> requestProject(String FREELANCER_ID) {
 		// TODO Auto-generated method stub
-		return mybatis.selectList("UserMapper.requestProject", USER_ID);
+		return mybatis.selectList("UserMapper.requestProject", FREELANCER_ID);
 	}
 	// 완료한 프로젝트 - 지원
-	public List<ProjectDTO> rEdMyProject(String USER_ID) {
+	public List<MyfreelancerDTO> rEdMyProject(String FREELANCER_ID) {
 		// TODO Auto-generated method stub
-		return mybatis.selectList("UserMapper.rEdMyProject", USER_ID);
+		return mybatis.selectList("UserMapper.rEdMyProject", FREELANCER_ID);
 	}
 }
