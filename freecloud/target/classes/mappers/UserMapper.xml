@@ -261,5 +261,40 @@
 				)
 	WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	
+	<!-- home 프로젝트 리스트 조회 -->
+	<select id="viewProjectList" resultType="ProjectViewDTO" parameterType="String">
+		SELECT
+		p.PROJECT_IDX,
+		u.USER_ID,
+		u.FREELANCER_IMAGE_PATH,
+		p.PROJECT_SUBJECT,
+		u.USER_NAME,
+		p.PROJECT_START_DATE
+		FROM FREE_USER u, free_project p
+        WHERE u.user_id = p.user_id AND PROJECT_MAIN_KATEGORY=#{PROJECT_MAIN_KATEGORY}
+	</select>
+	
+	<!--프리랜서 리스트 -->
+	<select id="UserList" resultType="UserDTO">
+		SELECT
+		USER_ID,
+		FREELANCER_IMAGE_PATH,
+		FREELANCER_ABOUT_ME,
+		USER_NAME,
+		FREELANCER_MAIN_KATEGORY
+		FROM FREE_USER 
+	</select>
+	
+	<!--프리랜서 리스트 -->
+	<select id="UserListALL" resultType="UserDTO"  parameterType="String" >
+		SELECT
+		USER_ID,
+		FREELANCER_IMAGE_PATH,
+		USER_NAME,
+		FREELANCER_SKILL
+		FROM FREE_USER 
+		WHERE FREELANCER_MAIN_KATEGORY=#{FREELANCER_MAIN_KATEGORY}
+	</select>
 
 </mapper>

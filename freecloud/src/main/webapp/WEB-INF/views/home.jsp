@@ -64,6 +64,16 @@
 <!-- modernizr css -->
 <script
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#clickDevel").click();
+		$("#clickDesign").click();
+		$("#devel2Click").click();		
+		$("#design2Click").click();
+	});
+</script>
+
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -291,9 +301,9 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="first-item active"><a
-								href="#design" aria-controls="arrival" role="tab"
-								data-toggle="tab">디자인</a></li>
-							<li role="presentation"><a href="#devel"
+								id="clickDesign" href="#design" aria-controls="arrival"
+								role="tab" data-toggle="tab">디자인</a></li>
+							<li role="presentation"><a href="#devel" id="clickDevel"
 								aria-controls="sale" role="tab" data-toggle="tab">IT프로그래밍</a></li>
 							<li role="presentation"><a href="#contents"
 								aria-controls="sale" role="tab" data-toggle="tab">콘텐츠 제작</a></li>
@@ -309,17 +319,19 @@
 				<div class="product-list tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="design">
 						<div class="featured-product-list indicator-style">
-							<c:forEach var="row" items="${list}">
+							<c:forEach var="row" items="${list1}">
 								<!-- 메뉴 시작-->
 								<div class="single-p-banner">
 									<div class="col-md-3">
 										<div class="single-banner">
-											<a href="#" class="single-banner-image-wrapper"> <img
-												alt=""
+											<a
+												href="projectView.do?PROJECT_IDX=${row.PROJECT_IDX}&USER_ID=${row.USER_ID}"
+												class="single-banner-image-wrapper"> <img alt=""
 												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
 											</a>
 											<div class="banner-bottom text-center">
-												<a href="#">${row.PROJECT_SUBJECT}</a>
+												<a
+													href="projectView.do?PROJECT_IDX=${row.PROJECT_IDX}&USER_ID=${row.USER_ID}">${row.PROJECT_SUBJECT}</a>
 											</div>
 											<div class="banner-bottom text-center">
 												<span class="blog-author">BY:${row.USER_NAME}</span> <span
@@ -339,12 +351,14 @@
 								<div class="single-p-banner">
 									<div class="col-md-3">
 										<div class="single-banner">
-											<a href="#" class="single-banner-image-wrapper"> <img
-												alt=""
+											<a
+												href="projectView.do?PROJECT_IDX=${row.PROJECT_IDX}&USER_ID=${row.USER_ID}"
+												class="single-banner-image-wrapper"> <img alt=""
 												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
 											</a>
 											<div class="banner-bottom text-center">
-												<a href="#">${row.PROJECT_SUBJECT}</a>
+												<a
+													href="projectView.do?PROJECT_IDX=${row.PROJECT_IDX}&USER_ID=${row.USER_ID}">${row.PROJECT_SUBJECT}</a>
 											</div>
 											<div class="banner-bottom text-center">
 												<span class="blog-author">BY:${row.USER_NAME}</span> <span
@@ -364,12 +378,14 @@
 								<div class="single-p-banner">
 									<div class="col-md-3">
 										<div class="single-banner">
-											<a href="#" class="single-banner-image-wrapper"> <img
-												alt=""
+											<a
+												href="projectView.do?PROJECT_IDX=${row.PROJECT_IDX}&USER_ID=${row.USER_ID}"
+												class="single-banner-image-wrapper"> <img alt=""
 												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
 											</a>
 											<div class="banner-bottom text-center">
-												<a href="#">${row.PROJECT_SUBJECT}</a>
+												<a
+													href="projectView.do?PROJECT_IDX=${row.PROJECT_IDX}&USER_ID=${row.USER_ID}">${row.PROJECT_SUBJECT}</a>
 											</div>
 											<div class="banner-bottom text-center">
 												<span class="blog-author">BY:${row.USER_NAME}</span> <span
@@ -389,12 +405,14 @@
 									<div class="single-p-banner">
 										<div class="col-md-3">
 											<div class="single-banner">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt=""
+												<a
+													href="projectView.do?PROJECT_IDX=${row.PROJECT_IDX}&USER_ID=${row.USER_ID}"
+													class="single-banner-image-wrapper"> <img alt=""
 													src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
 												</a>
 												<div class="banner-bottom text-center">
-													<a href="#">${row.PROJECT_SUBJECT}</a>
+													<a
+														href="projectView.do?PROJECT_IDX=${row.PROJECT_IDX}&USER_ID=${row.USER_ID}">${row.PROJECT_SUBJECT}</a>
 												</div>
 												<div class="banner-bottom text-center">
 													<span class="blog-author">BY:${row.USER_NAME}</span> <span
@@ -413,12 +431,14 @@
 										<div class="single-p-banner">
 											<div class="col-md-3">
 												<div class="single-banner">
-													<a href="#" class="single-banner-image-wrapper"> <img
-														alt=""
+													<a
+														href="projectView.do?PROJECT_IDX=${row.PROJECT_IDX}&USER_ID=${row.USER_ID}"
+														class="single-banner-image-wrapper"> <img alt=""
 														src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
 													</a>
 													<div class="banner-bottom text-center">
-														<a href="#">${row.PROJECT_SUBJECT}</a>
+														<a
+															href="projectView.do?PROJECT_IDX=${row.PROJECT_IDX}&USER_ID=${row.USER_ID}">${row.PROJECT_SUBJECT}</a>
 													</div>
 													<div class="banner-bottom text-center">
 														<span class="blog-author">BY:${row.USER_NAME}</span> <span
@@ -448,32 +468,20 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="testimonial-list">
-						<div class="single-testimonial">
-							<img
-								src="<c:url value='resources/writer/img/freeCloud/profile.jpg'/>"
-								alt="">
-							<div class="testmonial-info clearfix">
-								<p>안녕하십니까 JAVA SpringFrameWork 전문 프리랜서 김영웅입니다. 실력에는 자신있습니다
-									언제든지 불러만 주십시오!</p>
-								<div class="testimonial-author text-center">
-									<h3>김영웅</h3>
-									<p>IT프로그래밍</p>
+						<c:forEach var="row" items="${list6}" begin="0" end="3">
+							<div class="single-testimonial">
+								<img
+									src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>"
+									alt="">
+								<div class="testmonial-info clearfix">
+									<p>${row.FREELANCER_ABOUT_ME}</p>
+									<div class="testimonial-author text-center">
+										<h3>${row.USER_NAME}</h3>
+										<p>${row.FREELANCER_MAIN_KATEGORY}</p>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="single-testimonial">
-							<img
-								src="<c:url value='resources/writer/img/freeCloud/profile2.jpg'/>"
-								alt="">
-							<div class="testmonial-info clearfix">
-								<p>안녕하십니까 일러스트, 디자인 전문 프리랜서 김용웁입니다. 실력에는 자신있습니다 언제든지 불러만
-									주십시오</p>
-								<div class="testimonial-author text-center">
-									<h3>김용웁</h3>
-									<p>디자인</p>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -490,40 +498,146 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="first-item active"><a
-								href="#arrival" aria-controls="arrival" role="tab"
+								href="#design2" aria-controls="arrival" role="tab" id="design2Click"
 								data-toggle="tab">디자인</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">IT프로그래밍</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">콘텐츠 제작</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">비즈니스 컨설팅</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">주문제작</a></li>
+							<li role="presentation"><a href="#devel2" id="devel2Click"
+								aria-controls="sale" role="tab" data-toggle="tab">IT프로그래밍</a></li>
+							<li role="presentation"><a href="#contents2"
+								aria-controls="sale" role="tab" data-toggle="tab">콘텐츠 제작</a></li>
+							<li role="presentation"><a href="#consulting2"
+								aria-controls="sale" role="tab" data-toggle="tab">비즈니스 컨설팅</a></li>
+							<li role="presentation"><a href="#order2"
+								aria-controls="sale" role="tab" data-toggle="tab">주문제작</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="product-list tab-content">
-					<div role="tabpanel" class="tab-pane fade in active" id="arrival">
+					<div role="tabpanel" class="tab-pane fade in active" id="design2">
 						<div class="featured-product-list indicator-style">
-							<!-- 메뉴 시작-->
+
+								<!-- 메뉴 시작-->
 							<div class="single-p-banner">
-								<div class="col-md-3">
-									<div class="single-banner">
-										<a href="#" class="single-banner-image-wrapper"> <img
-											alt=""
-											src="<c:url value='resources/writer/img/freeCloud/profile.jpg'/>">
-										</a>
-										<div class="banner-bottom text-center">
-											<a href="#"><b>김영웅</b></a>
-										</div>
-										<div class="banner-bottom text-center">
-											Java, Spring, Jsp<br>
+								<c:forEach var="row" items="${list7}">
+									<div class="col-md-3">
+										<div class="single-banner">
+											<a href="#" class="single-banner-image-wrapper"> <img
+												alt=""
+												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
+											</a>
+											<div class="banner-bottom text-center">
+												<a href="#"><b>${row.USER_NAME}</b></a>
+											</div>
+											<div class="banner-bottom text-center">
+												${row.FREELANCER_SKILL}<br>
+											</div>
 										</div>
 									</div>
-								</div>
+								</c:forEach>
+							</div>
+							<!-- 메뉴 끝 -->
+
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade in active" id="devel2">
+						<div class="featured-product-list indicator-style">
+								<!-- 메뉴 시작-->
+							<div class="single-p-banner">
+								<c:forEach var="row" items="${list8}">
+									<div class="col-md-3">
+										<div class="single-banner">
+											<a href="#" class="single-banner-image-wrapper"> <img
+												alt=""
+												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
+											</a>
+											<div class="banner-bottom text-center">
+												<a href="#"><b>${row.USER_NAME}</b></a>
+											</div>
+											<div class="banner-bottom text-center">
+												${row.FREELANCER_SKILL}<br>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade in active" id="contents2">
+						<div class="featured-product-list indicator-style">
+
+								<!-- 메뉴 시작-->
+							<div class="single-p-banner">
+								<c:forEach var="row" items="${list9}">
+									<div class="col-md-3">
+										<div class="single-banner">
+											<a href="#" class="single-banner-image-wrapper"> <img
+												alt=""
+												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
+											</a>
+											<div class="banner-bottom text-center">
+												<a href="#"><b>${row.USER_NAME}</b></a>
+											</div>
+											<div class="banner-bottom text-center">
+												${row.FREELANCER_SKILL}<br>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+							<!-- 메뉴 끝 -->
+
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade in active"
+						id="consulting2">
+						<div class="featured-product-list indicator-style">
+
+								<!-- 메뉴 시작-->
+							<div class="single-p-banner">
+								<c:forEach var="row" items="${list10}">
+									<div class="col-md-3">
+										<div class="single-banner">
+											<a href="#" class="single-banner-image-wrapper"> <img
+												alt=""
+												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
+											</a>
+											<div class="banner-bottom text-center">
+												<a href="#"><b>${row.USER_NAME}</b></a>
+											</div>
+											<div class="banner-bottom text-center">
+												${row.FREELANCER_SKILL}<br>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+							<!-- 메뉴 끝 -->
+
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade in active" id="order2">
+						<div class="featured-product-list indicator-style">
+
+							<!-- 메뉴 시작-->
+							<div class="single-p-banner">
+								<c:forEach var="row" items="${list11}">
+									<div class="col-md-3">
+										<div class="single-banner">
+											<a href="#" class="single-banner-image-wrapper"> <img
+												alt=""
+												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
+											</a>
+											<div class="banner-bottom text-center">
+												<a href="#"><b>${row.USER_NAME}</b></a>
+											</div>
+											<div class="banner-bottom text-center">
+												${row.FREELANCER_SKILL}<br>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
 							</div>
 							<!-- 메뉴 끝 -->
 
