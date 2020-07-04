@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.ProjectViewDTO;
 import com.spring.freecloud.dto.UserDTO;
+import com.spring.freecloud.service.EtcService;
 import com.spring.freecloud.service.UserService;
 
 /**
@@ -29,54 +30,74 @@ public class HomeController {
 
 	@Autowired
 	UserService userSer;
+	@Autowired
+	EtcService etcSer;
 
-	
 	// 홈페이지
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-		public ModelAndView home(Locale locale, Model model) {
-		
-			ModelAndView mav = new ModelAndView();
-			
-			mav = sethome();
+	public ModelAndView home(Locale locale, Model model) {
 
-			return mav;
-		}
+		ModelAndView mav = new ModelAndView();
+		mav = sethome(mav);
+
+		return mav;
+	}
 
 	// 홈페이지
 	@RequestMapping(value = "home.do")
 	public ModelAndView homepage(Locale locale, Model model) {
-	
+
 		ModelAndView mav = new ModelAndView();
-		
-		mav = sethome();
+
+		mav = sethome(mav);
 
 		return mav;
 	}
-	
-	ModelAndView sethome() {
-		
+
+	// 상단 배너
+	ModelAndView setTop(ModelAndView mav) {
+		int regProject = 0;
+		int regFree = 0;
+		int edPrice = 0;
+		int allUser = 0;
+
+		regProject = etcSer.ProjectCount();
+		regFree = etcSer.RegFreeCount();
+		edPrice = etcSer.EdPrice();
+		allUser = etcSer.AllUser();
+		System.out.println("완료한 금액 : " + regFree);
+
+		mav.addObject("regProject", regProject);
+		mav.addObject("regFree", regFree);
+		mav.addObject("edPrice", edPrice);
+		mav.addObject("allUser", allUser);
+		return mav;
+	}
+
+	ModelAndView sethome(ModelAndView mav) {
+		mav = setTop(mav);
 		// 진행중인 프로젝트
-		List<ProjectViewDTO> list1 = null; 
-		List<ProjectViewDTO> list2 = null; 
+		List<ProjectViewDTO> list1 = null;
+		List<ProjectViewDTO> list2 = null;
 		List<ProjectViewDTO> list3 = null;
-		List<ProjectViewDTO> list4 = null; 
-		List<ProjectViewDTO> list5 = null; 	
+		List<ProjectViewDTO> list4 = null;
+		List<ProjectViewDTO> list5 = null;
 		// 추천 유저 리스트
-		List<UserDTO> list6 = null; 
+		List<UserDTO> list6 = null;
 		// 모든 유저 리스트
-		List<UserDTO> list7 = null; 
-		List<UserDTO> list8 = null; 
-		List<UserDTO> list9 = null; 
-		List<UserDTO> list10 = null; 
-		List<UserDTO> list11 = null; 
-		
+		List<UserDTO> list7 = null;
+		List<UserDTO> list8 = null;
+		List<UserDTO> list9 = null;
+		List<UserDTO> list10 = null;
+		List<UserDTO> list11 = null;
+
 		// 진행중인 프로젝트 목록 가져오기
 		list1 = userSer.viewProjectList("design");
 		list2 = userSer.viewProjectList("devel");
 		list3 = userSer.viewProjectList("contents");
 		list4 = userSer.viewProjectList("consulting");
 		list5 = userSer.viewProjectList("order");
-		
+
 		// 추천유저리스트
 		list6 = userSer.UserList();
 		// 유저리스트
@@ -85,8 +106,7 @@ public class HomeController {
 		list9 = userSer.UserListALL("contents");
 		list10 = userSer.UserListALL("consulting");
 		list11 = userSer.UserListALL("order");
-		ModelAndView mav = new ModelAndView();
-		
+
 		// 진행중인 프로젝트
 		mav.addObject("list1", list1);
 		mav.addObject("list2", list2);
@@ -99,10 +119,9 @@ public class HomeController {
 		mav.addObject("list9", list9);
 		mav.addObject("list10", list10);
 		mav.addObject("list11", list11);
-		
+
 		mav.setViewName("home");
 		return mav;
 	}
-
 
 }
