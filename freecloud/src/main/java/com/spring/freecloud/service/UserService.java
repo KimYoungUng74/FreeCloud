@@ -12,10 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
 
 import com.spring.freecloud.dao.UserDAO;
-<<<<<<< HEAD
-=======
 import com.spring.freecloud.dto.PortfolioDTO;
->>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
+
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.util.PagingDTO;
@@ -97,7 +95,7 @@ public class UserService {
 		return dao.seekPw(dto);
 	}
 
-<<<<<<< HEAD
+
 	// 프리랜서 리스트 조회
 	public List<UserDTO> listAll() {
 		// TODO Auto-generated method stub
@@ -116,7 +114,7 @@ public class UserService {
 	public List<ProjectDTO> selectProject(PagingDTO dto) {
 		return dao.selectProject(dto);
 	}
-=======
+
 	// 회원정보 수정
 	public int userModify(UserDTO dto) {
 		System.out.println(dto.toString());
@@ -206,6 +204,4 @@ public class UserService {
 		// TODO Auto-generated method stub
 		return dao.rEdMyProject(USER_ID);
 	}
-
->>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 }

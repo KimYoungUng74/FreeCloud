@@ -207,10 +207,10 @@ public class UserController {
 	public ModelAndView projectApply(Locale locale, HttpSession sessison) {
 		System.out.println("projectRequest에 접근함");
 
-		List<MyfreelancerDTO> ingList = null; // 진행중인 프로젝트
-		List<MyfreelancerDTO> requestedList = null; // 지원 요청 된 프로젝트
-		List<MyfreelancerDTO> requestList = null; // 지원한 프로젝트
-		List<MyfreelancerDTO> edList = null; // 완료한 프로젝트
+		List<ProjectDTO> ingList = null; // 진행중인 프로젝트
+		List<ProjectDTO> requestedList = null; // 지원 요청 된 프로젝트
+		List<ProjectDTO> requestList = null; // 지원한 프로젝트
+		List<ProjectDTO> edList = null; // 완료한 프로젝트
 		
 		String userId =sessison.getAttribute("userId").toString();	// 유저 아이디
 		String myprofile = userSer.myProfile(userId); // 프로필 사진 가져오기
@@ -267,7 +267,7 @@ public class UserController {
 			}
 
 		} else {
-			if (1 == userSer.userModify2(dto)) {
+			if (1 == userSer.userModify(dto)) {
 				System.out.println("회원정보 수정 되었음");
 			} else {
 				System.out.println("회원정보 수정 실패");
