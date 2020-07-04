@@ -258,10 +258,19 @@ public class UserController {
 	// 회원정보 수정
 	@RequestMapping(value = "myInfoModify.do", method = RequestMethod.POST)
 	public ModelAndView myInfoModify(Locale locale, UserDTO dto) {
-		if (1 == userSer.userModify(dto)) {
-			System.out.println("회원정보 수정 되었음");
+		if(dto.getUSER_PW().equals("")) {
+			if (1 == userSer.userModify(dto)) {
+				System.out.println("회원정보 수정 되었음");
+			} else {
+				System.out.println("회원정보 수정 실패");
+			}
+
 		} else {
-			System.out.println("회원정보 수정 실패");
+			if (1 == userSer.userModify2(dto)) {
+				System.out.println("회원정보 수정 되었음");
+			} else {
+				System.out.println("회원정보 수정 실패");
+			}
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("home");

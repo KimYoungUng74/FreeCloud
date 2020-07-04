@@ -590,7 +590,7 @@
 								<div class="col-md-6">
 									<p>
 										<label> 비밀번호 : </label> <input type="password"
-											name="USER_PASS" value="">
+											name="USER_PW" value="">
 									<p>
 									<p>
 										<label> 이름 : </label> <input type="text" name="USER_NAME"

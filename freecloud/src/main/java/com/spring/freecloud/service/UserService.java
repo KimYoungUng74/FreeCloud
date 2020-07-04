@@ -101,6 +101,13 @@ public class UserService {
 
 		return 1;
 	}
+	// 회원정보 수정 + 비밀번호 
+	public int userModify2(UserDTO dto) {
+		System.out.println(dto.toString());
+		dao.userModify2(dto); // 회원정보 수정
+
+		return 1;
+	}
 
 	// 프로필 변경
 	public void changeProfile(String savedName, String userid) {
@@ -183,5 +190,7 @@ public class UserService {
 		// TODO Auto-generated method stub
 		return dao.rEdMyProject(USER_ID);
 	}
+
+
 
 }

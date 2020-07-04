@@ -75,7 +75,9 @@
 		</script>
 	</c:if>
 	<c:if test="${msg == 'success'}">
-		<script> alert("${sessionScope.userName}님 환영합니다.");</script>
+		<script>
+			alert("${sessionScope.userName}님 환영합니다.");
+		</script>
 	</c:if>
 	<!-- Add your site or application content here -->
 	<!--Header Area Start-->
@@ -289,127 +291,144 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="first-item active"><a
-								href="#arrival" aria-controls="arrival" role="tab"
+								href="#design" aria-controls="arrival" role="tab"
 								data-toggle="tab">디자인</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">IT프로그래밍</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">콘텐츠 제작</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">비즈니스 컨설팅</a></li>
-							<li role="presentation"><a href="#sale" aria-controls="sale"
-								role="tab" data-toggle="tab">주문제작</a></li>
+							<li role="presentation"><a href="#devel"
+								aria-controls="sale" role="tab" data-toggle="tab">IT프로그래밍</a></li>
+							<li role="presentation"><a href="#contents"
+								aria-controls="sale" role="tab" data-toggle="tab">콘텐츠 제작</a></li>
+							<li role="presentation"><a href="#consulting"
+								aria-controls="sale" role="tab" data-toggle="tab">비즈니스 컨설팅</a></li>
+							<li role="presentation"><a href="#order"
+								aria-controls="sale" role="tab" data-toggle="tab">주문제작</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="product-list tab-content">
-					<div role="tabpanel" class="tab-pane fade in active" id="arrival">
+					<div role="tabpanel" class="tab-pane fade in active" id="design">
 						<div class="featured-product-list indicator-style">
-							<!-- 메뉴 시작-->
-							<div class="single-p-banner">
-								<div class="col-md-3">
-									<div class="single-banner">
-										<a href="#" class="single-banner-image-wrapper"> <img
-											alt=""
-											src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
-										</a>
-										<div class="banner-bottom text-center">
-											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
-										</div>
-										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span> <span
-												class="blog-date">2020년 04년 24일</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- 메뉴 끝 -->
-
-							<div class="single-p-banner">
-								<div class="col-md-3">
-									<div class="single-banner">
-										<a href="#" class="single-banner-image-wrapper"> <img
-											alt=""
-											src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
-										</a>
-										<div class="banner-bottom text-center">
-											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
-										</div>
-										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span> <span
-												class="blog-date">2020년 04년 24일</span>
+							<c:forEach var="row" items="${list}">
+								<!-- 메뉴 시작-->
+								<div class="single-p-banner">
+									<div class="col-md-3">
+										<div class="single-banner">
+											<a href="#" class="single-banner-image-wrapper"> <img
+												alt=""
+												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
+											</a>
+											<div class="banner-bottom text-center">
+												<a href="#">${row.PROJECT_SUBJECT}</a>
+											</div>
+											<div class="banner-bottom text-center">
+												<span class="blog-author">BY:${row.USER_NAME}</span> <span
+													class="blog-date">${row.PROJECT_START_DATE}</span>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="single-p-banner">
-								<div class="col-md-3">
-									<div class="single-banner">
-										<a href="#" class="single-banner-image-wrapper"> <img
-											alt=""
-											src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
-										</a>
-										<div class="banner-bottom text-center">
-											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
-										</div>
-										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span> <span
-												class="blog-date">2020년 04년 24일</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="single-p-banner">
-								<div class="col-md-3">
-									<div class="single-banner">
-										<a href="#" class="single-banner-image-wrapper"> <img
-											alt=""
-											src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
-										</a>
-										<div class="banner-bottom text-center">
-											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
-										</div>
-										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span> <span
-												class="blog-date">2020년 04년 24일</span>
+								<!-- 메뉴 끝 -->
+							</c:forEach>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade in active" id="devel">
+						<div class="featured-product-list indicator-style">
+							<c:forEach var="row" items="${list2}">
+								<!-- 메뉴 시작-->
+								<div class="single-p-banner">
+									<div class="col-md-3">
+										<div class="single-banner">
+											<a href="#" class="single-banner-image-wrapper"> <img
+												alt=""
+												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
+											</a>
+											<div class="banner-bottom text-center">
+												<a href="#">${row.PROJECT_SUBJECT}</a>
+											</div>
+											<div class="banner-bottom text-center">
+												<span class="blog-author">BY:${row.USER_NAME}</span> <span
+													class="blog-date">${row.PROJECT_START_DATE}</span>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="single-p-banner">
-								<div class="col-md-3">
-									<div class="single-banner">
-										<a href="#" class="single-banner-image-wrapper"> <img
-											alt=""
-											src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
-										</a>
-										<div class="banner-bottom text-center">
-											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
-										</div>
-										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span> <span
-												class="blog-date">2020년 04년 24일</span>
+								<!-- 메뉴 끝 -->
+							</c:forEach>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade in active" id="contents">
+						<div class="featured-product-list indicator-style">
+							<c:forEach var="row" items="${list3}">
+								<!-- 메뉴 시작-->
+								<div class="single-p-banner">
+									<div class="col-md-3">
+										<div class="single-banner">
+											<a href="#" class="single-banner-image-wrapper"> <img
+												alt=""
+												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
+											</a>
+											<div class="banner-bottom text-center">
+												<a href="#">${row.PROJECT_SUBJECT}</a>
+											</div>
+											<div class="banner-bottom text-center">
+												<span class="blog-author">BY:${row.USER_NAME}</span> <span
+													class="blog-date">${row.PROJECT_START_DATE}</span>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="single-p-banner">
-								<div class="col-md-3">
-									<div class="single-banner">
-										<a href="#" class="single-banner-image-wrapper"> <img
-											alt=""
-											src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
-										</a>
-										<div class="banner-bottom text-center">
-											<a href="#">올룩꿀룩 : 중고거래 종합 사이트 제작</a>
-										</div>
-										<div class="banner-bottom text-center">
-											<span class="blog-author">BY:곽지용</span> <span
-												class="blog-date">2020년 04년 24일</span>
+								<!-- 메뉴 끝 -->
+							</c:forEach>
+						</div>
+						<div role="tabpanel" class="tab-pane fade in active"
+							id="consulting">
+							<div class="featured-product-list indicator-style">
+								<c:forEach var="row" items="${list4}">
+									<!-- 메뉴 시작-->
+									<div class="single-p-banner">
+										<div class="col-md-3">
+											<div class="single-banner">
+												<a href="#" class="single-banner-image-wrapper"> <img
+													alt=""
+													src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
+												</a>
+												<div class="banner-bottom text-center">
+													<a href="#">${row.PROJECT_SUBJECT}</a>
+												</div>
+												<div class="banner-bottom text-center">
+													<span class="blog-author">BY:${row.USER_NAME}</span> <span
+														class="blog-date">${row.PROJECT_START_DATE}</span>
+												</div>
+											</div>
 										</div>
 									</div>
+									<!-- 메뉴 끝 -->
+								</c:forEach>
+							</div>
+							<div role="tabpanel" class="tab-pane fade in active" id="order">
+								<div class="featured-product-list indicator-style">
+									<c:forEach var="row" items="${list5}">
+										<!-- 메뉴 시작-->
+										<div class="single-p-banner">
+											<div class="col-md-3">
+												<div class="single-banner">
+													<a href="#" class="single-banner-image-wrapper"> <img
+														alt=""
+														src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
+													</a>
+													<div class="banner-bottom text-center">
+														<a href="#">${row.PROJECT_SUBJECT}</a>
+													</div>
+													<div class="banner-bottom text-center">
+														<span class="blog-author">BY:${row.USER_NAME}</span> <span
+															class="blog-date">${row.PROJECT_START_DATE}</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- 메뉴 끝 -->
+									</c:forEach>
 								</div>
 							</div>
 						</div>

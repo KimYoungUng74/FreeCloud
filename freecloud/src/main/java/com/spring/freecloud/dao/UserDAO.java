@@ -114,7 +114,12 @@ public class UserDAO {
 	// 회원정보 수정
 	public void userModify(UserDTO dto) {
 
-		mybatis.insert("UserMapper.userInfoChange", dto);
+		mybatis.update("UserMapper.userInfoChange", dto);
+	}
+	// 회원정보 수정 + 비밀번호
+	public void userModify2(UserDTO dto) {
+		dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
+		mybatis.update("UserMapper.userInfoChange2", dto);
 	}
 	// 비밀번호 체크
 	public String checkPw(UserDTO dto) {
@@ -168,4 +173,5 @@ public class UserDAO {
 		// TODO Auto-generated method stub
 		return mybatis.selectList("UserMapper.rEdMyProject", FREELANCER_ID);
 	}
+
 }
