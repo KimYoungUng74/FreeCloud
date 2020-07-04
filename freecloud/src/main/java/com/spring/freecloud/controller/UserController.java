@@ -2,8 +2,11 @@ package com.spring.freecloud.controller;
 
 import java.io.File;
 import java.io.IOException;
+<<<<<<< HEAD
+=======
 import java.text.DateFormat;
 import java.util.Date;
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -31,6 +34,7 @@ import com.spring.freecloud.dto.MyfreelancerDTO;
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.service.UserService;
+import com.spring.freecloud.util.PagingDTO;
 
 /**
  * Handles requests for the application home page.
@@ -395,6 +399,60 @@ public class UserController {
 		FileCopyUtils.copy(fileData, target);
 		return savedName;
 	}
+<<<<<<< HEAD
+	
+	 // 디렉토리 생성
+    private static void makeDir(String uploadPath, String... paths) {
+        // 디렉토리가 존재하면
+        if (new File(paths[paths.length - 1]).exists()){
+            return;
+        }
+        // 디렉토리가 존재하지 않으면
+        for (String path : paths) {
+            // 
+            File dirPath = new File(uploadPath + path);
+            // 디렉토리가 존재하지 않으면
+            if (!dirPath.exists()) {
+                dirPath.mkdir(); //디렉토리 생성
+            }
+        }
+    }  
+    
+    // 프리랜서 목록 리스트 조회 화면
+  	@RequestMapping(value = "freelancerSearch.do")
+  	public ModelAndView list(PagingDTO dto, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage,
+			@RequestParam(value = "wk", required = false) String wk) {
+
+		System.out.println("ProjectSearch.jsp" + wk);
+		/*
+		 * List<ProjectDTO> list = projectSer.selectProject(dto); for(int i=0;
+		 * i<list.size(); i++) { System.out.println(i + "번째 값 : " + list.get(i)); }
+		 * System.out.println("값이 없다는거임?"); System.out.println(list + " 값좀줘요");
+		 */
+		int total = userSer.countBoard();
+
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) {
+			cntPerPage = "5";
+		}
+
+		dto = new PagingDTO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+		List<ProjectDTO> list = userSer.selectProject(dto);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("freelancerSearch");
+		mav.addObject("paging", dto);
+		mav.addObject("viewAll", list);
+
+		return mav;
+=======
 
 	// 디렉토리 생성
 	private static void makeDir(String uploadPath, String... paths) {
@@ -411,6 +469,7 @@ public class UserController {
 				dirPath.mkdir(); // 디렉토리 생성
 			}
 		}
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 	}
 
 }

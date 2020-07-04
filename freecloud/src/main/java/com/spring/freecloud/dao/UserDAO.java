@@ -11,10 +11,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.spring.freecloud.dto.MyfreelancerDTO;
+<<<<<<< HEAD
+=======
 import com.spring.freecloud.dto.PortfolioDTO;
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
+import com.spring.freecloud.util.PagingDTO;
 import com.spring.freecloud.util.SHA256;
 
 //[DB연결 사용법] 3. 인터페이스 받아서 클래스 생성
@@ -61,43 +64,65 @@ public class UserDAO {
 	// 아이디 찾기
 	public String seekId(UserDTO dto) {
 		String id = mybatis.selectOne("UserMapper.seekId", dto);
-		return (null==id) ? "" : id;
+		return (null == id) ? "" : id;
 	}
+
 	// 비밀번호 찾기
 	public String seekPw(UserDTO dto) {
 		String id = mybatis.selectOne("UserMapper.seekPw", dto);
-		if(null == id) {
-			return "notFound";	// 정보가 일치 하지 않을 때
+		if (null == id) {
+			return "notFound"; // 정보가 일치 하지 않을 때
 		} else {
-			String pw = randomPw1()+randomPw2()+randomPw1()+randomPw2();			
+			String pw = randomPw1() + randomPw2() + randomPw1() + randomPw2();
 			dto.setUSER_PW(pw);
 			dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
-			if(0==mybatis.update("UserMapper.seekPw2", dto)) {
-				return "dbError";	// DB오류
+			if (0 == mybatis.update("UserMapper.seekPw2", dto)) {
+				return "dbError"; // DB오류
 			} else {
 				return pw; // 성공
-			}	
+			}
 		}
 	}
-	
+
 	// 랜덤 문자 생성
 	public String randomPw1() {
 		String rand = "";
 		double dValue = Math.random();
-	    char cValue = (char)((dValue * 26) + 65);	// 대문자
-	    rand += cValue;
-	    dValue = Math.random();
-	    cValue = (char)((dValue * 26) + 97); // 소문자
-	    rand += cValue;
+		char cValue = (char) ((dValue * 26) + 65); // 대문자
+		rand += cValue;
+		dValue = Math.random();
+		cValue = (char) ((dValue * 26) + 97); // 소문자
+		rand += cValue;
 		return rand;
 	}
+
 	// 랜덤 숫자 생성
 	public int randomPw2() {
 		double dValue = Math.random();
 
-	    int iValue = (int)(dValue * 10) + 1; //1~10
-	    
-	    return iValue;
+		int iValue = (int) (dValue * 10) + 1; // 1~10
+
+		return iValue;
+	}
+
+	// 프로젝트 목록 조회
+	public List<UserDTO> listAll() {
+		// TODO Auto-generated method stub
+		// return mybatis.selectOne("UserMapper.viewUser", dto);
+
+		return mybatis.selectList("UserMapper.freelancerListAll");
+	}
+
+	// 게시글 총 갯수
+
+	public int countBoard() {
+		return mybatis.selectOne("UserMapper.countBoard");
+	}
+
+	// 페이징 처리 게시글 조회
+
+	public List<ProjectDTO> selectProject(PagingDTO dto) {
+		return mybatis.selectList("UserMapper.selectBoard", dto);
 	}
 	// 프로필 변경
 	public void changeProfile(UserDTO dto) {
@@ -114,12 +139,7 @@ public class UserDAO {
 	// 회원정보 수정
 	public void userModify(UserDTO dto) {
 
-		mybatis.update("UserMapper.userInfoChange", dto);
-	}
-	// 회원정보 수정 + 비밀번호
-	public void userModify2(UserDTO dto) {
-		dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
-		mybatis.update("UserMapper.userInfoChange2", dto);
+		mybatis.insert("UserMapper.userInfoChange", dto);
 	}
 	// 비밀번호 체크
 	public String checkPw(UserDTO dto) {
@@ -154,24 +174,23 @@ public class UserDAO {
 	
 	/* 프로젝트 지원 형황 */
 	// 진행중인 나의 프로젝트 - 지원
-	public List<MyfreelancerDTO> rIngMyProject(String FREELANCER_ID) {
+	public List<ProjectDTO> rIngMyProject(String USER_ID) {
 		// TODO Auto-generated method stub
-		return mybatis.selectList("UserMapper.rIngMyProject", FREELANCER_ID);
+		return mybatis.selectList("UserMapper.rIngMyProject", USER_ID);
 	}
-	// 지원 요청 된 프로젝트 
-	public List<MyfreelancerDTO> requestedProject(String FREELANCER_ID) {
+	// 지원 요청된 프로젝트 
+	public List<ProjectDTO> requestedProject(String USER_ID) {
 		// TODO Auto-generated method stub
-		return mybatis.selectList("UserMapper.requestedProject", FREELANCER_ID);
+		return mybatis.selectList("UserMapper.requestedProject", USER_ID);
 	}
 	// 지원한 프로젝트
-	public List<MyfreelancerDTO> requestProject(String FREELANCER_ID) {
+	public List<ProjectDTO> requestProject(String USER_ID) {
 		// TODO Auto-generated method stub
-		return mybatis.selectList("UserMapper.requestProject", FREELANCER_ID);
+		return mybatis.selectList("UserMapper.requestProject", USER_ID);
 	}
 	// 완료한 프로젝트 - 지원
-	public List<MyfreelancerDTO> rEdMyProject(String FREELANCER_ID) {
+	public List<ProjectDTO> rEdMyProject(String USER_ID) {
 		// TODO Auto-generated method stub
-		return mybatis.selectList("UserMapper.rEdMyProject", FREELANCER_ID);
+		return mybatis.selectList("UserMapper.rEdMyProject", USER_ID);
 	}
-
 }

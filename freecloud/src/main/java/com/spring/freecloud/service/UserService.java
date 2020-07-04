@@ -12,10 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
 
 import com.spring.freecloud.dao.UserDAO;
-import com.spring.freecloud.dto.MyfreelancerDTO;
+<<<<<<< HEAD
+=======
 import com.spring.freecloud.dto.PortfolioDTO;
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
+import com.spring.freecloud.util.PagingDTO;
 
 @Service("IUserService")
 public class UserService {
@@ -94,17 +97,30 @@ public class UserService {
 		return dao.seekPw(dto);
 	}
 
+<<<<<<< HEAD
+	// 프리랜서 리스트 조회
+	public List<UserDTO> listAll() {
+		// TODO Auto-generated method stub
+
+		return dao.listAll();
+	}
+
+	// 게시글 총 갯수
+
+	public int countBoard() {
+		return dao.countBoard();
+	}
+
+	// 페이징 처리 게시글 조회
+
+	public List<ProjectDTO> selectProject(PagingDTO dto) {
+		return dao.selectProject(dto);
+	}
+=======
 	// 회원정보 수정
 	public int userModify(UserDTO dto) {
 		System.out.println(dto.toString());
 		dao.userModify(dto); // 회원정보 수정
-
-		return 1;
-	}
-	// 회원정보 수정 + 비밀번호 
-	public int userModify2(UserDTO dto) {
-		System.out.println(dto.toString());
-		dao.userModify2(dto); // 회원정보 수정
 
 		return 1;
 	}
@@ -171,26 +187,25 @@ public class UserService {
 
 	/* 프로젝트 지원 형황 */
 	// 진행중인 나의 프로젝트 - 지원
-	public List<MyfreelancerDTO> rIngMyProject(String USER_ID) {
+	public List<ProjectDTO> rIngMyProject(String USER_ID) {
 		// TODO Auto-generated method stub
 		return dao.rIngMyProject(USER_ID);
 	}
 	// 지원 요청된 프로젝트 
-	public List<MyfreelancerDTO> requestedProject(String USER_ID) {
+	public List<ProjectDTO> requestedProject(String USER_ID) {
 		// TODO Auto-generated method stub
 		return dao.requestedProject(USER_ID);
 	}
 	// 지원한 프로젝트
-	public List<MyfreelancerDTO> requestProject(String USER_ID) {
+	public List<ProjectDTO> requestProject(String USER_ID) {
 		// TODO Auto-generated method stub
 		return dao.requestProject(USER_ID);
 	}
 	// 완료한 프로젝트 - 지원
-	public List<MyfreelancerDTO> rEdMyProject(String USER_ID) {
+	public List<ProjectDTO> rEdMyProject(String USER_ID) {
 		// TODO Auto-generated method stub
 		return dao.rEdMyProject(USER_ID);
 	}
 
-
-
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 }

@@ -29,4 +29,66 @@
 		1
 		)
 	</insert>
+	
+	<!-- 프로젝트 참여 -->
+	<insert id="projectJoin">
+		INSERT INTO FREE_MYFREELANCER(PROJECT_IDX, PROJECT_SUBJECT, CLIENT_ID, FREELANCER_ID,PROJECT_STATUS)
+		VALUES(
+		#{PROJECT_IDX},
+		#{PROJECT_SUBJECT}, 
+		#{CLIENT_ID}, 
+		#{FREELANCER_ID}, 
+		#{PROJECT_STATUS}
+		)
+	</insert>
+	
+	
+	<!-- 프로젝트 리스트 보기 -->
+	<select id="projectListAll" parameterType="ProjectDTO" resultType="ProjectDTO">
+		SELECT * 
+		FROM FREE_PROJECT
+		ORDER BY PROJECT_IDX DESC
+	</select>
+	
+	<!-- 프로젝트 보기 -->
+	<select id="projectView" resultType="ProjectDTO">
+		SELECT * 
+		FROM FREE_PROJECT
+		WHERE PROJECT_IDX = ${PROJECT_IDX}
+	</select>
+	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countBoard" resultType="int">
+		SELECT COUNT(*)
+		FROM FREE_PROJECT
+	</select>
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="selectBoard" resultType="ProjectDTO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * 
+						FROM FREE_PROJECT
+						ORDER BY PROJECT_IDX DESC 
+						) A
+				)
+	WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- <select id="getTList" resultType="hashmap" parameterType="hashmap">
+    SELECT
+        name, age
+    FROM
+        TB_user
+    WHERE
+        age = #{sUser_age} AND
+        <foreach collection="sUser_type" item="type"  open="(" close=")" separator="or">
+            user_type = #{type.value}
+        </foreach>
+</select> -->
+ 
+
+	
 </mapper>

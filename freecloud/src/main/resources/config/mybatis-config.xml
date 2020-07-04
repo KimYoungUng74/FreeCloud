@@ -9,8 +9,13 @@
 		<typeAlias type="com.spring.freecloud.dto.UserDTO" alias="UserDTO"></typeAlias>
 		<typeAlias type="com.spring.freecloud.dto.BoardDTO" alias="BoardDTO"></typeAlias>
 		<typeAlias type="com.spring.freecloud.dto.ProjectDTO" alias="ProjectDTO"></typeAlias>
+<<<<<<< HEAD
+		<typeAlias type="com.spring.freecloud.dto.ProjectJoinDTO" alias="ProjectJoinDTO"></typeAlias>
+		<typeAlias type="com.spring.freecloud.util.PagingDTO" alias="PagingDTO"></typeAlias>
+		
+=======
 		<typeAlias type="com.spring.freecloud.dto.PortfolioDTO" alias="PortfolioDTO"></typeAlias>
-			<typeAlias type="com.spring.freecloud.dto.MyfreelancerDTO" alias="MyfreelancerDTO"></typeAlias>
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 	</typeAliases>
 	
 	

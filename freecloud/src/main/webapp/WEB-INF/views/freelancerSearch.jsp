@@ -20,6 +20,38 @@ function showCheckboxes() {
     expanded = false;
   }
 }
+
+function selChange() {
+	var sel = document.getElementById('cntPerPage').value;
+	location.href="freelancerSearch.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
+}
+
+// 근무형태 , 카테고리 , 지역 값 넘기기
+	function selChckChange() {
+		
+		var wk = $("input:radio[name='PROJECT_WORKING_KIND']:checked").val();
+		var sel = document.getElementById('cntPerPage').value;
+		
+	    var mkd = new Array();
+	    var mkds = new Array();
+		var addr = new Array();
+	
+	    $("input[name='PROJECT_MIDDLE_KATEGORY_D']:checked").each(function() {
+	    	mkd.push( $(this).val());	    	
+	    })
+	    
+	    $("input[name='PROJECT_MIDDLE_KATEGORY_DS']:checked").each(function() {
+	    	mkds.push( $(this).val());	    	
+	    })
+	    
+	    $("input[name='PROJECT_ADDRESS']:checked").each(function() {
+	    	addr.push( $(this).val());	    	
+	    })
+	  
+		location.href="projectSearch.do?nowPage=${paging.nowPage}&cntPerPage="+sel+"&wk="+wk+"&mkd="+mkd+"&mkds="+mkds+"addr="+addr;		
+	}
+
+
 </script>
 
 <style type="text/css">
@@ -162,10 +194,10 @@ function showCheckboxes() {
 									</h4>
 									<ul class="sub-menu">
 										<li><a href="projectReg.do">프로젝트 등록</a></li>
-										<li><a href="cart.html">프로젝트 찾기</a></li>
+										<li><a href="projectSearch.do">프로젝트 찾기</a></li>
 									</ul></li>
 								<li><h4>
-										<a href="shop.html">프리랜서 찾기</a>
+										<a href="freelancerSearch.do">프리랜서 찾기</a>
 									</h4></li>
 								<li><h4>
 										<a href="shop.html">정보구름</a>
@@ -352,7 +384,7 @@ function showCheckboxes() {
 								<h2 class="sidebar-title text-center">프리랜서 필터</h2>
 								
 
-								<h2 class="sidebar-title">
+				<!-- 				<h2 class="sidebar-title">
 									<p>&nbsp;&nbsp;<b>선호 프로젝트 형태</b></p>
 									<div class="wKind">
 
@@ -361,7 +393,7 @@ function showCheckboxes() {
 											type="checkbox" class="chkbox1"> 상주
 
 									</div>
-								</h2>
+								</h2> -->
 							</aside>
 							<p><b style="font-size: 16px">&nbsp;&nbsp;프리랜서 카테고리</b></p>
 							<!-- panel1 -->
@@ -710,46 +742,56 @@ function showCheckboxes() {
 								<ul>
 									<li class="product-size-deatils">
 										<div class="show-label">
-											<label>Show : </label> <select>
-												<option value="10" selected="selected">10</option>
-												<option value="09">09</option>
-												<option value="08">08</option>
-												<option value="07">07</option>
-												<option value="06">06</option>
-											</select>
+											<label>Show : </label> 
+											<select id="cntPerPage" name="sel" onchange="selChange()">
+											<option value="5"
+												<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5</option>
+											<option value="10"
+												<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10</option>
+											<option value="15"
+												<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15</option>
+											<option value="20"
+												<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20</option>
+										</select>
 										</div>
 									</li>
-									<li class="product-size-deatils">
-										<div class="show-label">
-											<label><i class="fa fa-sort-amount-asc"></i>Sort by :
-											</label> <select>
-												<option value="position" selected="selected">Position</option>
-												<option value="Name">Name</option>
-												<option value="Price">Price</option>
-											</select>
-										</div>
-									</li>
-									<li class="shop-pagination"><a href="#">1</a></li>
-									<li class="shop-pagination"><a href="#">2</a></li>
-									<li class="shop-pagination"><a href="#"><i
-											class="fa fa-caret-right"></i></a></li>
+									
+									<c:if test="${paging.startPage != 1 }">
+										<a href="freelancerSearch.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}"><i
+											class="fa fa-caret-left"></i></a>
+									</c:if>
+									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+										<c:choose>
+											<c:when test="${p == paging.nowPage }">
+												<b><li class="shop-pagination">${p }</li></b>
+											</c:when>
+											<c:when test="${p != paging.nowPage }">
+												<a href="freelancerSearch.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}"><li class="shop-pagination">${p }</li></a>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${paging.endPage != paging.lastPage}">
+										<a href="freelancerSearch.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}"><i
+											class="fa fa-caret-right"></i></a>
+									</c:if>
 								</ul>
 							</div>
 						</div>
 						<div class="tab-content">
+						<!-- Grid 형으로 글 목록 출력 -->
+						
 							<div class="row tab-pane fade in active" id="home">
 								<div class="shop-single-product-area">
-									
+									<c:forEach var="gRow" items="${viewAll }">
 									<div class="col-md-4 col-sm-6">
 										<div class="single-banner">
 											<div class="product-wrapper">
+												<!-- 클릭하면 해당 프리랜서 상세로 이동 -->
 												<a href="#" class="single-banner-image-wrapper"> <img
 													alt="" src="resources/writer/img/featured/2.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
+													
 												</a>
-												<div class="product-description">
+												<!-- <div class="product-description">
 													<div class="functional-buttons">
 														<a href="#" title="Add to Cart"> <i
 															class="fa fa-shopping-cart"></i>
@@ -760,443 +802,79 @@ function showCheckboxes() {
 															class="fa fa-compress"></i>
 														</a>
 													</div>
-												</div>
+												</div> -->
 											</div>
 											<div class="banner-bottom text-center">
 												<div class="banner-bottom-title">
-													<a href="#">People of the book</a>
+													<!-- 클릭하면 해당 프리랜서 상세로 이동 -->
+													<a href="#">${gRow.USER_ID }</a>
+													<c:choose>
+															<c:when test="${gRow.FREELANCER_MAIN_KATEGORY eq '개발'}">
+																<span class="new-price"><i class="fa fa-building"></i>&nbsp;&nbsp;개발자 (${gRow.FREELANCER_MIDDEL_KATEGORY})</span>
+															</c:when>
+															
+															<c:when test="${gRow.FREELANCER_MAIN_KATEGORY eq '디자인'}">
+																<span class="new-price"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;디자이너(${gRow.FREELANCER_MIDDEL_KATEGORY})</span>
+															</c:when>
+													</c:choose>
 												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
+												<div class="new-price1">
+													<i class="fa fa-language"></i>&nbsp;${gRow.FREELANCER_SKILL }
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/3.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">The secret letter</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/4.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">Lone some dove</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/5.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">The historian</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/6.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">East of eden</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/7.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">Cold mountain</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/8.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">Twilight</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									
+									</c:forEach>		
 								</div>
 							</div>
+							
+							<!-- List 형으로 글 목록 출력 -->
 							<div id="menu1" class="tab-pane fade">
 								<div class="row">
-									
-									<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="People of the book">
-													<img src="resources/writer/img/featured/2.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프리랜서 1</a>
-												</h4>
-												<div class="product-price">
-												
-													<span class="new-price"><i class="fa fa-building"></i>&nbsp;&nbsp;개발자</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-child"></i>&nbsp;&nbsp;개인</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> JAVA 서버, PHP, Phyton 전문 개발자 입니다. 서버 및 네트워크 개발에 전문성을 가지고 있으며,
-												 웹개발도 가능합니다. 현재 개인사정으로 회사를 퇴직하고 재택으로 근무하고 있으며, 그만큼.....</p>
-												<div class="availability">
-													<span><a href="cart.html">프리랜서 상세 보러가기</a></span>
+								<!-- 글 리스트 시작 -->	
+								<c:forEach var="lRow" items="${viewAll }">
+										<div class="single-shop-product">
+											<div class="col-xs-12 col-sm-5 col-md-4">
+												<div class="left-item">
+													<a href="single-product.html" title="People of the book">
+														<img src="resources/writer/img/featured/2.jpg" alt="">
+													</a>
 												</div>
 											</div>
-										</div>
-									</div>
-									<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="The secret letter">
-													<img src="resources/writer/img/featured/3.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프리랜서 2</a>
-												</h4>
-												<div class="product-price">
-												
-													<span class="new-price"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;디자이너</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-child"></i>&nbsp;&nbsp;팀</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> 안녕하세요. 10년차 디자이너들로 이루어진 디자인 팀 입니다. 웹 기획 및 디자인, 워드프로세스 테마제작, 테마 커스터마이징 등 모든일을 수행하고 있습니다.</p>
-												<div class="availability">
-													<span><a href="cart.html">프리랜서 상세 보러가기</a></span>
+											<div class="col-xs-12 col-sm-7 col-md-8">
+												<div class="deal-product-content">
+													<h4>
+														<a href="single-product.html" title="">${lRow.USER_ID }</a>
+													</h4>
+													<div class="product-price">
+														<c:choose>
+															<c:when test="${lRow.FREELANCER_MAIN_KATEGORY eq '개발'}">
+																<span class="new-price"><i class="fa fa-building"></i>&nbsp;&nbsp;개발자(${gRow.FREELANCER_MIDDEL_KATEGORY})</span> <span>|</span>
+															</c:when>
+															
+															<c:when test="${lRow.FREELANCER_MAIN_KATEGORY eq '디자인'}">
+															<span class="new-price"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;디자이너(${gRow.FREELANCER_MIDDEL_KATEGORY})</span>	 <span>|</span>
+															</c:when>
+														</c:choose>
+														<!-- fa fa-child => fa fa-language -->
+														<span class="new-price1"><i class="fa fa-language"></i>&nbsp;&nbsp;${lRow.FREELANCER_SKILL }</span> <span>|</span>
+														<span class="text-light">${lRow.FREELANCER_MIDDEL_KATEGORY }</span> 
+														<!-- <span class="old-price">$ 120.00</span> -->
+													</div>
+													<!-- <div class="list-rating-icon">
+														<i class="fa fa-star icolor"></i> <i
+															class="fa fa-star icolor"></i> <i
+															class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</div> -->
+													<p> ${lRow.FREELANCER_ABOUT_ME }</p>
+													<div class="availability">
+														<span><a href="cart.html">프리랜서 상세 보러가기</a></span>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="Lone some dove"> <img
-													src="resources/writer/img/featured/4.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프리랜서 3</a>
-												</h4>
-												<div class="product-price">
-												
-													<span class="new-price"><i class="fa fa-building"></i>&nbsp;&nbsp;개발자</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-child"></i>&nbsp;&nbsp;팀</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> 안녕하세요. 10년동안 대형프로젝트 SI기획과 개발을 수행했던 프로젝트 매니저 입니다. 저와 개발자 3명으로 활동하고 있습니다. 
-												다양한 운영체제에서 C/C++, PHP, JavaScript, C#, Java, Phython, Object C 등 다양한 언어를 사용하고 있습니다.</p>
-												<div class="availability">
-													<span><a href="cart.html">프리랜서 상세 보러가기</a></span>
-												</div>
-											</div>
-										</div>
-									 </div>
-										
-									<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="Lone some dove"> <img
-													src="resources/writer/img/featured/4.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프리랜서 4</a>
-												</h4>
-												<div class="product-price">
-												
-													<span class="new-price"><i class="fa fa-building"></i>&nbsp;&nbsp;개발자</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-child"></i>&nbsp;&nbsp;법인사업자</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> 반갑습니다. *설명이 가능하면 제작이 가능합니다.* 저희는 최근 10년간 웹, 모바일, 앱, 오프라인 윈도우, ERP 프로그램만을 해오는 
-												개발 전문 회사입니다. 항상 새로운 것에 호기심을 갖고 공부를 하는 회사입니다. 현재까지 많은 고객분들이......</p>
-												<div class="availability">
-													<span><a href="cart.html">프리랜서 상세 보러가기</a></span>
-												</div>
-											</div>
-										</div>
-									 </div>
-										
-									 <div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="Lone some dove"> <img
-													src="resources/writer/img/featured/4.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프리랜서 5</a>
-												</h4>
-												<div class="product-price">
-												
-													<span class="new-price"><i class="fa fa-building"></i>&nbsp;&nbsp;개발자</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-child"></i>&nbsp;&nbsp;개인</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> JAVA 서버, PHP, Phyton 전문 개발자 입니다. 서버 및 네트워크 개발에 전문성을 가지고 있으며,
-												 웹개발도 가능합니다. 현재 개인사정으로 회사를 퇴직하고 재택으로 근무하고 있으며, 그만큼.....</p>
-												<div class="availability">
-													<span><a href="cart.html">프리랜서 상세 보러가기</a></span>
-												</div>
-											</div>
-										</div>
-									 </div>
-										
-									<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="Lone some dove"> <img
-													src="resources/writer/img/featured/4.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프리랜서 6</a>
-												</h4>
-												<div class="product-price">
-												
-													<span class="new-price"><i class="fa fa-building"></i>&nbsp;&nbsp;개발자</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-child"></i>&nbsp;&nbsp;개인</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> JAVA 서버, PHP, Phyton 전문 개발자 입니다. 서버 및 네트워크 개발에 전문성을 가지고 있으며,
-												 웹개발도 가능합니다. 현재 개인사정으로 회사를 퇴직하고 재택으로 근무하고 있으며, 그만큼.....</p>
-												<div class="availability">
-													<span><a href="cart.html">프리랜서 상세 보러가기</a></span>
-												</div>
-											</div>
-										</div>
-									 </div>
+									</c:forEach>
 									</div>
 								</div>
 							</div>

@@ -20,7 +20,7 @@ public class BoardService {
 	}
 	
 	// 게시글 조회
-	private BoardDTO viewProject(BoardDTO dto) {
+	private BoardDTO listAll() {
 		// TODO Auto-generated method stub
 		
 		return null;//dao.viewProject(dto);
