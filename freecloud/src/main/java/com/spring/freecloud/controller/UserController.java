@@ -2,11 +2,8 @@ package com.spring.freecloud.controller;
 
 import java.io.File;
 import java.io.IOException;
-<<<<<<< HEAD
-=======
 import java.text.DateFormat;
 import java.util.Date;
->>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -399,7 +396,6 @@ public class UserController {
 		FileCopyUtils.copy(fileData, target);
 		return savedName;
 	}
-<<<<<<< HEAD
 	
 	 // 디렉토리 생성
     private static void makeDir(String uploadPath, String... paths) {
@@ -452,24 +448,6 @@ public class UserController {
 		mav.addObject("viewAll", list);
 
 		return mav;
-=======
-
-	// 디렉토리 생성
-	private static void makeDir(String uploadPath, String... paths) {
-		// 디렉토리가 존재하면
-		if (new File(paths[paths.length - 1]).exists()) {
-			return;
-		}
-		// 디렉토리가 존재하지 않으면
-		for (String path : paths) {
-			//
-			File dirPath = new File(uploadPath + path);
-			// 디렉토리가 존재하지 않으면
-			if (!dirPath.exists()) {
-				dirPath.mkdir(); // 디렉토리 생성
-			}
-		}
->>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
-	}
-
+  	}
+	
 }

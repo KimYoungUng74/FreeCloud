@@ -11,10 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
-=======
 import com.spring.freecloud.dto.PortfolioDTO;
->>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.util.PagingDTO;
