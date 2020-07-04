@@ -84,7 +84,7 @@
 					</div>
 				</div>
 				<div class="col-md-7">
-					<div class="mainmenu text-center"> 
+					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
 								<li><h4>
@@ -121,7 +121,7 @@
 									</c:when>
 									<c:otherwise>
 
-											<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
+										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
 									</c:otherwise>
 								</c:choose></li>
 							<li><c:choose>
@@ -129,7 +129,7 @@
 										<a href="signup.do">회원가입</a>
 									</c:when>
 									<c:otherwise>
-											<a href="logout.do">로그아웃</a>
+										<a href="logout.do">로그아웃</a>
 									</c:otherwise>
 								</c:choose></li>
 							<%-- <li class="shoping-cart"><a href="#"> <i
@@ -279,23 +279,25 @@
 				<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
 					<div class="row shop-widget">
 						<div class="thumbnail">
-							<div class="centered">
+							<div class="centered" id="profile">
 								<img alt=""
-									src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
+									src="<c:url value='http://localhost:8181/img/profile/${myprofile}'/>">
+								<input id="originalProfile" type="hidden" value="basic.png">
 							</div>
 						</div>
 						<hr>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%;" value="내 정보">
+						<div class="basic_btn" style="width: 100%;">
+							<a href="mypage.do">내 정보</a>
 						</div>
-						<div class="button" style="width: 100%;">
-							<input type="button" style="width: 100%" value="나의 프로젝트">
+						<div class="basic_btn" style="width: 100%;">
+							<a href="myProject.do">나의 프로젝트</a>
 						</div>
-						<div class="button" style="width: 100%;">
-							<input type="button" style="width: 100%" value="프로젝트 지원 현황">
+						<div class="basic_btn" style="width: 100%;">
+							<a href="projectRequest.do">프로젝트 지원 현황</a>
 						</div>
-						<div class="button" style="width: 100%; color: #fff;">
-							<input type="button" style="width: 100%" value="나의 게시판">
+						<div class="basic_btn" style="width: 100%;">
+							<a href="projectState.do"
+								style="color: #fff; background-color: #a3d4f7;">나의 게시판</a>
 						</div>
 					</div>
 				</div>
@@ -306,22 +308,18 @@
 							<div class="col-md-12">
 								<br> <label>내 게시물 </label>
 
-								<div style="overflow: auto; border:1px solid #D3D3D3; width: 100%; height: 250px;">
-								<a href="naver.com">울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
-								<a>울룩꿀룩</a><br>
+								<div
+									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
+									<a href="naver.com">울룩꿀룩</a><br> <a>울룩꿀룩</a><br> <a>울룩꿀룩</a><br>
+									<a>울룩꿀룩</a><br> <a>울룩꿀룩</a><br> <a>울룩꿀룩</a><br>
+									<a>울룩꿀룩</a><br> <a>울룩꿀룩</a><br> <a>울룩꿀룩</a><br>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<br> <label>댓글 단 게시물</label>
 
-								<div style="overflow: auto; border:1px solid #D3D3D3; width: 100%; height: 250px;"></div>
+								<div
+									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;"></div>
 							</div>
 							<div class="col-md-12">
 								<p></p>

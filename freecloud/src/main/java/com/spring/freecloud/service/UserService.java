@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
 
 import com.spring.freecloud.dao.UserDAO;
+<<<<<<< HEAD
+=======
+import com.spring.freecloud.dto.PortfolioDTO;
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.util.PagingDTO;
@@ -83,6 +87,7 @@ public class UserService {
 		return dao.seekId(dto);
 	}
 
+	// 비밀번호 찾기
 	public String seekPw(String id, String name, String email) {
 		UserDTO dto = new UserDTO();
 		dto.setUSER_ID(id);
@@ -92,6 +97,7 @@ public class UserService {
 		return dao.seekPw(dto);
 	}
 
+<<<<<<< HEAD
 	// 프리랜서 리스트 조회
 	public List<UserDTO> listAll() {
 		// TODO Auto-generated method stub
@@ -110,4 +116,96 @@ public class UserService {
 	public List<ProjectDTO> selectProject(PagingDTO dto) {
 		return dao.selectProject(dto);
 	}
+=======
+	// 회원정보 수정
+	public int userModify(UserDTO dto) {
+		System.out.println(dto.toString());
+		dao.userModify(dto); // 회원정보 수정
+
+		return 1;
+	}
+
+	// 프로필 변경
+	public void changeProfile(String savedName, String userid) {
+		UserDTO dto = new UserDTO();
+		dto.setUSER_ID(userid);
+		dto.setFREELANCER_IMAGE_PATH(savedName);
+
+		dao.changeProfile(dto);
+	}
+
+	// 포트폴리오 추가
+	public void addPortfolio(String originalName, String savedName, String userid) {
+		PortfolioDTO dto = new PortfolioDTO();
+		dto.setUSER_ID(userid);
+		dto.setORIGINNAME(originalName);
+		dto.setPORTFOLIO_PATH(savedName);
+
+		dao.addPortfolio(dto);
+	}
+
+	// 포트폴리오 삭제
+	public void deletePortfolio(String userid) {
+		PortfolioDTO dto = new PortfolioDTO();
+		dto.setUSER_ID(userid);
+		dao.deletePortfolio(dto);
+	}
+
+	// 비밀번호 확인
+	public String checkPw(String id, String pw) {
+		UserDTO dto = new UserDTO();
+		dto.setUSER_ID(id);
+		dto.setUSER_PW(pw);
+		return dao.checkPw(dto);
+	}
+
+	//회원 정보 확인
+	public UserDTO myInfo(String id) {
+		// TODO Auto-generated method stub
+		UserDTO dto = new UserDTO();
+		dto.setUSER_ID(id);
+		return dao.myInfo(dto);
+	}
+
+	// 프로필 사진
+	public String myProfile(String id) {
+		// TODO Auto-generated method stub
+		return dao.myProfile(id);
+	}
+
+	/* 나의 프로젝트 */
+	// 진행중인 나의 프로젝트 - 의뢰
+	public List<ProjectDTO> ingMyProject(String USER_ID) {
+		return dao.ingMyProject(USER_ID);
+	}
+
+	// 완료한 프로젝트 - 의뢰
+	public List<ProjectDTO> edMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return dao.edMyProject(USER_ID);
+	}
+
+	/* 프로젝트 지원 형황 */
+	// 진행중인 나의 프로젝트 - 지원
+	public List<ProjectDTO> rIngMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return dao.rIngMyProject(USER_ID);
+	}
+	// 지원 요청된 프로젝트 
+	public List<ProjectDTO> requestedProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return dao.requestedProject(USER_ID);
+	}
+	// 지원한 프로젝트
+	public List<ProjectDTO> requestProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return dao.requestProject(USER_ID);
+	}
+	// 완료한 프로젝트 - 지원
+	public List<ProjectDTO> rEdMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return dao.rEdMyProject(USER_ID);
+	}
+
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 }

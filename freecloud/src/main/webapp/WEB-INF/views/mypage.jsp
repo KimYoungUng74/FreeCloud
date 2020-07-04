@@ -66,32 +66,241 @@
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	//아이디 중복체크
-	    $('#CHANGE').click(function(){
-	    	// ajax로 전달할 폼 객체
-            var formData = new FormData();
-            // 폼 객체에 파일추가, append("변수명", 값)
-            formData.append('file', $('#file')[0].files[0]);
-            
-	        $.ajax({
-		     type:"POST",
-		     url:"fileUploadAjax.do",
-		     data: formData,
-		     dataType: "text",
-		     processData: false,
-             contentType: false,
-		     success:function(data){	//data : checkId에서 넘겨준 결과값
-		            if($.trim(data)!="Fail"){
-		            	var test = "<img alt=\"\"src=\"<c:url value='"+$.trim(data)+"'/>\">";
-		            	 $('#profile').html(test);
-		               alert($.trim(data));
-		           	}else{
-		           		alert("실패");
-		            }
-		         }
-		    }) 
-	     })
+	$(function() {
+		//프로필 바꾸기
+		$('#CHANGE')
+				.click(
+						function() {
+							// ajax로 전달할 폼 객체
+							var formData = new FormData();
+							// 폼 객체에 파일추가, append("변수명", 값)
+							formData.append('file', $('#file')[0].files[0]);
+							formData.append('originalProfile', $(
+									'#originalProfile').val());
+							$
+									.ajax({
+										type : "POST",
+										url : "fileUploadAjax.do",
+										data : formData,
+										dataType : "text",
+										processData : false,
+										contentType : false,
+										success : function(data) { //data : checkId에서 넘겨준 결과값
+											if ($.trim(data) != "Fail") {
+												var test = "<img alt=\"\"src=\"<c:url value='http://localhost:8181/img/profile/"
+														+ $.trim(data)
+														+ "'/>\">";
+												$('#profile').html(test);
+												$('#profileClose').click();
+
+											} else {
+												alert("실패");
+											}
+										}
+									})
+						})
+
+		// 비밀번호 확인				
+		$(function() {
+			//비밀번호 확인
+			$('#myPass').click(function() {
+
+				$.ajax({
+					type : "POST",
+					url : "checkMyPass.do",
+					data : {
+						"pw" : $('#myPassCheck').val()
+					},
+					success : function(data) { //data : seekPw에서 넘겨준 결과값(pw)
+						if (data == "Not_Match") {
+							alert("비밀번호가 일치하지 않습니다.");
+						} else {
+							$('#infoForm').submit();
+						}
+					}
+				})
+			})
+
+		});
+
+		// 포트폴리오 전송
+		$('#portfolioBtn')
+				.click(
+						function() {
+							// ajax로 전달할 폼 객체
+							var formData = new FormData();
+							// 폼 객체에 파일추가, append("변수명", 값)
+							formData.append('portfolio',
+									$('#myPortfolio')[0].files[0]);
+
+							$
+									.ajax({
+										type : "POST",
+										url : "myPortfolioUploadAjax.do",
+										data : formData,
+										dataType : "text",
+										processData : false,
+										contentType : false,
+										success : function(data) { //data : checkId에서 넘겨준 결과값
+											if ($.trim(data) != "Fail") {
+												var idx = data.indexOf("_") + 1;
+												var test = "<div><a href='${path}/upload/displayFile?fileName="
+														+ data
+														+ "'>"
+														+ data.substr(idx)
+														+ "</a><span data-src="+data+">[삭제]</span></div>";
+												$('#portfolio').html(test);
+											} else {
+												alert("실패");
+											}
+										}
+									})
+						})
+
+		$("#portfolio").on("click", "span", function(event) {
+			var that = $(this); // 여기서 this는 클릭한 span태그
+			$.ajax({
+				url : "myPortfolioDeleteAjax.do",
+				type : "post",
+				// data: "fileName="+$(this).attr("date-src") = {fileName:$(this).attr("data-src")}
+				// 태그.attr("속성")
+				data : {
+					fileName : $(this).attr("data-src")
+				}, // json방식
+				dataType : "text",
+				success : function(result) {
+					if (result == "deleted") {
+						// 클릭한 span태그가 속한 div를 제거
+						that.parent("div").remove();
+					}
+				}
+			});
+		})
+	});
+</script>
+<script type="text/javascript">
+	$(function() {
+
+		$('#CATAGORY1')
+				.change(
+						function() {
+							$('#CATAGORY2').children('option').remove();
+							if ($("#CATAGORY1 option:selected").val() == "") {
+								num = new Array("중분류 선택");
+								vnum = new Array("");
+							} else if ($("#CATAGORY1 option:selected").val() == "design") {
+								num = new Array("웹", "제품", "프리젠테이션", "인쇄물",
+										"커머스, 쇼핑몰", "로고", "그래픽", "영상", "게임",
+										"기타");
+								vnum = new Array("WEB", "PRODUCT", "PRE",
+										"PRINT", "SHOP", "LOGO", "GRAPHIC",
+										"VIDEO", "GAME", "OTHER");
+							} else if ($("#CATAGORY1 option:selected").val() == "devel") {
+								num = new Array("웹", "애플리케이션", "워드프로세스",
+										"퍼블리싱", "일반 소프트웨어", "커머스, 쇼핑몰", "게임",
+										"임베디드", "기타");
+								vnum = new Array("WEB", "APP", "WORD", "PUB",
+										"SOFT", "SHOP", "GAME", "IMB", "OTHER");
+							}
+
+							for (var i = 0; i < num.length; i++) {
+								$("#CATAGORY2").append(
+										"<option value='"+vnum[i]+"'>" + num[i]
+												+ "</option>");
+							}
+						})
+
+		$('#skillBtn').click(
+				function() {
+					if ($('#mySkill').val() == "") {
+						$('#mySkill').val($('#skillInput').val());
+					} else {
+						var oldMySkill = $('#mySkill').val();
+						var newMySkill = oldMySkill.split(',');
+						for ( var i in newMySkill) {
+							if ($('#skillInput').val() == newMySkill[i]) {
+								alert("이미 등록된 보유기술입니다.");
+								return;
+							}
+						}
+						$('#mySkill').val(
+								$('#mySkill').val() + ","
+										+ $('#skillInput').val());
+						$('#skillInput').val("");
+					}
+				})
+
+		$('#skillDeleteBtn').click(
+				function() {
+					if ($('#mySkill').val() == "") {
+						alert("제거할 보유기술이 없습니다.");
+					} else {
+						var oldMySkill = $('#mySkill').val();
+						var newMySkill = oldMySkill.split(',');
+						$('#mySkill').val("");
+						for ( var i in newMySkill) {
+							if ($('#skillInput').val() == newMySkill[i]) {
+								continue;
+							} else {
+								if ($('#mySkill').val() == "") {
+									$('#mySkill').val(newMySkill[i]);
+								} else {
+									$('#mySkill').val(
+											$('#mySkill').val() + ","
+													+ newMySkill[i]);
+								}
+
+							}
+						}
+						$('#skillInput').val("");
+					}
+				})
+		$('#licenseBtn').click(
+				function() {
+					if ($('#myLicense').val() == "" && !($('#licenseInput').val() == "")) {
+						$('#myLicense').val($('#licenseInput').val());
+					} else {
+						
+						var oldMySkill = $('#myLicense').val();
+						var newMySkill = oldMySkill.split(',');
+						for ( var i in newMySkill) {
+							if ($('#licenseInput').val() == newMySkill[i]) {
+								alert("이미 등록된 자격증입니다.");
+								return;
+							}
+						}
+						$('#myLicense').val(
+								$('#myLicense').val() + ","
+										+ $('#licenseInput').val());
+						$('#licenseInput').val("");
+					}
+				})
+		$('#licenseDeleteBtn').click(
+				function() {
+					if ($('#myLicense').val() == "") {
+						alert("제거할 자격증이 없습니다.");
+					} else {
+						var oldMyLicense = $('#myLicense').val();
+						var newMyLicense = oldMyLicense.split(',');
+						$('#myLicense').val("");
+						for ( var i in newMyLicense) {
+							if ($('#licenseInput').val() == newMyLicense[i]) {
+								continue;
+							} else {
+								if ($('#myLicense').val() == "") {
+									$('#myLicense').val(newMyLicense[i]);
+								} else {
+									$('#myLicense').val(
+											$('#myLicense').val() + ","
+													+ newMyLicense[i]);
+								}
+
+							}
+						}
+						$('#licenseInput').val("");
+					}
+				})
+
 	});
 </script>
 
@@ -151,7 +360,6 @@ $(function(){
 										<a href="login.do">로그인<i class="flaticon-people"></i></a>
 									</c:when>
 									<c:otherwise>
-
 										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
 									</c:otherwise>
 								</c:choose></li>
@@ -307,163 +515,206 @@ $(function(){
 	<div class="shopping-area section-padding">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
-					<div class="row shop-widget">
-						<div class="thumbnail">
-							<div class="centered" id="profile">
-								<img alt=""
-									src="<c:url value='resources/writer/img/freeCloud/올룩꿀룩.png'/>">
+				<form action="myInfoModify.do" method="post" id="infoForm">
+					<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
+						<div class="row shop-widget">
+							<div class="thumbnail">
+								<div class="centered" id="profile">
+									<img alt=""
+										src="<c:url value='http://localhost:8181/img/profile/${dto.FREELANCER_IMAGE_PATH}'/>">
+									<input id="originalProfile" type="hidden" value="basic.png">
+								</div>
 							</div>
-						</div>
-						<div class="basic_btn" style="width: 100%">
-							<a href="#" title="Quick view" data-toggle="modal"
-								data-target="#pwDialog">이미지 변경</a>
-						</div>
-						<br>
-						<div class="col-md-5">
-							<h5>
-								<b>정보 공개 여부</b>
-							</h5>
-						</div>
+							<div class="basic_btn" style="width: 100%">
+								<a href="#" title="Quick view" data-toggle="modal"
+									data-target="#pwDialog">이미지 변경</a>
+							</div>
+							<br>
+							<div class="col-md-5">
+								<h5>
+									<b>정보 공개 여부</b>
+								</h5>
+							</div>
 
-						<div class="col-md-7"
-							style="border: 1px solid #D3D3D3; font-size: 16px;">
-							<input type="radio" name="infor" value="true">공개 &nbsp; <input
-								type="radio" name="infor" value="false">비공개
-						</div>
-						<br>
-						<hr>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%; color: #fff"
-								value="내 정보">
-						</div>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="나의 프로젝트">
-						</div>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="프로젝트 지원 현황">
-						</div>
-						<div class="button" style="width: 100%">
-							<input type="button" style="width: 100%" value="나의 게시판">
+							<div class="col-md-7"
+								style="border: 1px solid #D3D3D3; font-size: 16px;">
+								<c:choose>
+									<c:when test="${FREELANCER_PUBLIC == 0}">
+										<input type="radio" name="FREELANCER_PUBLIC" value=1>공개
+											&nbsp; <input type="radio" name="FREELANCER_PUBLIC" value=0
+											checked="checked">비공개
+										</c:when>
+									<c:otherwise>
+										<input type="radio" name="FREELANCER_PUBLIC" value=1
+											checked="checked">공개
+											&nbsp; <input type="radio" name="FREELANCER_PUBLIC" value=0>비공개
+										</c:otherwise>
+								</c:choose>
+
+							</div>
+							<br>
+							<hr>
+							<div class="basic_btn" style="width: 100%;">
+								<a href="mypage.do" style="color: #fff; background-color: #a3d4f7;">내 정보</a>
+							</div>
+							<div class="basic_btn" style="width: 100%;">
+								<a href="myProject.do">나의 프로젝트</a>
+							</div>
+							<div class="basic_btn" style="width: 100%;">
+								<a href="projectRequest.do">프로젝트 지원 현황</a>
+							</div>
+							<div class="basic_btn" style="width: 100%;">
+								<a href="projectState.do">나의 게시판</a>
+							</div>
+							
 						</div>
 					</div>
-				</div>
-				<div class="col-md-9 col-sm-9 col-xs-12" style="font-size: 20px;">
-					<div
-						style="width: 100%; height: 100%; border: 1px solid #D3D3D3; padding: 10px;">
-						<div class="row">
-							<div class="col-md-6">
-								<p>
-									<label> ID : </label> 꾸꾸까까
-								<p>
-								<p>
-									<label> 지역 : </label> <select>
-										<option value="">지역 선택</option>
-										<option value="중졸">서울</option>
-										<option value="고졸">경기도</option>
-										<option value="대졸">강원도</option>
-									</select>
-								<p>
-							</div>
-							<div class="col-md-6">
-								<p>
-									<label> 이름 : </label> 이름
-								<p>
-								<p>
-									<label> 최종학력 : </label> <select>
-										<option value="">학력 선택</option>
+					<div class="col-md-9 col-sm-9 col-xs-12" style="font-size: 20px;">
+						<div
+							style="width: 100%; height: 100%; border: 1px solid #D3D3D3; padding: 10px;">
+							<div class="row">
+								<div class="col-md-6">
+									<p>
+										<label> ID : </label> <input name="USER_ID"
+											value="${sessionScope.userId}" readonly="readonly">
+									<p>
+									<p>
+										<label> 지역 : </label> <select name="USER_ADDRESS">
+											<option value="${dto.USER_ADDRESS}" hidden selected>${dto.USER_ADDRESS}</option>
+											<option value="서울">서울</option>
+											<option value="경기도">경기도</option>
+											<option value="강원도">강원도</option>
+										</select>
+									<p>
+								</div>
+								<div class="col-md-6">
+									<p>
+										<label> 비밀번호 : </label> <input type="password"
+											name="USER_PASS" value="">
+									<p>
+									<p>
+										<label> 이름 : </label> <input type="text" name="USER_NAME"
+											value="${dto.USER_NAME}">
+									<p>
+								</div>
+								<div class="col-md-6">
+									<p>
+										<label> 이메일 : </label> <input type="email" name="USER_EMAIL"
+											value="${dto.USER_EMAIL}" placeholder="freeCloud@free.com">
+									</p>
+								</div>
+								<div class="col-md-6">
+									<label> 최종학력 : </label> <select name="USER_EDU">
+										<option value="${dto.USER_EDU}" hidden selected>${dto.USER_EDU}</option>
 										<option value="중졸">중졸</option>
 										<option value="고졸">고졸</option>
 										<option value="대졸">대졸</option>
 									</select>
-								<p>
-							</div>
-							<div class="col-md-12">
-
-								<p>
-									<label> 이메일 : </label> <input type="email"
-										placeholder="freeCloud@free.com">
-								<p>
-								<p>
-									<label> 전화번호 </label>
-							</div>
-							<div class="col-md-4">
-								<input type="text" style="width: 90%;"> &nbsp;&nbsp;-
-							</div>
-							<div class="col-md-4">
-								<input type="text" style="width: 90%;"> &nbsp;&nbsp;-
-							</div>
-							<div class="col-md-4">
-								<input type="text" style="width: 100%;">
-							</div>
-
-							<div class="col-md-12">
-								<br> <label> 자기소개 </label>
-
-								<textarea rows="8" style="width: 100%; resize: none;"></textarea>
-							</div>
-							<div class="col-md-6">
-								<p>
-									<label> 전문분야 : </label> <select>
-										<option value="">대분류 선택</option>
-										<option value="중졸">서울</option>
-										<option value="고졸">경기도</option>
-										<option value="대졸">강원도</option>
-									</select> &nbsp; <select>
-										<option value="">중분류 선택</option>
-										<option value="중졸">서울</option>
-										<option value="고졸">경기도</option>
-										<option value="대졸">강원도</option>
-									</select>
-								</p>
-							</div>
-							<div class="col-md-6">
-								<p>
-									<label> 경력 : </label> <select>
-										<option value="">경력 선택</option>
-										<option value="중졸">1년미만</option>
-										<option value="고졸">1년</option>
-										<option value="대졸">3년</option>
-									</select>
-								</p>
-							</div>
-							<div class="col-md-12">
-								<p>
-									<label> 보유기술 : </label> <input type="text" disabled="disabled">
-									<input type="text">
-									<button class="basicBtn">등록</button>
-								<p />
-							</div>
-							<div class="col-md-12">
-								<label> 포트폴리오 </label>
-							</div>
-							<div class="col-md-6">
-								<p>
-									<input class="basicBtn" style="width: 100%" type="file">
-								</p>
-							</div>
-							<div class="col-md-6">
-								<p>
-									<button class="basicBtn">등록</button>
-								</p>
-							</div>
-							<div class="col-md-12">
-								<p>
-									<label> 자격증 : </label> <input type="text" disabled="disabled">
-									<input type="text">
-									<button class="basicBtn">등록</button>
-								<p />
-							</div>
-							<div class="col-md-12">
-								<p>
-								<div class="button" style="width: 100%">
-									<input type="button" style="width: 100%" value="등록 하기">
 								</div>
-								</p>
+
+								<div class="col-md-12">
+									<label> 전화번호 </label>
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE1" style="width: 90%;"
+										value="${dto.USER_PHONE1}"> &nbsp;&nbsp;-
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE2" style="width: 90%;"
+										value="${dto.USER_PHONE2}"> &nbsp;&nbsp;-
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE3" style="width: 100%;"
+										value="${dto.USER_PHONE3}">
+								</div>
+
+								<div class="col-md-12">
+									<br> <label> 자기소개 </label>
+
+									<textarea rows="8" name="FREELANCER_ABOUT_ME"
+										style="width: 100%; resize: none;">${dto.FREELANCER_ABOUT_ME}</textarea>
+								</div>
+								<div class="col-md-8">
+									<p>
+										<label> 전문분야 : </label> <select id="CATAGORY1"
+											name="FREELANCER_MAIN_KATEGORY">
+											<option value="${dto.FREELANCER_MAIN_KATEGORY}" hidden
+												selected>${dto.FREELANCER_MAIN_KATEGORY}</option>
+											<option value="design">디자인</option>
+											<option value="devel">IT프로그래밍</option>
+											<option value="콘텐츠 제작">콘텐츠 제작</option>
+											<option value="비즈니스 컨설팅">비즈니스 컨설팅</option>
+											<option value="주문제작">주문제작</option>
+										</select> &nbsp; <select id="CATAGORY2"
+											name="FREELANCER_MIDDEL_KATEGORY">
+											<option value="${dto.FREELANCER_MIDDEL_KATEGORY}" hidden
+												selected>${dto.FREELANCER_MIDDEL_KATEGORY}</option>
+										</select>
+									</p>
+								</div>
+								<div class="col-md-4">
+									<p>
+										<label> 경력 : </label> <select name="FREELANCER_CAREER">
+											<c:choose>
+												<c:when test="${dto.FREELANCER_CAREER == 0}">
+													<option value="${dto.FREELANCER_CAREER}" hidden selected>1년미만</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${dto.FREELANCER_CAREER}" hidden selected>${dto.FREELANCER_MIDDEL_KATEGORY}년</option>
+												</c:otherwise>
+											</c:choose>
+
+											<option value=0>1년미만</option>
+											<option value=1>1년</option>
+											<option value=3>3년</option>
+										</select>
+									</p>
+								</div>
+								<div class="col-md-12 basicBtn2">
+									<p>
+										<label> 보유기술 : </label> <input type="text" id="mySkill"
+											name="FREELANCER_SKILL" readonly="readonly"
+											value="${dto.FREELANCER_SKILL}"> <input type="text"
+											id="skillInput" value=""> <a
+											id="skillBtn">등록</a> <a id="skillDeleteBtn">삭제</a>
+									<p />
+								</div>
+								<div class="col-md-12">
+									<label> 포트폴리오 </label>
+								</div>
+								<div id="portfolioReg" style="display: block;">
+									<div class="col-md-6">
+										<p>
+											<input class="basicBtn" id="myPortfolio" style="width: 100%"
+												type="file">
+										</p>
+									</div>
+									<div class="col-md-6 basicBtn2">
+										<p>
+											<a id="portfolioBtn">등록</a>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-12" id="portfolio"></div>
+
+								<div class="col-md-12 basicBtn2">
+									<p>
+										<label> 자격증 : </label> <input type="text" id="myLicense"
+											name="FREELANCER_CERTIFICATE" readonly="readonly"
+											value="${dto.FREELANCER_CERTIFICATE}"> <input
+											type="text" id="licenseInput" value=""> <a id="licenseBtn">등록</a> <a id="licenseDeleteBtn">삭제</a>
+									<p />
+								</div>
+								<div class="col-md-12">
+									<div class="basic_btn" style="width: 100%">
+										<a title="Quick view" data-toggle="modal"
+											data-target="#idDialog">등록 하기</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -601,8 +852,9 @@ $(function(){
 			</div>
 		</div>
 
-		<!-- 이미지 변경 -->
-		<div class="modal fade" id="pwDialog" tabindex="-1" role="dialog">
+		<!-- 비밀번호 확인 -->
+
+		<div class="modal fade" id="idDialog" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -616,21 +868,23 @@ $(function(){
 							<div class="container">
 								<div class="row">
 									<div>
-											<h2 class="heading-title">이미지 변경</h2>
-											<p>
-												<b>아이디</b>
-											</p>
-											<p class="form-row seekpw">
-												<input type="file" name="file" id="file"
-													placeholder="아이디 입력">
-											</p>
-											<div class="submit" style="float: center">
-												<button name="CHANGE" id="CHANGE" class="btn-default"
-													style="width: 100%">
-													<span> <i class="fa fa-user left"></i> 이미지 변경
-													</span>
-												</button>
-											</div>
+										<h2 class="heading-title">비밀번호 확인</h2>
+
+										<p>
+											<b>비밀번호 확인</b>
+										</p>
+
+										<p class="form-row seekid">
+											<input type="password" id="myPassCheck">
+										</p>
+
+										<div class="submit" style="float: center">
+											<button name="myPass" id="myPass" class="btn-default"
+												style="width: 100%">
+												<span> <i class="fa fa-user left"></i> 확인
+												</span>
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -640,6 +894,49 @@ $(function(){
 				</div>
 			</div>
 		</div>
+		<!-- 비밀번호 확인 -->
+
+		<!-- 이미지 변경 -->
+		<div class="modal fade" id="pwDialog" tabindex="-1" role="dialog">
+			<div class="modal-dialog" id="profileChange" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" id="profileClose"
+							data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-product">
+							<div class="container">
+								<div class="row">
+									<div>
+										<h2 class="heading-title">이미지 변경</h2>
+										<p>
+											<b>이미지파일</b>
+										</p>
+										<p class="form-row seekpw">
+											<input type="file" name="file" id="file" placeholder="아이디 입력">
+										</p>
+										<div class="submit" style="float: center">
+											<button name="CHANGE" id="CHANGE" class="btn-default"
+												style="width: 100%">
+												<span> <i class="fa fa-user left"></i> 이미지 변경
+												</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- .product-info -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 이미지 변경 -->
+
+
 	</div>
 	<!--End of Quickview Product-->
 	<!-- all js here -->

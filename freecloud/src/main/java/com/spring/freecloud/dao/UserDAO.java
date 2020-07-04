@@ -11,6 +11,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+<<<<<<< HEAD
+=======
+import com.spring.freecloud.dto.PortfolioDTO;
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.util.PagingDTO;
@@ -119,5 +123,74 @@ public class UserDAO {
 
 	public List<ProjectDTO> selectProject(PagingDTO dto) {
 		return mybatis.selectList("UserMapper.selectBoard", dto);
+	}
+	// 프로필 변경
+	public void changeProfile(UserDTO dto) {
+		mybatis.update("UserMapper.profileChange", dto);
+	}
+	// 포트폴리오 추가
+	public void addPortfolio(PortfolioDTO dto) {
+		mybatis.insert("UserMapper.portfolioAdd", dto);
+	}
+	// 포트폴리오 삭제
+	public void deletePortfolio(PortfolioDTO dto) {
+		mybatis.delete("UserMapper.deletePortfolio", dto);
+	}
+	// 회원정보 수정
+	public void userModify(UserDTO dto) {
+
+		mybatis.insert("UserMapper.userInfoChange", dto);
+	}
+	// 비밀번호 체크
+	public String checkPw(UserDTO dto) {
+		dto.setUSER_PW(SHA256.getSHA256(dto.getUSER_PW()));
+		String name = mybatis.selectOne("UserMapper.checkPw", dto);
+		return name;
+	}
+
+	// 내 정보 확인
+	public UserDTO myInfo(UserDTO dto) {
+		return mybatis.selectOne("UserMapper.viewUser", dto);
+	}
+
+	// 내 프로필 사진 
+	public String myProfile(String USER_ID) {
+		// TODO Auto-generated method stub
+		return  mybatis.selectOne("UserMapper.myProfile", USER_ID);
+	}
+
+	/* 나의 프로젝트 */
+	// 진행중인 프로젝트 - 의뢰
+	public List<ProjectDTO> ingMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.ingMyProject", USER_ID);
+	}
+
+	// 완료한 프로젝트 - 의뢰
+	public List<ProjectDTO> edMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.edMyProject", USER_ID);
+	}
+	
+	/* 프로젝트 지원 형황 */
+	// 진행중인 나의 프로젝트 - 지원
+	public List<ProjectDTO> rIngMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.rIngMyProject", USER_ID);
+	}
+	// 지원 요청된 프로젝트 
+	public List<ProjectDTO> requestedProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.requestedProject", USER_ID);
+	}
+	// 지원한 프로젝트
+	public List<ProjectDTO> requestProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.requestProject", USER_ID);
+	}
+	// 완료한 프로젝트 - 지원
+	public List<ProjectDTO> rEdMyProject(String USER_ID) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("UserMapper.rEdMyProject", USER_ID);
 	}
 }

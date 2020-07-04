@@ -2,6 +2,11 @@ package com.spring.freecloud.controller;
 
 import java.io.File;
 import java.io.IOException;
+<<<<<<< HEAD
+=======
+import java.text.DateFormat;
+import java.util.Date;
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -155,9 +160,9 @@ public class UserController {
 		System.out.println("seekpw에 접근함");
 		String str = "";
 		String pwcheck = userSer.seekPw(id, name, email);
-		if (pwcheck == "dbError") { // 정보가 일치할 경우
+		if (pwcheck == "dbError") { // 정보가 일치하지 않을 경우
 			str = "DB오류가 발생했습니다 다시 시도해주세요";
-		} else if (pwcheck == "notFound") { // 가입된 회원아 아닐경우
+		} else if (pwcheck == "notFound") { // 가입된 회원이 아닐경우
 			str = "가입된 정보가 없습니다 입력한 정보를 확인하세요";
 		} else {
 			str = "임시비밀번호 : \'" + pwcheck + " \'로그인시 변경해주세요";
@@ -166,10 +171,101 @@ public class UserController {
 		return str;
 	}
 
-	// 마이페이지
-	@RequestMapping(value = "mypage.do")
-	public String mypage(Locale locale, Model model) {
-		return "mypage";
+	// 회원정보 수정 페이지
+	@RequestMapping(value = "mypage.do", produces = "application/text; charset=utf8")
+	public ModelAndView mypage(Locale locale, HttpSession sessison) {
+		System.out.println("mypage에 접근함");
+		UserDTO dto = new UserDTO();
+		dto = userSer.myInfo(sessison.getAttribute("userId").toString());
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("dto", dto);
+		mav.setViewName("mypage");
+		System.out.println(dto);
+		return mav;
+	}
+
+	// 나의 프로젝트
+	@RequestMapping(value = "myProject.do", produces = "application/text; charset=utf8")
+	public ModelAndView myProject(Locale locale, HttpSession sessison) {
+		System.out.println("myProject에 접근함");
+		
+		List<ProjectDTO> ingList = null; // 진행중인 프로젝트
+		List<ProjectDTO> edList = null; // 완료한 프로젝트
+		String userId =sessison.getAttribute("userId").toString();	// 유저 아이디
+		String myprofile = userSer.myProfile(userId); // 프로필 사진 가져오기
+		ingList = userSer.ingMyProject(userId); // 진행중인 프로젝트 - 의뢰
+		edList = userSer.edMyProject(userId);  // 완료한 프로젝트 - 의뢰
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("ingList", ingList);
+		mav.addObject("edList", edList);
+		mav.addObject("myprofile", myprofile);
+		mav.setViewName("myProject");
+		return mav;
+	}
+
+	// 프로젝트 지원 현황
+	@RequestMapping(value = "projectRequest.do", produces = "application/text; charset=utf8")
+	public ModelAndView projectApply(Locale locale, HttpSession sessison) {
+		System.out.println("projectApply에 접근함");
+
+		List<ProjectDTO> ingList = null; // 진행중인 프로젝트
+		List<ProjectDTO> requestedList = null; // 지원 요청 된 프로젝트
+		List<ProjectDTO> requestList = null; // 지원한 프로젝트
+		List<ProjectDTO> edList = null; // 완료한 프로젝트
+		
+		String userId =sessison.getAttribute("userId").toString();	// 유저 아이디
+		String myprofile = userSer.myProfile(userId); // 프로필 사진 가져오기
+		ingList = userSer.rIngMyProject(userId); // 진행중인 프로젝트 - 지원
+		requestedList = userSer.requestedProject(userId);  // 완료한 프로젝트 - 의뢰
+		requestList = userSer.requestProject(userId); // 진행중인 프로젝트 - 의뢰
+		edList = userSer.rEdMyProject(userId);  // 완료한 프로젝트 - 지원
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("myprofile", myprofile);
+		mav.setViewName("projectApply");
+		return mav;
+	}
+
+	// 나의 게시판
+	@RequestMapping(value = "projectState.do", produces = "application/text; charset=utf8")
+	public ModelAndView projectState(Locale locale, HttpSession sessison) {
+		System.out.println("projectState에 접근함");
+		String myprofile = userSer.myProfile(sessison.getAttribute("userId").toString()); // 프로필 사진 가져오기
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("myprofile", myprofile);
+		mav.setViewName("projectState");
+		return mav;
+	}
+
+	// 아이디 찾기
+	@RequestMapping(value = "/checkMyPass.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String checkMyPass(@RequestParam("pw") String pw, HttpSession sessison) {
+		System.out.println("checkMyPass에 접근함");
+		String str = "";
+		str = userSer.checkPw(sessison.getAttribute("userId").toString(), pw);
+		System.out.println(str);
+		if (str == null) { // 비밀번호 일치함
+			str = "Not_Match";
+		} else { // 비밀번호 일치 하지 않음
+			str = "Same";
+		}
+
+		return str;
+	}
+
+	// 회원정보 수정
+	@RequestMapping(value = "myInfoModify.do", method = RequestMethod.POST)
+	public ModelAndView myInfoModify(Locale locale, UserDTO dto) {
+		if (1 == userSer.userModify(dto)) {
+			System.out.println("회원정보 수정 되었음");
+		} else {
+			System.out.println("회원정보 수정 실패");
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("home");
+
+		return mav;
 	}
 
 	// 업로드 흐름 : 업로드 버튼클릭 => 임시디렉토리에 업로드=> 지정된 디렉토리에 저장 => 파일정보가 file에 저장
@@ -206,45 +302,90 @@ public class UserController {
 
 	// 파일 업로드 Ajax
 	@RequestMapping(value = "/fileUploadAjax.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-	public @ResponseBody String uplodaFormAjax(MultipartFile file, ModelAndView mav) throws IOException, Exception {
-		
+	public @ResponseBody String uplodaFormAjax(MultipartFile file, String originalProfile, HttpSession sessison,
+			ModelAndView mav) throws IOException, Exception {
+
+		System.out.println("원래 파일이름 : " + originalProfile);
 		String dirname = File.separator + "profile";
 		System.out.println(file);
 		System.out.println("fileUploadAjax에 접근함");
-		
+
 		String savedName = file.getOriginalFilename();
-		
 		logger.info("파일이름 :" + file.getOriginalFilename());
 		logger.info("파일크기 : " + file.getSize());
 		logger.info("컨텐트 타입 : " + file.getContentType());
 
 		System.out.println("파일이름 :" + file.getOriginalFilename());
-		
+
 		// 랜덤생성+파일이름 저장
-        // 파일명 랜덤생성 메서드호출
-        savedName = uploadFile(savedName, file.getBytes(), dirname);
+		// 파일명 랜덤생성 메서드호출
+		savedName = uploadFile(savedName, file.getBytes(), dirname);
 
-		
-		return "http://localhost:8181/img/profile/" + savedName;
+		// 프로필 DB변경
+		userSer.changeProfile(savedName, sessison.getAttribute("userId").toString());
 
+		if (originalProfile != "basic.png")
+			new File(uploadPath + File.separator + "profile" + File.separator + originalProfile).delete();
+
+		return savedName;
+
+	}
+
+	// 포트폴리오 업로드 Ajax
+	@RequestMapping(value = "/	myPortfolioUploadAjax.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String myPortfolioUploadAjax(MultipartFile portfolio, HttpSession sessison, ModelAndView mav)
+			throws IOException, Exception {
+
+		String dirname = File.separator + "portfolio";
+		System.out.println(portfolio);
+		System.out.println("fileUploadAjax에 접근함");
+
+		String originalName = portfolio.getOriginalFilename();
+
+		logger.info("파일이름 :" + portfolio.getOriginalFilename());
+		logger.info("파일크기 : " + portfolio.getSize());
+		logger.info("컨텐트 타입 : " + portfolio.getContentType());
+
+		System.out.println("파일이름 :" + portfolio.getOriginalFilename());
+
+		// 랜덤생성+파일이름 저장
+		// 파일명 랜덤생성 메서드호출
+		String savedName = uploadFile(originalName, portfolio.getBytes(), dirname);
+		userSer.addPortfolio(originalName, savedName, sessison.getAttribute("userId").toString());
+
+		return savedName;
+
+	}
+
+	// 포트폴리오 파일 삭제
+	@RequestMapping(value = "myPortfolioDeleteAjax.do", method = RequestMethod.POST)
+	public @ResponseBody String deleteFile(String fileName, HttpSession sessison) {
+
+		userSer.deletePortfolio(sessison.getAttribute("userId").toString());
+		// 원본 파일 삭제
+		System.out.println(uploadPath + File.separator + "portfolio" + fileName.replace('/', File.separatorChar));
+		new File(uploadPath + File.separator + "portfolio" + File.separator + fileName.replace('/', File.separatorChar))
+				.delete();
+
+		return "deleted";
 	}
 
 	// 파일명 랜덤생성 메서드
 	private String uploadFile(String originalName, byte[] fileData, String dirName) throws Exception {
-		
+
 		// 폴더 생성
 		makeDir(uploadPath, dirName);
 		// uuid 생성(Universal Unique IDentifier, 범용 고유 식별자)
 		UUID uuid = UUID.randomUUID();
 		// 랜덤생성+파일이름 저장
 		String savedName = uuid.toString() + "_" + originalName;
-		System.out.println(uploadPath + "\\" + savedName);
-		File target = new File(uploadPath+dirName, savedName);
+		File target = new File(uploadPath + dirName, savedName);
 		// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
 		// FileCopyUtils.copy(바이트배열, 파일객체)
 		FileCopyUtils.copy(fileData, target);
 		return savedName;
 	}
+<<<<<<< HEAD
 	
 	 // 디렉토리 생성
     private static void makeDir(String uploadPath, String... paths) {
@@ -297,6 +438,24 @@ public class UserController {
 		mav.addObject("viewAll", list);
 
 		return mav;
+=======
+
+	// 디렉토리 생성
+	private static void makeDir(String uploadPath, String... paths) {
+		// 디렉토리가 존재하면
+		if (new File(paths[paths.length - 1]).exists()) {
+			return;
+		}
+		// 디렉토리가 존재하지 않으면
+		for (String path : paths) {
+			//
+			File dirPath = new File(uploadPath + path);
+			// 디렉토리가 존재하지 않으면
+			if (!dirPath.exists()) {
+				dirPath.mkdir(); // 디렉토리 생성
+			}
+		}
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 	}
 
 }

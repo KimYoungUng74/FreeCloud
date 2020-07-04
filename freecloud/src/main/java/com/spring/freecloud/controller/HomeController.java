@@ -45,7 +45,11 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate );
 		
+<<<<<<< HEAD
 		return "freelancerSearch";
+=======
+		return "home";
+>>>>>>> c94018010cfa83378c78d7946b34cea122ecf239
 	}
 	
 	@RequestMapping(value = "home.do", method = RequestMethod.GET)
