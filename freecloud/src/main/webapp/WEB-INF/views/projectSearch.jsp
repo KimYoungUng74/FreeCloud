@@ -20,6 +20,37 @@ function showCheckboxes() {
     expanded = false;
   }
 }
+
+function selChange() {
+	var sel = document.getElementById('cntPerPage').value;
+	location.href="projectSearch.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
+}
+
+// 근무형태 , 카테고리 , 지역 값 넘기기
+	function selChckChange() {
+		
+		var wk = $("input:radio[name='PROJECT_WORKING_KIND']:checked").val();
+		var sel = document.getElementById('cntPerPage').value;
+		
+	    var mkd = new Array();
+	    var mkds = new Array();
+		var addr = new Array();
+	
+	    $("input[name='PROJECT_MIDDLE_KATEGORY_D']:checked").each(function() {
+	    	mkd.push( $(this).val());	    	
+	    })
+	    
+	    $("input[name='PROJECT_MIDDLE_KATEGORY_DS']:checked").each(function() {
+	    	mkds.push( $(this).val());	    	
+	    })
+	    
+	    $("input[name='PROJECT_ADDRESS']:checked").each(function() {
+	    	addr.push( $(this).val());	    	
+	    })
+	  
+		location.href="projectSearch.do?nowPage=${paging.nowPage}&cntPerPage="+sel+"&wk="+wk+"&mkd="+mkd+"&mkds="+mkds+"addr="+addr;		
+	}
+
 </script>
 
 <style type="text/css">
@@ -165,7 +196,7 @@ function showCheckboxes() {
 										<li><a href="projectSearch.do">프로젝트 찾기</a></li>
 									</ul></li>
 								<li><h4>
-										<a href="shop.html">프리랜서 찾기</a>
+										<a href="freelancerSearch.do">프리랜서 찾기</a>
 									</h4></li>
 								<li><h4>
 										<a href="shop.html">정보구름</a>
@@ -354,11 +385,12 @@ function showCheckboxes() {
 
 								<h2 class="sidebar-title">
 									<p>&nbsp;&nbsp;<b>프로젝트 형태</b></p>
+									<!-- 근무 형태  -->
 									<div class="wKind">
 
-										<input type="checkbox" class="chkbox1">
+										<input type="radio" class="chkbox1" name="PROJECT_WORKING_KIND" id="PROJECT_WORKING_KIND" value="외주">
 										&nbsp;외주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-											type="checkbox" class="chkbox1"> 상주
+											type="radio" class="chkbox1" name="PROJECT_WORKING_KIND" id="PROJECT_WORKING_KIND" value="상주"> 상주
 
 									</div>
 								</h2>
@@ -375,47 +407,48 @@ function showCheckboxes() {
 										</a>
 									</h4>
 								</div>
+								<!-- 개발 카테고리 -->
 								<div id="collapseOne" class="panel-collapse collapse in"
 									role="tabpanel" aria-labelledby="headingOne"
 									aria-expanded="true" style="">
 									<div class="panel-body">
 										<div class="row">
 											<div class="col-md-8 col-sm-6">
-
+												
 												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;웹
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_D" id="PROJECT_MIDDLE_KATEGORY_D" value="웹">&nbsp;웹
 												</label></li>
 
 												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;애플리케이션
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_D" id="PROJECT_MIDDLE_KATEGORY_D" value="애플리케이션">&nbsp;애플리케이션
 												</label></li>
 
 												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;워드프레스
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_D" id="PROJECT_MIDDLE_KATEGORY_D" value="워드프로세스">&nbsp;워드프로세스
 												</label></li>
 
 												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;퍼블리싱
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_D" id="PROJECT_MIDDLE_KATEGORY_D" value="퍼블리싱">&nbsp;퍼블리싱
 												</label></li>
 
 												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;일반 소프트웨어
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_D" id="PROJECT_MIDDLE_KATEGORY_D" value="소프트웨어">&nbsp;일반 소프트웨어
 												</label></li>
 
 												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;커머스, 쇼핑몰
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_D" id="PROJECT_MIDDLE_KATEGORY_D" value="커머스,쇼핑몰">&nbsp;커머스, 쇼핑몰
 												</label></li>
 
 												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;게임
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_D" id="PROJECT_MIDDLE_KATEGORY_D" value="게임">&nbsp;게임
 												</label></li>
 
 												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;임베디드
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_D" id="PROJECT_MIDDLE_KATEGORY_D" value="임베디드">&nbsp;임베디드
 												</label></li>
 
 												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;기타
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_D" id="PROJECT_MIDDLE_KATEGORY_D" value="기타">&nbsp;기타
 												</label></li>
 
 											</div>
@@ -426,7 +459,7 @@ function showCheckboxes() {
 							</div>
 
 
-							<!-- panel2 -->
+							<!-- 디자인 카테고리 -->
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingTwo">
 									<h4 class="panel-title">
@@ -444,44 +477,44 @@ function showCheckboxes() {
 										<div class="row">
 											<div class="col-md-8 col-sm-6">
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;웹
+												<li class="listc"><label for="chk3"> <input
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_DS" id="PROJECT_MIDDLE_KATEGORY_DS" value="웹">&nbsp;웹
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;제품
+												<li class="listc"><label for="chk3"> <input
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_DS" id="PROJECT_MIDDLE_KATEGORY_DS" value="제품">&nbsp;제품
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;프레젠테이션
+												<li class="listc"><label for="chk3"> <input
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_DS" id="PROJECT_MIDDLE_KATEGORY_DS" value="프레젠테이션">&nbsp;프레젠테이션
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;인쇄물
+												<li class="listc"><label for="chk3"> <input
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_DS" id="PROJECT_MIDDLE_KATEGORY_DS" value="인쇄물">&nbsp;인쇄물
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;커머스, 쇼핑몰
+												<li class="listc"><label for="chk3"> <input
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_DS" id="PROJECT_MIDDLE_KATEGORY_DS" value="커머스,쇼핑몰">&nbsp;커머스, 쇼핑몰
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;로고
+												<li class="listc"><label for="chk3"> <input
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_DS" id="PROJECT_MIDDLE_KATEGORY_DS" value="로고">&nbsp;로고
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;그래픽
+												<li class="listc"><label for="chk3"> <input
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_DS" id="PROJECT_MIDDLE_KATEGORY_DS" value="그래픽">&nbsp;그래픽
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;영상
+												<li class="listc"><label for="chk3"> <input
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_DS" id="PROJECT_MIDDLE_KATEGORY_DS" value="영상">&nbsp;영상
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;게임
+												<li class="listc"><label for="chk3"> <input
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_DS" id="PROJECT_MIDDLE_KATEGORY_DS" value="게임">&nbsp;게임
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;기타
+												<li class="listc"><label for="chk3"> <input
+														type="checkbox" name="PROJECT_MIDDLE_KATEGORY_DS" id="PROJECT_MIDDLE_KATEGORY_DS" value="기타">&nbsp;기타
 												</label></li>
 
 											</div>
@@ -570,80 +603,86 @@ function showCheckboxes() {
 										<div class="row">
 											<div class="col-md-8 col-sm-6">
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;전지역
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="all" id="check-all">&nbsp;전지역
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;서울특별시
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="서울특별시">&nbsp;서울특별시
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;경기도
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="경기도">&nbsp;경기도
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;인천광역시
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="인천광역시">&nbsp;인천광역시
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;부산광역시
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="부산광영시">&nbsp;부산광역시
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;대구광역시
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="대구광역시">&nbsp;대구광역시
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;광주광역시
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="광주광역시">&nbsp;광주광역시
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;울산광역시
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="율산광역시">&nbsp;울산광역시
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;세종특별자치시
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="세종특별자치시">&nbsp;세종특별자치시
 												</label></li>
 
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;강원도
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="강원도">&nbsp;강원도
 												</label></li>
 												
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;충청북도
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="충청북도">&nbsp;충청북도
 												</label></li>
 												
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;충청남도
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="충청남도">&nbsp;충청남도
 												</label></li>
 												
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;전라북도
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="전라북도">&nbsp;전라북도
 												</label></li>
 												
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;전라남도
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="전라남도">&nbsp;전라남도
 												</label></li>
 												
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;경상북도
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="경상북도">&nbsp;경상북도
 												</label></li>
 												
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;경상남도
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="경상남도">&nbsp;경상남도
 												</label></li>
 												
-												<li class="listc"><label for="chk1"> <input
-														type="checkbox" name="chk1" id="chk1">&nbsp;제주특별자치도
+												<li class="listc"><label for="chk2"> <input
+														type="checkbox" name="PROJECT_ADDRESS" id="PROJECT_ADDRESS" value="제주특별자치도">&nbsp;제주특별자치도
 												</label></li>
 
-											</div>
-
+											</div>	
 										</div>
+										
+										
 									</div>
+									
 								</div>
+								
 								</div>
+										<div>
+												<input type="button" value="검색" style="float: right" onclick="selChckChange();">
+										</div>
 								</h2>
 								
 								
@@ -668,16 +707,21 @@ function showCheckboxes() {
 								<ul>
 									<li class="product-size-deatils">
 										<div class="show-label">
-											<label>Show : </label> <select>
-												<option value="10" selected="selected">10</option>
-												<option value="09">09</option>
-												<option value="08">08</option>
-												<option value="07">07</option>
-												<option value="06">06</option>
-											</select>
+											<label>Show : </label> 
+											<select id="cntPerPage" name="sel" onchange="selChange()">
+											<option value="5"
+												<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5</option>
+											<option value="10"
+												<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10</option>
+											<option value="15"
+												<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15</option>
+											<option value="20"
+												<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20</option>
+										</select>
+										
 										</div>
 									</li>
-									<li class="product-size-deatils">
+									<!-- <li class="product-size-deatils">
 										<div class="show-label">
 											<label><i class="fa fa-sort-amount-asc"></i>Sort by :
 											</label> <select>
@@ -686,27 +730,53 @@ function showCheckboxes() {
 												<option value="Price">Price</option>
 											</select>
 										</div>
+										
 									</li>
-									<li class="shop-pagination"><a href="#">1</a></li>
+									 -->
+									<!-- <li class="shop-pagination"><a href="#">1</a></li>
 									<li class="shop-pagination"><a href="#">2</a></li>
 									<li class="shop-pagination"><a href="#"><i
-											class="fa fa-caret-right"></i></a></li>
+											class="fa fa-caret-right"></i></a></li> -->
+											
+									<c:if test="${paging.startPage != 1 }">
+										<a href="projectSearch.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}"><i
+											class="fa fa-caret-left"></i></a>
+									</c:if>
+									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+										<c:choose>
+											<c:when test="${p == paging.nowPage }">
+												<b><li class="shop-pagination">${p }</li></b>
+											</c:when>
+											<c:when test="${p != paging.nowPage }">
+												<a href="projectSearch.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}"><li class="shop-pagination">${p }</li></a>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${paging.endPage != paging.lastPage}">
+										<a href="projectSearch.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}"><i
+											class="fa fa-caret-right"></i></a>
+									</c:if>
+									
 								</ul>
 							</div>
 						</div>
 						<div class="tab-content">
+							<!-- Grid 형으로 글 목록 출력 -->
+							
 							<div class="row tab-pane fade in active" id="home">
+								<c:forEach var="gRow" items="${viewAll }">
 								<div class="shop-single-product-area">
 									
 									<div class="col-md-4 col-sm-6">
 										<div class="single-banner">
 											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
+												<a href="projectView.do?PROJECT_IDX=${gRow.PROJECT_IDX }&USER_ID=${gRow.USER_ID}" class="single-banner-image-wrapper"> <img
 													alt="" src="resources/writer/img/featured/2.jpg">
 													<div class="price">
-														<span>$</span>160
+														<span>￦</span>${gRow.PROJECT_BUDGET }
 													</div>
 												</a>
+												<!--  
 												<div class="product-description">
 													<div class="functional-buttons">
 														<a href="#" title="Add to Cart"> <i
@@ -719,449 +789,62 @@ function showCheckboxes() {
 														</a>
 													</div>
 												</div>
+												-->
 											</div>
 											<div class="banner-bottom text-center">
 												<div class="banner-bottom-title">
-													<a href="#">People of the book</a>
+													<a href="projectView.do?PROJECT_IDX=${gRow.PROJECT_IDX }&USER_ID=${gRow.USER_ID}">${gRow.PROJECT_SUBJECT }</a>
 												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
+												<div class="new-price1">
+													<i class="fa fa-clock-o"></i>&nbsp; ${gRow.PROJECT_MAIN_KATEGORY }(${gRow.PROJECT_MIDDLE_KATEGORY })
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/3.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">The secret letter</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/4.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">Lone some dove</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/5.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">The historian</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/6.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">East of eden</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/7.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">Cold mountain</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-6">
-										<div class="single-banner">
-											<div class="product-wrapper">
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/8.jpg">
-													<div class="price">
-														<span>$</span>160
-													</div>
-												</a>
-												<div class="product-description">
-													<div class="functional-buttons">
-														<a href="#" title="Add to Cart"> <i
-															class="fa fa-shopping-cart"></i>
-														</a> <a href="#" title="Add to Wishlist"> <i
-															class="fa fa-heart-o"></i>
-														</a> <a href="#" title="Quick view" data-toggle="modal"
-															data-target="#productModal"> <i
-															class="fa fa-compress"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="banner-bottom text-center">
-												<div class="banner-bottom-title">
-													<a href="#">Twilight</a>
-												</div>
-												<div class="rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-									
 								</div>
+								</c:forEach>
 							</div>
+							
+							
+							<!-- List 형으로 글 목록 출력 -->
 							<div id="menu1" class="tab-pane fade">
 								<div class="row">
-									
-									<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="People of the book">
-													<img src="resources/writer/img/featured/2.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프로젝트 1</a>
-												</h4>
-												<div class="product-price">
-													<span class="new-price">￦ 10.000.000 원</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-clock-o"></i>&nbsp;예상 기간 50일</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> &lt;프로젝트 진행 방식&gt; 사전 미팅 방식 : - 오프라인 진행 중 
-												미팅 : - 미팅 방식: 온라인 (카카오톡, 화상미팅 등) 
-												- 미팅 주기: 주 2회 예상 
-												시작일 : 2020년 06월 08일 착수 시점 : - 계약 체결 이후, 즉시 시작하길 희망합니다. 프로젝트 우선순위 : 완성도 높은 산출물을 받아보는 것이 가장 중요합니다. </p>
-												<div class="availability">
-													<span><a href="cart.html">프로젝트 상세 보러가기</a></span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="The secret letter">
-													<img src="resources/writer/img/featured/3.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프로젝트 2</a>
-												</h4>
-												<div class="product-price">
-													<span class="new-price">￦ 5.000.000 원</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-clock-o"></i>&nbsp;예상 기간 30일</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 23</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> &lt;프로젝트 진행 방식&gt; 사전 미팅 방식 : - 오프라인 진행 중 
-												미팅 : - 미팅 방식: 온라인 (카카오톡, 화상미팅 등) 
-												- 미팅 주기: 주 2회 예상 
-												시작일 : 2020년 06월 08일 착수 시점 : - 계약 체결 이후, 즉시 시작하길 희망합니다. 프로젝트 우선순위 : 완성도 높은 산출물을 받아보는 것이 가장 중요합니다. </p>
-												<div class="availability">
-													<span><a href="cart.html">프로젝트 상세 보러가기</a></span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="Lone some dove"> <img
-													src="resources/writer/img/featured/4.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프로젝트 3</a>
-												</h4>
-												<div class="product-price">
-													<span class="new-price">￦ 1.000.000 원</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-clock-o"></i>&nbsp;예상 기간 10일</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> &lt;프로젝트 진행 방식&gt; 사전 미팅 방식 : - 오프라인 진행 중 
-												미팅 : - 미팅 방식: 온라인 (카카오톡, 화상미팅 등) 
-												- 미팅 주기: 주 2회 예상 
-												시작일 : 2020년 06월 08일 착수 시점 : - 계약 체결 이후, 즉시 시작하길 희망합니다. 프로젝트 우선순위 : 완성도 높은 산출물을 받아보는 것이 가장 중요합니다. </p>
-												<div class="availability">
-													<span><a href="cart.html">프로젝트 상세 보러가기</a></span>
-												</div>
-											</div>
-											</div>
-										</div>
-										
+								<!-- 글 리스트 시작 -->	
+								<c:forEach var="lRow" items="${viewAll }">							
 										<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="Lone some dove"> <img
-													src="resources/writer/img/featured/4.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프로젝트 4</a>
-												</h4>
-												<div class="product-price">
-													<span class="new-price">￦ 1.000.000 원</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-clock-o"></i>&nbsp;예상 기간 10일</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
+												<div class="col-xs-12 col-sm-5 col-md-4">
+													<div class="left-item">
+														<a href="projectView.do?PROJECT_IDX=${lRow.PROJECT_IDX }&USER_ID=${lRow.USER_ID}" title="People of the book">
+															<img src="resources/writer/img/featured/2.jpg" alt="">
+														</a>
+													</div>
 												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> &lt;프로젝트 진행 방식&gt; 사전 미팅 방식 : - 오프라인 진행 중 
-												미팅 : - 미팅 방식: 온라인 (카카오톡, 화상미팅 등) 
-												- 미팅 주기: 주 2회 예상 
-												시작일 : 2020년 06월 08일 착수 시점 : - 계약 체결 이후, 즉시 시작하길 희망합니다. 프로젝트 우선순위 : 완성도 높은 산출물을 받아보는 것이 가장 중요합니다. </p>
-												<div class="availability">
-													<span><a href="cart.html">프로젝트 상세 보러가기</a></span>
+												
+												<div class="col-xs-12 col-sm-7 col-md-8">
+													<div class="deal-product-content">
+														<h4>
+															<a href="single-product.html" title="">${ lRow.PROJECT_SUBJECT}</a>
+														</h4>
+														<div class="product-price">
+															<span class="new-price">￦${lRow.PROJECT_BUDGET } 원</span> <span>|</span>
+															<span class="new-price1"><i class="fa fa-clock-o"></i>&nbsp;${lRow.PROJECT_MAIN_KATEGORY }(${lRow.PROJECT_MIDDLE_KATEGORY })</span> <span>|</span>
+															<span class="text-light">등록 일자 :  ${lRow.PROJECT_START_DATE }</span> 
+															<!-- <span class="old-price">$ 120.00</span> -->
+														</div>
+														<!-- <div class="list-rating-icon">
+															<i class="fa fa-star icolor"></i> <i
+																class="fa fa-star icolor"></i> <i
+																class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</div> -->
+														<p> ${ lRow.PROJECT_CONTENT} </p>
+														<div class="availability">
+															<span><a href="projectView.do?PROJECT_IDX=${lRow.PROJECT_IDX }&USER_ID=${lRow.USER_ID}">프로젝트 상세 보러가기</a></span>
+														</div>
+													</div>
 												</div>
-											</div>
-											</div>
-										</div>
-										
-										<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="Lone some dove"> <img
-													src="resources/writer/img/featured/4.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프로젝트 5</a>
-												</h4>
-												<div class="product-price">
-													<span class="new-price">￦ 1.000.000 원</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-clock-o"></i>&nbsp;예상 기간 10일</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> &lt;프로젝트 진행 방식&gt; 사전 미팅 방식 : - 오프라인 진행 중 
-												미팅 : - 미팅 방식: 온라인 (카카오톡, 화상미팅 등) 
-												- 미팅 주기: 주 2회 예상 
-												시작일 : 2020년 06월 08일 착수 시점 : - 계약 체결 이후, 즉시 시작하길 희망합니다. 프로젝트 우선순위 : 완성도 높은 산출물을 받아보는 것이 가장 중요합니다. </p>
-												<div class="availability">
-													<span><a href="cart.html">프로젝트 상세 보러가기</a></span>
-												</div>
-											</div>
-											</div>
-										</div>
-										
-										<div class="single-shop-product">
-										<div class="col-xs-12 col-sm-5 col-md-4">
-											<div class="left-item">
-												<a href="single-product.html" title="Lone some dove"> <img
-													src="resources/writer/img/featured/4.jpg" alt="">
-												</a>
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-7 col-md-8">
-											<div class="deal-product-content">
-												<h4>
-													<a href="single-product.html" title="">등록된 프로젝트 6</a>
-												</h4>
-												<div class="product-price">
-													<span class="new-price">￦ 1.000.000 원</span> <span>|</span>
-													<span class="new-price1"><i class="fa fa-clock-o"></i>&nbsp;예상 기간 10일</span> <span>|</span>
-													<span class="text-light">등록 일자 : 2020 05 26</span> 
-													<!-- <span class="old-price">$ 120.00</span> -->
-												</div>
-												<!-- <div class="list-rating-icon">
-													<i class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i
-														class="fa fa-star icolor"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div> -->
-												<p> &lt;프로젝트 진행 방식&gt; 사전 미팅 방식 : - 오프라인 진행 중 
-												미팅 : - 미팅 방식: 온라인 (카카오톡, 화상미팅 등) 
-												- 미팅 주기: 주 2회 예상 
-												시작일 : 2020년 06월 08일 착수 시점 : - 계약 체결 이후, 즉시 시작하길 희망합니다. 프로젝트 우선순위 : 완성도 높은 산출물을 받아보는 것이 가장 중요합니다. </p>
-												<div class="availability">
-													<span><a href="cart.html">프로젝트 상세 보러가기</a></span>
-												</div>
-											</div>
-											</div>
-										</div>
+											</div>		
+									</c:forEach>											
 									</div>
 								</div>
 							</div>

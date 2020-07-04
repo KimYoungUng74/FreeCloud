@@ -358,7 +358,7 @@
 										<li><a href="projectSearch.do">프로젝트 찾기</a></li>
 									</ul></li>
 								<li><h4>
-										<a href="shop.html">프리랜서 찾기</a>
+										<a href="freelancerSearch.do">프리랜서 찾기</a>
 									</h4></li>
 								<li><h4>
 										<a href="shop.html">정보구름</a>

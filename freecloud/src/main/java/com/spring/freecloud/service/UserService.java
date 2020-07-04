@@ -1,6 +1,7 @@
 package com.spring.freecloud.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
 
 import com.spring.freecloud.dao.UserDAO;
+import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
+import com.spring.freecloud.util.PagingDTO;
 
 @Service("IUserService")
 public class UserService {
@@ -85,8 +88,26 @@ public class UserService {
 		dto.setUSER_ID(id);
 		dto.setUSER_NAME(name);
 		dto.setUSER_EMAIL(email);
-		
+
 		return dao.seekPw(dto);
 	}
 
+	// 프리랜서 리스트 조회
+	public List<UserDTO> listAll() {
+		// TODO Auto-generated method stub
+
+		return dao.listAll();
+	}
+
+	// 게시글 총 갯수
+
+	public int countBoard() {
+		return dao.countBoard();
+	}
+
+	// 페이징 처리 게시글 조회
+
+	public List<ProjectDTO> selectProject(PagingDTO dto) {
+		return dao.selectProject(dto);
+	}
 }
