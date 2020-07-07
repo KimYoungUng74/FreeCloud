@@ -6,9 +6,10 @@ public class BoardDTO {
 	 	
 	private int BBS_IDX;
 	private String USER_ID;
+	private String BBS_MAIN_KATEGORY;
 	private String BBS_SUBJECT;
 	private String BBS_CONTENT;
-	private String BBS_VIEW;
+	private int BBS_VIEWS;
 	private Date BBS_REG_DATE;
 	private Date BBS_UPDATE_DATE;
 	
@@ -27,6 +28,15 @@ public class BoardDTO {
 	public void setUSER_ID(String uSER_ID) {
 		USER_ID = uSER_ID;
 	}
+	
+	
+	public String getBBS_MAIN_KATEGORY() {
+		return BBS_MAIN_KATEGORY;
+	}
+
+	public void setBBS_MAIN_KATEGORY(String bBS_MAIN_KATEGORY) {
+		BBS_MAIN_KATEGORY = bBS_MAIN_KATEGORY;
+	}
 
 	public String getBBS_SUBJECT() {
 		return BBS_SUBJECT;
@@ -44,16 +54,13 @@ public class BoardDTO {
 		BBS_CONTENT = bBS_CONTENT;
 	}
 
-	public String getBBS_VIEW() {
-		return BBS_VIEW;
+	public int getBBS_VIEWS() {
+		return BBS_VIEWS;
 	}
 
-	public void setBBS_VIEW(String bBS_VIEW) {
-		BBS_VIEW = bBS_VIEW;
+	public void setBBS_VIEWS(int bBS_VIEWS) {
+		BBS_VIEWS = bBS_VIEWS;
 	}
-
-
-
 
 	public Date getBBS_REG_DATE() {
 		return BBS_REG_DATE;
@@ -82,10 +89,14 @@ public class BoardDTO {
 
 	@Override
 	public String toString() {
-		return "BoardDTO [BBS_IDX=" + BBS_IDX + ", USER_ID=" + USER_ID + ", BBS_SUBJECT=" + BBS_SUBJECT
-				+ ", BBS_CONTENT=" + BBS_CONTENT + ", BBS_VIEW=" + BBS_VIEW + ", BBS_REG_DATE=" + BBS_REG_DATE
-				+ ", BBS_UPDATE_DATE=" + BBS_UPDATE_DATE + "]";
+		return "BoardDTO [BBS_IDX=" + BBS_IDX + ", USER_ID=" + USER_ID + ", BBS_MAIN_KATEGORY=" + BBS_MAIN_KATEGORY
+				+ ", BBS_SUBJECT=" + BBS_SUBJECT + ", BBS_CONTENT=" + BBS_CONTENT + ", BBS_VIEWS=" + BBS_VIEWS
+				+ ", BBS_REG_DATE=" + BBS_REG_DATE + ", BBS_UPDATE_DATE=" + BBS_UPDATE_DATE + "]";
 	}
+
+	
+
+	
 
 
 	

@@ -1561,8 +1561,8 @@ p.form-row-phone {
 	text-align: center;
 }
 
-#checkout-review-table thead tr th:first-child {
-	width: 70%;
+#checkout-review-table thead tr th:nth-child(2) {
+	width: 50%;
 }
 
 #checkout-review-table thead tr th {
@@ -1586,15 +1586,13 @@ p.form-row-phone {
 	white-space: nowrap;
 }
 
-#checkout-review-table tbody tr:first-child {
-	font-size: 16px;
-}
+
 
 #checkout-review-table tbody tr {
 	border-top: 1px solid #f2f2f2;
 }
 
-#checkout-review-table tbody tr td:first-child {
+#checkout-review-table tbody tr td:nth-child(2) {
 	text-align: left;
 }
 

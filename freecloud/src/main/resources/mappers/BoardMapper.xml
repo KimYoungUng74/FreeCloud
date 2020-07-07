@@ -30,6 +30,29 @@
 		)
 	</insert>
 	
+	<!-- 게시글 등록 -->
+	<insert id="boardWrite">
+		INSERT INTO FREE_BBS(BBS_IDX, USER_ID, BBS_MAIN_KATEGORY, BBS_SUBJECT, BBS_CONTENT
+		, BBS_REG_DATE, BBS_UPDATE_DATE,BBS_VIEWS)
+		VALUES(
+		BBS_INC.nextval, 
+		#{USER_ID},
+		#{BBS_MAIN_KATEGORY},  
+		#{BBS_SUBJECT}, 
+		#{BBS_CONTENT}, 
+		sysdate, 
+		sysdate, 
+		0
+		)
+	</insert>
+	
+	<!-- 게시글 수정 -->
+	<update id="boardUpdate" parameterType="BoardDTO">
+		UPDATE FREE_BBS
+		set BBS_SUBJECT = #{BBS_SUBJECT},BBS_CONTENT = #{BBS_CONTENT},BBS_MAIN_KATEGORY = #{BBS_MAIN_KATEGORY}, BBS_UPDATE_DATE = sysdate
+		where BBS_IDX = #{BBS_IDX}
+	</update>
+	
 	<!-- 프로젝트 참여 -->
 	<insert id="projectJoin">
 		INSERT INTO FREE_MYFREELANCER(PROJECT_IDX, PROJECT_SUBJECT, CLIENT_ID, FREELANCER_ID,PROJECT_STATUS)
@@ -50,20 +73,33 @@
 		ORDER BY PROJECT_IDX DESC
 	</select>
 	
-	<!-- 프로젝트 보기 -->
+	<!-- 프로젝트 상세 보기 -->
 	<select id="projectView" resultType="ProjectDTO">
 		SELECT * 
 		FROM FREE_PROJECT
 		WHERE PROJECT_IDX = ${PROJECT_IDX}
 	</select>
 	
-	<!-- 총 게시글 갯수 출력 -->
+	<!-- 게시글 상세 보기 -->
+	<select id="boardView" resultType="BoardDTO">
+		SELECT * 
+		FROM FREE_BBS
+		WHERE BBS_IDX = ${BBS_IDX}
+	</select>
+	
+	<!-- 총 게시글 갯수 출력 ( 프로젝트 ) -->
 	<select id="countBoard" resultType="int">
 		SELECT COUNT(*)
 		FROM FREE_PROJECT
 	</select>
 	
-	<!-- 페이징 처리 후 게시글 조회 -->
+	<!-- 총 게시글 갯수 출력 ( 정보 구름 ) -->
+	<select id="countBoardList" resultType="int">
+		SELECT COUNT(*)
+		FROM FREE_BBS
+	</select>
+	
+	<!-- 페이징 처리 후 프로젝트 게시글 조회 -->
 	<select id="selectBoard" resultType="ProjectDTO">
 		SELECT * 
 		FROM (
@@ -72,6 +108,20 @@
 						SELECT * 
 						FROM FREE_PROJECT
 						ORDER BY PROJECT_IDX DESC 
+						) A
+				)
+	WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 페이징 처리 후 정보구름 게시글 조회 -->
+	<select id="selectBoardList" resultType="BoardDTO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * 
+						FROM FREE_BBS
+						ORDER BY BBS_IDX DESC 
 						) A
 				)
 	WHERE RN BETWEEN #{start} AND #{end}
