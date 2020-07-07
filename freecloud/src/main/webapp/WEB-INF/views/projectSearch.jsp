@@ -743,7 +743,7 @@ function search(){
 										<div class="single-banner">
 											<div class="product-wrapper">
 												
-												<a href="projectView.do?PROJECT_IDX=${gRow.PROJECT_IDX }&USER_ID=${gRow.USER_ID}" class="single-banner-image-wrapper"> 
+												<a href="projectView.do?PROJECT_IDX=${gRow.PROJECT_IDX }" class="single-banner-image-wrapper"> 
 												<img alt="" src="<c:url value='http://localhost:8181/img/profile/${gRow.PROJECT_IMAGE_PATH}'/>" onerror="this.src='resources/writer/img/featured/2.jpg'" style="width: 260px" height="270px" >
 													<div class="price">
 														<span>￦</span><fmt:formatNumber type="number" maxFractionDigits="3" value="${gRow.PROJECT_BUDGET }" />
