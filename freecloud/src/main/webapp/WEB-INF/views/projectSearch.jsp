@@ -47,7 +47,7 @@ function search(){
     	addr.push( $(this).val());	    	
     })
   
-	location.href="projectSearch.do?nowPage=${paging.nowPage}&cntPerPage="+sel+"&wk="+wk+"&mkd="+mkd+"&mkds="+mkds+"addr="+addr;		
+	location.href="testSearch.do?nowPage=${paging.nowPage}&cntPerPage="+sel+"&wk="+wk+"&mkd="+mkd+"&mkds="+mkds+"addr="+addr;		
 }
 
 // 근무형태 , 카테고리 , 지역 값 넘기기

@@ -468,24 +468,10 @@
 						</div>
 
 						<div class="col-md-4" style="display: inline; width: 30%;">
-							<b>근무 형태</b><label for="workMessage" id="workMessage"></label> <br>
+							<b>근무 형태 </b><label for="workMessage" id="workMessage"></label> <br>
 							<br>
-							<p style="font-size: 23px;" class="wkind">
-								<c:choose>
-									<c:when test="${dto.PROJECT_WORKING_KIND eq '외주' }">
-										&nbsp;&nbsp; <input type="radio" id="PROJECT_WORKING_KIND" name="PROJECT_WORKING_KIND" value="외주" onclick="workCheck()" checked="checked" disabled="true"
-										style="width: 18px; height: 18px">&nbsp;&nbsp;외주&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="PROJECT_WORKING_KIND" name="PROJECT_WORKING_KIND" onclick="workCheck()" readonly="readonly" disabled="true"
-										value="상주 " style="width: 18px; height: 18px">&nbsp;&nbsp;상주
-									</c:when>
-									
-									<c:when test="${dto.PROJECT_WORKING_KIND eq '상주' }">
-										&nbsp;&nbsp; <input type="radio" id="WORKING_KIND" name="WORKING_KIND" value="외주" onclick="workCheck()" disabled="true"
-										style="width: 18px; height: 18px">&nbsp;&nbsp;외주&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="WORKING_KIND" name="WORKING_KIND" onclick="workCheck()" checked="checked" disabled="true"
-										value="상주 " style="width: 18px; height: 18px">&nbsp;&nbsp;상주
-									</c:when>								
-								</c:choose>
+							<p style="font-size: 23px;">
+								<b>${dto.PROJECT_WORKING_KIND}</b>
 							</p>
 						</div>
 
@@ -503,22 +489,21 @@
 						</div>
 
 						<div class="col-md-4" style="display: inline; width: 30%;">
-							<b>예산 조율 여부</b><br>
+							<b>예산 조율 여부 ${dto.PROJECT_BUDGET_COORDINATION}</b></b><br>
 							<br>
 							<p style="font-size: 23px;" class="cooldi">
+								
 								<c:choose>
 									<c:when test="${dto.PROJECT_BUDGET_COORDINATION eq 0}">
-										&nbsp;&nbsp; <input type="radio" id="PROOJECT_BUDGET_COORDINATION" name="PROOJECT_BUDGET_COORDINATION" value="0" onclick="coorCheck()" checked="checked" disabled="true"
-										style="width: 18px; height: 18px">&nbsp;&nbsp;가능&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="PROOJECT_BUDGET_COORDINATION" name="PROOJECT_BUDGET_COORDINATION" onclick="coorCheck()" disabled="true"
-										value="1" style="width: 18px; height: 18px">&nbsp;&nbsp;불가능
+										<p style="font-size: 23px;">
+										<b>가능</b>
+										</p>
 									</c:when>
 									
 									<c:when test="${dto.PROJECT_BUDGET_COORDINATION eq 1} ">
-										&nbsp;&nbsp; <input type="radio" id="PROOJECT_BUDGET_COORDINATION" name="PROOJECT_BUDGET_COORDINATION" value="0" onclick="coorCheck()"  disabled="true"
-										style="width: 18px; height: 18px">&nbsp;&nbsp;가능&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="PROOJECT_BUDGET_COORDINATION" name="PROOJECT_BUDGET_COORDINATION" onclick="coorCheck()" checked="checked" disabled="true"
-										value="1" style="width: 18px; height: 18px">&nbsp;&nbsp;불가능
+										<p style="font-size: 23px;">
+										<b>불가능 ${dto.PROJECT_BUDGET_COORDINATION}</b>
+										</p>
 									</c:when>
 								</c:choose>
 							</p>

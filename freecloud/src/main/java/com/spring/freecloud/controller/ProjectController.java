@@ -102,6 +102,31 @@ public class ProjectController {
 		return mav;
 	}
 
+	/*
+	 * //프로젝트 검색 테스트
+	 * 
+	 * @RequestMapping(value = "testSearch.do") public ModelAndView test(PagingDTO
+	 * dto, Model model,
+	 * 
+	 * @RequestParam(value = "nowPage", required = false) String nowPage,
+	 * 
+	 * @RequestParam(value = "cntPerPage", required = false) String cntPerPage,
+	 * 
+	 * @RequestParam(value = "wk", required = false) String wk,
+	 * 
+	 * @RequestParam(value = "mkd", required = false) String mkd,
+	 * 
+	 * @RequestParam(value = "mkds", required = false) String mkds,
+	 * 
+	 * @RequestParam(value = "addr", required = false) String addr) {
+	 * 
+	 * System.out.println("현재 페이지 : " + nowPage); System.out.println("카운트 페이지 : " +
+	 * cntPerPage); System.out.println("근무 형태 : " + wk);
+	 * System.out.println("메인 카테고리 : " + mkd); System.out.println("미들 카테고리 : " +
+	 * mkds); System.out.println("지역 : " + addr);
+	 * 
+	 * return null; }
+	 */
 	// 프로젝트 게시글 조회
 	@RequestMapping(value = "projectView.do")
 	public ModelAndView view(@RequestParam int PROJECT_IDX, HttpSession session) {
