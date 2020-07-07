@@ -357,8 +357,7 @@
 									<p>
 										<label> 보유기술 : </label> <input type="text" id="mySkill"
 											name="FREELANCER_SKILL" readonly="readonly"
-											value="${dto.FREELANCER_SKILL}"> <input type="text"
-											readonly="readonly" id="skillInput" value="">
+											value="${dto.FREELANCER_SKILL}">
 									<p />
 								</div>
 								<div class="col-md-12">
@@ -378,8 +377,7 @@
 									<p>
 										<label> 자격증 : </label> <input type="text" id="myLicense"
 											name="FREELANCER_CERTIFICATE" readonly="readonly"
-											value="${dto.FREELANCER_CERTIFICATE}"> <input
-											type="text" id="licenseInput" value="" readonly="readonly">
+											value="${dto.FREELANCER_CERTIFICATE}">
 									<p />
 								</div>
 								<div class="col-md-12">
