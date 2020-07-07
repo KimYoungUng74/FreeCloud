@@ -29,7 +29,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.freecloud.dto.MyfreelancerDTO;
 import com.spring.freecloud.dto.ProjectDTO;
+import com.spring.freecloud.dto.ProjectViewDTO;
 import com.spring.freecloud.dto.UserDTO;
+import com.spring.freecloud.service.EtcService;
 import com.spring.freecloud.service.UserService;
 import com.spring.freecloud.util.PagingDTO;
 
@@ -43,7 +45,8 @@ public class UserController {
 
 	@Autowired
 	UserService userSer;
-
+	@Autowired
+	EtcService etcSer;
 	// xml에 설정된 리소스 참조
 	// bean의 id가 uploadPath인 태그를 참조 파일업로드
 	@Autowired
@@ -52,10 +55,12 @@ public class UserController {
 
 	// 회원가입 화면
 	@RequestMapping(value = "signup.do")
-	public String signup(Locale locale, Model model) {
-		return "signup";
+	public ModelAndView signup(Locale locale, Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav = setTop(mav);
+		mav.setViewName("signup");
+		return mav;
 	}
-
 	// 회원 가입 처리
 	@RequestMapping(value = "signupOk.do", method = RequestMethod.POST)
 	public ModelAndView signupOk(Locale locale, UserDTO dto) {
@@ -67,7 +72,7 @@ public class UserController {
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("home");
-
+		mav = sethome(mav);
 		return mav;
 	}
 
@@ -100,8 +105,11 @@ public class UserController {
 
 	// 로그인 화면
 	@RequestMapping(value = "login.do")
-	public String login(Locale locale, Model model) {
-		return "login";
+	public ModelAndView login(Locale locale, Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav = setTop(mav);
+		mav.setViewName("login");
+		return mav;
 	}
 
 	// 로그인 처리
@@ -115,6 +123,7 @@ public class UserController {
 			mav.setViewName("home");
 			mav.addObject("msg", "success");
 			System.out.println("로그인 성공");
+			mav = sethome(mav);
 		} else { // 로그인 실패
 			// login.jsp로 이동
 			mav.setViewName("login");
@@ -133,6 +142,7 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("home");
 		mav.addObject("msg", "logout");
+		mav = sethome(mav);
 		return mav;
 	}
 
@@ -179,7 +189,7 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("dto", dto);
 		mav.setViewName("mypage");
-		System.out.println(dto);
+		mav = setTop(mav);
 		return mav;
 	}
 
@@ -200,6 +210,7 @@ public class UserController {
 		mav.addObject("edList", edList);
 		mav.addObject("myprofile", myprofile);
 		mav.setViewName("myProject");
+		mav = setTop(mav);
 		return mav;
 	}
 
@@ -227,6 +238,7 @@ public class UserController {
 		mav.addObject("edList", edList);
 		mav.addObject("myprofile", myprofile);
 		mav.setViewName("projectRequest");
+		mav = setTop(mav);
 		return mav;
 	}
 
@@ -238,6 +250,7 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("myprofile", myprofile);
 		mav.setViewName("projectState");
+		mav = setTop(mav);
 		return mav;
 	}
 
@@ -275,8 +288,7 @@ public class UserController {
 			}
 		}
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("home");
-
+		mav = sethome(mav);
 		return mav;
 	}
 
@@ -364,7 +376,7 @@ public class UserController {
 		// 파일명 랜덤생성 메서드호출
 		String savedName = uploadFile(originalName, portfolio.getBytes(), dirname);
 		userSer.addPortfolio(originalName, savedName, sessison.getAttribute("userId").toString());
-
+		
 		return savedName;
 
 	}
@@ -447,8 +459,112 @@ public class UserController {
 		mav.setViewName("freelancerSearch");
 		mav.addObject("paging", dto);
 		mav.addObject("viewAll", list);
-
+		mav = setTop(mav);
 		return mav;
   	}
+  	
+ // 프리랜서 상세 페이지
+ 	@RequestMapping(value = "freelancerPage.do", produces = "application/text; charset=utf8")
+ 	public ModelAndView freelancerPage(Locale locale, @RequestParam("userId") String userId, HttpSession sessison) {
+ 		System.out.println("freelancerPage에 접근함");
+ 		
+ 		List<ProjectDTO> ingList = null; // 진행중인 프로젝트
+ 		
+ 		ingList = userSer.ingMyProject(sessison.getAttribute("userId").toString()); // 진행중인 프로젝트 - 의뢰
+ 		UserDTO dto = new UserDTO();
+ 		dto = userSer.myInfo(userId);
+ 		ModelAndView mav = new ModelAndView();
+ 		mav.addObject("dto", dto);
+ 		mav.addObject("ingList", ingList);
+ 		mav.setViewName("freelancerPage");
+ 		mav = setTop(mav);
+ 		return mav;
+ 	}
+ 	 // 프로젝트 지원요청
+ 	@RequestMapping(value = "RequestProject.do", produces = "application/text; charset=utf8")
+ 	public ModelAndView RequestProject(Locale locale, @RequestParam("PROJECT_SUBJECT") String PROJECT_SUBJECT, @RequestParam("PROJECT_IDX") String PROJECT_IDX, @RequestParam("userId") String userId, HttpSession sessison) {
+ 		System.out.println("RequestProject에 접근함");
+ 		 		
+ 		etcSer.RequestProject(PROJECT_IDX, PROJECT_SUBJECT, userId, sessison.getAttribute("userId").toString());
+ 		UserDTO dto = new UserDTO();
+ 		dto = userSer.myInfo(userId);
+ 		ModelAndView mav = new ModelAndView();
+ 		mav.addObject("dto", dto);
+ 		mav.addObject("msg", "ok");
+ 		mav.setViewName("freelancerPage");
+ 		mav = setTop(mav);
+ 		return mav;
+ 	}
+ 	
+
+ // 상단 배너
+ 	ModelAndView setTop(ModelAndView mav) {
+ 		int regProject = 0;
+ 		int regFree = 0;
+ 		int edPrice = 0;
+ 		int allUser = 0;
+
+ 		regProject = etcSer.ProjectCount();
+ 		regFree = etcSer.RegFreeCount();
+ 		edPrice = etcSer.EdPrice();
+ 		allUser = etcSer.AllUser();
+ 		System.out.println("완료한 금액 : " + regFree);
+
+ 		mav.addObject("regProject", regProject);
+ 		mav.addObject("regFree", regFree);
+ 		mav.addObject("edPrice", edPrice);
+ 		mav.addObject("allUser", allUser);
+ 		return mav;
+ 	}
+ 	
+ 	ModelAndView sethome(ModelAndView mav) {
+		mav = setTop(mav);
+		// 진행중인 프로젝트
+		List<ProjectViewDTO> list1 = null;
+		List<ProjectViewDTO> list2 = null;
+		List<ProjectViewDTO> list3 = null;
+		List<ProjectViewDTO> list4 = null;
+		List<ProjectViewDTO> list5 = null;
+		// 추천 유저 리스트
+		List<UserDTO> list6 = null;
+		// 모든 유저 리스트
+		List<UserDTO> list7 = null;
+		List<UserDTO> list8 = null;
+		List<UserDTO> list9 = null;
+		List<UserDTO> list10 = null;
+		List<UserDTO> list11 = null;
+
+		// 진행중인 프로젝트 목록 가져오기
+		list1 = userSer.viewProjectList("design");
+		list2 = userSer.viewProjectList("devel");
+		list3 = userSer.viewProjectList("contents");
+		list4 = userSer.viewProjectList("consulting");
+		list5 = userSer.viewProjectList("order");
+
+		// 추천유저리스트
+		list6 = userSer.UserList();
+		// 유저리스트
+		list7 = userSer.UserListALL("design");
+		list8 = userSer.UserListALL("devel");
+		list9 = userSer.UserListALL("contents");
+		list10 = userSer.UserListALL("consulting");
+		list11 = userSer.UserListALL("order");
+
+		// 진행중인 프로젝트
+		mav.addObject("list1", list1);
+		mav.addObject("list2", list2);
+		mav.addObject("list3", list3);
+		mav.addObject("list4", list4);
+		mav.addObject("list5", list5);
+		mav.addObject("list6", list6);
+		mav.addObject("list7", list7);
+		mav.addObject("list8", list8);
+		mav.addObject("list9", list9);
+		mav.addObject("list10", list10);
+		mav.addObject("list11", list11);
+
+		mav.setViewName("home");
+		return mav;
+	}
 	
 }

@@ -36,5 +36,12 @@
 		FROM
 		FREE_USER
 	</select>
+	
+	<!-- 지원 요청 -->
+	<insert id="RequestProject" parameterType="MyfreelancerDTO">
+		INSERT INTO free_myfreelancer(PROJECT_IDX, PROJECT_SUBJECT, CLIENT_ID, FREELANCER_ID, PROJECT_STATUS)
+		VALUES(#{PROJECT_IDX}, #{PROJECT_SUBJECT}, #{CLIENT_ID}, #{FREELANCER_ID}, 2)
+	</insert>
+	
 
 </mapper>

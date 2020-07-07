@@ -46,4 +46,11 @@ public class EtcService {
 		// TODO Auto-generated method stub
 		return dao.AllUser();
 	}
+
+	// 프로젝트 지원
+	public int RequestProject(String pROJECT_IDX, String PROJECT_SUBJECT, String freeid, String clientId) {
+		// TODO Auto-generated method stub
+		return dao.RequestProject(pROJECT_IDX, PROJECT_SUBJECT, freeid, clientId);
+	}
+
 }

@@ -3,23 +3,16 @@
 <%@ page session="true"%>
 <html>
 <head>
-<style type="text/css">
-   .chklist { height: 100px; overflow: auto; width: 100px; border: 1px solid #D3D3D3; }
-   .chklist { list-style-type: none; padding: 0; overflow-x: hidden; }
-   .listc {  padding: 0; }
-   .wKind {border: 1px solid #D3D3D3; }
-   
- </style>
- 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	language="java"%>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Creat An Account || Witter Multipage Responsive Template</title>
+<title>Home One || Witter Multipage Responsive Template</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon"
+	href="<c:url value='resources/writer/img/favicon.ico'/>">
 <!-- Place favicon.ico in the root directory -->
 <!-- Google Fonts -->
 <link
@@ -71,8 +64,19 @@
 <!-- modernizr css -->
 <script
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+	
+</script>
+
 </head>
 <body>
+	<c:if test="${msg == 'ok'}">
+		<script>
+			alert("요청 되었습니다.");
+		</script>
+	</c:if>
 	<!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -238,263 +242,160 @@
 		</div>
 	</div>
 	<!-- Counter Area End -->
-	<!-- Loging Area Start -->
-
-	<!-- <div class="panel-body">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="shop-select">
-					<label>Country <span class="required">*</span></label> <select>
-						<option value="volvo">Bangladesh</option>
-						<option value="saab">Algeria</option>
-						<option value="mercedes">Afghanistan</option>
-						<option value="audi">Ghana</option>
-						<option value="audi2">Albania</option>
-						<option value="audi3">Bahrain</option>
-						<option value="audi4">Colombia</option>
-						<option value="audi5">Dominican Republic</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<p class="form-row">
-					<input type="text" placeholder="First Name *">
-				</p>
-			</div>
-			<div class="col-md-6">
-				<p class="form-row">
-					<input type="text" placeholder="Last Name *">
-				</p>
-			</div>
-			<div class="col-md-12">
-				<p class="form-row">
-					<input type="text" placeholder="Company Name">
-				</p>
-			</div>
-			<div class="col-md-12">
-				<p class="form-row">
-					<input type="text" placeholder="Street address">
-				</p>
-			</div>
-			<div class="col-md-12">
-				<p class="form-row">
-					<input type="text" placeholder="Town / City">
-				</p>
-			</div>
-			<div class="col-md-6">
-				<p class="form-row">
-					<input type="text" placeholder="State / County *">
-				</p>
-			</div>
-			<div class="col-md-6">
-				<p class="form-row">
-					<input type="text" placeholder="Postcode / Zip">
-				</p>
-			</div>
-			<div class="col-md-6">
-				<p class="form-row">
-					<input type="text" placeholder="Email Address *">
-				</p>
-			</div>
-			<div class="col-md-6">
-				<p class="form-row">
-					<input type="text" placeholder="Phone *">
-				</p>
-			</div>
-			<div class="col-md-12">
-				<label class="checbox-info"> <input type="checkbox"
-					id="cbox"> Create an account?
-				</label>
-				<div id="cbox_info">
-					<p>Create an account by entering the information below. If you
-						are a returning customer please login at the top of the page.</p>
-					<p class="form-row form-row-phone">
-						<label>Phone<span class="required">*</span></label> <input
-							type="text" placeholder="Phone">
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>-->
-	<div class="login-account section-padding">
+	<!-- Shop Area Start -->
+	<div class="shopping-area section-padding">
 		<div class="container">
 			<div class="row">
-				<div>
-					<form action="#" class="create-account-form" method="post">
-						<h2 class="heading-title">프로젝트 상세</h2>
-
-						<div class="shop-select" style="display: inline; width: 25%;">
-							<label><b>카테고리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
-							<select style="width: 25%">
-								<option hidden="">대분류</option>
-								<option value="volvo">IT</option>
-								<option value="saab">Algeria</option>
-								<option value="mercedes">Afghanistan</option>
-								<option value="audi">Ghana</option>
-								<option value="audi2">Albania</option>
-								<option value="audi3">Bahrain</option>
-								<option value="audi4">Colombia</option>
-								<option value="audi5">Dominican Republic</option>
-							</select>
-						</div>
-
-						<div class="shop-select" style="display: inline; width: 25%;">
-							<!-- <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;중분류 </label> -->
-							<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> <select
-								style="width: 25%">
-								<option hidden="">중분류</option>
-								<option value="volvo">Java</option>
-								<option value="saab">Algeria</option>
-								<option value="mercedes">Afghanistan</option>
-								<option value="audi">Ghana</option>
-								<option value="audi2">Albania</option>
-								<option value="audi3">Bahrain</option>
-								<option value="audi4">Colombia</option>
-								<option value="audi5">Dominican Republic</option>
-							</select>
-
-
-						</div>
-						<br>
-
-						<p class="form-row">
-							<b>제목</b><br>
-							<br> <input type="text" id="userPW2" placeholder="제목">
-						</p>
-
-						<p>
-							<b>상세업무</b>
-						</p>
-
-						<p class="form-row order-notes">
-							<textarea placeholder="상세 내용 기입"></textarea>
-						</p>
-
-
-						<div class="col-md-4" style="display: inline; width: 50%;">
-							<b>프로젝트 시작일</b><br>
-							<br>
-							<p class="form-row"">
-
-								<input style="display: inline;" type="text" id="userPhone1"
-									placeholder="Ex)2020-05-05">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							</p>
-						</div>
-
-						<div class="col-md-4" style="display: inline; width: 50%;">
-							<p class="shop-select">
-								<b>근무 위치</b><br>
-								<br> <select>
-									<option value="none">지역을 선택하세요.</option>
-									<option value="서울특별시">서울특별시</option>
-								</select>
-							</p>
-						</div>
-
-						<div class="col-md-4" style="display: inline; width: 51%;">
-							<b>모집 마감일</b><br>
-							<br>
-							<p class="form-row"">
-
-								<input style="display: inline;" type="text" id="userPhone1"
-									placeholder="Ex)2020-05-05">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							</p>
-						</div>
-
-						<div class="col-md-4" style="display: inline; width: 30%;">
-							<b>근무 형태</b><br>
-							<br>
-							<p style="font-size: 23px;" class="wKind">
-								&nbsp;&nbsp; <input type="radio" name="chk_kind" value="HTML"
-									style="width: 18px; height: 18px">&nbsp;&nbsp;외주&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="chk_kind"
-									value="CSS " style="width: 18px; height: 18px">&nbsp;&nbsp;상주
-
-							</p>
-						</div>
-
-						<div class="col-md-4" style="display: inline; width: 51%;">
-							<b>프로젝트 예산</b><br>
-							<br>
-							<p class="form-row"">
-
-								<input style="display: inline;" type="text" id="userPhone1"
-									placeholder="예산 입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							</p>
-						</div>
-
-						<div class="col-md-4" style="display: inline; width: 30%;">
-							<b>예산 조율 여부</b><br>
-							<br>
-							<p style="font-size: 23px;" class="wKind">
-								&nbsp;&nbsp; <input type="radio" name="chk_budget" value="HTML"
-									style="width: 18px; height: 18px">&nbsp;&nbsp;가능&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="chk_budget"
-									value="CSS " style="width: 18px; height: 18px">&nbsp;&nbsp;불가능
-
-							</p>
-						</div>
-
-						<div class="col-md-4" style="display: inline; width: 50%;">
-							<b>프리랜서 지원현황</b><br><br>
-							<ul class="chklist"style="width: 100%">
-								<li class="listc"><label for="chk1"><input type="checkbox"
-										name="chk1" id="chk1">First</label></li>
-								<li class="listc"><label for="chk2"><input type="checkbox"
-										name="chk2" id="chk2">Second</label></li>
-								<li class="listc"><label for="chk3"><input type="checkbox"
-										name="chk3" id="chk3">Third</label></li>
-								<li class="listc"><label for="chk4"><input type="checkbox"
-										name="chk4" id="chk4">Fourth</label></li>
-								<li class="listc"><label for="chk5"><input type="checkbox"
-										name="chk5" id="chk5">Fifth</label></li>
-								<li class="listc"><label for="chk6"><input type="checkbox"
-										name="chk6" id="chk6">Sixth</label></li>
-								<li class="listc"><label for="chk7"><input type="checkbox"
-										name="chk7" id="chk7">Seventh</label></li>
-							</ul>
-							<br>
-						</div>
-						
-						<div class="col-md-4" style="display: inline; width:50%;">
-							<br><br>
-							<div class="submit" style="display: inline;">
-							<button name="loginBtn" id="loginBtn" type="submit"
-								class="btn-default">
-								<span> <i class="fa fa-user left"></i> 마감하기
-								</span>
-							</button>
+				<form action="myInfoModify.do" method="post" id="infoForm">
+					<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
+						<div class="row shop-widget">
+							<div class="thumbnail">
+								<div class="centered" id="profile">
+									<img alt=""
+										src="<c:url value='http://localhost:8181/img/profile/${dto.FREELANCER_IMAGE_PATH}'/>">
+									<input id="originalProfile" type="hidden" value="basic.png">
+								</div>
 							</div>
-						<br>
-						</div>
-						
-						<div class="submit" style="display: inline;">
-							
-							<button name="loginBtn" id="loginBtn" type="submit"
-								class="btn-default" style="width:51%">
-								<span> <i class="fa fa-user left"></i> 삭제
-								</span>
-							</button>
-							
-						</div>
-						
-						<div class="submit" style="display: inline;">
-							
-							<button name="loginBtn" id="loginBtn" type="submit"
-								class="btn-default" style="width:48%">
-								<span> <i class="fa fa-user left"></i> 수정
-								</span>
-							</button>
-							
-						</div>
-						
+							<div class="basic_btn" style="width: 100%">
+								<a href="#" title="Quick view" data-toggle="modal"
+									data-target="#pwDialog">지원 요청</a>
+							</div>
+							<br>
 
-					</form>
-				</div>
+						</div>
+					</div>
+					<div class="col-md-9 col-sm-9 col-xs-12" style="font-size: 20px;">
+						<div
+							style="width: 100%; height: 100%; border: 1px solid #D3D3D3; padding: 10px;">
+							<div class="row">
+								<div class="col-md-6">
+									<p>
+										<label> ID : </label> <input name="USER_ID"
+											value="${dto.USER_ID}" readonly="readonly">
+									<p>
+									<p>
+										<label> 지역 : </label> <select name="USER_ADDRESS"
+											disabled="disabled">
+											<option value="${dto.USER_ADDRESS}" hidden selected>${dto.USER_ADDRESS}</option>
+										</select>
+									<p>
+								</div>
+								<div class="col-md-6">
+									<p>
+										<label> 이름 : </label> <input type="text" name="USER_NAME"
+											readonly="readonly" value="${dto.USER_NAME}">
+									<p>
+								</div>
+								<div class="col-md-6">
+									<p>
+										<label> 이메일 : </label> <input type="email" name="USER_EMAIL"
+											readonly="readonly" value="${dto.USER_EMAIL}"
+											placeholder="freeCloud@free.com">
+									</p>
+								</div>
+								<div class="col-md-6">
+									<label> 최종학력 : </label> <select name="USER_EDU"
+										disabled="disabled">
+										<option value="${dto.USER_EDU}" hidden selected>${dto.USER_EDU}</option>
+
+									</select>
+								</div>
+
+								<div class="col-md-12">
+									<label> 전화번호 </label>
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE1" style="width: 90%;"
+										readonly="readonly" value="${dto.USER_PHONE1}">
+									&nbsp;&nbsp;-
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE2" style="width: 90%;"
+										readonly="readonly" value="${dto.USER_PHONE2}">
+									&nbsp;&nbsp;-
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE3" style="width: 100%;"
+										readonly="readonly" value="${dto.USER_PHONE3}">
+								</div>
+
+								<div class="col-md-12">
+									<br> <label> 자기소개 </label>
+
+									<textarea rows="8" name="FREELANCER_ABOUT_ME"
+										style="width: 100%; resize: none;" readonly="readonly">${dto.FREELANCER_ABOUT_ME}</textarea>
+								</div>
+								<div class="col-md-8">
+									<p>
+										<label> 전문분야 : </label> <select id="CATAGORY1"
+											disabled="disabled" name="FREELANCER_MAIN_KATEGORY">
+											<option value="${dto.FREELANCER_MAIN_KATEGORY}" hidden
+												disabled="disabled" selected>${dto.FREELANCER_MAIN_KATEGORY}</option>
+										</select> &nbsp; <select id="CATAGORY2" disabled="disabled"
+											name="FREELANCER_MIDDEL_KATEGORY">
+											<option value="${dto.FREELANCER_MIDDEL_KATEGORY}" hidden
+												disabled="disabled" selected>${dto.FREELANCER_MIDDEL_KATEGORY}</option>
+										</select>
+									</p>
+								</div>
+								<div class="col-md-4">
+									<p>
+										<label> 경력 : </label> <select name="FREELANCER_CAREER"
+											disabled="disabled">
+											<c:choose>
+												<c:when test="${dto.FREELANCER_CAREER == 0}">
+													<option value="${dto.FREELANCER_CAREER}" hidden selected>1년미만</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${dto.FREELANCER_CAREER}" hidden selected>${dto.FREELANCER_MIDDEL_KATEGORY}년</option>
+												</c:otherwise>
+											</c:choose>
+										</select>
+									</p>
+								</div>
+								<div class="col-md-12 basicBtn2">
+									<p>
+										<label> 보유기술 : </label> <input type="text" id="mySkill"
+											name="FREELANCER_SKILL" readonly="readonly"
+											value="${dto.FREELANCER_SKILL}"> <input type="text"
+											readonly="readonly" id="skillInput" value="">
+									<p />
+								</div>
+								<div class="col-md-12">
+									<label> 포트폴리오 </label>
+								</div>
+								<div id="portfolioReg" style="display: block;">
+									<div class="col-md-6">
+										<p>
+											<input class="basicBtn" id="myPortfolio" style="width: 100%"
+												type="file">
+										</p>
+									</div>
+								</div>
+								<div class="col-md-12" id="portfolio"></div>
+
+								<div class="col-md-12 basicBtn2">
+									<p>
+										<label> 자격증 : </label> <input type="text" id="myLicense"
+											name="FREELANCER_CERTIFICATE" readonly="readonly"
+											value="${dto.FREELANCER_CERTIFICATE}"> <input
+											type="text" id="licenseInput" value="" readonly="readonly">
+									<p />
+								</div>
+								<div class="col-md-12">
+									<div class="basic_btn" style="width: 100%">
+										<a title="Quick view" data-toggle="modal"
+											onclick="history.back(-1);" data-target="#idDialog">뒤로 가기</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-	<!-- Loging Area End -->
+	<!-- Shop Area End -->
 	<!-- Footer Area Start -->
 	<footer>
 		<div class="footer-top-area">
@@ -565,6 +466,109 @@
 		</div>
 	</footer>
 	<!-- Footer Area End -->
+	<!--Quickview Product Start -->
+	<div id="quickview-wrapper">
+		<!-- Modal -->
+		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-product">
+							<div class="product-images"></div>
+							<div class="product-info">
+								<h1>Frame Princes Cut Diamond</h1>
+								<div class="price-box">
+									<p class="s-price">
+										<span class="special-price"><span class="amount">$280.00</span></span>
+									</p>
+								</div>
+								<a href="product-details.html" class="see-all">See all
+									features</a>
+								<div class="quick-add-to-cart">
+									<form method="post" class="cart">
+										<div class="numbers-row">
+											<input type="number" id="french-hens" value="3">
+										</div>
+										<button class="single_add_to_cart_button" type="submit">Add
+											to cart</button>
+									</form>
+								</div>
+								<div class="quick-desc">Lorem ipsum dolor sit amet,
+									consectetur adipiscing elit. Nam fringilla augue nec est
+									tristique auctor. Donec non est at libero vulputate rutrum.
+									Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
+									vulputate adipiscing cursus eu, suscipit id nulla.</div>
+								<div class="social-sharing">
+									<div class="widget widget_socialsharing_widget">
+										<h3 class="widget-title-modal">Share this product</h3>
+										<ul class="social-icons">
+											<li><a target="_blank" title="Facebook" href="#"
+												class="facebook social-icon"><i class="fa fa-facebook"></i></a></li>
+											<li><a target="_blank" title="Twitter" href="#"
+												class="twitter social-icon"><i class="fa fa-twitter"></i></a></li>
+											<li><a target="_blank" title="Pinterest" href="#"
+												class="pinterest social-icon"><i class="fa fa-pinterest"></i></a></li>
+											<li><a target="_blank" title="Google +" href="#"
+												class="gplus social-icon"><i class="fa fa-google-plus"></i></a></li>
+											<li><a target="_blank" title="LinkedIn" href="#"
+												class="linkedin social-icon"><i class="fa fa-linkedin"></i></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- .product-info -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 지원 요청 -->
+		<div class="modal fade" id="pwDialog" tabindex="-1" role="dialog">
+			<div class="modal-dialog" id="profileChange" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" id="profileClose"
+							data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-product">
+							<div class="container">
+								<div class="row">
+									<div>
+										<h2 class="heading-title">지원 요청</h2>
+										<label> 진행중인 프로젝트 </label>
+
+										<div
+											style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
+											<c:forEach var="row" items="${ingList}">
+												<a
+													href="RequestProject.do?PROJECT_SUBJECT=${row.PROJECT_SUBJECT}&PROJECT_IDX=${row.PROJECT_IDX}&userId=${dto.USER_ID}">${row.PROJECT_SUBJECT}</a>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- .product-info -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 이미지 변경 -->
+
+
+	</div>
+	<!--End of Quickview Product-->
 	<!-- all js here -->
 	<!-- jquery latest version -->
 	<script
