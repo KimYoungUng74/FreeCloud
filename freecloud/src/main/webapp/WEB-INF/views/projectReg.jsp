@@ -329,6 +329,22 @@
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
 </head>
 <body>
+	<c:if test="${msg == 'logout'}">
+		<script>
+			alert("로그아웃 되었습니다.");
+		</script>
+	</c:if>
+
+	<%
+	if(session.getAttribute("userId")==null) {	
+	%>
+		<script>
+			alert("로그인 하세요..");
+			location.href="home.do";
+		</script>
+	<%
+	}
+	%>
 	<!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->

@@ -73,7 +73,8 @@ public class UserController {
 
 	// 아이디 중복 체크
 	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
-	public @ResponseBody String AjaxView(@RequestParam("id") String id) {
+	public @ResponseBody String AjaxView(@RequestParam("id") String id) throws Exception{
+		System.out.println("넘어가세요");
 		String str = "";
 		boolean idcheck = userSer.checkId(id);
 		if (idcheck) { // 이미 존재하는 계정
