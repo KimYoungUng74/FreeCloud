@@ -64,16 +64,25 @@
 <!-- modernizr css -->
 <script
 	src="<c:url value='resources/writer/js/vendor/modernizr-2.8.3.min.js'/>"></script>
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+	
+</script>
+
 </head>
 <body>
+	<c:if test="${msg == 'ok'}">
+		<script>
+			alert("요청 되었습니다.");
+		</script>
+	</c:if>
 	<!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
 	<!-- Add your site or application content here -->
 	<!--Header Area Start-->
-
 	<div class="header-area">
 		<div class="container">
 			<div class="row">
@@ -122,7 +131,6 @@
 										<a href="login.do">로그인<i class="flaticon-people"></i></a>
 									</c:when>
 									<c:otherwise>
-
 										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
 									</c:otherwise>
 								</c:choose></li>
@@ -278,85 +286,152 @@
 	<div class="shopping-area section-padding">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
-					<div class="row shop-widget">
-						<div class="thumbnail">
-							<div class="centered" id="profile">
-								<img alt=""
-									src="<c:url value='http://localhost:8181/img/profile/${myprofile}'/>">
-								<input id="originalProfile" type="hidden" value="basic.png">
+				<form action="myInfoModify.do" method="post" id="infoForm">
+					<div class="col-md-3 col-sm-3 col-xs-12" style="font-size: 20px">
+						<div class="row shop-widget">
+							<div class="thumbnail">
+								<div class="centered" id="profile">
+									<img alt=""
+										src="<c:url value='http://localhost:8181/img/profile/${dto.FREELANCER_IMAGE_PATH}'/>">
+									<input id="originalProfile" type="hidden" value="basic.png">
+								</div>
 							</div>
-						</div>
-						<hr>
-						<div class="basic_btn" style="width: 100%;">
-							<a href="mypage.do">내 정보</a>
-						</div>
-						<div class="basic_btn" style="width: 100%;">
-							<a href="myProject.do">나의 프로젝트</a>
-						</div>
-						<div class="basic_btn" style="width: 100%;">
-							<a href="projectRequest.do"
-								style="color: #fff; background-color: #a3d4f7;">프로젝트 지원 현황</a>
-						</div>
-						<div class="basic_btn" style="width: 100%;">
-							<a href="projectState.do">나의 게시판</a>
+							<div class="basic_btn" style="width: 100%">
+								<a href="#" title="Quick view" data-toggle="modal"
+									data-target="#pwDialog">지원 요청</a>
+							</div>
+							<br>
+
 						</div>
 					</div>
-				</div>
-				<div class="col-md-9 col-sm-9 col-xs-12" style="font-size: 20px;">
-					<div
-						style="width: 100%; height: 100%; border: 1px solid #D3D3D3; padding: 10px;">
-						<div class="row">
-							<div class="col-md-12">
-								<br> <label>진행 중인 프로젝트 </label>
-
-								<div
-									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
-									<c:forEach var="row" items="${ingList}">
-										<a href="${row.PROJECT_IDX}">${row.PROJECT_SUBJECT}</a>
-										<br>
-									</c:forEach>
+					<div class="col-md-9 col-sm-9 col-xs-12" style="font-size: 20px;">
+						<div
+							style="width: 100%; height: 100%; border: 1px solid #D3D3D3; padding: 10px;">
+							<div class="row">
+								<div class="col-md-6">
+									<p>
+										<label> ID : </label> <input name="USER_ID"
+											value="${dto.USER_ID}" readonly="readonly">
+									<p>
+									<p>
+										<label> 지역 : </label> <select name="USER_ADDRESS"
+											disabled="disabled">
+											<option value="${dto.USER_ADDRESS}" hidden selected>${dto.USER_ADDRESS}</option>
+										</select>
+									<p>
 								</div>
-							</div>
-							<div class="col-md-12">
-								<br> <label>지원 요청된 프로젝트</label>
-
-								<div
-									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
-									<c:forEach var="row" items="${requestedList}">
-										<a href="${row.PROJECT_IDX}">${row.PROJECT_SUBJECT}</a>
-										<br>
-									</c:forEach>
+								<div class="col-md-6">
+									<p>
+										<label> 이름 : </label> <input type="text" name="USER_NAME"
+											readonly="readonly" value="${dto.USER_NAME}">
+									<p>
 								</div>
-							</div>
-							<div class="col-md-12">
-								<br> <label>지원한 프로젝트</label>
-
-								<div
-									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
-									<c:forEach var="row" items="${requestList}">
-										<a href="${row.PROJECT_IDX}">${row.PROJECT_SUBJECT}</a>
-										<br>
-									</c:forEach>
+								<div class="col-md-6">
+									<p>
+										<label> 이메일 : </label> <input type="email" name="USER_EMAIL"
+											readonly="readonly" value="${dto.USER_EMAIL}"
+											placeholder="freeCloud@free.com">
+									</p>
 								</div>
-							</div>
-							<div class="col-md-12">
-								<br> <label>완료한 프로젝트</label>
+								<div class="col-md-6">
+									<label> 최종학력 : </label> <select name="USER_EDU"
+										disabled="disabled">
+										<option value="${dto.USER_EDU}" hidden selected>${dto.USER_EDU}</option>
 
-								<div
-									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
-									<c:forEach var="row" items="${edList}">
-										<a href="${row.PROJECT_IDX}">${row.PROJECT_SUBJECT}</a>
-										<br>
-									</c:forEach>
+									</select>
 								</div>
-							</div>
-							<div class="col-md-12">
-								<p></p>
+
+								<div class="col-md-12">
+									<label> 전화번호 </label>
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE1" style="width: 90%;"
+										readonly="readonly" value="${dto.USER_PHONE1}">
+									&nbsp;&nbsp;-
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE2" style="width: 90%;"
+										readonly="readonly" value="${dto.USER_PHONE2}">
+									&nbsp;&nbsp;-
+								</div>
+								<div class="col-md-4">
+									<input type="text" name="USER_PHONE3" style="width: 100%;"
+										readonly="readonly" value="${dto.USER_PHONE3}">
+								</div>
+
+								<div class="col-md-12">
+									<br> <label> 자기소개 </label>
+
+									<textarea rows="8" name="FREELANCER_ABOUT_ME"
+										style="width: 100%; resize: none;" readonly="readonly">${dto.FREELANCER_ABOUT_ME}</textarea>
+								</div>
+								<div class="col-md-8">
+									<p>
+										<label> 전문분야 : </label> <select id="CATAGORY1"
+											disabled="disabled" name="FREELANCER_MAIN_KATEGORY">
+											<option value="${dto.FREELANCER_MAIN_KATEGORY}" hidden
+												disabled="disabled" selected>${dto.FREELANCER_MAIN_KATEGORY}</option>
+										</select> &nbsp; <select id="CATAGORY2" disabled="disabled"
+											name="FREELANCER_MIDDEL_KATEGORY">
+											<option value="${dto.FREELANCER_MIDDEL_KATEGORY}" hidden
+												disabled="disabled" selected>${dto.FREELANCER_MIDDEL_KATEGORY}</option>
+										</select>
+									</p>
+								</div>
+								<div class="col-md-4">
+									<p>
+										<label> 경력 : </label> <select name="FREELANCER_CAREER"
+											disabled="disabled">
+											<c:choose>
+												<c:when test="${dto.FREELANCER_CAREER == 0}">
+													<option value="${dto.FREELANCER_CAREER}" hidden selected>1년미만</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${dto.FREELANCER_CAREER}" hidden selected>${dto.FREELANCER_MIDDEL_KATEGORY}년</option>
+												</c:otherwise>
+											</c:choose>
+										</select>
+									</p>
+								</div>
+								<div class="col-md-12 basicBtn2">
+									<p>
+										<label> 보유기술 : </label> <input type="text" id="mySkill"
+											name="FREELANCER_SKILL" readonly="readonly"
+											value="${dto.FREELANCER_SKILL}"> <input type="text"
+											readonly="readonly" id="skillInput" value="">
+									<p />
+								</div>
+								<div class="col-md-12">
+									<label> 포트폴리오 </label>
+								</div>
+								<div id="portfolioReg" style="display: block;">
+									<div class="col-md-6">
+										<p>
+											<input class="basicBtn" id="myPortfolio" style="width: 100%"
+												type="file">
+										</p>
+									</div>
+								</div>
+								<div class="col-md-12" id="portfolio"></div>
+
+								<div class="col-md-12 basicBtn2">
+									<p>
+										<label> 자격증 : </label> <input type="text" id="myLicense"
+											name="FREELANCER_CERTIFICATE" readonly="readonly"
+											value="${dto.FREELANCER_CERTIFICATE}"> <input
+											type="text" id="licenseInput" value="" readonly="readonly">
+									<p />
+								</div>
+								<div class="col-md-12">
+									<div class="basic_btn" style="width: 100%">
+										<a title="Quick view" data-toggle="modal"
+											onclick="history.back(-1);" data-target="#idDialog">뒤로 가기</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -377,8 +452,9 @@
 							<div class="col-md-9">
 								<br>
 								<h2 class="footer-title">
-									<a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a
-										href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a>
+									<p>
+										<a href="#">회사소개</a>&nbsp;|&nbsp;<a href="#">이용약관</a>&nbsp;|&nbsp;<a
+											href="#">FAQ</a>&nbsp;|&nbsp;<a href="#">개인정보 처리방침</a>
 								</h2>
 							</div>
 							<br> <br> <br> <br>
@@ -492,6 +568,45 @@
 				</div>
 			</div>
 		</div>
+
+
+		<!-- 지원 요청 -->
+		<div class="modal fade" id="pwDialog" tabindex="-1" role="dialog">
+			<div class="modal-dialog" id="profileChange" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" id="profileClose"
+							data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-product">
+							<div class="container">
+								<div class="row">
+									<div>
+										<h2 class="heading-title">지원 요청</h2>
+										<label> 진행중인 프로젝트 </label>
+
+										<div
+											style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
+											<c:forEach var="row" items="${ingList}">
+												<a
+													href="RequestProject.do?PROJECT_SUBJECT=${row.PROJECT_SUBJECT}&PROJECT_IDX=${row.PROJECT_IDX}&userId=${dto.USER_ID}">${row.PROJECT_SUBJECT}</a>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- .product-info -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 이미지 변경 -->
+
+
 	</div>
 	<!--End of Quickview Product-->
 	<!-- all js here -->

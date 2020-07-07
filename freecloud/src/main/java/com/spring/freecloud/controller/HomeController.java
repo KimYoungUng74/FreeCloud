@@ -39,7 +39,7 @@ public class HomeController {
 
 		ModelAndView mav = new ModelAndView();
 		mav = sethome(mav);
-
+		mav.setViewName("freelancerPage");
 		return mav;
 	}
 
@@ -50,7 +50,6 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 
 		mav = sethome(mav);
-
 		return mav;
 	}
 

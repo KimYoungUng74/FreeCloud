@@ -312,6 +312,7 @@
 									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
 									<c:forEach var="row" items="${ingList}">
 									<a href="${row.PROJECT_IDX}">${row.PROJECT_SUBJECT}</a>
+									<br>
 									</c:forEach>	
 								</div>
 							</div>
@@ -322,6 +323,7 @@
 									style="overflow: auto; border: 1px solid #D3D3D3; width: 100%; height: 250px;">
 									<c:forEach var="row" items="${edList}">
 									<a href="${row.PROJECT_IDX}">${row.PROJECT_SUBJECT}</a>
+									<br>
 									</c:forEach>
 									</div>
 							</div>
