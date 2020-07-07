@@ -161,6 +161,7 @@
 	<select id="ingMyProject" parameterType="String"
 		resultType="ProjectDTO">
 		SELECT
+		USER_ID,
 		PROJECT_IDX,
 		PROJECT_SUBJECT 
 		FROM FREE_PROJECT
@@ -171,6 +172,7 @@
 	<select id="edMyProject" parameterType="String"
 		resultType="ProjectDTO">
 		SELECT
+		USER_ID,
 		PROJECT_IDX,
 		PROJECT_SUBJECT 
 		FROM FREE_PROJECT
