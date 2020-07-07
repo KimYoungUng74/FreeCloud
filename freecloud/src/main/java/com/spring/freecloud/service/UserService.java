@@ -15,6 +15,7 @@ import com.spring.freecloud.dao.UserDAO;
 import com.spring.freecloud.dto.PortfolioDTO;
 
 import com.spring.freecloud.dto.ProjectDTO;
+import com.spring.freecloud.dto.ProjectViewDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.util.PagingDTO;
 
@@ -203,5 +204,21 @@ public class UserService {
 	public List<ProjectDTO> rEdMyProject(String USER_ID) {
 		// TODO Auto-generated method stub
 		return dao.rEdMyProject(USER_ID);
+	}
+
+	// home 프로젝트 리스트
+	public List<ProjectViewDTO> viewProjectList(String cata) {
+		// TODO Auto-generated method stub
+		return dao.viewProjectList(cata);
+	}
+
+	public List<UserDTO> UserList() {
+		// TODO Auto-generated method stub
+		return dao.UserList();
+	}
+
+	public List<UserDTO> UserListALL(String FREELANCER_MAIN_KATEGORY) {
+		// TODO Auto-generated method stub
+		return dao.UserListALL(FREELANCER_MAIN_KATEGORY);
 	}
 }
