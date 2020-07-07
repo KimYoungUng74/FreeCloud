@@ -1,5 +1,6 @@
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="true"%>
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
@@ -26,30 +27,31 @@ function selChange() {
 	location.href="projectSearch.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
 }
 
-// 근무형태 , 카테고리 , 지역 값 넘기기
-	function selChckChange() {
-		
-		var wk = $("input:radio[name='PROJECT_WORKING_KIND']:checked").val();
-		var sel = document.getElementById('cntPerPage').value;
-		
-	    var mkd = new Array();
-	    var mkds = new Array();
-		var addr = new Array();
+function search(){
+	var wk = $("input:radio[name='PROJECT_WORKING_KIND']:checked").val();
+	var sel = document.getElementById('cntPerPage').value;
 	
-	    $("input[name='PROJECT_MIDDLE_KATEGORY_D']:checked").each(function() {
-	    	mkd.push( $(this).val());	    	
-	    })
-	    
-	    $("input[name='PROJECT_MIDDLE_KATEGORY_DS']:checked").each(function() {
-	    	mkds.push( $(this).val());	    	
-	    })
-	    
-	    $("input[name='PROJECT_ADDRESS']:checked").each(function() {
-	    	addr.push( $(this).val());	    	
-	    })
-	  
-		location.href="projectSearch.do?nowPage=${paging.nowPage}&cntPerPage="+sel+"&wk="+wk+"&mkd="+mkd+"&mkds="+mkds+"addr="+addr;		
-	}
+    var mkd = new Array();
+    var mkds = new Array();
+	var addr = new Array();
+
+    $("input[name='PROJECT_MIDDLE_KATEGORY_D']:checked").each(function() {
+    	mkd.push( $(this).val());	    	
+    })
+    
+    $("input[name='PROJECT_MIDDLE_KATEGORY_DS']:checked").each(function() {
+    	mkds.push( $(this).val());	    	
+    })
+    
+    $("input[name='PROJECT_ADDRESS']:checked").each(function() {
+    	addr.push( $(this).val());	    	
+    })
+  
+	location.href="projectSearch.do?nowPage=${paging.nowPage}&cntPerPage="+sel+"&wk="+wk+"&mkd="+mkd+"&mkds="+mkds+"addr="+addr;		
+}
+
+// 근무형태 , 카테고리 , 지역 값 넘기기
+
 
 </script>
 
@@ -645,10 +647,15 @@ function selChange() {
 								</div>
 								
 								</div>
-										<div>
-												<input type="button" value="검색" style="float: right" onclick="selChckChange();">
+										<div class="submit" style="display: inline; float: right;">
+										<br><br>
+										<button name="pReg" id="pReg" type="button" onclick=""
+														class="btn-default" style="width:100%">
+										<span> <i class="fa fa-user left"></i> 검색하기
+										</span>
+										</button>
 										</div>
-								</h2>
+								
 								
 								
 						</div>
@@ -735,10 +742,11 @@ function selChange() {
 									<div class="col-md-4 col-sm-6">
 										<div class="single-banner">
 											<div class="product-wrapper">
-												<a href="projectView.do?PROJECT_IDX=${gRow.PROJECT_IDX }&USER_ID=${gRow.USER_ID}" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/2.jpg">
+												
+												<a href="projectView.do?PROJECT_IDX=${gRow.PROJECT_IDX }&USER_ID=${gRow.USER_ID}" class="single-banner-image-wrapper"> 
+												<img alt="" src="<c:url value='http://localhost:8181/img/profile/${gRow.PROJECT_IMAGE_PATH}'/>" onerror="this.src='resources/writer/img/featured/2.jpg'" style="width: 260px" height="270px" >
 													<div class="price">
-														<span>￦</span>${gRow.PROJECT_BUDGET }
+														<span>￦</span><fmt:formatNumber type="number" maxFractionDigits="3" value="${gRow.PROJECT_BUDGET }" />
 													</div>
 												</a>
 												<!--  
@@ -779,8 +787,8 @@ function selChange() {
 										<div class="single-shop-product">
 												<div class="col-xs-12 col-sm-5 col-md-4">
 													<div class="left-item">
-														<a href="projectView.do?PROJECT_IDX=${lRow.PROJECT_IDX }&USER_ID=${lRow.USER_ID}" title="People of the book">
-															<img src="resources/writer/img/featured/2.jpg" alt="">
+														<a href="projectView.do?PROJECT_IDX=${lRow.PROJECT_IDX }&USER_ID=${lRow.USER_ID}">
+															<img alt="" src="<c:url value='http://localhost:8181/img/profile/${lRow.PROJECT_IMAGE_PATH}'/>" onerror="this.src='resources/writer/img/featured/2.jpg'" style="width: 260px" height="270px" >
 														</a>
 													</div>
 												</div>
@@ -791,7 +799,7 @@ function selChange() {
 															<a href="single-product.html" title="">${ lRow.PROJECT_SUBJECT}</a>
 														</h4>
 														<div class="product-price">
-															<span class="new-price">￦${lRow.PROJECT_BUDGET } 원</span> <span>|</span>
+															<span class="new-price">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${lRow.PROJECT_BUDGET }"/>원</span> <span>|</span>
 															<span class="new-price1"><i class="fa fa-clock-o"></i>&nbsp;${lRow.PROJECT_MAIN_KATEGORY }(${lRow.PROJECT_MIDDLE_KATEGORY })</span> <span>|</span>
 															<span class="text-light">등록 일자 :  ${lRow.PROJECT_START_DATE }</span> 
 															<!-- <span class="old-price">$ 120.00</span> -->

@@ -118,10 +118,14 @@ public class ProjectController {
 
 	// 프로젝트 등록 처리
 	@RequestMapping(value = "projectRegOk.do", method = RequestMethod.POST)
-	public String projectWrite(Locale local, ProjectDTO dto, HttpServletRequest request) throws Exception {
+	public String projectWrite(Locale local, ProjectDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
 
 		System.out.println("등록 테스트");
+		
+		String USER_ID = (String)session.getAttribute("userId");
 
+		String ImagePath = projectSer.getImage(USER_ID);
+		
 		int budget = Integer.parseInt(request.getParameter("PROJECT_BUDGET"));
 		int cBudget = Integer.parseInt(request.getParameter("PROOJECT_BUDGET_COORDINATION"));
 		String start_date = request.getParameter("PROJECT_START_DATE");
@@ -134,7 +138,10 @@ public class ProjectController {
 		dto.setPROJECT_BUDGET_COORDINATION(cBudget);
 		dto.setPROJECT_START_DATE(SD);
 		dto.setPROJECT_END_DATE(ED);
-
+		dto.setPROJECT_IMAGE_PATH(ImagePath);
+		
+		System.out.println("아이디 : " + USER_ID);
+		System.out.println("이미지 경로 : " + dto.getPROJECT_IMAGE_PATH());
 		System.out.println("대분류 " + dto.getPROJECT_MAIN_KATEGORY());
 		System.out.println("중분류 " + dto.getPROJECT_MIDDLE_KATEGORY());
 		System.out.println("제목 : " + dto.getPROJECT_SUBJECT());

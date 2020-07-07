@@ -81,7 +81,7 @@
 
 		document.getElementById('PROJECT_BUDGET').value = budget;
 		
-		var maink = $("#PROJECT_MAIN_KETEGORY").val();
+		var maink = $("#PROJECT_MAIN_KATEGORY").val();
 		var middlek = $("#PROJECT_MIDDLE_KATEGORY").val();
 		var subject = $("#PROJECT_SUBJECT").val();
 		var content = $("#PROJECT_CONTENT").val();
@@ -92,7 +92,7 @@
 		
 		
 		
-		//대분류
+		/* //대분류
 		if(maink == "none"){
 			alert("대분류 카테고리를 선택하세요");
 			return false;
@@ -155,7 +155,7 @@
 		if(!$('input:radio[name=PROOJECT_BUDGET_COORDINATION]').is(':checked')){
 			alert("예산 조율 여부를 선택하세요.");
 			return false;
-		}
+		} */
 		
 		alert("게시글 등록 완료.");
 		
@@ -595,10 +595,11 @@
 				<div>
 					<form action="projectRegOk.do" class="create-account-form" method="post" id="frm">
 						<h2 class="heading-title">프로젝트 등록</h2>
-
+						
+						<input type="hidden" value="${sessionScope.userId }" name="USER_ID" id="ID">
 						<div class="shop-select" style="display: inline; width: 25%;">
 							<label><b>카테고리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
-							<select name="PROJECT_MAIN_KETEGORY" id="PROJECT_MAIN_KETEGORY" style="width: 25%" onchange="categoryChange(this)">
+							<select name="PROJECT_MAIN_KATEGORY" id="PROJECT_MAIN_KATEGORY" style="width: 25%" onchange="categoryChange(this)">
 								<option hidden="" value="none">대분류</option>
 								<option value="devel">개발</option>
 								<option value="design">디자인</option>
@@ -666,9 +667,9 @@
 							<b>근무 형태</b><label for="workMessage" id="workMessage"></label> <br>
 							<br>
 							<p style="font-size: 23px;" class="wkind">
-								&nbsp;&nbsp; <input type="radio" id="WORKING_KIND" name="WORKING_KIND" value="외주" onclick="workCheck()"
+								&nbsp;&nbsp; <input type="radio" id="PROJECT_WORKING_KIND" name="PROJECT_WORKING_KIND" value="외주" onclick="workCheck()"
 									style="width: 18px; height: 18px">&nbsp;&nbsp;외주&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="WORKING_KIND" name="WORKING_KIND" onclick="workCheck()"
+								&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="PROJECT_WORKING_KIND" name="PROJECT_WORKING_KIND" onclick="workCheck()"
 									value="상주 " style="width: 18px; height: 18px">&nbsp;&nbsp;상주
 
 							</p>

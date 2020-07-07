@@ -754,8 +754,8 @@ function selChange() {
 										<div class="single-banner">
 											<div class="product-wrapper">
 												<!-- 클릭하면 해당 프리랜서 상세로 이동 -->
-												<a href="#" class="single-banner-image-wrapper"> <img
-													alt="" src="resources/writer/img/featured/2.jpg">
+												<a href="#" class="single-banner-image-wrapper"> 
+												<img alt="" src="<c:url value='http://localhost:8181/img/profile/${gRow.FREELANCER_IMAGE_PATH}'/>" style="width: 260px" height="270px" >
 													
 												</a>
 												<!-- <div class="product-description">
@@ -776,11 +776,11 @@ function selChange() {
 													<!-- 클릭하면 해당 프리랜서 상세로 이동 -->
 													<a href="#">${gRow.USER_ID }</a>
 													<c:choose>
-															<c:when test="${gRow.FREELANCER_MAIN_KATEGORY eq '개발'}">
+															<c:when test="${gRow.FREELANCER_MAIN_KATEGORY eq 'devel'}">
 																<span class="new-price"><i class="fa fa-building"></i>&nbsp;&nbsp;개발자 (${gRow.FREELANCER_MIDDEL_KATEGORY})</span>
 															</c:when>
 															
-															<c:when test="${gRow.FREELANCER_MAIN_KATEGORY eq '디자인'}">
+															<c:when test="${gRow.FREELANCER_MAIN_KATEGORY eq 'design'}">
 																<span class="new-price"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;디자이너(${gRow.FREELANCER_MIDDEL_KATEGORY})</span>
 															</c:when>
 													</c:choose>
@@ -804,7 +804,7 @@ function selChange() {
 											<div class="col-xs-12 col-sm-5 col-md-4">
 												<div class="left-item">
 													<a href="single-product.html" title="People of the book">
-														<img src="resources/writer/img/featured/2.jpg" alt="">
+														<img alt="" src="<c:url value='http://localhost:8181/img/profile/${lRow.FREELANCER_IMAGE_PATH}'/>" style="width: 260px" height="270px" >
 													</a>
 												</div>
 											</div>
@@ -815,11 +815,11 @@ function selChange() {
 													</h4>
 													<div class="product-price">
 														<c:choose>
-															<c:when test="${lRow.FREELANCER_MAIN_KATEGORY eq '개발'}">
+															<c:when test="${lRow.FREELANCER_MAIN_KATEGORY eq 'devel'}">
 																<span class="new-price"><i class="fa fa-building"></i>&nbsp;&nbsp;개발자(${gRow.FREELANCER_MIDDEL_KATEGORY})</span> <span>|</span>
 															</c:when>
 															
-															<c:when test="${lRow.FREELANCER_MAIN_KATEGORY eq '디자인'}">
+															<c:when test="${lRow.FREELANCER_MAIN_KATEGORY eq 'design'}">
 															<span class="new-price"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;디자이너(${gRow.FREELANCER_MIDDEL_KATEGORY})</span>	 <span>|</span>
 															</c:when>
 														</c:choose>

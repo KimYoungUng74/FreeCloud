@@ -397,9 +397,16 @@
 						
 						<div class="shop-select" style="display: inline; width: 25%;">
 							<label><b>카테고리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
-							<select name="PROJECT_MAIN_KETEGORY" id="PROJECT_MAIN_KETEGORY" style="width: 25%" onchange="categoryChange(this)">
+							<select name="PROJECT_MAIN_KATEGORY" id="PROJECT_MAIN_KATEGORY" style="width: 25%" onchange="categoryChange(this)">
 								
-								<option value="${dto.PROJECT_MAIN_KATEGORY }">${dto.PROJECT_MAIN_KATEGORY }</option>
+								<c:if test="${dto.PROJECT_MAIN_KATEGORY eq 'devel'}">
+									<option value="${dto.PROJECT_MAIN_KATEGORY }">개발</option>
+								</c:if>
+								
+								<c:if test="${dto.PROJECT_MAIN_KATEGORY eq 'design'}">
+									<option value="${dto.PROJECT_MAIN_KATEGORY }">디자인</option>
+								</c:if>
+								
 								
 							</select>
 						</div>						
@@ -466,9 +473,9 @@
 							<p style="font-size: 23px;" class="wkind">
 								<c:choose>
 									<c:when test="${dto.PROJECT_WORKING_KIND eq '외주' }">
-										&nbsp;&nbsp; <input type="radio" id="WORKING_KIND" name="WORKING_KIND" value="외주" onclick="workCheck()" checked="checked" disabled="true"
+										&nbsp;&nbsp; <input type="radio" id="PROJECT_WORKING_KIND" name="PROJECT_WORKING_KIND" value="외주" onclick="workCheck()" checked="checked" disabled="true"
 										style="width: 18px; height: 18px">&nbsp;&nbsp;외주&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="WORKING_KIND" name="WORKING_KIND" onclick="workCheck()" readonly="readonly" disabled="true"
+									&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="PROJECT_WORKING_KIND" name="PROJECT_WORKING_KIND" onclick="workCheck()" readonly="readonly" disabled="true"
 										value="상주 " style="width: 18px; height: 18px">&nbsp;&nbsp;상주
 									</c:when>
 									

@@ -25,6 +25,10 @@ public class ProjectService {
 
 	}
 	
+	public String getImage(String USER_ID) {
+		return dao.getImage(USER_ID);
+	}
+	
 	// 게시글 리스트 조회
 	public List<ProjectDTO> listAll() {
 		// TODO Auto-generated method stub

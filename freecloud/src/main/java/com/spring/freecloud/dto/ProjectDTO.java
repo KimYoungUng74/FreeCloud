@@ -19,8 +19,6 @@ public class ProjectDTO {
 	private String PROJECT_IMAGE_PATH;
 	private int PROJECT_STATUS;
 	private int PROJECT_VIEWS;
-	
-	
 	public int getPROJECT_IDX() {
 		return PROJECT_IDX;
 	}
@@ -33,7 +31,6 @@ public class ProjectDTO {
 	public void setUSER_ID(String uSER_ID) {
 		USER_ID = uSER_ID;
 	}
-	
 	public String getPROJECT_MAIN_KATEGORY() {
 		return PROJECT_MAIN_KATEGORY;
 	}
@@ -46,7 +43,6 @@ public class ProjectDTO {
 	public void setPROJECT_MIDDLE_KATEGORY(String pROJECT_MIDDLE_KATEGORY) {
 		PROJECT_MIDDLE_KATEGORY = pROJECT_MIDDLE_KATEGORY;
 	}
-	
 	public String getPROJECT_WORKING_KIND() {
 		return PROJECT_WORKING_KIND;
 	}
@@ -59,7 +55,6 @@ public class ProjectDTO {
 	public void setPROJECT_SUBJECT(String pROJECT_SUBJECT) {
 		PROJECT_SUBJECT = pROJECT_SUBJECT;
 	}
-	
 	public String getPROJECT_CONTENT() {
 		return PROJECT_CONTENT;
 	}
@@ -114,7 +109,6 @@ public class ProjectDTO {
 	public void setPROJECT_VIEWS(int pROJECT_VIEWS) {
 		PROJECT_VIEWS = pROJECT_VIEWS;
 	}
-	
 	@Override
 	public String toString() {
 		return "ProjectDTO [PROJECT_IDX=" + PROJECT_IDX + ", USER_ID=" + USER_ID + ", PROJECT_MAIN_KATEGORY="
@@ -126,6 +120,9 @@ public class ProjectDTO {
 				+ ", PROJECT_IMAGE_PATH=" + PROJECT_IMAGE_PATH + ", PROJECT_STATUS=" + PROJECT_STATUS
 				+ ", PROJECT_VIEWS=" + PROJECT_VIEWS + "]";
 	}
+	
+	
+	
 	
 
 	    

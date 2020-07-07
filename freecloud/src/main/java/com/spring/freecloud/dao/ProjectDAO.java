@@ -31,6 +31,10 @@ public class ProjectDAO {
 
 	}
 
+	public String getImage(String USER_ID) {
+		return mybatis.selectOne("BoardMapper.getImage", USER_ID);
+	}
+	
 	// 프로젝트 참여
 	public void projectJoin(ProjectJoinDTO dto) {
 
