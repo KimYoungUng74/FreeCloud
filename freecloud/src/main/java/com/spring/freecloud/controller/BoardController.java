@@ -26,6 +26,7 @@ import com.spring.freecloud.dto.ProjectJoinDTO;
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.service.BoardService;
+import com.spring.freecloud.service.EtcService;
 import com.spring.freecloud.service.ProjectService;
 import com.spring.freecloud.service.UserService;
 import com.spring.freecloud.util.PagingDTO;
@@ -40,6 +41,9 @@ public class BoardController {
 
 	@Autowired
 	BoardService boardSer;
+	@Autowired
+	EtcService etcSer;
+	
 
 	// 게시글 등록 화면
 	@RequestMapping(value = "boardReg.do")
@@ -66,7 +70,7 @@ public class BoardController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("home");
-
+		mav = setTop(mav);
 		return mav;
 	}
 
@@ -106,7 +110,7 @@ public class BoardController {
 		mav.setViewName("boardList");
 		mav.addObject("paging", dto);
 		mav.addObject("viewAll", list);
-
+		mav = setTop(mav);
 		return mav;
 	}
 
@@ -122,6 +126,7 @@ public class BoardController {
 		mav.setViewName("boardView");
 
 		mav.addObject("dto", boardSer.projectRead(BBS_IDX));
+		mav = setTop(mav);
 		return mav;
 	}
 	
@@ -147,6 +152,26 @@ public class BoardController {
 
 		return "redirect:boardView.do?BBS_IDX="+BBS_IDX;
 	}
+	
+	 // 상단 배너
+ 	ModelAndView setTop(ModelAndView mav) {
+ 		int regProject = 0;
+ 		int regFree = 0;
+ 		int edPrice = 0;
+ 		int allUser = 0;
+
+ 		regProject = etcSer.ProjectCount();
+ 		regFree = etcSer.RegFreeCount();
+ 		edPrice = etcSer.EdPrice();
+ 		allUser = etcSer.AllUser();
+ 		System.out.println("완료한 금액 : " + regFree);
+
+ 		mav.addObject("regProject", regProject);
+ 		mav.addObject("regFree", regFree);
+ 		mav.addObject("edPrice", edPrice);
+ 		mav.addObject("allUser", allUser);
+ 		return mav;
+ 	}
 
 	/*
 	 * // 프로젝트 게시글 리스트 조회 화면

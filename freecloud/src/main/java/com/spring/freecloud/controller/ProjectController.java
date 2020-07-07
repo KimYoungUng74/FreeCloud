@@ -26,6 +26,7 @@ import com.spring.freecloud.dto.ProjectJoinDTO;
 import com.spring.freecloud.dto.ProjectDTO;
 import com.spring.freecloud.dto.UserDTO;
 import com.spring.freecloud.service.BoardService;
+import com.spring.freecloud.service.EtcService;
 import com.spring.freecloud.service.ProjectService;
 import com.spring.freecloud.service.UserService;
 import com.spring.freecloud.util.PagingDTO;
@@ -40,11 +41,16 @@ public class ProjectController {
 
 	@Autowired
 	ProjectService projectSer;
-
+	@Autowired
+	EtcService etcSer;
+	
 	// 프로젝트 등록 화면
 	@RequestMapping(value = "projectReg.do")
-	public String projectReg(Locale locale, Model model) {
-		return "projectReg";
+	public ModelAndView projectReg(Locale locale, Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("projectReg");
+		mav = setTop(mav);
+		return mav;
 	}
 
 	/*
@@ -98,7 +104,7 @@ public class ProjectController {
 		mav.setViewName("projectSearch");
 		mav.addObject("paging", dto);
 		mav.addObject("viewAll", list);
-
+		mav = setTop(mav);
 		return mav;
 	}
 
@@ -138,6 +144,7 @@ public class ProjectController {
 		mav.setViewName("projectView");
 
 		mav.addObject("dto", projectSer.projectRead(PROJECT_IDX));
+		mav = setTop(mav);
 		return mav;
 	}
 
@@ -210,5 +217,25 @@ public class ProjectController {
 		// return "redirect:projectSearch.do";
 		return "redirect:projectSearch.do";
 	}
+	
+	 // 상단 배너
+ 	ModelAndView setTop(ModelAndView mav) {
+ 		int regProject = 0;
+ 		int regFree = 0;
+ 		int edPrice = 0;
+ 		int allUser = 0;
+
+ 		regProject = etcSer.ProjectCount();
+ 		regFree = etcSer.RegFreeCount();
+ 		edPrice = etcSer.EdPrice();
+ 		allUser = etcSer.AllUser();
+ 		System.out.println("완료한 금액 : " + regFree);
+
+ 		mav.addObject("regProject", regProject);
+ 		mav.addObject("regFree", regFree);
+ 		mav.addObject("edPrice", edPrice);
+ 		mav.addObject("allUser", allUser);
+ 		return mav;
+ 	}
 
 }
