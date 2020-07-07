@@ -483,12 +483,12 @@
 
 									<div class="col-md-3">
 										<div class="single-banner">
-											<a href="#" class="single-banner-image-wrapper"> <img
+											<a href="freelancerPage.do?userId=${row.USER_ID}" class="single-banner-image-wrapper"> <img
 												alt=""
 												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
 											</a>
 											<div class="banner-bottom text-center">
-												<a href="#"><b>${row.USER_NAME}</b></a>
+												<a href="freelancerPage.do?userId=${row.USER_ID}"><b>${row.USER_NAME}</b></a>
 											</div>
 											<div class="banner-bottom text-center">
 												${row.FREELANCER_SKILL}<br>
@@ -504,17 +504,17 @@
 					<div role="tabpanel" class="tab-pane fade in active" id="devel2">
 						<div class="featured-product-list indicator-style">
 							<c:forEach var="row" items="${list8}">
-								<!-- 메뉴 시작-->
+							<!-- 메뉴 시작-->
 								<div class="single-p-banner">
 
 									<div class="col-md-3">
 										<div class="single-banner">
-											<a href="#" class="single-banner-image-wrapper"> <img
+											<a href="freelancerPage.do?userId=${row.USER_ID}" class="single-banner-image-wrapper"> <img
 												alt=""
 												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
 											</a>
 											<div class="banner-bottom text-center">
-												<a href="#"><b>${row.USER_NAME}</b></a>
+												<a href="freelancerPage.do?userId=${row.USER_ID}"><b>${row.USER_NAME}</b></a>
 											</div>
 											<div class="banner-bottom text-center">
 												${row.FREELANCER_SKILL}<br>
@@ -523,23 +523,24 @@
 									</div>
 
 								</div>
+								<!-- 메뉴 끝 -->
 							</c:forEach>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade in active" id="contents2">
 						<div class="featured-product-list indicator-style">
 							<c:forEach var="row" items="${list9}">
-								<!-- 메뉴 시작-->
+							<!-- 메뉴 시작-->
 								<div class="single-p-banner">
 
 									<div class="col-md-3">
 										<div class="single-banner">
-											<a href="#" class="single-banner-image-wrapper"> <img
+											<a href="freelancerPage.do?userId=${row.USER_ID}" class="single-banner-image-wrapper"> <img
 												alt=""
 												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
 											</a>
 											<div class="banner-bottom text-center">
-												<a href="#"><b>${row.USER_NAME}</b></a>
+												<a href="freelancerPage.do?userId=${row.USER_ID}"><b>${row.USER_NAME}</b></a>
 											</div>
 											<div class="banner-bottom text-center">
 												${row.FREELANCER_SKILL}<br>
@@ -561,12 +562,12 @@
 
 									<div class="col-md-3">
 										<div class="single-banner">
-											<a href="#" class="single-banner-image-wrapper"> <img
+											<a href="freelancerPage.do?userId=${row.USER_ID}" class="single-banner-image-wrapper"> <img
 												alt=""
 												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
 											</a>
 											<div class="banner-bottom text-center">
-												<a href="#"><b>${row.USER_NAME}</b></a>
+												<a href="freelancerPage.do?userId=${row.USER_ID}"><b>${row.USER_NAME}</b></a>
 											</div>
 											<div class="banner-bottom text-center">
 												${row.FREELANCER_SKILL}<br>
@@ -587,12 +588,12 @@
 
 									<div class="col-md-3">
 										<div class="single-banner">
-											<a href="#" class="single-banner-image-wrapper"> <img
+											<a href="freelancerPage.do?userId=${row.USER_ID}" class="single-banner-image-wrapper"> <img
 												alt=""
 												src="<c:url value='http://localhost:8181/img/profile/${row.FREELANCER_IMAGE_PATH}'/>">
 											</a>
 											<div class="banner-bottom text-center">
-												<a href="#"><b>${row.USER_NAME}</b></a>
+												<a href="freelancerPage.do?userId=${row.USER_ID}"><b>${row.USER_NAME}</b></a>
 											</div>
 											<div class="banner-bottom text-center">
 												${row.FREELANCER_SKILL}<br>
