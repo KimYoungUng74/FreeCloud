@@ -494,17 +494,17 @@
 							<p style="font-size: 23px;" class="cooldi">
 								
 								<c:choose>
-									<c:when test="${dto.PROJECT_BUDGET_COORDINATION eq 0}">
+									<c:when test="${dto.PROJECT_BUDGET_COORDINATION == 0}">
 										<p style="font-size: 23px;">
 										<b>가능</b>
 										</p>
 									</c:when>
 									
-									<c:when test="${dto.PROJECT_BUDGET_COORDINATION eq 1} ">
+									<c:otherwise>
 										<p style="font-size: 23px;">
-										<b>불가능 ${dto.PROJECT_BUDGET_COORDINATION}</b>
+										<b>불가능</b>
 										</p>
-									</c:when>
+									</c:otherwise>
 								</c:choose>
 							</p>
 						</div>
