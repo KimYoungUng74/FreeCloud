@@ -55,10 +55,12 @@ public class UserController {
 
 	// 회원가입 화면
 	@RequestMapping(value = "signup.do")
-	public String signup(Locale locale, Model model) {
-		return "signup";
+	public ModelAndView signup(Locale locale, Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav = setTop(mav);
+		mav.setViewName("signup");
+		return mav;
 	}
-
 	// 회원 가입 처리
 	@RequestMapping(value = "signupOk.do", method = RequestMethod.POST)
 	public ModelAndView signupOk(Locale locale, UserDTO dto) {
@@ -70,7 +72,7 @@ public class UserController {
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("home");
-
+		mav = sethome(mav);
 		return mav;
 	}
 
@@ -103,8 +105,11 @@ public class UserController {
 
 	// 로그인 화면
 	@RequestMapping(value = "login.do")
-	public String login(Locale locale, Model model) {
-		return "login";
+	public ModelAndView login(Locale locale, Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav = setTop(mav);
+		mav.setViewName("login");
+		return mav;
 	}
 
 	// 로그인 처리
@@ -118,6 +123,7 @@ public class UserController {
 			mav.setViewName("home");
 			mav.addObject("msg", "success");
 			System.out.println("로그인 성공");
+			mav = sethome(mav);
 		} else { // 로그인 실패
 			// login.jsp로 이동
 			mav.setViewName("login");
@@ -136,6 +142,7 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("home");
 		mav.addObject("msg", "logout");
+		mav = sethome(mav);
 		return mav;
 	}
 

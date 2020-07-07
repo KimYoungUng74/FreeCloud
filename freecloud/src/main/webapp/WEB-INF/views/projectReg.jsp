@@ -363,11 +363,11 @@
 					</div>
 				</div>
 				<div class="col-md-7">
-					<div class="mainmenu text-center"> 
+					<div class="mainmenu text-center">
 						<nav>
 							<ul id="nav">
 								<li><h4>
-										<a href="index.html">프로젝트</a>
+										<a href="projectSearch.do">프로젝트</a>
 									</h4>
 									<ul class="sub-menu">
 										<li><a href="projectReg.do">프로젝트 등록</a></li>
@@ -377,15 +377,18 @@
 										<a href="freelancerSearch.do">프리랜서 찾기</a>
 									</h4></li>
 								<li><h4>
-										<a href="shop.html">정보구름</a>
-									</h4></li>
+										<a href="boardList.do">정보구름</a>
+									</h4><ul class="sub-menu">
+                              <li><a href="boardReg.do">게시글 등록</a></li>
+                              <li><a href="boardList.do">게시글 목록</a></li>
+                           </ul></li>
 								<li><h4>
-										<a href="about.html">서비스 안내</a>
+										<a href="about.do">서비스 안내</a>
 									</h4>
 									<ul class="sub-menu">
-										<li><a href="about.html">프로젝트 이용방법</a></li>
-										<li><a href="cart.html">프리랜서 이용방법</a></li>
-										<li><a href="cart.html">프로젝트 찾기</a></li>
+										<li><a href="useProject.do">프로젝트 이용방법</a></li>
+										<li><a href="useFreelancer.do">프리랜서 이용방법</a></li>
+										<li><a href="useProjectSerch.do">프로젝트 찾기</a></li>
 									</ul></li>
 							</ul>
 						</nav>
@@ -400,7 +403,7 @@
 									</c:when>
 									<c:otherwise>
 
-											<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
+										<a href="mypage.do">마이페이지<i class="flaticon-people"></i></a>
 									</c:otherwise>
 								</c:choose></li>
 							<li><c:choose>
@@ -408,64 +411,9 @@
 										<a href="signup.do">회원가입</a>
 									</c:when>
 									<c:otherwise>
-											<a href="logout.do">로그아웃</a>
+										<a href="logout.do">로그아웃</a>
 									</c:otherwise>
 								</c:choose></li>
-							<%-- <li class="shoping-cart"><a href="#"> <i
-									class="flaticon-shop"></i> <span>2</span>
-							</a>
-								<div class="add-to-cart-product">
-									<div class="cart-product">
-										<div class="cart-product-image">
-											<a href="single-product.html"> <img
-												src="<c:url value='resources/writer/img/shop/1.jpg'/> alt="">
-											</a>
-										</div>
-										<div class="cart-product-info">
-											<p>
-												<span>1</span> x <a href="single-product.html">East of
-													eden</a>
-											</p>
-											<a href="single-product.html">S, Orange</a> <span
-												class="cart-price">$ 140.00</span>
-										</div>
-										<div class="cart-product-remove">
-											<i class="fa fa-times"></i>
-										</div>
-									</div>
-									<div class="cart-product">
-										<div class="cart-product-image">
-											<a href="single-product.html"> <img
-												src="<c:url value='resources/writer/img/shop/1.jpg'/>"
-												alt="">
-											</a>
-										</div>
-										<div class="cart-product-info">
-											<p>
-												<span>1</span> x <a href="single-product.html">East of
-													eden</a>
-											</p>
-											<a href="single-product.html">S, Orange</a> <span
-												class="cart-price">$ 140.00</span>
-										</div>
-										<div class="cart-product-remove">
-											<i class="fa fa-times"></i>
-										</div>
-									</div>
-									<div class="total-cart-price">
-										<div class="cart-product-line fast-line">
-											<span>Shipping</span> <span class="free-shiping">$10.50</span>
-										</div>
-										<div class="cart-product-line">
-											<span>Total</span> <span class="total">$ 140.00</span>
-										</div>
-									</div>
-									<div class="cart-checkout">
-										<a href="checkout.html"> Check out <i
-											class="fa fa-chevron-right"></i>
-										</a>
-									</div>
-								</div></li> --%>
 						</ul>
 					</div>
 				</div>
@@ -480,19 +428,30 @@
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="mobile-menu">
 						<nav id="dropdown">
-							<ul>
-								<li><a href="index.html"><b>프로젝트</b></a>
+							<ul id="nav">
+								<li><h4>
+										<a href="projectSearch.do">프로젝트</a>
+									</h4>
 									<ul class="sub-menu">
-										<li><a href="about.html">프로젝트 등록</a></li>
-										<li><a href="cart.html">프로젝트 찾기</a></li>
+										<li><a href="projectReg.do">프로젝트 등록</a></li>
+										<li><a href="projectSearch.do">프로젝트 찾기</a></li>
 									</ul></li>
-								<li><a href="shop.html">프리랜서 찾기</a></li>
-								<li><a href="shop.html">정보구름</a></li>
-								<li><a href="about.html">서비스 안내</a>
+								<li><h4>
+										<a href="freelancerSearch.do">프리랜서 찾기</a>
+									</h4></li>
+								<li><h4>
+										<a href="boardList.do">정보구름</a>
+									</h4><ul class="sub-menu">
+                              <li><a href="boardReg.do">게시글 등록</a></li>
+                              <li><a href="boardList.do">게시글 목록</a></li>
+                           </ul></li>
+								<li><h4>
+										<a href="about.do">서비스 안내</a>
+									</h4>
 									<ul class="sub-menu">
-										<li><a href="about.html">프로젝트 이용방법</a></li>
-										<li><a href="cart.html">프리랜서 이용방법</a></li>
-										<li><a href="cart.html">프로젝트 찾기</a></li>
+										<li><a href="useProject.do">프로젝트 이용방법</a></li>
+										<li><a href="useFreelancer.do">프리랜서 이용방법</a></li>
+										<li><a href="useProjectSerch.do">프로젝트 찾기</a></li>
 									</ul></li>
 							</ul>
 						</nav>
@@ -502,45 +461,46 @@
 		</div>
 	</div>
 	<!-- Mobile Menu End -->
+	<!-- Counter Area Start -->
 	<div class="counter-area section-padding text-center"
 		style="background-color: #a3d4f7">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">3725</span>
+							<span class="fcount"> <span class="counter">${regProject}</span>
 							</span>
-							<h3>등록된 프로젝트 수</h3>
+							<h3>프로젝트 수</h3>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-2 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">950</span>
+							<span class="fcount"> <span class="counter">${regFree}</span>명
 							</span>
-							<h3>등록된 프리랜서 수</h3>
+							<h3>프리랜서 수</h3>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-5 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">2145150</span>원
+							<span class="fcount"> <span class="counter">${edPrice}</span>원
 							</span>
 							<h3>완료 금액</h3>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-2 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">627877</span>
+							<span class="fcount"> <span class="counter">${allUser}</span>명
 							</span>
 							<h3>회원 수</h3>
 						</div>
@@ -549,6 +509,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Counter Area End -->
 	<!-- Breadcrumbs Area Start -->
 	<!-- Loging Area Start -->
 
