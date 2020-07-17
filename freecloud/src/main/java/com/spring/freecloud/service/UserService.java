@@ -51,7 +51,7 @@ public class UserService {
 	}
 
 	// 회원 정보 조회
-	private UserDTO viewUser(UserDTO dto) {
+	public UserDTO viewUser(UserDTO dto) {
 		// TODO Auto-generated method stub
 		return dao.viewUser(dto);
 	}
