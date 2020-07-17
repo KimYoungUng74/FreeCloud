@@ -69,14 +69,14 @@ public class BoardController {
 		System.out.println("등록완료");
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("home");
+		mav.setViewName("boardList");
 		mav = setTop(mav);
 		return mav;
 	}
 
 	// 게시글 리스트 조회 ( 페이징 )
 	@RequestMapping(value = "boardList.do")
-	public ModelAndView list(PagingDTO dto, Model model,
+	public ModelAndView boardList(PagingDTO dto, Model model,
 
 			@RequestParam(value = "nowPage", required = false) String nowPage,
 

@@ -298,73 +298,45 @@
 	</div>
 	<!--Header Area End-->
 	<!-- Mobile Menu Start -->
-	<div class="mobile-menu-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12">
-					<div class="mobile-menu">
-						<nav id="dropdown">
-							<ul>
-								<li><a href="index.html"><b>프로젝트</b></a>
-									<ul class="sub-menu">
-										<li><a href="about.html">프로젝트 등록</a></li>
-										<li><a href="cart.html">프로젝트 찾기</a></li>
-									</ul></li>
-								<li><a href="shop.html">프리랜서 찾기</a></li>
-								<li><a href="shop.html">정보구름</a></li>
-								<li><a href="about.html">서비스 안내</a>
-									<ul class="sub-menu">
-										<li><a href="about.html">프로젝트 이용방법</a></li>
-										<li><a href="cart.html">프리랜서 이용방법</a></li>
-										<li><a href="cart.html">프로젝트 찾기</a></li>
-									</ul></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Mobile Menu End -->
 	<div class="counter-area section-padding text-center"
 		style="background-color: #a3d4f7">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">3725</span>
+							<span class="fcount"> <span class="counter">${regProject}</span>
 							</span>
-							<h3>등록된 프로젝트 수</h3>
+							<h3>프로젝트 수</h3>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-2 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">950</span>
+							<span class="fcount"> <span class="counter">${regFree}</span>명
 							</span>
-							<h3>등록된 프리랜서 수</h3>
+							<h3>프리랜서 수</h3>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-5 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">2145150</span>원
+							<span class="fcount"> <span class="counter">${edPrice}</span>원
 							</span>
 							<h3>완료 금액</h3>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-2 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">627877</span>
+							<span class="fcount"> <span class="counter">${allUser}</span>명
 							</span>
 							<h3>회원 수</h3>
 						</div>
@@ -373,6 +345,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- Mobile Menu End -->
+
 	<!-- Breadcrumbs Area Start -->
 	<!-- Loging Area Start -->
 

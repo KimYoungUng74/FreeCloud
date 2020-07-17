@@ -277,39 +277,39 @@ function selChange() {
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">3725</span>
+							<span class="fcount"> <span class="counter">${regProject}</span>
 							</span>
-							<h3>등록된 프로젝트 수</h3>
+							<h3>프로젝트 수</h3>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-2 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">950</span>
+							<span class="fcount"> <span class="counter">${regFree}</span>명
 							</span>
-							<h3>등록된 프리랜서 수</h3>
+							<h3>프리랜서 수</h3>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-5 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">2145150</span>원
+							<span class="fcount"> <span class="counter">${edPrice}</span>원
 							</span>
 							<h3>완료 금액</h3>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-2 col-sm-3 col-xs-6">
 					<div class="single-counter wow" data-wow-duration="1.5s"
-						data-wow-delay=".3s">
+						data-wow-delay=".2s">
 						<div class="counter-info">
-							<span class="fcount"> <span class="counter">627877</span>
+							<span class="fcount"> <span class="counter">${allUser}</span>명
 							</span>
 							<h3>회원 수</h3>
 						</div>

@@ -34,7 +34,7 @@ public class ProjectDAO {
 	public String getImage(String USER_ID) {
 		return mybatis.selectOne("BoardMapper.getImage", USER_ID);
 	}
-	
+
 	// 프로젝트 참여
 	public void projectJoin(ProjectJoinDTO dto) {
 
@@ -66,14 +66,74 @@ public class ProjectDAO {
 		return mybatis.selectList("BoardMapper.selectBoard", dto);
 	}
 
-	// 프로젝트 수정
-	public void projectUpdate(ProjectDTO dto) {
-
+	// 근무 형태만 선택
+	public List<ProjectDTO> getW(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getW", map);
 	}
 
-	// 프로젝트 삭제
-	public void projectRemove(ProjectDTO dto) {
-
+	// 개발형태만 선택
+	public List<ProjectDTO> getMKD(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getMKD", map);
 	}
+
+	// 디자인 형태만 선택
+	public List<ProjectDTO> getMKDS(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getMKDS", map);
+	}
+
+	// 지역만 선택
+	public List<ProjectDTO> getAddr(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getAddr", map);
+	}
+
+	// 근무 개발만 선택
+	public List<ProjectDTO> getWMKD(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getWMKD", map);
+	}
+
+	// 근무 디자인 형태만 선택
+	public List<ProjectDTO> getWMKDS(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getWMKDS", map);
+	}
+
+	// 근무 지역만 선택
+	public List<ProjectDTO> getWADDR(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getWADDR", map);
+	}
+
+	// 개발 디자인만 선택
+	public List<ProjectDTO> getDMKD(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getDMKD", map);
+	}
+
+	// 개발 디자인만 선택
+	public List<ProjectDTO> getMADDR(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getMADDR", map);
+	}
+
+	// 디자인 지역만 선택
+	public List<ProjectDTO> getMKADDR(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getMKADDR", map);
+	}
+
+	// 근무 개발 디자인만 선택
+	public List<ProjectDTO> getWDMKD(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getWDMKD", map);
+	}
+
+	// 근무 개발 지역만 선택
+	public List<ProjectDTO> getWMKDADDR(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getWMKDADDR", map);
+	}
+
+	// 근무 디자인 지역만 선택
+	public List<ProjectDTO> getWDMKDADDR(Map<String, Object> map) {
+		return mybatis.selectList("BoardMapper.getWDMKDADDR", map);
+	}
+
+	/*
+	 * // 전부 선택 public List<ProjectDTO> getAll(Map<String, Object> map) { //return
+	 * mybatis.selectList("BoardMapper.getAll", map); }
+	 */
 
 }
